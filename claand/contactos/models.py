@@ -1,5 +1,9 @@
 from django.db import models
 
+
+class Calificacion(models.Model):
+	calificacion  = models.IntegerField(default=1)
+
 class Contacto(models.Model):
 	es_cliente = models.BooleanField(default=False)
 	nombre = models.CharField(max_length=35)
@@ -9,10 +13,6 @@ class Contacto(models.Model):
 
 	def __str__(self):
 		return self.nombre
-
-
-class Calificacion(models.Model):
-	calificacion  = models.IntegerField(default=1)
 
 class Nota(models.Model):
 	descripcion = models.TextField()
