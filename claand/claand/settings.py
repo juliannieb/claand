@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'contactos',
     'cotizaciones',
+    'empresas',
 )
 
 MIDDLEWARE_CLASSES = (
