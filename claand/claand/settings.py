@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'contactos',
     'cotizaciones',
     'empresas',
+    'principal',
 )
 
 MIDDLEWARE_CLASSES = (
