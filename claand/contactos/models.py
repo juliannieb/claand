@@ -1,5 +1,6 @@
 from django.db import models
 from empresas.models import Empresa
+from principal.models import Vendedor
 
 class Contacto(models.Model):
     is_active = models.BooleanField(default=True)
@@ -9,6 +10,7 @@ class Contacto(models.Model):
     correo_electronico = models.EmailField(unique=True)
     calificaciones = models.ManyToManyField('Calificacion')
     empresa = models.ManyToManyField(Empresa, through='Pertenece')
+    vendedor = models.ManyToManyField(Vendedor, through='Atiende')
 
     def __str__(self):
         return self.nombre
@@ -25,8 +27,24 @@ class Area(models.Model):
     def __str__(self):
         return self.nombre
 
+    class Meta:
+        verbose_name = 'Área'
+        verbose_name_plural = 'Áreas'
+
+class Atiende(models.Model):
+    contacto = models.ForeignKey(Contacto)
+    vendedor = models.ForeignKey(Vendedor)
+    fecha = models.DateField()
+
+
 class Calificacion(models.Model):
     calificacion  = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.calificacion
+
+    class Meta:
+        verbose_name_plural = 'Calificaciones'
 
 class Nota(models.Model):
     is_active = models.BooleanField(default=True)
@@ -65,9 +83,14 @@ class TipoNumeroTelefonico(models.Model):
 class NumeroTelefonico(models.Model):
     contacto = models.ForeignKey(Contacto, null=True)
     empresa = models.ForeignKey(Empresa, null=True)
+    vendedor = models.ForeignKey(Vendedor, null=True)
     is_active = models.BooleanField(default=True)
     numero = models.IntegerField()
     tipo_numero = models.ForeignKey(TipoNumeroTelefonico)
 
     def __str__(self):
         return self.numero
+
+    class Meta:
+        verbose_name_plural = 'Números Telefónicos'
+        verbose_name = 'Número Telefónico'

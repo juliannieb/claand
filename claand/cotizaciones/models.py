@@ -19,6 +19,10 @@ class Cotizacion(models.Model):
         self.fecha_modificacion = datetime.datetime.today()     # siempre guardar fecha modificacion.
         return super(Pago, self).save(*args, **kwargs)
 
+    class Meta:
+        verbose_name = 'Cotización'
+        verbose_name_plural = 'Cotizaciones'
+
 class Venta(models.Model):
     is_active = models.BooleanField(default=True)
     monto_total = models.FloatField(default=0)
