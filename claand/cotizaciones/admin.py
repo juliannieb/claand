@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from cotizaciones.models import Cotizacion, Venta, Pago
+
+admin.site.register(Cotizacion)
+admin.site.register(Venta)
+admin.site.register(Pago)

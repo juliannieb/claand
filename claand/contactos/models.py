@@ -27,6 +27,10 @@ class Area(models.Model):
     def __str__(self):
         return self.nombre
 
+    class Meta:
+        verbose_name = 'Área'
+        verbose_name_plural = 'Áreas'
+
 class Atiende(models.Model):
     contacto = models.ForeignKey(Contacto)
     vendedor = models.ForeignKey(Vendedor)
@@ -35,6 +39,12 @@ class Atiende(models.Model):
 
 class Calificacion(models.Model):
     calificacion  = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.calificacion
+
+    class Meta:
+        verbose_name_plural = 'Calificaciones'
 
 class Nota(models.Model):
     is_active = models.BooleanField(default=True)
@@ -76,3 +86,7 @@ class NumeroTelefonico(models.Model):
 
     def __str__(self):
         return self.numero
+
+    class Meta:
+        verbose_name_plural = 'Números Telefónicos'
+        verbose_name = 'Número Telefónico'
