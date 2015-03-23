@@ -4,7 +4,7 @@ from django.db import models
 class Empresa(models.Model):
 	is_active = models.BooleanField(default=True)
 	nombre = models.CharField(max_length=30)
-	rfc = models.CharField(max_length=13)
+	rfc = models.CharField(primary_key=True, max_length=13)
 
 	def save(self, *args, **kwargs):
 		self.rfc = self.rfc.upper()

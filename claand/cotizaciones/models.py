@@ -8,7 +8,7 @@ class Cotizacion(models.Model):
     is_active = models.BooleanField(default=True)
     monto = models.FloatField(default=0)
     descripcion = models.TextField()
-    es_pendiente = models.BooleanField(default=False)
+    is_pendiente = models.BooleanField(default=False)
     contacto = models.ForeignKey(Contacto)
     fecha_creacion = models.DateField(editable=False)
     fecha_modificacion = models.DateField()
@@ -22,7 +22,7 @@ class Cotizacion(models.Model):
 class Venta(models.Model):
     is_active = models.BooleanField(default=True)
     monto_total = models.FloatField(default=0)
-    completada = models.BooleanField(default=False)
+    is_completada = models.BooleanField(default=False)
     cotizacion = models.OneToOneField(Cotizacion)
 
 class Pago(models.Model):
@@ -30,6 +30,7 @@ class Pago(models.Model):
     venta = models.ForeignKey(Venta)
     fecha_creacion = models.DateField(editable=False)
     fecha_modificacion = models.DateField()
+    monto = models.FloatField()
 
     def save(self, *args, **kwargs):
         if not self.id:

@@ -3,7 +3,7 @@ from empresas.models import Empresa
 
 class Contacto(models.Model):
     is_active = models.BooleanField(default=True)
-    es_cliente = models.BooleanField(default=False)
+    is_cliente = models.BooleanField(default=False)
     nombre = models.CharField(max_length=35)
     apellido = models.CharField(max_length=35)
     correo_electronico = models.EmailField(unique=True)
@@ -30,6 +30,7 @@ class Calificacion(models.Model):
 
 class Nota(models.Model):
     is_active = models.BooleanField(default=True)
+    clasificacion = models.IntegerField(default=1)
     descripcion = models.TextField()
     contacto = models.ForeignKey(Contacto)
 
@@ -39,6 +40,8 @@ class Nota(models.Model):
 class Recordatorio(models.Model):
     is_active = models.BooleanField(default=True)
     descripcion = models.TextField()
+    fecha = models.DateTimeField()
+    urgencia = models.IntegerField(default=1)
     contacto = models.ForeignKey(Contacto)
 
     def __str__(self):
@@ -47,6 +50,7 @@ class Recordatorio(models.Model):
 class Llamada(models.Model):
     is_active = models.BooleanField(default=True)
     descripcion = models.TextField()
+    fecha = models.DateField()
     contacto = models.ForeignKey(Contacto)
 
     def __str__(self):
