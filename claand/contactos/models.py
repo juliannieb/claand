@@ -21,6 +21,9 @@ class Pertenece(models.Model):
     fecha = models.DateField()
     area = models.ForeignKey('Area')
 
+    class Meta:
+        verbose_name_plural = 'Pertenecen'
+
 class Area(models.Model):
     nombre = models.CharField(max_length=30)
 
@@ -35,6 +38,9 @@ class Atiende(models.Model):
     contacto = models.ForeignKey(Contacto)
     vendedor = models.ForeignKey(Vendedor)
     fecha = models.DateField()
+
+    class Meta:
+        verbose_name_plural = 'Atienden'
 
 
 class Calificacion(models.Model):

@@ -26,6 +26,9 @@ class EmpresaTieneDireccion(models.Model):
             self.fecha = datetime.datetime.today()
         return super(EmpresaTieneDireccion, self).save(*args, **kwargs)
 
+    class Meta:
+        verbose_name_plural = 'Empresa tiene direcciones'
+
 class TipoRedSocial(models.Model):
     nombre = models.CharField(max_length=30)
 
