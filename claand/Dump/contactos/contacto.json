@@ -1,2 +1,142 @@
 [
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "jperez@hotmail.com",
+        "nombre": "Juan",
+        "is_cliente": false,
+        "apellido": "P\u00e9rez",
+        "is_active": true,
+        "calificaciones": [
+            6
+        ]
+    },
+    "pk": 2
+},
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "fgutierrez@gmail.com",
+        "nombre": "Francisco",
+        "is_cliente": false,
+        "apellido": "Torres Gutierrez",
+        "is_active": true,
+        "calificaciones": [
+            8
+        ]
+    },
+    "pk": 3
+},
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "tomasgolo@hotmail.com",
+        "nombre": "Tom\u00e1s",
+        "is_cliente": false,
+        "apellido": "G\u00f3mez L\u00f3pez",
+        "is_active": true,
+        "calificaciones": [
+            7
+        ]
+    },
+    "pk": 4
+},
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "fvacap@gmail.com",
+        "nombre": "Federico",
+        "is_cliente": true,
+        "apellido": "Vaca Paz",
+        "is_active": true,
+        "calificaciones": [
+            10
+        ]
+    },
+    "pk": 5
+},
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "lamr@hotmail.com",
+        "nombre": "Luis Antonio",
+        "is_cliente": false,
+        "apellido": "Mart\u00ednez Rodriguez",
+        "is_active": true,
+        "calificaciones": [
+            7
+        ]
+    },
+    "pk": 6
+},
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "jamesml@hotmail.com",
+        "nombre": "Jaime",
+        "is_cliente": false,
+        "apellido": "Molina Leal",
+        "is_active": true,
+        "calificaciones": [
+            8
+        ]
+    },
+    "pk": 7
+},
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "robertgof@yahoo.com.mx",
+        "nombre": "Roberto",
+        "is_cliente": false,
+        "apellido": "G\u00f3mez Fr\u00edas",
+        "is_active": true,
+        "calificaciones": [
+            9
+        ]
+    },
+    "pk": 8
+},
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "djuarvill@hotmail.com",
+        "nombre": "Daniel",
+        "is_cliente": true,
+        "apellido": "Ju\u00e1rez Villarreal",
+        "is_active": true,
+        "calificaciones": [
+            9
+        ]
+    },
+    "pk": 9
+},
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "marionu@gmail.com",
+        "nombre": "Mario",
+        "is_cliente": true,
+        "apellido": "Nu\u00f1ez Garc\u00eda",
+        "is_active": true,
+        "calificaciones": [
+            6
+        ]
+    },
+    "pk": 10
+},
+{
+    "model": "contactos.contacto",
+    "fields": {
+        "correo_electronico": "fdvargas@gmail.com",
+        "nombre": "Fernanda Daniela",
+        "is_cliente": true,
+        "apellido": "Vargas Herrera",
+        "is_active": true,
+        "calificaciones": [
+            10
+        ]
+    },
+    "pk": 11
+}
 ]

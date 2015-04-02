@@ -87,15 +87,15 @@ class TipoNumeroTelefonico(models.Model):
         return self.nombre
 
 class NumeroTelefonico(models.Model):
-    contacto = models.ForeignKey(Contacto, null=True)
-    empresa = models.ForeignKey(Empresa, null=True)
-    vendedor = models.ForeignKey(Vendedor, null=True)
+    contacto = models.ForeignKey(Contacto, null=True, blank=True)
+    empresa = models.ForeignKey(Empresa, null=True, blank=True)
+    vendedor = models.ForeignKey(Vendedor, null=True, blank=True)
     is_active = models.BooleanField(default=True)
-    numero = models.IntegerField()
+    numero = models.BigIntegerField()
     tipo_numero = models.ForeignKey(TipoNumeroTelefonico)
 
     def __str__(self):
-        return self.numero
+        return str(self.numero)
 
     class Meta:
         verbose_name_plural = 'Números Telefónicos'
