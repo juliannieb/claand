@@ -1,0 +1,58 @@
+[
+{
+    "model": "contactos.area",
+    "fields": {
+        "nombre": "Ventas"
+    },
+    "pk": 1
+},
+{
+    "model": "contactos.area",
+    "fields": {
+        "nombre": "Seguridad"
+    },
+    "pk": 2
+},
+{
+    "model": "contactos.area",
+    "fields": {
+        "nombre": "Calidad"
+    },
+    "pk": 3
+},
+{
+    "model": "contactos.area",
+    "fields": {
+        "nombre": "Mercadotecnia"
+    },
+    "pk": 4
+},
+{
+    "model": "contactos.area",
+    "fields": {
+        "nombre": "Producci\u00f3n"
+    },
+    "pk": 5
+},
+{
+    "model": "contactos.area",
+    "fields": {
+        "nombre": "Direcci\u00f3n"
+    },
+    "pk": 6
+},
+{
+    "model": "contactos.area",
+    "fields": {
+        "nombre": "Administraci\u00f3n"
+    },
+    "pk": 7
+},
+{
+    "model": "contactos.area",
+    "fields": {
+        "nombre": "Finanzas"
+    },
+    "pk": 8
+}
+]

@@ -1,0 +1,37 @@
+[
+{
+    "fields": {
+        "nombre": "Oficina"
+    },
+    "pk": 1,
+    "model": "contactos.tiponumerotelefonico"
+},
+{
+    "fields": {
+        "nombre": "Celular"
+    },
+    "pk": 2,
+    "model": "contactos.tiponumerotelefonico"
+},
+{
+    "fields": {
+        "nombre": "Casa"
+    },
+    "pk": 3,
+    "model": "contactos.tiponumerotelefonico"
+},
+{
+    "fields": {
+        "nombre": "Fax"
+    },
+    "pk": 4,
+    "model": "contactos.tiponumerotelefonico"
+},
+{
+    "fields": {
+        "nombre": "Otro"
+    },
+    "pk": 5,
+    "model": "contactos.tiponumerotelefonico"
+}
+]

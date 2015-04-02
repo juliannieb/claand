@@ -1,0 +1,92 @@
+[
+{
+    "pk": 1,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "San Isidro 25",
+        "is_active": true,
+        "municipio": 2357
+    }
+},
+{
+    "pk": 2,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "Cerro Grande 140",
+        "is_active": true,
+        "municipio": 524
+    }
+},
+{
+    "pk": 3,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "Pablo Cabrera 307",
+        "is_active": true,
+        "municipio": 529
+    }
+},
+{
+    "pk": 4,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "R\u00edo verde 32",
+        "is_active": true,
+        "municipio": 2945
+    }
+},
+{
+    "pk": 5,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "Ju\u00e1rez 45",
+        "is_active": true,
+        "municipio": 2172
+    }
+},
+{
+    "pk": 6,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "Corregidora 570",
+        "is_active": true,
+        "municipio": 544
+    }
+},
+{
+    "pk": 7,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "Constituyentes 52",
+        "is_active": true,
+        "municipio": 2388
+    }
+},
+{
+    "pk": 8,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "Ayuntamiento 220",
+        "is_active": true,
+        "municipio": 2925
+    }
+},
+{
+    "pk": 9,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "Bernardo Quintana 49",
+        "is_active": true,
+        "municipio": 2551
+    }
+},
+{
+    "pk": 10,
+    "model": "empresas.direccion",
+    "fields": {
+        "direccion": "Hidalgo 420",
+        "is_active": true,
+        "municipio": 2652
+    }
+}
+]

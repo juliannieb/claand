@@ -1,0 +1,102 @@
+[
+{
+    "pk": 1,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.claand.com/",
+        "tipo_red_social": 4,
+        "is_active": true,
+        "empresa": "CLAA580219JRR"
+    }
+},
+{
+    "pk": 2,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.facebook.com/Mazda",
+        "tipo_red_social": 2,
+        "is_active": true,
+        "empresa": "MAZD650219SGG"
+    }
+},
+{
+    "pk": 3,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.facebook.com/Toyota",
+        "tipo_red_social": 2,
+        "is_active": true,
+        "empresa": "TOYO830412TDS"
+    }
+},
+{
+    "pk": 4,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.cocacola.com/",
+        "tipo_red_social": 4,
+        "is_active": true,
+        "empresa": "COCA540895SOP"
+    }
+},
+{
+    "pk": 5,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.twitter.com/Kellogs",
+        "tipo_red_social": 1,
+        "is_active": true,
+        "empresa": "KELL640717YUU"
+    }
+},
+{
+    "pk": 6,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.imbera.com/",
+        "tipo_red_social": 4,
+        "is_active": true,
+        "empresa": "IMBE430587TOE"
+    }
+},
+{
+    "pk": 7,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.oracle.com/",
+        "tipo_red_social": 4,
+        "is_active": true,
+        "empresa": "ORAC680519ORC"
+    }
+},
+{
+    "pk": 8,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.microsoft.com/",
+        "tipo_red_social": 4,
+        "is_active": true,
+        "empresa": "MICR780420MST"
+    }
+},
+{
+    "pk": 9,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.facebook.com/Copper_clad",
+        "tipo_red_social": 2,
+        "is_active": true,
+        "empresa": "COPP685743POS"
+    }
+},
+{
+    "pk": 10,
+    "model": "empresas.redsocial",
+    "fields": {
+        "link": "http://www.elica.com/",
+        "tipo_red_social": 4,
+        "is_active": true,
+        "empresa": "ELIC540318TRE"
+    }
+}
+]

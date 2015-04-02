@@ -1,0 +1,30 @@
+[
+{
+    "pk": 1,
+    "fields": {
+        "nombre": "Twitter"
+    },
+    "model": "empresas.tiporedsocial"
+},
+{
+    "pk": 2,
+    "fields": {
+        "nombre": "Facebook"
+    },
+    "model": "empresas.tiporedsocial"
+},
+{
+    "pk": 3,
+    "fields": {
+        "nombre": "LinkedIn"
+    },
+    "model": "empresas.tiporedsocial"
+},
+{
+    "pk": 4,
+    "fields": {
+        "nombre": "P\u00e1gina Web"
+    },
+    "model": "empresas.tiporedsocial"
+}
+]

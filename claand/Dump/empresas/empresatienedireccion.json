@@ -1,0 +1,92 @@
+[
+{
+    "pk": 1,
+    "fields": {
+        "direccion": 1,
+        "fecha": "2015-04-01",
+        "empresa": "CLAA580219JRR"
+    },
+    "model": "empresas.empresatienedireccion"
+},
+{
+    "pk": 2,
+    "fields": {
+        "direccion": 2,
+        "fecha": "2015-04-01",
+        "empresa": "MAZD650219SGG"
+    },
+    "model": "empresas.empresatienedireccion"
+},
+{
+    "pk": 3,
+    "fields": {
+        "direccion": 3,
+        "fecha": "2015-04-01",
+        "empresa": "TOYO830412TDS"
+    },
+    "model": "empresas.empresatienedireccion"
+},
+{
+    "pk": 4,
+    "fields": {
+        "direccion": 4,
+        "fecha": "2015-04-01",
+        "empresa": "COCA540895SOP"
+    },
+    "model": "empresas.empresatienedireccion"
+},
+{
+    "pk": 5,
+    "fields": {
+        "direccion": 5,
+        "fecha": "2015-04-01",
+        "empresa": "KELL640717YUU"
+    },
+    "model": "empresas.empresatienedireccion"
+},
+{
+    "pk": 6,
+    "fields": {
+        "direccion": 6,
+        "fecha": "2015-04-01",
+        "empresa": "IMBE430587TOE"
+    },
+    "model": "empresas.empresatienedireccion"
+},
+{
+    "pk": 7,
+    "fields": {
+        "direccion": 7,
+        "fecha": "2015-04-01",
+        "empresa": "ORAC680519ORC"
+    },
+    "model": "empresas.empresatienedireccion"
+},
+{
+    "pk": 8,
+    "fields": {
+        "direccion": 8,
+        "fecha": "2015-04-01",
+        "empresa": "MICR780420MST"
+    },
+    "model": "empresas.empresatienedireccion"
+},
+{
+    "pk": 9,
+    "fields": {
+        "direccion": 9,
+        "fecha": "2015-04-01",
+        "empresa": "COPP685743POS"
+    },
+    "model": "empresas.empresatienedireccion"
+},
+{
+    "pk": 10,
+    "fields": {
+        "direccion": 10,
+        "fecha": "2015-04-01",
+        "empresa": "ELIC540318TRE"
+    },
+    "model": "empresas.empresatienedireccion"
+}
+]

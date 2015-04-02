@@ -1,0 +1,82 @@
+[
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Claand"
+    },
+    "pk": "CLAA580219JRR",
+    "model": "empresas.empresa"
+},
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Coca Cola"
+    },
+    "pk": "COCA540895SOP",
+    "model": "empresas.empresa"
+},
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Copper Clad"
+    },
+    "pk": "COPP685743POS",
+    "model": "empresas.empresa"
+},
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Elica"
+    },
+    "pk": "ELIC540318TRE",
+    "model": "empresas.empresa"
+},
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Imbera"
+    },
+    "pk": "IMBE430587TOE",
+    "model": "empresas.empresa"
+},
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Kellogs"
+    },
+    "pk": "KELL640717YUU",
+    "model": "empresas.empresa"
+},
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Mazda"
+    },
+    "pk": "MAZD650219SGG",
+    "model": "empresas.empresa"
+},
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Microsoft"
+    },
+    "pk": "MICR780420MST",
+    "model": "empresas.empresa"
+},
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Oracle"
+    },
+    "pk": "ORAC680519ORC",
+    "model": "empresas.empresa"
+},
+{
+    "fields": {
+        "is_active": true,
+        "nombre": "Toyota"
+    },
+    "pk": "TOYO830412TDS",
+    "model": "empresas.empresa"
+}
+]
