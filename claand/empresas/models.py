@@ -23,7 +23,7 @@ class EmpresaTieneDireccion(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.fecha = datetime.datetime.today()
+            self.fecha = datetime.now()
         return super(EmpresaTieneDireccion, self).save(*args, **kwargs)
 
     class Meta:
@@ -57,7 +57,7 @@ class Estado(models.Model):
         return self.nombre
 
 class Municipio(models.Model):
-    nombre = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=50)
     estado = models.ForeignKey(Estado)
 
     def __str__(self):

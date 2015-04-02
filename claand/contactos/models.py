@@ -47,7 +47,7 @@ class Calificacion(models.Model):
     calificacion  = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.calificacion
+        return str(self.calificacion)
 
     class Meta:
         verbose_name_plural = 'Calificaciones'
