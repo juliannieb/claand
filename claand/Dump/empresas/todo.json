@@ -2,88 +2,98 @@
 {
     "fields": {
         "is_active": true,
-        "nombre": "Claand"
+        "nombre": "Claand",
+        "rfc": "CLAA580219JRR"
     },
-    "pk": "CLAA580219JRR",
+    "pk": 1,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "is_active": true,
-        "nombre": "Coca Cola"
+        "nombre": "Coca Cola",
+        "rfc": "COCA540895SOP"
     },
-    "pk": "COCA540895SOP",
+    "pk": 2,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "is_active": true,
-        "nombre": "Copper Clad"
+        "nombre": "Copper Clad",
+        "rfc": "COPP685743POS"
     },
-    "pk": "COPP685743POS",
+    "pk": 3,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "is_active": true,
-        "nombre": "Elica"
+        "nombre": "Elica",
+        "rfc": "ELIC540318TRE"
     },
-    "pk": "ELIC540318TRE",
+    "pk": 4,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "is_active": true,
-        "nombre": "Imbera"
+        "nombre": "Imbera",
+        "rfc": "IMBE430587TOE"
     },
-    "pk": "IMBE430587TOE",
+    "pk": 5,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "is_active": true,
-        "nombre": "Kellogs"
+        "nombre": "Kellogs",
+        "rfc": "KELL640717YUU"
     },
-    "pk": "KELL640717YUU",
+    "pk": 6,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "is_active": true,
-        "nombre": "Mazda"
+        "nombre": "Mazda",
+        "rfc": "MAZD650219SGG"
     },
-    "pk": "MAZD650219SGG",
+    "pk": 7,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "is_active": true,
-        "nombre": "Microsoft"
+        "nombre": "Microsoft",
+        "rfc": "MICR780420MST"
     },
-    "pk": "MICR780420MST",
+    "pk": 8,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "is_active": true,
-        "nombre": "Oracle"
+        "nombre": "Oracle",
+        "rfc": "ORAC680519ORC"
     },
-    "pk": "ORAC680519ORC",
+    "pk": 9,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "is_active": true,
-        "nombre": "Toyota"
+        "nombre": "Toyota",
+        "rfc": "TOYO830412TDS"
     },
-    "pk": "TOYO830412TDS",
+    "pk": 10,
     "model": "empresas.empresa"
 },
 {
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 1,
-        "empresa": "CLAA580219JRR"
+        "empresa": 1
     },
     "pk": 1,
     "model": "empresas.empresatienedireccion"
@@ -92,7 +102,7 @@
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 2,
-        "empresa": "MAZD650219SGG"
+        "empresa": 7
     },
     "pk": 2,
     "model": "empresas.empresatienedireccion"
@@ -101,7 +111,7 @@
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 3,
-        "empresa": "TOYO830412TDS"
+        "empresa": 10
     },
     "pk": 3,
     "model": "empresas.empresatienedireccion"
@@ -110,7 +120,7 @@
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 4,
-        "empresa": "COCA540895SOP"
+        "empresa": 2
     },
     "pk": 4,
     "model": "empresas.empresatienedireccion"
@@ -119,7 +129,7 @@
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 5,
-        "empresa": "KELL640717YUU"
+        "empresa": 6
     },
     "pk": 5,
     "model": "empresas.empresatienedireccion"
@@ -128,7 +138,7 @@
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 6,
-        "empresa": "IMBE430587TOE"
+        "empresa": 5
     },
     "pk": 6,
     "model": "empresas.empresatienedireccion"
@@ -137,7 +147,7 @@
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 7,
-        "empresa": "ORAC680519ORC"
+        "empresa": 9
     },
     "pk": 7,
     "model": "empresas.empresatienedireccion"
@@ -146,7 +156,7 @@
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 8,
-        "empresa": "MICR780420MST"
+        "empresa": 8
     },
     "pk": 8,
     "model": "empresas.empresatienedireccion"
@@ -155,7 +165,7 @@
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 9,
-        "empresa": "COPP685743POS"
+        "empresa": 3
     },
     "pk": 9,
     "model": "empresas.empresatienedireccion"
@@ -164,7 +174,7 @@
     "fields": {
         "fecha": "2015-04-01",
         "direccion": 10,
-        "empresa": "ELIC540318TRE"
+        "empresa": 4
     },
     "pk": 10,
     "model": "empresas.empresatienedireccion"
@@ -202,7 +212,7 @@
         "is_active": true,
         "link": "http://www.claand.com/",
         "tipo_red_social": 4,
-        "empresa": "CLAA580219JRR"
+        "empresa": 1
     },
     "pk": 1,
     "model": "empresas.redsocial"
@@ -212,7 +222,7 @@
         "is_active": true,
         "link": "http://www.facebook.com/Mazda",
         "tipo_red_social": 2,
-        "empresa": "MAZD650219SGG"
+        "empresa": 7
     },
     "pk": 2,
     "model": "empresas.redsocial"
@@ -222,7 +232,7 @@
         "is_active": true,
         "link": "http://www.facebook.com/Toyota",
         "tipo_red_social": 2,
-        "empresa": "TOYO830412TDS"
+        "empresa": 10
     },
     "pk": 3,
     "model": "empresas.redsocial"
@@ -232,7 +242,7 @@
         "is_active": true,
         "link": "http://www.cocacola.com/",
         "tipo_red_social": 4,
-        "empresa": "COCA540895SOP"
+        "empresa": 2
     },
     "pk": 4,
     "model": "empresas.redsocial"
@@ -242,7 +252,7 @@
         "is_active": true,
         "link": "http://www.twitter.com/Kellogs",
         "tipo_red_social": 1,
-        "empresa": "KELL640717YUU"
+        "empresa": 6
     },
     "pk": 5,
     "model": "empresas.redsocial"
@@ -252,7 +262,7 @@
         "is_active": true,
         "link": "http://www.imbera.com/",
         "tipo_red_social": 4,
-        "empresa": "IMBE430587TOE"
+        "empresa": 5
     },
     "pk": 6,
     "model": "empresas.redsocial"
@@ -262,7 +272,7 @@
         "is_active": true,
         "link": "http://www.oracle.com/",
         "tipo_red_social": 4,
-        "empresa": "ORAC680519ORC"
+        "empresa": 9
     },
     "pk": 7,
     "model": "empresas.redsocial"
@@ -272,7 +282,7 @@
         "is_active": true,
         "link": "http://www.microsoft.com/",
         "tipo_red_social": 4,
-        "empresa": "MICR780420MST"
+        "empresa": 8
     },
     "pk": 8,
     "model": "empresas.redsocial"
@@ -282,7 +292,7 @@
         "is_active": true,
         "link": "http://www.facebook.com/Copper_clad",
         "tipo_red_social": 2,
-        "empresa": "COPP685743POS"
+        "empresa": 3
     },
     "pk": 9,
     "model": "empresas.redsocial"
@@ -292,7 +302,7 @@
         "is_active": true,
         "link": "http://www.elica.com/",
         "tipo_red_social": 4,
-        "empresa": "ELIC540318TRE"
+        "empresa": 4
     },
     "pk": 10,
     "model": "empresas.redsocial"
