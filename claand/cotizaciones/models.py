@@ -14,9 +14,12 @@ class Cotizacion(models.Model):
     fecha_modificacion = models.DateField()
 
     def save(self, *args, **kwargs):
+        """ Override de save para que sólo haya una fecha de creación,
+        y si dicha tupla se modifica, se guarde la fecha de modificación.
+        """
         if not self.id:
             self.fecha_creacion = datetime.datetime.today()
-        self.fecha_modificacion = datetime.datetime.today()     # siempre guardar fecha modificacion.
+        self.fecha_modificacion = datetime.datetime.today()
         return super(Pago, self).save(*args, **kwargs)
 
     class Meta:
@@ -35,9 +38,10 @@ class Pago(models.Model):
     fecha_creacion = models.DateField(editable=False)
     fecha_modificacion = models.DateField()
     monto = models.FloatField()
-
+    """ Override de save para que sólo haya una fecha de creación,
+        y si dicha tupla se modifica, se guarde la fecha de modificación.
+    """
     def save(self, *args, **kwargs):
         if not self.id:
             self.fecha_creacion = datetime.datetime.today()
-        self.fecha_modificacion = datetime.datetime.today()     # siempre guardar fecha modificacion.
-        return super(Pago, self).save(*args, **kwargs)
+        self.fecha_modificacion = datetime.datetime.today()     

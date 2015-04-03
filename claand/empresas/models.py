@@ -10,6 +10,9 @@ class Empresa(models.Model):
     direcciones = models.ManyToManyField('Direccion', through='EmpresaTieneDireccion')
 
     def save(self, *args, **kwargs):
+        """ Override de save para que el RFC siempre se guarde
+        en mayusculas.
+        """
         self.rfc = self.rfc.upper()
         return super(Empresa, self).save(*args, **kwargs)
 
@@ -22,6 +25,9 @@ class EmpresaTieneDireccion(models.Model):
     direccion = models.ForeignKey('Direccion')
 
     def save(self, *args, **kwargs):
+        """ Override de save para que la fecha de creacion
+        siempre sea la actual.
+        """
         if not self.id:
             self.fecha = datetime.now()
         return super(EmpresaTieneDireccion, self).save(*args, **kwargs)
