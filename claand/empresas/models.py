@@ -6,7 +6,7 @@ from django.db import models
 class Empresa(models.Model):
     is_active = models.BooleanField(default=True)
     nombre = models.CharField(max_length=30)
-    rfc = models.CharField(max_length=13, primary_key=True)
+    rfc = models.CharField(max_length=13)
     direcciones = models.ManyToManyField('Direccion', through='EmpresaTieneDireccion')
 
     def save(self, *args, **kwargs):
