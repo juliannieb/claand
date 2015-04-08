@@ -1,18 +1,19 @@
 from datetime import datetime
-
 from django.db import models
-
+from django.template.defaultfilters import slugify
 
 class Empresa(models.Model):
     is_active = models.BooleanField(default=True)
     nombre = models.CharField(max_length=30)
-    rfc = models.CharField(max_length=13)
+    rfc = models.CharField(max_length=13, unique=True)
+    slug = models.SlugField(unique=True, null=True)
     direcciones = models.ManyToManyField('Direccion', through='EmpresaTieneDireccion')
 
     def save(self, *args, **kwargs):
         """ Override de save para que el RFC siempre se guarde
         en mayusculas.
         """
+        self.slug = slugify(self.nombre)
         self.rfc = self.rfc.upper()
         return super(Empresa, self).save(*args, **kwargs)
 
