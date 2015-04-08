@@ -1,6 +1,8 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from empresas.models import Empresa
 from principal.models import Vendedor
+
 
 class Contacto(models.Model):
     is_active = models.BooleanField(default=True)
@@ -11,6 +13,11 @@ class Contacto(models.Model):
     calificaciones = models.ManyToManyField('Calificacion')
     empresa = models.ManyToManyField(Empresa, through='Pertenece')
     vendedor = models.ManyToManyField(Vendedor, through='Atiende')
+    slug = models.SlugField(unique=True, null=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nombre)
+        super(Contacto, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.nombre
