@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Registrar cotización</h1>
+        </div>
+    </div>
+
+    
+    <div class="container">
+        <div class="row row-centered">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
+                <form class="form-horizontal" role="form" id="form_llamada">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="sel_contactoCotizacion">Contacto:</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="sel_contactoCotizacion">
+                                <option selected="selected">Seleccionar...</option>
+                                <option>Juan Pérez</option>
+                                <option>Alejandro Cassis</option>
+                                <option>Julián Niebieskikwiat</option>
+                                <option>Marco López</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="txt_monto">Monto:</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="txt_monto" placeholder="Monto $$$" required="required">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="txt_descripcionLlamada">Descripción:</label>
+                        <div class="col-sm-8">
+                            <textarea name="txt_descripcionLlamada" id="txt_descripcionLlamada" cols="30" rows="5" class="form-control" form="form_llamada" required="required"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="date_cotizacion">Fecha:</label>
+                        <div class="col-sm-8">
+                            <!-- agregar max="1985-04-12T23:20:50.52" para controlar que la fecha no sea mayor a la actual -->
+                            <input type="date" id="date_cotizacion" class="form-control" max="" required="required">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="btn_submitContacto" class="btn btn-success pull-right">Registrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock content%}

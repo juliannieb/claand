@@ -14,7 +14,7 @@ def vendedor_index(request):
 	TO DO: implementar todo ja.
 	"""
 
-	return render_to_response('Vendedor/index.html')
+	return render_to_response('Vendedor/Consultar/Ventas.html')
 
 def consultar(request):
 	""" Funcion para manejar la vista principal de consultas.

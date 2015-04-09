@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Todas las cotizaciones</h1>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row pull-right">
+            <form action="search_cotizaciones" class="form-horizontal">
+                <div class="col-sm-8 col-xs-8">
+                    <input type="text" class="form-control" id="txt_search_cotizaciones">
+                </div>
+                <div class="col-sm-4 col-xs-4">
+                    <button type="submit" class="btn btn-default pull-right">Buscar</button>
+                </div>
+            </form>
+        </div>
+            
+    </div>
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Empresa</th>
+                    <th>Descripción</th>
+                    <th>Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td><a href="...Consultar/Cotizaciones?idCotizacion">1</a></td>
+                    <td>Juan Pérez</td>
+                    <td>Gerber</td>
+                    <td>Cotización de máquina troqueladora</td>
+                    <td>25000</td>
+                </tr>
+                <tr>
+                    <td><a href="...Consultar/Cotizaciones?idCotizacion">2</a></td>
+                    <td>Julián Niebieskikwiat</td>
+                    <td>Mitsubishi</td>
+                    <td>Máquina de estampado</td>
+                    <td>100000</td>
+                </tr>
+                <tr>
+                    <td><a href="...Consultar/Cotizaciones?idCotizacion">3</a></td>
+                    <td>Marco López</td>
+                    <td>Kellog's</td>
+                    <td>Punzonadora</td>
+                    <td>250000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content%}
