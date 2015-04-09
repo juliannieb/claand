@@ -25,4 +25,4 @@ def director_index(request):
 	Aqui deben ir los permisos de login para el director.
 	TO DO: implementar todo ja.
 	"""
-	return HttpResponse("Index director")
+	return render_to_response('Director/Consultar/Ventas.html')

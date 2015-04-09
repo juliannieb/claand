@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Mitsubishi</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row row-centered">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="txt_nombreEmpresa">Nombre:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="txt_nombreEmpresa" placeholder="Mitsubishi" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="txt_rfcEmpresa">RFC:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="txt_rfcEmpresa" placeholder="GTER850320J77" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="direccionEmpresa">Dirección:</label>
+                        <div class="col-sm-8" id="direccionEmpresa">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="txt_rfcEmpresa">Estado:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="txt_rfcEmpresa" placeholder="Querétaro" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="txt_rfcEmpresa">Municipio:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="txt_rfcEmpresa" placeholder="Querétaro de Arteaga" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="txt_rfcEmpresa">Dirección:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="txt_rfcEmpresa" placeholder="Epigmenio Gonzáles #16" readonly>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="txt_telefonoContacto">Teléfono:</label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" id="txt_tipoTelefonoEmpresa" placeholder="4422160105" readonly>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="txt_rfcEmpresa" placeholder="Oficina" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-6 col-sm-6 pull-right">
+                            <button class="btn btn-info pull-right" id="btn_agregarTelEmpresa">+</button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="txt_redSocEmpresa">Redes Sociales:</label>
+                        <div class="col-sm-5">
+                            <input type="url" class="form-control" id="txt_redSocEmpresa" placeholder="facebook.com/MitsubishiQro" readonly>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="txt_redSocEmpresa" placeholder="Facebook" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-6 col-sm-6 pull-right">
+                            <button class="btn btn-info pull-right" id="btn_agregarRedSocEmpresa">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="btn_submitContacto" class="btn btn-success pull-right">Guardar cambios</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Contactos asociados</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Empresa</th>
+                    <th>Área</th>
+                    <th>Email</th>
+                    <th>Estatus</th>
+                    <th>Calificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="...Consultar/Contactos?idContacto">2</a></td>
+                    <td>Alejandro Cassis</td>
+                    <td>Mitsubishi</td>
+                    <td>Ventas</td>
+                    <td>csssz@gmail.com</td>
+                    <td>Cliente</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <td><a href="...Consultar/Contactos?idContacto">3</a></td>
+                    <td>Julián Niebieskikwiat</td>
+                    <td>Mitsubishi</td>
+                    <td>Seguridad</td>
+                    <td>julian@hotmail.com</td>
+                    <td>Cliente</td>
+                    <td>A</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Cotizaciones asociadas</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Empresa</th>
+                    <th>Descripción</th>
+                    <th>Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="...Consultar/Cotizaciones?idCotizacion">2</a></td>
+                    <td>Julián Niebieskikwiat</td>
+                    <td>Mitsubishi</td>
+                    <td>Máquina de estampado</td>
+                    <td>100000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Ventas asociadas</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID Venta</th>
+                    <th>ID Cotización</th>
+                    <th>Cliente</th>
+                    <th>Empresa</th>
+                    <th>Descripción</th>
+                    <th>Monto</th>
+                    <th>Estatus</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="...Consultar/Cotizaciones?idCotizacion">2</a></td>
+                    <td>890</td>
+                    <td>Julián Niebieskikwiat</td>
+                    <td>Mitsubishi</td>
+                    <td>Máquina de estampado</td>
+                    <td>100000</td>
+                    <td>Finalizada</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content%}

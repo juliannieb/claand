@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Todas las empresas</h1>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row pull-left">
+            <form action="genera_reporte" class="form-horizontal">
+                <div class="col-sm-4 col-xs-4">
+                    <button type="submit" class="btn btn-success pull-left">Generar Reporte</button>
+                </div>
+            </form>
+        </div> 
+        <div class="row pull-right">
+            <form action="search_contactos" class="form-horizontal">
+                <div class="col-sm-8 col-xs-8">
+                    <input type="text" class="form-control" id="txt_search_contactos">
+                </div>
+                <div class="col-sm-4 col-xs-4">
+                    <button type="submit" class="btn btn-default pull-right">Buscar</button>
+                </div>
+            </form>
+        </div>     
+    </div>
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>RFC</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td><a href="...Consultar/Empresas?idEmpresa">GUIS770511L55</a></td>
+                    <td>Gerber</td>
+                </tr>
+
+                <tr>
+                    <td><a href="...Consultar/Empresas?idEmpresa">ACTD670514H44</a></td>
+                    <td>Kellog's</td>
+                </tr>
+                <tr>
+                    <td><a href="Empresas_pkGTER850320J77.html">GTER850320J77</a></td>
+                    <td>Mitsubishi</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content%}
