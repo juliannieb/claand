@@ -18,9 +18,9 @@ class Cotizacion(models.Model):
         y si dicha tupla se modifica, se guarde la fecha de modificación.
         """
         if not self.id:
-            self.fecha_creacion = datetime.datetime.today()
-        self.fecha_modificacion = datetime.datetime.today()
-        return super(Pago, self).save(*args, **kwargs)
+            self.fecha_creacion = datetime.today()
+        self.fecha_modificacion = datetime.today()
+        return super(Cotizacion, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Cotización'
@@ -43,5 +43,6 @@ class Pago(models.Model):
     """
     def save(self, *args, **kwargs):
         if not self.id:
-            self.fecha_creacion = datetime.datetime.today()
-        self.fecha_modificacion = datetime.datetime.today()     
+            self.fecha_creacion = datetime.today()
+        self.fecha_modificacion = datetime.today()
+        return super(Pago, self).save(*args, **kwargs)  
