@@ -2,7 +2,8 @@ from django.conf.urls import url, patterns
 from contactos import views
 
 urlpatterns = patterns('',
-        url(r'^registrar-contacto/$', views.registrar_contactos, name='registrar_contactos'),
+        url(r'^registrar-contactos/$', views.registrar_contactos, name='registrar_contactos'),
+        url(r'^registrar-contacto/$', views.registrar_contacto, name='registrar_contacto'),
         url(r'^registrar-llamada/$', views.registrar_llamada, name='registrar_llamada'),
 
         url(r'^contactos/$', views.consultar_contactos, name='consultar_contactos'),

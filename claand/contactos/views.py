@@ -17,6 +17,11 @@ def registrar_contactos(request):
 	""" registrar un nuevo contacto """
 	return render_to_response('contactos/registrar_contactos.html')
 
+
+def registrar_contacto(request):
+	""" registrar un nuevo contacto """
+	return render_to_response('contactos/registrar_contacto.html')
+
 def registrar_llamada(request):
 	""" registrar una llamada """
 	return render_to_response('contactos/registrar_llamada.html')
