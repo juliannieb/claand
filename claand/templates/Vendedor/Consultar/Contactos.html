@@ -37,43 +37,31 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="Contactos_pk1.html">1</a></td>
-                    <td>Juan Pérez</td>
-                    <td>Gerber</td>
-                    <td>Ventas</td>
-                    <td>juanp@hotmail.com</td>
-                    <td>Prospecto</td>
-                    <td>E</td>
-                </tr>
+                {% for contacto in contactos_list %}
+                    <tr>
+                        <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto.id }}</a></td>
+                        <td>{{ contacto.nombre }}</td>
+                        {% if not contacto.empresa.all %}
+                            <td></td>
+                        {% else %}
+                            {% for empresa in contacto.empresa.all %}
+                                <td>{{ empresa }}</td>
+                            {% endfor %}
+                        {% endif %}
 
-                <tr>
-                    <td><a href="...Consultar/Contactos?idContacto">2</a></td>
-                    <td>Alejandro Cassis</td>
-                    <td>Mitsubishi</td>
-                    <td>Ventas</td>
-                    <td>csssz@gmail.com</td>
-                    <td>Cliente</td>
-                    <td>C</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Contactos?idContacto">3</a></td>
-                    <td>Julián Niebieskikwiat</td>
-                    <td>Mitsubishi</td>
-                    <td>Seguridad</td>
-                    <td>julian@hotmail.com</td>
-                    <td>Cliente</td>
-                    <td>A</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Contactos?idContacto">4</a></td>
-                    <td>Marco López</td>
-                    <td>Kellog's</td>
-                    <td>Calidad</td>
-                    <td>marco@hotmail.com</td>
-                    <td>Cliente</td>
-                    <td>B</td>
-                </tr>
+                        
+                        <td></td>
+                   
+
+                        <td>{{ contacto.correo_electronico }}</td>
+                        {% if contacto.is_cliente %}
+                            <td>Cliente</td>
+                        {% else %}
+                            <td>Prospecto</td>
+                        {% endif %}
+                        <td>3</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

@@ -1,14 +1,17 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
+from contactos.models import Contacto
 
 def consultar_contactos(request):
 	""" mostrar todos los contactos """
-	return HttpResponse("todos los contactosss")
+	lista_contactos = Contacto.objects.all()
+	context = {'contactos_list' : lista_contactos}
+	return render_to_response('Vendedor/Consultar/Contactos.html', context)
 
 def contacto(request, contacto_nombre_slug):
 	""" mostrar detalle de un contacto """
-	return HttpResponse("contacto en especifico")
+
+	return render_to_response('Vendedor/Consultar/Contacto.html')
 
 def registrar_contactos(request):
 	""" registrar un nuevo contacto """

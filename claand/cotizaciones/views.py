@@ -1,10 +1,9 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 
 def consultar_cotizaciones(request):
 	""" mostrar todas las cotizaciones """
-	return HttpResponse("cotizaciones general")
+	return render_to_response('Vendedor/Consultar/Cotizaciones.html')
 
 def cotizacion(request, id_cotizacion):
 	""" mostrar detalle de una cotizacion """
@@ -12,7 +11,7 @@ def cotizacion(request, id_cotizacion):
 
 def consultar_ventas(request):
 	""" mostrar todas las ventas """
-	return HttpResponse("ventas general")
+	return render_to_response('Vendedor/Consultar/Ventas.html')
 
 def venta(request, id_venta):
 	""" mostrar detalle de una venta """

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 
 def registrar_empresa(request):
@@ -7,7 +7,7 @@ def registrar_empresa(request):
 
 def consultar_empresas(request):
 	""" mostrar todas las empresas """
-	return HttpResponse("todas las empresas")
+	return render_to_response('Vendedor/Consultar/Empresas.html')
 
 def empresa(request, empresa_id):
 	""" mostrar una empresa """
