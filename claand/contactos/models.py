@@ -3,7 +3,7 @@ from django.template.defaultfilters import slugify
 from empresas.models import Empresa
 from principal.models import Vendedor
 
-
+    
 class Contacto(models.Model):
     is_active = models.BooleanField(default=True)
     is_cliente = models.BooleanField(default=False)
