@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Todos los vendedores</h1>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row pull-left">
+            <form action="genera_reporte" class="form-horizontal">
+                <div class="col-sm-4 col-xs-4">
+                    <button type="submit" class="btn btn-success pull-left">Generar Reporte</button>
+                </div>
+            </form>
+        </div> 
+        <div class="row pull-right">
+            <form action="search_contactos" class="form-horizontal">
+                <div class="col-sm-8 col-xs-8">
+                    <input type="text" class="form-control" id="txt_search_contactos">
+                </div>
+                <div class="col-sm-4 col-xs-4">
+                    <button type="submit" class="btn btn-default pull-right">Buscar</button>
+                </div>
+            </form>
+        </div>     
+    </div>
+
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Llamadas de la semana</th>
+                    <th>Cantidad cotizada semanal</th>
+                    <th>Cantidad vendida semanal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="Vendedores_pk1.html">1</a></td>
+                    <td>Juan Pérez</td>
+                    <td>4421234567</td>
+                    <td>4</td>
+                    <td>1800.00</td>
+                    <td>1200.00</td>
+                </tr>
+
+                <tr>
+                    <td><a href="#">2</a></td>
+                    <td>Alejandro Cassis</td>
+                    <td>4421234512</td>
+                    <td>15</td>
+                    <td>14000.00</td>
+                    <td>10000.00</td>
+                </tr>
+                <tr>
+                    <td><a href="#">3</a></td>
+                    <td>Julián Niebieskikwiat</td>
+                    <td>4421261512</td>
+                    <td>11</td>
+                    <td>8000.00</td>
+                    <td>1000.00</td>
+                </tr>
+                <tr>
+                    <td><a href="#">4</a></td>
+                    <td>Marco López</td>
+                    <td>4421238933</td>
+                    <td>6</td>
+                    <td>30000.00</td>
+                    <td>15000.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content%}
