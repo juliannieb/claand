@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response
 
 
 def index(request):
@@ -12,7 +13,8 @@ def vendedor_index(request):
 	""" Funcion para manejar el index principal del vendedor.
 	TO DO: implementar todo ja.
 	"""
-	return HttpResponse("Index vendedor")
+
+	return render_to_response('Vendedor/index.html')
 
 def consultar(request):
 	""" Funcion para manejar la vista principal de consultas.
