@@ -2,9 +2,8 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 
 
-def index(request):
-	""" Funcion para manejar el index principal de la aplicación.
-	TO DO: implementar todo ja.
+def user_login(request):
+	""" Aqui se tiene que poner todo lo del login.
 	"""
 	return HttpResponse("Indexxxx")
 

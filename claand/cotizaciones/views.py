@@ -20,3 +20,6 @@ def venta(request, id_venta):
 def registrar(request):
 	""" registrar cotizacion """
 	return render_to_response('cotizaciones/registrar_cotizacion.html')
+
+
+""" Falta todas las relacionadas con pago """
