@@ -6,24 +6,24 @@ def consultar_contactos(request):
 	""" mostrar todos los contactos """
 	lista_contactos = Contacto.objects.all()
 	context = {'contactos_list' : lista_contactos}
-	return render_to_response('Vendedor/Consultar/Contactos.html', context)
+	return render_to_response('contactos/contactos.html', context)
 
 def contacto(request, contacto_nombre_slug):
 	""" mostrar detalle de un contacto """
 
-	return render_to_response('Vendedor/Consultar/Contacto.html')
+	return render_to_response('contactos/contacto.html')
 
 def registrar_contactos(request):
 	""" registrar un nuevo contacto """
-	return HttpResponse("registrar contacto")
+	return render_to_response('contactos/registrar_contactos.html')
 
 def registrar_llamada(request):
 	""" registrar una llamada """
-	return HttpResponse("registrar una llamada")
+	return render_to_response('contactos/registrar_llamada.html')
 
 def consultar_notas(request):
 	""" mostrar todas las notas """
-	return HttpResponse("consultar todas las notas")
+	return render_to_response('contactos/notas.html')
 
 def nota(request, nota_id):
 	""" mostrar detalle de una nota """
@@ -35,7 +35,7 @@ def registrar_nota(request):
 
 def consultar_recordatorios(request):
 	""" mostrar todos los recordatorios """
-	return HttpResponse("consultar todos los recordatorio")
+	return render_to_response('contactos/recordatorios.html')
 
 def recordatorio(request, recordatorio_id):
 	""" mostrar detalle de un recordatorio """

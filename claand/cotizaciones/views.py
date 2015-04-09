@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 def consultar_cotizaciones(request):
 	""" mostrar todas las cotizaciones """
-	return render_to_response('Vendedor/Consultar/Cotizaciones.html')
+	return render_to_response('cotizaciones/cotizaciones.html')
 
 def cotizacion(request, id_cotizacion):
 	""" mostrar detalle de una cotizacion """
@@ -11,7 +11,7 @@ def cotizacion(request, id_cotizacion):
 
 def consultar_ventas(request):
 	""" mostrar todas las ventas """
-	return render_to_response('Vendedor/Consultar/Ventas.html')
+	return render_to_response('cotizaciones/ventas.html')
 
 def venta(request, id_venta):
 	""" mostrar detalle de una venta """
@@ -19,4 +19,4 @@ def venta(request, id_venta):
 
 def registrar(request):
 	""" registrar cotizacion """
-	return HttpResponse("registrar cotizacion")
+	return render_to_response('cotizaciones/registrar_cotizacion.html')
