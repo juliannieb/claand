@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <form action="registrar_contacto" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn btn-success pull-right" value="Submit" />
+    </form>
+
+{% endblock content%}

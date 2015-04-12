@@ -6,7 +6,7 @@ def index(request):
 	""" Funcion para manejar el index principal de la aplicación.
 	TO DO: implementar todo ja.
 	"""
-	return HttpResponse("Indexxxx")
+	return render_to_response('principal/login.html')
 
 def vendedor_index(request):
 	""" Funcion para manejar el index principal del vendedor.

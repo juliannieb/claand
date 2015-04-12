@@ -44,9 +44,7 @@
                         {% if not contacto.empresa.all %}
                             <td></td>
                         {% else %}
-                            {% for empresa in contacto.empresa.all %}
-                                <td>{{ empresa }}</td>
-                            {% endfor %}
+                            <td>{{ contacto.empresa.all|join:", " }}</td>
                         {% endif %}
 
                         
