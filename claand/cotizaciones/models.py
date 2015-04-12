@@ -38,10 +38,11 @@ class Pago(models.Model):
     fecha_creacion = models.DateField(editable=False)
     fecha_modificacion = models.DateField()
     monto = models.FloatField()
-    """ Override de save para que sólo haya una fecha de creación,
-        y si dicha tupla se modifica, se guarde la fecha de modificación.
-    """
+    
     def save(self, *args, **kwargs):
+        """ Override de save para que sólo haya una fecha de creación,
+        y si dicha tupla se modifica, se guarde la fecha de modificación.
+        """
         if not self.id:
             self.fecha_creacion = datetime.today()
         self.fecha_modificacion = datetime.today()
