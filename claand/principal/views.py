@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 def user_login(request):
 	""" Aqui se tiene que poner todo lo del login.
 	"""
-	return render_to_response('principal/login.html')
+	return render_to_response('principal/user_login.html')
 
 def vendedor_index(request):
 	""" Funcion para manejar el index principal del vendedor.
