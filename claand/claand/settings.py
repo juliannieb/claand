@@ -98,6 +98,9 @@ STATIC_PATH = os.path.join(PROJECT_PATH,'static')
 
 STATIC_URL = '/static/'
 
+LOGIN_URL = '/principal/login/'
+LOGOUT_URL = '/principal/logout/'
+
 STATICFILES_DIRS = (
     STATIC_PATH,
 )

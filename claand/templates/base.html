@@ -31,7 +31,11 @@
                     <li><a href="{% url 'contactos:registrar_llamada' %}">Registrar llamada</a></li>
                     <li><a href="{% url 'cotizaciones:registrar_cotizacion' %}">Registrar cotización</a></li>
                     <li><a href="{% url 'principal:consultar' %}">Consultar</a></li>
-                    <li><a href="#">Salir</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'principal:logout' %}">Logout</a></li>
+                    {% else %}
+                     <li><a href="asdasd}">asdasdasd</a></li>
+                    {% endif %}
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="shortcut icon" href="{% static "img/ClaandLogo.png" %}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static "css/general.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}">
-    <!-- <link href="navbar-fixed-top.css" rel="stylesheet"> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{% static "js/login.js" %}"></script>
-</head>
-<body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'principal:user_login' %}"><img src="{% static "img/ClaandLogo.png" %}" alt="Claand" style="width: 30px; height: 20px;">  Claand</a>
-
-        </div>
-    </div>
-</nav>
+{% extends "base.html" %}
 
 <section id="login">
     <div class="container">
@@ -31,20 +6,23 @@
     	    <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
         	    <div class="form-wrap">
                 <h1>Ingresa con tu usuario</h1>
-                    <form class="form-horizontal" role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
+                    <form class="form-horizontal" role="form" action="{% url 'principal:login' %}" method="post" id="login-form" autocomplete="off">
                         <div class="form-group">
                             <label for="usuario" class="sr-only">Usuario</label>
-                            <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario">
+                            {{ form.username }}
+                            <!-- <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario"> -->
                         </div>
                         <div class="form-group">
                             <label for="key" class="sr-only">Contraseña</label>
-                            <input type="password" name="key" id="key" class="form-control" placeholder="Contraseña">
+                            {{ form.password }}<!-- 
+                            <input type="password" name="key" id="key" class="form-control" placeholder="Contraseña"> -->
                         </div>
                         <div class="checkbox">
                             <span class="character-checkbox" onclick="showPassword()"></span>
                             <span class="label">Mostrar contraseña</span>
                         </div>
-                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Ingresar">
+                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="login">
+                        <input type="hidden" name="next" value="{{ next }}" />
                     </form>
                     <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">¿Olvidaste tu contraseña?</a>
                     <hr>
