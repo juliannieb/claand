@@ -27,11 +27,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'contactos:registrar_contactos' %}">Registrar contacto</a></li>
-                    <li><a href="{% url 'contactos:registrar_llamada' %}">Registrar llamada</a></li>
-                    <li><a href="{% url 'cotizaciones:registrar_cotizacion' %}">Registrar cotización</a></li>
-                    <li><a href="{% url 'principal:consultar' %}">Consultar</a></li>
                     {% if user.is_authenticated %}
+                        <li><a href="{% url 'contactos:registrar_contactos' %}">Registrar contacto</a></li>
+                        <li><a href="{% url 'contactos:registrar_llamada' %}">Registrar llamada</a></li>
+                        <li><a href="{% url 'cotizaciones:registrar_cotizacion' %}">Registrar cotización</a></li>
+                        <li><a href="{% url 'principal:consultar' %}">Consultar</a></li>
+                    
                         <li><a href="{% url 'principal:logout' %}">Logout</a></li>
                     {% endif %}
                 </ul>

@@ -1,17 +1,10 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
 
 from empresas.forms import EmpresaForm, DireccionForm
 from empresas.models import Empresa, Direccion, EmpresaTieneDireccion
 
-"""
-@login_required
-def registrar_empresa(request):
-	""Funcion para manejar la vista de registrar empresa. ""
-	return render_to_response('empresas/registrar_empresa.html', context_instance=RequestContext(request))
-"""
 
 @login_required
 def consultar_empresas(request):
@@ -25,11 +18,10 @@ def consultar_empresas(request):
 @login_required
 def empresa(request, empresa_id):
 	""" mostrar una empresa """
-	return render_to_response('empresas/empresa.html', context_instance=RequestContext(request))
+	return render(request, 'empresas/empresa.html', {})
 
 @login_required
 def registrar_empresa(request):
-    # A HTTP POST?
     if request.method == 'POST':
         form = EmpresaForm(request.POST)
         formDireccion = DireccionForm(request.POST)

@@ -1,7 +1,8 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from contactos.models import Contacto
 from django.contrib.auth.decorators import login_required
+from contactos.models import Contacto
+
 
 @login_required
 def consultar_contactos(request):
@@ -13,27 +14,27 @@ def consultar_contactos(request):
 def contacto(request, contacto_nombre_slug):
 	""" mostrar detalle de un contacto """
 
-	return render_to_response('contactos/contacto.html')
+	return render(request, 'contactos/contacto.html', {})
 
 @login_required
 def registrar_contactos(request):
 	""" registrar un nuevo contacto """
-	return render_to_response('contactos/registrar_contactos.html')
+	return render(request, 'contactos/registrar_contactos.html', {})
 
 @login_required
 def registrar_contacto(request):
 	""" registrar un nuevo contacto """
-	return render_to_response('contactos/registrar_contacto.html')
+	return render(request, 'contactos/registrar_contacto.html', {})
 
 @login_required
 def registrar_llamada(request):
 	""" registrar una llamada """
-	return render_to_response('contactos/registrar_llamada.html')
+	return render(request, 'contactos/registrar_llamada.html', {})
 
 @login_required
 def consultar_notas(request):
 	""" mostrar todas las notas """
-	return render_to_response('contactos/notas.html')
+	return render(request, 'contactos/notas.html', {})
 
 @login_required
 def nota(request, nota_id):

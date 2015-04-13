@@ -44,8 +44,8 @@
                             {% else %}
                                 {% for e in c.contacto.empresa.all%}
                                     <td>{{e}}</td>
-                                {{% endfor %}}
-                            {%  endif }
+                                {% endfor %}
+                            {%  endif %}
                         <td>{{c.descripcion}}</td>
                         <td>{{c.monto}}</td>
                     </tr>
