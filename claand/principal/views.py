@@ -24,7 +24,7 @@ def user_login(request):
     # The request is not a HTTP POST, so display the login form.
     # This scenario would most likely be a HTTP GET.
     else:
-        return render(request, 'principal/login.html', {})
+        return render(request, 'principal/login2.html', {})
 
 def user_logout(request):
 	logout(request)
