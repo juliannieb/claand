@@ -49,7 +49,7 @@ def registrar_nota(request):
 @login_required
 def consultar_recordatorios(request):
 	""" mostrar todos los recordatorios """
-	return render_to_response('contactos/recordatorios.html')
+	return render('contactos/recordatorios.html')
 
 @login_required
 def recordatorio(request, recordatorio_id):

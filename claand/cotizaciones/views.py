@@ -12,7 +12,8 @@ def consultar_cotizaciones(request):
 @login_required
 def cotizacion(request, id_cotizacion):
     """ mostrar detalle de una cotizacion """
-    return HttpResponse("cotizacion detalle")
+    #c = Cotizacion()
+    return render(request, "cotizaciones/cotizacion.html", {})
 
 @login_required
 def consultar_ventas(request):
