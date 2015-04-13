@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Registrar empresa</h1>
+        </div>
+    </div>
+
+    
+    <div class="container">
+        <div class="row row-centered">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
+                <form id="category_form" method="post" action="{% url 'empresas:registrar_empresa' %}">
+
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+
+                    {% for field in form.visible_fields %}
+                        {{ field.errors }}
+                        {{ field.help_text }}
+                        {{ field }}
+                    {% endfor %}
+
+                    {% for hidden in formDireccion.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+
+                    {% for field in formDireccion.visible_fields %}
+                        {{ field.errors }}
+                        {{ field.help_text }}
+                        {{ field }}
+                    {% endfor %}
+
+                    <input type="submit" name="submit" value="Registrar" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}
