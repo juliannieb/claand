@@ -35,28 +35,21 @@
                 </tr>
             </thead>
             <tbody>
-                
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">1</a></td>
-                    <td>Juan Pérez</td>
-                    <td>Gerber</td>
-                    <td>Cotización de máquina troqueladora</td>
-                    <td>25000</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">2</a></td>
-                    <td>Julián Niebieskikwiat</td>
-                    <td>Mitsubishi</td>
-                    <td>Máquina de estampado</td>
-                    <td>100000</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">3</a></td>
-                    <td>Marco López</td>
-                    <td>Kellog's</td>
-                    <td>Punzonadora</td>
-                    <td>250000</td>
-                </tr>
+                {% for c in cotizaciones_list %}
+                    <tr>
+                        <td><a href="...Consultar/Cotizaciones?idCotizacion">1</a></td>
+                        <td>{{c.contacto}}</td>
+                            {% if not c.contacto.empresa.all%}
+                                <td></td>
+                            {% else %}
+                                {% for e in c.contacto.empresa.all%}
+                                    <td>{{e}}</td>
+                                {{% endfor %}}
+                            {%  endif }
+                        <td>{{c.descripcion}}</td>
+                        <td>{{c.monto}}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
