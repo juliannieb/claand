@@ -33,8 +33,6 @@
                     <li><a href="{% url 'principal:consultar' %}">Consultar</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'principal:logout' %}">Logout</a></li>
-                    {% else %}
-                     <li><a href="asdasd}">asdasdasd</a></li>
                     {% endif %}
                 </ul>
             </div><!--/.nav-collapse -->

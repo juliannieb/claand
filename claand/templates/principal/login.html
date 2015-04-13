@@ -4,8 +4,11 @@
 {% block content %}
 
 	{% if errors %}
-	<p>Your username and password didn't match. Please try again.</p>
+	<p>El usuario y contraseña no coinciden, intenta de nuevo.</p>
 	{% endif %}
+    {% if desactivada %}
+    <p>Tu cuenta está desactivada.</p>
+    {% endif %}
     <form id="login_form" method="post" action="{% url 'principal:login' %}">
         {% csrf_token %}
     	Username: <input type="text" name="username" value="" size="50" />

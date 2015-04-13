@@ -13,23 +13,17 @@ def user_login(request):
 
         if user:
             if user.is_active:
-                # If the account is valid and active, we can log the user in.
-                # We'll send the user back to the homepage.
                 login(request, user)
+                """ Aquí se tiene que validar si es vendedor o director """
                 return HttpResponseRedirect('/principal/vendedor/')
             else:
-                # An inactive account was used - no logging in!
-                return HttpResponse("Cuenta desactivada")
+                return render(request, 'principal/login.html', {'desactivada':True})
         else:
-            # Bad login details were provided. So we can't log the user in.
-            # print "Invalid login details: {0}, {1}".format(username, password)
-            return render(request, 'principal/login2.html', {'errors':True})
+            return render(request, 'principal/login.html', {'errors':True})
 
     # The request is not a HTTP POST, so display the login form.
     # This scenario would most likely be a HTTP GET.
     else:
-        # No context variables to pass to the template system, hence the
-        # blank dictionary object...
         return render(request, 'principal/login2.html', {})
 
 def user_logout(request):
@@ -41,14 +35,14 @@ def vendedor_index(request):
 	""" Funcion para manejar el index principal del vendedor.
 	TO DO: implementar todo ja.
 	"""
-	return render_to_response('principal/index_vendedor.html', context_instance=RequestContext(request))
+	return render(request, 'principal/index_vendedor.html')
 
 @login_required
 def consultar(request):
 	""" Funcion para manejar la vista principal de consultas.
 	TO DO: implementar todo ja.
 	"""
-	return render_to_response('principal/consultar.html', context_instance=RequestContext(request))
+	return render(request, 'principal/consultar.html')
 
 @login_required
 def director_index(request):
@@ -56,4 +50,6 @@ def director_index(request):
 	Aqui deben ir los permisos de login para el director.
 	TO DO: implementar todo ja.
 	"""
-	return render_to_response('principal/index_director.html', context_instance=RequestContext(request))
+	return render(request, 'principal/index_director.html')
+
+

@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from models.empresas import Empresa
 
 from empresas.forms import EmpresaForm, DireccionForm
 from empresas.models import Empresa, Direccion, EmpresaTieneDireccion
@@ -16,7 +17,11 @@ def registrar_empresa(request):
 @login_required
 def consultar_empresas(request):
 	""" mostrar todas las empresas """
-	return render_to_response('empresas/empresas.html', context_instance=RequestContext(request))
+	empresas_list = Empresa.objects.all()
+	#t = loader.get_template('empresas/empresas.html')
+	#c = Context({'empresas_list': empresas_list})
+	#return HttpResponse(t.render(c))
+	return render(request, 'empresas/empresas.html', {'empresas_list': empresas_list})
 
 @login_required
 def empresa(request, empresa_id):

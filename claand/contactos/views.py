@@ -7,9 +7,8 @@ from django.template import RequestContext
 @login_required
 def consultar_contactos(request):
 	""" mostrar todos los contactos """
-	lista_contactos = Contacto.objects.all()
-	context = {'contactos_list' : lista_contactos}
-	return render_to_response('contactos/contactos.html', context)
+	contactos_list = Contacto.objects.all()
+	return render(request, 'contactos/contactos.html', {'contactos_list': contactos_list})
 
 @login_required
 def contacto(request, contacto_nombre_slug):
