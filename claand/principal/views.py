@@ -23,14 +23,14 @@ def user_login(request):
         else:
             # Bad login details were provided. So we can't log the user in.
             # print "Invalid login details: {0}, {1}".format(username, password)
-            return render(request, 'principal/login.html', {'errors':True})
+            return render(request, 'principal/login2.html', {'errors':True})
 
     # The request is not a HTTP POST, so display the login form.
     # This scenario would most likely be a HTTP GET.
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render(request, 'principal/login.html', {})
+        return render(request, 'principal/login2.html', {})
 
 def user_logout(request):
 	logout(request)
