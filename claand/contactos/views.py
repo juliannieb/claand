@@ -2,7 +2,6 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from contactos.models import Contacto
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
 
 @login_required
 def consultar_contactos(request):

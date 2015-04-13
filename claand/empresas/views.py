@@ -2,7 +2,6 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from models.empresas import Empresa
 
 from empresas.forms import EmpresaForm, DireccionForm
 from empresas.models import Empresa, Direccion, EmpresaTieneDireccion
