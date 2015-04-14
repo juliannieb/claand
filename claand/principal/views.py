@@ -6,23 +6,26 @@ from django.template import RequestContext
 
 
 def user_login(request):
+    """ esta vista maneja todo el proceso de login:
+    en el caso de que sea un GET, muestra el template de login,
+    y si es POST realiza la validacion y redireccionamiento. 
+    """
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
-
         if user:
             if user.is_active:
                 login(request, user)
-                """ Aquí se tiene que validar si es vendedor o director """
-                return HttpResponseRedirect('/principal/vendedor/')
+                try:
+                    user.vendedor
+                    return HttpResponseRedirect('/principal/vendedor/')
+                except Exception:
+                    return HttpResponseRedirect('/principal/director/')
             else:
-                return render(request, 'principal/login.html', {'desactivada':True})
+                return render(request, 'principal/login2.html', {'desactivada':True})
         else:
-            return render(request, 'principal/login.html', {'errors':True})
-
-    # The request is not a HTTP POST, so display the login form.
-    # This scenario would most likely be a HTTP GET.
+            return render(request, 'principal/login2.html', {'errors':True})
     else:
         return render(request, 'principal/login2.html', {})
 
