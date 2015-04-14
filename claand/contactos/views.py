@@ -8,6 +8,7 @@ from principal.models import Vendedor
 @login_required
 def consultar_contactos(request):
 	""" mostrar todos los contactos """
+	#Falta validar si el current_user es el Director, para mostrar todos los contactos
 	current_user = request.user
 	current_vendedor = Vendedor.objects.get(user=current_user)
 	contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
