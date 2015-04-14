@@ -4,33 +4,42 @@ from empresas.models import RedSocial, Estado, Municipio, Direccion
 from contactos.models import NumeroTelefonico, TipoNumeroTelefonico
 
 class EmpresaForm(forms.ModelForm):
-	nombre = forms.CharField(max_length=30, help_text='Nombre: ', required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-	rfc = forms.CharField(max_length=13, help_text='RFC: ', required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+	nombre = forms.CharField(max_length=30, help_text='Nombre: ', required=True, \
+		widget=forms.TextInput(attrs={'class': 'form-control'}))
+	rfc = forms.CharField(max_length=13, help_text='RFC: ', required=True, \
+		widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 	class Meta:
 		model = Empresa
 		fields = ('nombre', 'rfc',)
 
 class DireccionForm(forms.ModelForm):
-	direccion = forms.CharField(max_length=100, help_text='Dirección: ', required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-	estado = forms.ModelChoiceField(queryset=Estado.objects.all(), help_text='Estado: ', required=False, widget=forms.Select(attrs={'class': 'form-control'}))
-	municipio = forms.ModelChoiceField(queryset=Municipio.objects.all(), help_text='Municipio: ', required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+	direccion = forms.CharField(max_length=100, help_text='Dirección: ', required=True, \
+		widget=forms.TextInput(attrs={'class': 'form-control'}))
+	estado = forms.ModelChoiceField(queryset=Estado.objects.all(), help_text='Estado: ', \
+		required=False, widget=forms.Select(attrs={'class': 'form-control'}))
+	municipio = forms.ModelChoiceField(queryset=Municipio.objects.all(), help_text='Municipio: ', \
+		required=True, widget=forms.Select(attrs={'class': 'form-control'}))
 
 	class Meta:
 		model = Direccion
 		fields = ('estado', 'municipio', 'direccion',)
 
 class NumeroTelefonicoForm(forms.ModelForm):
-	numero = forms.IntegerField(help_text='Número: ', required=False, widget=forms.NumberInput(attrs={'class': 'form-control'}))
-	tipo_numero = forms.ModelChoiceField(queryset=TipoNumeroTelefonico.objects.all(), help_text='Tipo: ', required=False, widget=forms.Select(attrs={'class': 'form-control'}))
+	numero = forms.IntegerField(help_text='Número: ', required=False, \
+		widget=forms.NumberInput(attrs={'class': 'form-control'}))
+	tipo_numero = forms.ModelChoiceField(queryset=TipoNumeroTelefonico.objects.all(), \
+		help_text='Tipo: ', required=False, widget=forms.Select(attrs={'class': 'form-control'}))
 
 	class Meta:
 		model = NumeroTelefonico
 		fields = ('numero', 'tipo_numero',)
 
 class RedSocialForm(forms.ModelForm):
-	link = forms.URLField(help_text='Link: ', required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
-	tipo_red_social = forms.ModelChoiceField(queryset=TipoRedSocial.objects.all(), help_text='Tipo: ', required=False, widget=forms.Select(attrs={'class': 'form-control'}))
+	link = forms.URLField(help_text='Link: ', required=False, \
+		widget=forms.URLInput(attrs={'class': 'form-control'}))
+	tipo_red_social = forms.ModelChoiceField(queryset=TipoRedSocial.objects.all(), \
+		help_text='Tipo: ', required=False, widget=forms.Select(attrs={'class': 'form-control'}))
 
 	class Meta:
 		model = RedSocial

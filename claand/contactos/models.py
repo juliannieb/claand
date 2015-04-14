@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
 from empresas.models import Empresa
@@ -31,6 +32,11 @@ class Pertenece(models.Model):
     class Meta:
         verbose_name_plural = 'Pertenecen'
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.fecha = datetime.now()
+        return super(Pertenece, self).save(*args, **kwargs)
+
 class Area(models.Model):
     nombre = models.CharField(max_length=30)
 
@@ -48,6 +54,11 @@ class Atiende(models.Model):
 
     class Meta:
         verbose_name_plural = 'Atienden'
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.fecha = datetime.now()
+        return super(Atiende, self).save(*args, **kwargs)
 
 
 class Calificacion(models.Model):
