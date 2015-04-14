@@ -1,92 +1,20 @@
 [
 {
+    "fields": {
+        "vendedor": 1,
+        "fecha": "2015-04-13",
+        "contacto": 3
+    },
     "pk": 1,
-    "fields": {
-        "vendedor": 2,
-        "contacto": 2,
-        "fecha": "2015-04-01"
-    },
     "model": "contactos.atiende"
 },
 {
+    "fields": {
+        "vendedor": 1,
+        "fecha": "2015-04-13",
+        "contacto": 10
+    },
     "pk": 2,
-    "fields": {
-        "vendedor": 3,
-        "contacto": 3,
-        "fecha": "2015-04-01"
-    },
-    "model": "contactos.atiende"
-},
-{
-    "pk": 3,
-    "fields": {
-        "vendedor": 4,
-        "contacto": 4,
-        "fecha": "2015-04-01"
-    },
-    "model": "contactos.atiende"
-},
-{
-    "pk": 4,
-    "fields": {
-        "vendedor": 2,
-        "contacto": 5,
-        "fecha": "2015-04-01"
-    },
-    "model": "contactos.atiende"
-},
-{
-    "pk": 5,
-    "fields": {
-        "vendedor": 3,
-        "contacto": 6,
-        "fecha": "2015-04-01"
-    },
-    "model": "contactos.atiende"
-},
-{
-    "pk": 6,
-    "fields": {
-        "vendedor": 4,
-        "contacto": 7,
-        "fecha": "2015-04-01"
-    },
-    "model": "contactos.atiende"
-},
-{
-    "pk": 7,
-    "fields": {
-        "vendedor": 2,
-        "contacto": 8,
-        "fecha": "2015-04-01"
-    },
-    "model": "contactos.atiende"
-},
-{
-    "pk": 8,
-    "fields": {
-        "vendedor": 3,
-        "contacto": 9,
-        "fecha": "2015-04-01"
-    },
-    "model": "contactos.atiende"
-},
-{
-    "pk": 9,
-    "fields": {
-        "vendedor": 4,
-        "contacto": 10,
-        "fecha": "2015-04-01"
-    },
-    "model": "contactos.atiende"
-},
-{
-    "pk": 10,
-    "fields": {
-        "vendedor": 2,
-        "contacto": 11,
-        "fecha": "2015-04-01"
-    },
     "model": "contactos.atiende"
 }
 ]

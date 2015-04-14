@@ -1,37 +1,37 @@
 [
 {
+    "pk": 6,
     "model": "contactos.calificacion",
     "fields": {
         "calificacion": 1
-    },
-    "pk": 6
+    }
 },
 {
+    "pk": 7,
     "model": "contactos.calificacion",
     "fields": {
         "calificacion": 2
-    },
-    "pk": 7
+    }
 },
 {
+    "pk": 8,
     "model": "contactos.calificacion",
     "fields": {
         "calificacion": 3
-    },
-    "pk": 8
+    }
 },
 {
+    "pk": 9,
     "model": "contactos.calificacion",
     "fields": {
         "calificacion": 4
-    },
-    "pk": 9
+    }
 },
 {
+    "pk": 10,
     "model": "contactos.calificacion",
     "fields": {
         "calificacion": 5
-    },
-    "pk": 10
+    }
 }
 ]
