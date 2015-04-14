@@ -45,7 +45,8 @@ def registrar_contacto(request):
             correo_electronico = data['correo_electronico']
             empresa = data['empresa']
             area = data['area']
-            contacto = Contacto(nombre=nombre, apellido=apellido, correo_electronico=correo_electronico)
+            is_cliente = data['is_cliente']
+            contacto = Contacto(nombre=nombre, apellido=apellido, correo_electronico=correo_electronico, is_cliente=is_cliente)
             contacto.save()
             
             
