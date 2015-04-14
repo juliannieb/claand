@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,6 +87,8 @@ USE_L10N = True
 USE_TZ = True
 
 
+GRAPPELLI_ADMIN_TITLE = "Claand"
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
@@ -95,6 +98,9 @@ PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 
 STATIC_PATH = os.path.join(PROJECT_PATH,'static')
+PROJECT_DIR = os.path.dirname(__file__)
+
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 STATIC_URL = '/static/'
 
@@ -115,3 +121,9 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     TEMPLATE_PATH,
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.request",
+    "django.contrib.auth.context_processors.auth",
+)
+
