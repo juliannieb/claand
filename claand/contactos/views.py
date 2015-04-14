@@ -1,20 +1,26 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from contactos.models import Contacto
+from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende
+from principal.models import Vendedor
 
 
 @login_required
 def consultar_contactos(request):
 	""" mostrar todos los contactos """
-	contactos_list = Contacto.objects.all()
+	current_user = request.user
+	current_vendedor = Vendedor.objects.get(user=current_user)
+	contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
 	return render(request, 'contactos/contactos.html', {'contactos_list': contactos_list})
 
 @login_required
 def contacto(request, contacto_nombre_slug):
 	""" mostrar detalle de un contacto """
-
-	return render(request, 'contactos/contacto.html', {})
+	contacto = Contacto.objects.get(slug=contacto_nombre_slug)
+	pertenece = Pertenece.objects.get(contacto=contacto)
+	numeros_list = contacto.numerotelefonico_set.all()
+	calificacion = Calificacion.objects.get(contacto=contacto)
+	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion})
 
 @login_required
 def registrar_contactos(request):

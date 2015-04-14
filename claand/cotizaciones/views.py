@@ -12,7 +12,6 @@ def consultar_cotizaciones(request):
 @login_required
 def cotizacion(request, id_cotizacion):
     """ mostrar detalle de una cotizacion """
-    #c = Cotizacion()
     return render(request, "cotizaciones/cotizacion.html", {})
 
 @login_required

@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>Juan Pérez</h1>
+            <h1>{{ contacto.nombre }} {{ contacto.apellido }}</h1>
         </div>
     </div>
 
@@ -16,13 +16,13 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="txt_nombreContacto">Nombre:</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txt_nombreContacto" placeholder="Juan Pérez" readonly>
+                            <input type="text" class="form-control" id="txt_nombreContacto" placeholder= "{{ contacto.nombre }} {{ contacto.apellido }}" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="txt_nombreEmpresa">Empresa:</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txt_nombreEmpresa" placeholder="Gerber" readonly>
+                            <input type="text" class="form-control" id="txt_nombreEmpresa" placeholder= "{{ pertenece.empresa.nombre }}" readonly>
                         </div>
                     </div>
                     <!-- <div class="form-group">
@@ -33,24 +33,26 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="txt_area">Nombre:</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="txt_area" placeholder="Ventas" readonly>
+                            <input type="text" class="form-control" id="txt_area" placeholder="{{ pertenece.area }}" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="email">Email:</label>
                         <div class="col-sm-8">
-                            <input type="email" class="form-control" id="email" placeholder="juanp@hotmail.com" readonly>
+                            <input type="email" class="form-control" id="email" placeholder="{{ contacto.correo_electronico }}" readonly>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="txt_telefonoContacto">Teléfono:</label>
-                        <div class="col-sm-5">
-                            <input type="number" class="form-control" id="txt_tipoTelefonoContacto" placeholder="4421156885" readonly>
+                    {% for numero in numeros_list %}
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="txt_telefonoContacto">Teléfono:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="txt_tipoTelefonoContacto" placeholder="{{ numero.numero }}" readonly>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" placeholder="{{ numero.tipo_numero }}" readonly>
+                            </div>
                         </div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" placeholder="Celular" readonly>
-                        </div>
-                    </div>
+                    {% endfor %}
                     <div class="form-group">
                         <div class="col-sm-offset-6 col-sm-6 pull-right">
                             <button class="btn btn-info pull-right" id="btn_agregarTelContacto">+</button>
@@ -58,14 +60,20 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="sel_isCliente">Estatus:</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="Prospecto" readonly>
-                        </div>
+                        {% if contacto.is_cliente %}
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Cliente" readonly>
+                            </div>
+                        {% else %}
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Prospecto" readonly>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="sel_Calificacion">Calificacion:</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="E" readonly>
+                            <input type="text" class="form-control" placeholder="{{ calificacion.calificacion }}" readonly>
                         </div>
                     </div>
                     <div class="form-group"> 
