@@ -35,19 +35,18 @@
                 </tr>
             </thead>
             <tbody>
-                {% for c in cotizaciones_list %}
-                    <tr>
-                        <td><a href="...Consultar/Cotizaciones?idCotizacion">1</a></td>
-                        <td>{{c.contacto}}</td>
-                            {% if not c.contacto.empresa.all%}
+                {% for cotizacion in cotizaciones_list %}
+                    <tr><td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
+                        <td>{{cotizacion.contacto}}</td>
+                            {% if not cotizacion.contacto.empresa.all%}
                                 <td></td>
                             {% else %}
-                                {% for e in c.contacto.empresa.all%}
+                                {% for e in cotizacion.contacto.empresa.all%}
                                     <td>{{e}}</td>
-                                {{% endfor %}}
-                            {%  endif }
-                        <td>{{c.descripcion}}</td>
-                        <td>{{c.monto}}</td>
+                                {% endfor %}
+                            {%  endif %}
+                        <td>{{cotizacion.descripcion}}</td>
+                        <td>{{cotizacion.monto}}</td>
                     </tr>
                 {% endfor %}
             </tbody>

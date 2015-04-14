@@ -27,8 +27,8 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
+                    <th>Apellido</th>
                     <th>Empresa</th>
                     <th>Área</th>
                     <th>Email</th>
@@ -38,18 +38,16 @@
             </thead>
             <tbody>
                 {% for contacto in contactos_list %}
-                    <tr>
-                        <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto.id }}</a></td>
+                    <tr href="{% url 'contactos:contacto' contacto.slug %}">
                         <td>{{ contacto.nombre }}</td>
+                        <td>{{ contacto.apellido }}</td>
                         {% if not contacto.empresa.all %}
                             <td></td>
                         {% else %}
                             <td>{{ contacto.empresa.all|join:", " }}</td>
                         {% endif %}
 
-                        
-                        <td></td>
-                   
+                        <td>{{ contacto.pertenece_set.get.area }}</td>
 
                         <td>{{ contacto.correo_electronico }}</td>
                         {% if contacto.is_cliente %}
@@ -57,7 +55,7 @@
                         {% else %}
                             <td>Prospecto</td>
                         {% endif %}
-                        <td>3</td>
+                        <td>{{ contacto.calificaciones.get }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

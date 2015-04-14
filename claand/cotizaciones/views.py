@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from cotizaciones.models import Cotizacion, Venta
@@ -12,12 +12,12 @@ def consultar_cotizaciones(request):
 @login_required
 def cotizacion(request, id_cotizacion):
     """ mostrar detalle de una cotizacion """
-    return HttpResponse("cotizacion detalle")
+    return render(request, "cotizaciones/cotizacion.html", {})
 
 @login_required
 def consultar_ventas(request):
     """ mostrar todas las ventas """
-    return render_to_response('cotizaciones/ventas.html')
+    return render(request, 'cotizaciones/ventas.html', {})
 
 @login_required
 def venta(request, id_venta):
@@ -27,7 +27,7 @@ def venta(request, id_venta):
 @login_required
 def registrar(request):
     """ registrar cotizacion """
-    return render_to_response('cotizaciones/registrar_cotizacion.html')
+    return render(request, 'cotizaciones/registrar_cotizacion.html', {})
 
 
 """ Falta todas las relacionadas con pago """
