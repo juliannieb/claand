@@ -8,17 +8,18 @@ from empresas.models import Empresa, Direccion, EmpresaTieneDireccion
 
 @login_required
 def consultar_empresas(request):
-	""" mostrar todas las empresas """
-	empresas_list = Empresa.objects.all()
-	#t = loader.get_template('empresas/empresas.html')
-	#c = Context({'empresas_list': empresas_list})
-	#return HttpResponse(t.render(c))
-	return render(request, 'empresas/empresas.html', {'empresas_list': empresas_list})
+    """ mostrar todas las empresas """
+    empresas_list = Empresa.objects.all()
+    return render(request, 'empresas/empresas.html', {'empresas_list': empresas_list})
 
 @login_required
-def empresa(request, empresa_id):
-	""" mostrar una empresa """
-	return render(request, 'empresas/empresa.html', {})
+def empresa(request, empresa_nombre_slug):
+    """ mostrar una empresa """
+    empresa = Empresa.objects.get(slug=empresa_nombre_slug)
+    empresa_tiene_direccion = EmpresaTieneDireccion.objects.filter(empresa=empresa)
+    numeros_list = empresa.numerotelefonico_set.all()
+    redes_list = empresa.redsocial_set.all()
+    return render(request, 'empresas/empresa.html', {'empresa': empresa, 'empresa_tiene_direccion': empresa_tiene_direccion,'numeros_list': numeros_list, 'redes_list': redes_list})
 
 @login_required
 def registrar_empresa(request):

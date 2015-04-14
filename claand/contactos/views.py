@@ -10,11 +10,11 @@ from empresas.forms import NumeroTelefonicoForm, RedSocialForm
 
 @login_required
 def consultar_contactos(request):
-    """ mostrar todos los contactos """
-    current_user = request.user
-    current_vendedor = Vendedor.objects.get(user=current_user)
-    contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
-    return render(request, 'contactos/contactos.html', {'contactos_list': contactos_list})
+	#Falta validar si el current_user es el Director, para mostrar todos los contactos
+	current_user = request.user
+	current_vendedor = Vendedor.objects.get(user=current_user)
+	contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+	return render(request, 'contactos/contactos.html', {'contactos_list': contactos_list})
 
 @login_required
 def contacto(request, contacto_nombre_slug):

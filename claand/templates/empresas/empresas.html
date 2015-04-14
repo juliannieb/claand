@@ -31,20 +31,12 @@
                 </tr>
             </thead>
             <tbody>
-                
+                {% for empresa in empresas_list %}
                 <tr>
-                    <td><a href="...Consultar/Empresas?idEmpresa">GUIS770511L55</a></td>
-                    <td>Gerber</td>
+                    <td><a href="{% url 'empresas:empresa' empresa.slug %}">{{ empresa.rfc }}</a></td>
+                    <td>{{ empresa.nombre }}</td>
                 </tr>
-
-                <tr>
-                    <td><a href="...Consultar/Empresas?idEmpresa">ACTD670514H44</a></td>
-                    <td>Kellog's</td>
-                </tr>
-                <tr>
-                    <td><a href="Empresas_pkGTER850320J77.html">GTER850320J77</a></td>
-                    <td>Mitsubishi</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

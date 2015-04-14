@@ -46,9 +46,7 @@
                         {% else %}
                             <td>{{ contacto.empresa.all|join:", " }}</td>
                         {% endif %}
-
                         <td>{{ contacto.pertenece_set.get.area }}</td>
-
                         <td>{{ contacto.correo_electronico }}</td>
                         {% if contacto.is_cliente %}
                             <td>Cliente</td>
