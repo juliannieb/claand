@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'grappelli',
+    'djangobower',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,6 +113,13 @@ STATICFILES_DIRS = (
 )
 
 
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+
 # Path for the template folder
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 
@@ -126,4 +134,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.auth.context_processors.auth",
 )
+
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components/')
+
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'underscore',
+)
+
+# BOWER_PATH = '/usr/bin/bower'
 
