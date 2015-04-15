@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import RequestContext
 
+def no_es_vendedor(user):
+    """Funcion para el decorador user_passes_test
+    """
+    return not user.groups.filter(name='vendedor').exists()
 
 def user_login(request):
     """ esta vista maneja todo el proceso de login:
@@ -48,6 +52,7 @@ def consultar(request):
 	return render(request, 'principal/consultar.html')
 
 @login_required
+@user_passes_test(no_es_vendedor)
 def director_index(request):
 	""" Funcion para manejar el index principal del director.
 	Aqui deben ir los permisos de login para el director.
