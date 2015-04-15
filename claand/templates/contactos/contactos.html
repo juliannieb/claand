@@ -38,8 +38,8 @@
             </thead>
             <tbody>
                 {% for contacto in contactos_list %}
-                    <tr href="{% url 'contactos:contacto' contacto.slug %}">
-                        <td>{{ contacto.nombre }}</td>
+                    <tr>
+                        <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto.nombre }}</a></td>
                         <td>{{ contacto.apellido }}</td>
                         {% if not contacto.empresa.all %}
                             <td></td>
