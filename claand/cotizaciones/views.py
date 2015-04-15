@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from cotizaciones.models import Cotizacion, Venta
+from contactos.models import Pertenece
 
 @login_required
 def consultar_cotizaciones(request):
@@ -12,17 +13,26 @@ def consultar_cotizaciones(request):
 @login_required
 def cotizacion(request, id_cotizacion):
     """ mostrar detalle de una cotizacion """
-    return render(request, "cotizaciones/cotizacion.html", {})
+    cotizacion = Cotizacion.objects.get(id=id_cotizacion)
+    contacto = cotizacion.contacto
+    pertenece = Pertenece.objects.get(contacto=contacto)
+    return render(request, "cotizaciones/cotizacion.html", {'cotizacion': cotizacion, 'contacto': contacto, 'pertenece': pertenece})
 
 @login_required
 def consultar_ventas(request):
     """ mostrar todas las ventas """
-    return render(request, 'cotizaciones/ventas.html', {})
+    ventas_list = Venta.objects.all()
+    return render(request, 'cotizaciones/ventas.html', {'ventas_list': ventas_list})
 
 @login_required
 def venta(request, id_venta):
     """ mostrar detalle de una venta """
-    return HttpResponse("venta detalle")
+    venta = Venta.objects.get(id=id_venta)
+    id_cotizacion = venta.cotizacion.id
+    cotizacion = Cotizacion.objects.get(id=id_cotizacion)
+    contacto = cotizacion.contacto
+    pertenece = Pertenece.objects.get(contacto=contacto)
+    return render(request, 'cotizaciones/venta.html', {'venta': venta, 'cotizacion': cotizacion, 'contacto': contacto, 'pertenece': pertenece})
 
 @login_required
 def registrar(request):

@@ -76,7 +76,7 @@ class Recordatorio(models.Model):
     contacto = models.ForeignKey(Contacto)
 
     def __str__(self):
-        return self.contacto, ":", self.descripcion[:30]
+        return self.descripcion[:30]
 
 class Llamada(models.Model):
     is_active = models.BooleanField(default=True)

@@ -40,34 +40,15 @@
                     <th>Fecha</th>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">1</a></td>
-                    <td>Juan Pérez</td>
-                    <td>3</td>
-                    <td>Tenerlo en cuenta para proyecto de marcadoras.</td>
-                    <td>13/05/2015</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">2</a></td>
-                    <td>John Perez</td>
-                    <td>2</td>
-                    <td>Me cae mal.</td>
-                    <td>12/08/2015</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">3</a></td>
-                    <td>Adalaid Carranza</td>
-                    <td>3</td>
-                    <td>Muy buen cliente.</td>
-                    <td>30/04/2015</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">4</a></td>
-                    <td>Georges Lucas</td>
-                    <td>1</td>
-                    <td>Posiblemente se cambie de empresa.</td>
-                    <td>04/04/2015</td>
-                </tr>
+                {% for recordatorio in recordatorios_list %}
+                    <tr>
+                        <td><a href="{% url 'contactos:recordatorio' recordatorio.id %}">1</a></td>
+                        <td>{{ recordatorio.contacto }} {{ recordatorio.contacto.apellido }}</td>
+                        <td>{{ recordatorio.urgencia }}</td>
+                        <td>{{ recordatorio }}</td>
+                        <td>{{ recordatorio.fecha }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

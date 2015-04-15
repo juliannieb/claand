@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende
+from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende, Recordatorio, Nota
 from principal.models import Vendedor
+from cotizaciones.models import Cotizacion, Venta
 
 
 @login_required
@@ -10,8 +11,11 @@ def consultar_contactos(request):
 	""" mostrar todos los contactos """
 	#Falta validar si el current_user es el Director, para mostrar todos los contactos
 	current_user = request.user
-	current_vendedor = Vendedor.objects.get(user=current_user)
-	contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+	if current_user.is_superuser:
+		contactos_list = Contacto.objects.all()
+	else:
+		current_vendedor = Vendedor.objects.get(user=current_user)
+		contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
 	return render(request, 'contactos/contactos.html', {'contactos_list': contactos_list})
 
 @login_required
@@ -21,7 +25,8 @@ def contacto(request, contacto_nombre_slug):
 	pertenece = Pertenece.objects.get(contacto=contacto)
 	numeros_list = contacto.numerotelefonico_set.all()
 	calificacion = Calificacion.objects.get(contacto=contacto)
-	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion})
+	cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
+	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion, 'cotizaciones_list': cotizaciones_list})
 
 @login_required
 def registrar_contactos(request):
@@ -56,7 +61,8 @@ def registrar_nota(request):
 @login_required
 def consultar_recordatorios(request):
 	""" mostrar todos los recordatorios """
-	return render('contactos/recordatorios.html')
+	recordatorios_list = Recordatorio.objects.all()
+	return render(request, 'contactos/recordatorios.html', {'recordatorios_list': recordatorios_list})
 
 @login_required
 def recordatorio(request, recordatorio_id):

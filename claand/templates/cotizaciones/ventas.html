@@ -27,7 +27,6 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>ID Venta</th>
                     <th>ID Cotización</th>
                     <th>Cliente</th>
                     <th>Empresa</th>
@@ -37,34 +36,20 @@
                 </tr>
             </thead>
             <tbody>
-                
+                {% for venta in ventas_list %}
                 <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">1</a></td>
-                    <td>45</td>
-                    <td>Juan Pérez</td>
-                    <td>Gerber</td>
-                    <td>Cotización de máquina troqueladora</td>
-                    <td>25000</td>
-                    <td>Pendiente</td>
+                    <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
+                    <td>{{ venta.cotizacion.contacto }} {{ venta.cotizacion.contacto.apellido }}</td>
+                    <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
+                    <td>{{ venta.cotizacion.descripcion }}</td>
+                    <td>{{ venta.cotizacion.monto }}</td>
+                    {% if venta.is_completada %}
+                        <td>Completada</td>
+                    {% else %}
+                        <td>Pendiente</td>
+                    {% endif %}
                 </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">2</a></td>
-                    <td>890</td>
-                    <td>Julián Niebieskikwiat</td>
-                    <td>Mitsubishi</td>
-                    <td>Máquina de estampado</td>
-                    <td>100000</td>
-                    <td>Finalizada</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">3</a></td>
-                    <td>540</td>
-                    <td>Marco López</td>
-                    <td>Kellog's</td>
-                    <td>Punzonadora</td>
-                    <td>250000</td>
-                    <td>Finalizada</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
