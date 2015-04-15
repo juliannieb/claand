@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende
 from principal.models import Vendedor
 from empresas.models import Empresa
+from contactos.models import Llamada
 
-from contactos.forms import ContactoForm
+from contactos.forms import ContactoForm, LlamadaForm
 from empresas.forms import NumeroTelefonicoForm, RedSocialForm
 
 def no_es_vendedor(user):
@@ -88,7 +89,37 @@ def registrar_contacto(request):
 @login_required
 def registrar_llamada(request):
     """ registrar una llamada """
-    return render(request, 'contactos/registrar_llamada.html', {})
+    current_user = request.user
+    current_vendedor = Vendedor.objects.get(user=current_user)
+    contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+    if request.method == 'POST':
+        formLlamada = LlamadaForm(request.POST)
+        formLlamada.fields["contacto"].queryset = contactos_list
+        forms = {'formLlamada':formLlamada}
+
+        # Have we been provided with a valid form?
+        if formLlamada.is_valid():
+            # Save the new category to the database.
+            data = formLlamada.cleaned_data
+            contacto = data['contacto']
+            descripcion = data['descripcion']
+            Llamada(contacto=contacto, descripcion=descripcion).save()
+
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return render(request, 'principal/index_vendedor.html')
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print (formLlamada.errors)
+    else:
+        # If the request was not a POST, display the form to enter details.
+        formLlamada = LlamadaForm()
+        formLlamada.fields["contacto"].queryset = contactos_list
+        forms = {'formLlamada':formLlamada}
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render(request, 'contactos/registrar_llamada.html', forms)
 
 @login_required
 @user_passes_test(no_es_vendedor)
