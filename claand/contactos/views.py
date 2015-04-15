@@ -18,9 +18,8 @@ def no_es_vendedor(user):
 
 @login_required
 def consultar_contactos(request):
-	#Falta validar si el current_user es el Director, para mostrar todos los contactos
 	current_user = request.user
-	if current_user.is_superuser:
+	if no_es_vendedor(current_user):
 		contactos_list = Contacto.objects.all()
 	else:
 		current_vendedor = Vendedor.objects.get(user=current_user)
