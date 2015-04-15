@@ -1,12 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende
 from principal.models import Vendedor
 from empresas.models import Empresa
 
 from contactos.forms import ContactoForm
 from empresas.forms import NumeroTelefonicoForm, RedSocialForm
+
+def no_es_vendedor(user):
+    """Funcion para el decorador user_passes_test
+    """
+    return not user.groups.filter(name='vendedor').exists()
 
 @login_required
 def consultar_contactos(request):
@@ -86,31 +91,37 @@ def registrar_llamada(request):
     return render(request, 'contactos/registrar_llamada.html', {})
 
 @login_required
+@user_passes_test(no_es_vendedor)
 def consultar_notas(request):
     """ mostrar todas las notas """
     return render(request, 'contactos/notas.html', {})
 
 @login_required
+@user_passes_test(no_es_vendedor)
 def nota(request, nota_id):
     """ mostrar detalle de una nota """
     return HttpResponse("detalle nota")
 
 @login_required
+@user_passes_test(no_es_vendedor)
 def registrar_nota(request):
     """ registrar una nueva nota """
     return HttpResponse("registrar una nota")
 
 @login_required
+@user_passes_test(no_es_vendedor)
 def consultar_recordatorios(request):
-    """ mostrar todos los recordatorios """
-    return render('contactos/recordatorios.html')
+	""" mostrar todos los recordatorios """
+	return render(request, 'contactos/recordatorios.html')
 
 @login_required
+@user_passes_test(no_es_vendedor)
 def recordatorio(request, recordatorio_id):
     """ mostrar detalle de un recordatorio """
     return HttpResponse("detalle recordatorio")
 
 @login_required
+@user_passes_test(no_es_vendedor)
 def registrar_recordatorio(request):
     """ registrar un nuevo recordatorio """
     return HttpResponse("registrar un recordatorio")
