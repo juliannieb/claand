@@ -109,8 +109,13 @@ class Llamada(models.Model):
     fecha = models.DateField()
     contacto = models.ForeignKey(Contacto)
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.fecha = datetime.now()
+        return super(Llamada, self).save(*args, **kwargs)
+
     def __str__(self):
-        return self.contacto, ":", self.descripcion[:30]
+        return self.descripcion[:30]
 
 class TipoNumeroTelefonico(models.Model):
     nombre = models.CharField(max_length=30)

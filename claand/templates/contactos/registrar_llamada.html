@@ -13,35 +13,25 @@
     <div class="container">
         <div class="row row-centered">
             <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
-                <form class="form-horizontal" role="form" id="form_llamada">
+                <form class="form-horizontal" method="post" action="{% url 'contactos:registrar_llamada' %}">
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="sel_contactoLlamada">Contacto:</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" id="sel_contactoLlamada">
-                                <option selected="selected">Seleccionar...</option>
-                                <option>Juan Pérez</option>
-                                <option>Alejandro Cassis</option>
-                                <option>Julián Niebieskikwiat</option>
-                                <option>Marco López</option>
-                            </select>
-                        </div>
-                    </div>
+                    {% csrf_token %}
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="txt_descripcionLlamada">Descripción:</label>
-                        <div class="col-sm-8">
-                            <textarea name="txt_descripcionLlamada" id="txt_descripcionLlamada" cols="30" rows="5" class="form-control" form="form_llamada" required="required"></textarea>
+                    {% for hidden in formLlamada.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+
+                    {% for field in formLlamada.visible_fields %}
+                        {{ field.errors }}
+                        <div class="row" style="margin-bottom:5px">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="txt_nombreContacto">{{ field.help_text}}</label>
+                                <div class="col-sm-8">
+                                    {{ field }}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="control-label col-sm-4" for="date_llamada">Fecha:</label>
-                        <div class="col-sm-8">
-                            <!-- agregar max="1985-04-12T23:20:50.52" para controlar que la fecha no sea mayor a la actual -->
-                            <input type="date" id="date_llamada" class="form-control" max="" required="required">
-                        </div>
-                    </div>
+                    {% endfor %}
                     
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">

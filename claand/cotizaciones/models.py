@@ -8,7 +8,7 @@ class Cotizacion(models.Model):
     is_active = models.BooleanField(default=True)
     monto = models.FloatField(default=0)
     descripcion = models.TextField()
-    is_pendiente = models.BooleanField(default=False)
+    is_pendiente = models.BooleanField(default=True)
     contacto = models.ForeignKey(Contacto)
     fecha_creacion = models.DateField(editable=False)
     fecha_modificacion = models.DateField()

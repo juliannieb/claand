@@ -1,9 +1,7 @@
 """
 Django settings for claand project.
-
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
-
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
@@ -143,5 +141,5 @@ BOWER_INSTALLED_APPS = (
     'underscore',
 )
 
-# BOWER_PATH = '/usr/bin/bower'
 
+# BOWER_PATH = '/usr/bin/bower'
