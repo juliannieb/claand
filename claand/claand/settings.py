@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'grappelli',
-    'djangobower',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +39,8 @@ INSTALLED_APPS = (
     'cotizaciones',
     'empresas',
     'principal',
+    'djangobower',
+    'django_nvd3',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -128,6 +129,12 @@ TEMPLATE_DIRS = (
     TEMPLATE_PATH,
 )
 
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
+)
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.auth.context_processors.auth",
@@ -139,6 +146,8 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components/')
 BOWER_INSTALLED_APPS = (
     'jquery',
     'underscore',
+    'd3#3.3.13',
+    'nvd3#1.7.1',
 )
 
 
