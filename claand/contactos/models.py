@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
 from empresas.models import Empresa
@@ -16,7 +17,21 @@ class Contacto(models.Model):
     slug = models.SlugField(unique=True, null=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.nombre)
+        if not self.id and not self.slug:
+            slug = slugify(self.nombre)
+            slug += "-" + slugify(self.apellido)
+            slug_exists = True
+            counter = 1
+            self.slug = slug
+            while slug_exists:
+                try:
+                    slug_exits = Contacto.objects.get(slug=slug)
+                    if slug_exits:
+                        slug = self.slug + '_' + str(counter)
+                        counter += 1
+                except Contacto.DoesNotExist:
+                    self.slug = slug
+                    break
         super(Contacto, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -30,6 +45,11 @@ class Pertenece(models.Model):
 
     class Meta:
         verbose_name_plural = 'Pertenecen'
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.fecha = datetime.now()
+        return super(Pertenece, self).save(*args, **kwargs)
 
 class Area(models.Model):
     nombre = models.CharField(max_length=30)
@@ -48,6 +68,11 @@ class Atiende(models.Model):
 
     class Meta:
         verbose_name_plural = 'Atienden'
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.fecha = datetime.now()
+        return super(Atiende, self).save(*args, **kwargs)
 
 
 class Calificacion(models.Model):
@@ -98,8 +123,8 @@ class NumeroTelefonico(models.Model):
     empresa = models.ForeignKey(Empresa, null=True, blank=True)
     vendedor = models.ForeignKey(Vendedor, null=True, blank=True)
     is_active = models.BooleanField(default=True)
-    numero = models.BigIntegerField()
-    tipo_numero = models.ForeignKey(TipoNumeroTelefonico)
+    numero = models.BigIntegerField(null=True)
+    tipo_numero = models.ForeignKey(TipoNumeroTelefonico, null=True)
 
     def __str__(self):
         return str(self.numero)

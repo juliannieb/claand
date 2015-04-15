@@ -16,27 +16,77 @@
                 <form id="category_form" method="post" action="{% url 'empresas:registrar_empresa' %}">
 
                     {% csrf_token %}
+
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
                     {% endfor %}
 
                     {% for field in form.visible_fields %}
                         {{ field.errors }}
-                        {{ field.help_text }}
-                        {{ field }}
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="control-label col-sm-4" for="txt_nombreEmpresa">{{ field.help_text }}</label>
+                            <div class="col-sm-8">
+                                {{ field }}
+                            </div>
+                        </div>
+                        
                     {% endfor %}
 
                     {% for hidden in formDireccion.hidden_fields %}
                         {{ hidden }}
                     {% endfor %}
 
-                    {% for field in formDireccion.visible_fields %}
-                        {{ field.errors }}
-                        {{ field.help_text }}
-                        {{ field }}
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Dirección:</label>
+                            <div class="col-sm-8" id="direccionEmpresa">
+
+                        {% for field in formDireccion.visible_fields %}
+                            {{ field.errors }}
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <label class="control-label col-sm-4">{{ field.help_text }}</label>
+                                    <div class="col-sm-8">
+                                        {{ field }}
+                                    </div>
+                                </div>
+                        {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for hidden in formNumeroTelefonico.hidden_fields %}
+                        {{ hidden }}
                     {% endfor %}
 
-                    <input type="submit" name="submit" value="Registrar" />
+                    <div class="row" style="margin-bottom:5px;">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="txt_redSocEmpresa">Teléfono:</label>
+                            <div class="col-sm-5">
+                                {{ formNumeroTelefonico.numero }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ formNumeroTelefonico.tipo_numero}}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for hidden in formRedSocial.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+
+                    <div class="row" style="margin-bottom:5px;">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="txt_redSocEmpresa">Redes Sociales:</label>
+                            <div class="col-sm-5">
+                                {{ formRedSocial.link }}
+                            </div>
+                            <div class="col-sm-3">
+                                {{ formRedSocial.tipo_red_social }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" name="submit" class="btn btn-success pull-right" value="Registrar" />
                 </form>
             </div>
         </div>

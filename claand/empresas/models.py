@@ -13,9 +13,21 @@ class Empresa(models.Model):
         """ Override de save para que el RFC siempre se guarde
         en mayusculas.
         """
-        self.slug = slugify(self.nombre)
-        self.rfc = self.rfc.upper()
-        return super(Empresa, self).save(*args, **kwargs)
+        if not self.id and not self.slug:
+            slug = slugify(self.nombre)
+            slug_exists = True
+            counter = 1
+            self.slug = slug
+            while slug_exists:
+                try:
+                    slug_exits = Empresa.objects.get(slug=slug)
+                    if slug_exits:
+                        slug = self.slug + '_' + str(counter)
+                        counter += 1
+                except Empresa.DoesNotExist:
+                    self.slug = slug
+                    break
+        super(Empresa, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.nombre
@@ -47,9 +59,9 @@ class TipoRedSocial(models.Model):
 
 class RedSocial(models.Model):
     is_active = models.BooleanField(default=True)
-    link = models.URLField()
+    link = models.URLField(null=True)
     empresa = models.ForeignKey(Empresa)
-    tipo_red_social = models.ForeignKey(TipoRedSocial)
+    tipo_red_social = models.ForeignKey(TipoRedSocial, null=True)
 
     def __str__(self):
         return self.link
