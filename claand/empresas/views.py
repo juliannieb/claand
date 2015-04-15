@@ -28,20 +28,22 @@ def registrar_empresa(request):
         formDireccion = DireccionForm(request.POST)
         formNumeroTelefonico = NumeroTelefonicoForm(request.POST)
         formRedSocial = RedSocialForm(request.POST)
+        forms = {'form':form, 'formDireccion':formDireccion, 'formNumeroTelefonico':formNumeroTelefonico, 'formRedSocial':formRedSocial}
 
         # Have we been provided with a valid form?
-        if form.is_valid() and formDireccion.is_valid():
+        if form.is_valid() and formDireccion.is_valid() and formNumeroTelefonico.is_valid() and formRedSocial.is_valid():
             # Save the new category to the database.
+            empresa = form.instance
             empresa = form.save(commit=True)
             direccion = formDireccion.save(commit=True)
 
             EmpresaTieneDireccion(empresa=empresa, direccion=direccion).save()
 
-            if formNumeroTelefonico.has_changed() and formNumeroTelefonico.is_valid():
+            if formNumeroTelefonico.has_changed():
                 numero_telefonico = formNumeroTelefonico.instance
                 numero_telefonico.empresa = empresa
                 numero_telefonico.save()
-            if formRedSocial.has_changed() and formRedSocial.is_valid():
+            if formRedSocial.has_changed():
                 red_social = formRedSocial.instance
                 red_social.empresa = empresa
                 red_social.save()
@@ -61,8 +63,8 @@ def registrar_empresa(request):
         formDireccion = DireccionForm()
         formNumeroTelefonico = NumeroTelefonicoForm()
         formRedSocial = RedSocialForm()
-        context = {'form':form, 'formDireccion':formDireccion, 'formNumeroTelefonico':formNumeroTelefonico, 'formRedSocial':formRedSocial}
+        forms = {'form':form, 'formDireccion':formDireccion, 'formNumeroTelefonico':formNumeroTelefonico, 'formRedSocial':formRedSocial}
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
-    return render(request, 'empresas/registrar_empresa2.html', context)
+    return render(request, 'empresas/registrar_empresa2.html', forms)

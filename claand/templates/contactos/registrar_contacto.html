@@ -21,6 +21,7 @@
                     {% endfor %}
                     
                     {% for field in formContacto.visible_fields %}
+                        {{ field.errors }}
                         <div class="row" style="margin-bottom:5px">
                             <div class="form-group">
                                 <label class="control-label col-sm-4" for="txt_nombreContacto">{{ field.help_text}}</label>

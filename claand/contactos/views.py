@@ -35,9 +35,10 @@ def registrar_contacto(request):
     if request.method == 'POST':
         formContacto = ContactoForm(request.POST)
         formNumeroTelefonico = NumeroTelefonicoForm(request.POST)
+        forms = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico}
 
         # Have we been provided with a valid form?
-        if formContacto.is_valid():
+        if formContacto.is_valid() and formNumeroTelefonico.is_valid():
             # Save the new category to the database.
             data = formContacto.cleaned_data
             nombre = data['nombre']
@@ -56,7 +57,7 @@ def registrar_contacto(request):
             current_vendedor = Vendedor.objects.get(user=current_user)
             Atiende(vendedor=current_vendedor, contacto=contacto).save()
 
-            if formNumeroTelefonico.has_changed() and formNumeroTelefonico.is_valid():
+            if formNumeroTelefonico.has_changed():
                 numero_telefonico = formNumeroTelefonico.instance
                 numero_telefonico.contacto = contacto
                 numero_telefonico.save()
@@ -73,11 +74,11 @@ def registrar_contacto(request):
         # If the request was not a POST, display the form to enter details.
         formContacto = ContactoForm()
         formNumeroTelefonico = NumeroTelefonicoForm()
-        context = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico}
+        forms = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico}
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
-    return render(request, 'contactos/registrar_contacto.html', context)
+    return render(request, 'contactos/registrar_contacto.html', forms)
 
 @login_required
 def registrar_llamada(request):

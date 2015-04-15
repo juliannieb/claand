@@ -6,12 +6,17 @@ from contactos.models import NumeroTelefonico, TipoNumeroTelefonico
 class EmpresaForm(forms.ModelForm):
 	nombre = forms.CharField(max_length=30, help_text='Nombre: ', required=True, \
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
-	rfc = forms.CharField(max_length=13, help_text='RFC: ', required=True, \
+	rfc = forms.RegexField(max_length=13, help_text='RFC: ', regex=r'[a-zA-Z0-9]{13}', \
+		required=True, error_message ="Debe contener 13 letras y números", \
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 	class Meta:
 		model = Empresa
 		fields = ('nombre', 'rfc',)
+
+	def clean(self):
+		cleaned_data = self.cleaned_data
+
 
 class DireccionForm(forms.ModelForm):
 	direccion = forms.CharField(max_length=100, help_text='Dirección: ', required=True, \
