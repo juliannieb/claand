@@ -9,13 +9,14 @@ from contactos.models import Pertenece
 from cotizaciones.forms import Contacto, CotizacionForm, VentaForm
 
 def no_es_vendedor(user):
-    """Funcion para el decorador user_passes_test
+    """ Funcion para el decorador user_passes_test
     """
     return not user.groups.filter(name='vendedor').exists()
 
 @login_required
 def consultar_cotizaciones(request):
-    """ mostrar todas las cotizaciones """
+    """ Vista para mostrar todas las cotizaciones de un usuario.
+    """
     current_user = request.user
     if no_es_vendedor(current_user):
         cotizaciones_list = Cotizacion.objects.all()
@@ -24,22 +25,33 @@ def consultar_cotizaciones(request):
         contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
         cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'cotizaciones/cotizaciones.html', {'cotizaciones_list': cotizaciones_list, \
-        'no_es_vendedor':es_vendedor})
+
+    context = {}
+    context['cotizaciones_list'] = cotizaciones_list
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'cotizaciones/cotizaciones.html', context)
 
 @login_required
 def cotizacion(request, id_cotizacion):
-    """ mostrar detalle de una cotizacion """
+    """ Vista para mostrar el detalle de una cotizacion.
+    """
     cotizacion = Cotizacion.objects.get(id=id_cotizacion)
     contacto = cotizacion.contacto
     pertenece = Pertenece.objects.get(contacto=contacto)
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, "cotizaciones/cotizacion.html", {'cotizacion': cotizacion, \
-        'contacto': contacto, 'pertenece': pertenece, 'no_es_vendedor':es_vendedor})
+
+    context = {}
+    context['cotizacion'] = cotizacion
+    context['contacto'] = contacto
+    context['pertenece'] = pertenece
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, "cotizaciones/cotizacion.html", context)
 
 @login_required
 def consultar_ventas(request):
-    """ mostrar todas las ventas """
+    """ Vista para mostrar todas las ventas asociadas a un usuario.
+    En el caso del director, se muestran todas las ventas globales.
+    """
     current_user = request.user
     if no_es_vendedor(current_user):
         ventas_list = Venta.objects.all()
@@ -49,24 +61,35 @@ def consultar_ventas(request):
         cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
         ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'cotizaciones/ventas.html', {'ventas_list': ventas_list, \
-        'no_es_vendedor':es_vendedor})
+
+    context = {}
+    context['ventas_list'] = ventas_list
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'cotizaciones/ventas.html', context)
 
 @login_required
 def venta(request, id_venta):
-    """ mostrar detalle de una venta """
+    """ Vista para mostrar el detalle de una venta en particular.
+    """
     venta = Venta.objects.get(id=id_venta)
     id_cotizacion = venta.cotizacion.id
     cotizacion = Cotizacion.objects.get(id=id_cotizacion)
     contacto = cotizacion.contacto
     pertenece = Pertenece.objects.get(contacto=contacto)
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'cotizaciones/venta.html', {'venta':venta, 'cotizacion':cotizacion, \
-        'contacto':contacto, 'pertenece':pertenece, 'no_es_vendedor':es_vendedor})
+
+    context = {}
+    context['venta'] = venta
+    context['cotizacion'] = cotizacion
+    context['contacto'] = contacto
+    context['pertenece'] = pertenece
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'cotizaciones/venta.html', context)
 
 @login_required
 def registrar(request):
-    """ registrar cotizacion """
+    """ Vista para registrar una cotizacion.
+    """
     current_user = request.user
     current_vendedor = Vendedor.objects.get(user=current_user)
     contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
@@ -103,6 +126,9 @@ def registrar(request):
 
 
 def registrar_venta(request, id_cotizacion):
+    """ Vista para registrar una venta.
+    En esta misma se cambia el status de una cotizacion a no pendiente.
+    """
     cotizacion = Cotizacion.objects.get(id=id_cotizacion)
     current_user = request.user
     if request.method == 'POST':

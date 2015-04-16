@@ -13,8 +13,6 @@ urlpatterns = patterns('',
         url(r'^notas/(?P<nota_id>[\w\-]+)/$', views.nota, name='nota'),
         url(r'^registrar-nota/$', views.registrar_nota, name='registrar_nota'),
 
-        url(r'^piechart/', views.demo_piechart, name='demo_piechart'),
-
         url(r'^recordatorios/$', views.consultar_recordatorios, name='consultar_recordatorios'),
         url(r'^recordatorios/(?P<recordatorio_id>[\w\-]+)/$', views.recordatorio, name='recordatorio'),
         url(r'^registrar-recordatorio/$', views.registrar_recordatorio, name='registrar_recordatorio'),
