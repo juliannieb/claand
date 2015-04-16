@@ -5,12 +5,18 @@ from django.contrib.auth.decorators import login_required
 from empresas.forms import EmpresaForm, DireccionForm, NumeroTelefonicoForm, RedSocialForm
 from empresas.models import Empresa, Direccion, EmpresaTieneDireccion
 
+def no_es_vendedor(user):
+    """Funcion para el decorador user_passes_test
+    """
+    return not user.groups.filter(name='vendedor').exists()
 
 @login_required
 def consultar_empresas(request):
     """ mostrar todas las empresas """
     empresas_list = Empresa.objects.all()
-    return render(request, 'empresas/empresas.html', {'empresas_list': empresas_list})
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'empresas/empresas.html', {'empresas_list': empresas_list, \
+        'no_es_vendedor':es_vendedor})
 
 @login_required
 def empresa(request, empresa_nombre_slug):
@@ -19,7 +25,10 @@ def empresa(request, empresa_nombre_slug):
     empresa_tiene_direccion = EmpresaTieneDireccion.objects.filter(empresa=empresa)
     numeros_list = empresa.numerotelefonico_set.all()
     redes_list = empresa.redsocial_set.all()
-    return render(request, 'empresas/empresa.html', {'empresa': empresa, 'empresa_tiene_direccion': empresa_tiene_direccion,'numeros_list': numeros_list, 'redes_list': redes_list})
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'empresas/empresa.html', {'empresa': empresa, \
+        'empresa_tiene_direccion':empresa_tiene_direccion,'numeros_list':numeros_list, \
+        'redes_list': redes_list, 'no_es_vendedor':es_vendedor})
 
 @login_required
 def registrar_empresa(request):
@@ -28,7 +37,9 @@ def registrar_empresa(request):
         formDireccion = DireccionForm(request.POST)
         formNumeroTelefonico = NumeroTelefonicoForm(request.POST)
         formRedSocial = RedSocialForm(request.POST)
-        forms = {'form':form, 'formDireccion':formDireccion, 'formNumeroTelefonico':formNumeroTelefonico, 'formRedSocial':formRedSocial}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'form':form, 'formDireccion':formDireccion, 'formNumeroTelefonico':formNumeroTelefonico, \
+        'formRedSocial':formRedSocial, 'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if form.is_valid() and formDireccion.is_valid() and formNumeroTelefonico.is_valid() and formRedSocial.is_valid():
@@ -63,7 +74,10 @@ def registrar_empresa(request):
         formDireccion = DireccionForm()
         formNumeroTelefonico = NumeroTelefonicoForm()
         formRedSocial = RedSocialForm()
-        forms = {'form':form, 'formDireccion':formDireccion, 'formNumeroTelefonico':formNumeroTelefonico, 'formRedSocial':formRedSocial}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'form':form, 'formDireccion':formDireccion, \
+        'formNumeroTelefonico':formNumeroTelefonico, \
+        'formRedSocial':formRedSocial, 'no_es_vendedor':es_vendedor}
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).

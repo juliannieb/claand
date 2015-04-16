@@ -12,7 +12,32 @@
     <div class="container">
 
     <!-- Main component for a primary marketing message or call to action -->
-    {% if es_vendedor %}
+    {% if no_es_vendedor %}
+    <div class="jumbotron" style="text-align: center;">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <a href="{% url 'principal:consultar' %}" class="menu_submenu_link">
+                    <img class="img-responsive center-block" src="{% static "img/Search-256.png" %}" alt="">
+                    <h2>Consultar</h2>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <a href="{% url 'contactos:consultar_notas' %}" class="menu_submenu_link">
+                    <img class="img-responsive center-block" src="{% static "img/notes.png" %}" alt="">
+                    <h2>Notas</h2>
+                </a>
+                
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <a href="{% url 'contactos:consultar_recordatorios' %}" class="menu_submenu_link">
+                    <img class="img-responsive center-block" src="{% static "img/reminder.png" %}" alt="">
+                    <h2>Recordatorios</h2>
+                </a>   
+            </div>
+        </div>
+    </div>
+
+    {% else %}
     <div class="jumbotron" style="text-align: center;">
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -43,9 +68,7 @@
                 
             </div>
         </div>
-    </div>
-    {% else %}
-    <h1>Hola</h1>
+    </div>    
     {% endif %}
 
 {% endblock content%}

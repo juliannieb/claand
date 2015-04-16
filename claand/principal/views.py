@@ -21,11 +21,8 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                try:
-                    user.vendedor
-                    return HttpResponseRedirect('/principal/vendedor/')
-                except Exception:
-                    return HttpResponseRedirect('/principal/director/')
+                es_vendedor = no_es_vendedor(user)
+                return HttpResponseRedirect('/principal/index/', {'no_es_vendedor':es_vendedor})
             else:
                 return render(request, 'principal/login2.html', {'desactivada':True})
         else:
@@ -42,23 +39,24 @@ def vendedor_index(request):
     """ Funcion para manejar el index principal del vendedor.
     TO DO: implementar todo ja.
     """
-    return render(request, 'principal/index_vendedor.html')
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/index_vendedor.html', {'no_es_vendedor':es_vendedor})
 
 @login_required
 def consultar(request):
     """ Funcion para manejar la vista principal de consultas.
     TO DO: implementar todo ja.
     """
-    return render(request, 'principal/consultar.html')
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/consultar.html', {'no_es_vendedor':es_vendedor})
 
 @login_required
-@user_passes_test(no_es_vendedor)
-def director_index(request):
+def index(request):
     """ Funcion para manejar el index principal del director.
     Aqui deben ir los permisos de login para el director.
     TO DO: implementar todo ja.
     """
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'principal/index_vendedor.html', {'es_vendedor':es_vendedor})
+    return render(request, 'principal/index.html', {'no_es_vendedor':es_vendedor})
 
 

@@ -19,35 +19,43 @@ def no_es_vendedor(user):
 
 @login_required
 def consultar_contactos(request):
-	current_user = request.user
-	if no_es_vendedor(current_user):
-		contactos_list = Contacto.objects.all()
-	else:
-		current_vendedor = Vendedor.objects.get(user=current_user)
-		contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
-	return render(request, 'contactos/contactos.html', {'contactos_list': contactos_list})
+    current_user = request.user
+    es_vendedor = no_es_vendedor(request.user)
+    if no_es_vendedor(current_user):
+        contactos_list = Contacto.objects.all()
+    else:
+        current_vendedor = Vendedor.objects.get(user=current_user)
+        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+    return render(request, 'contactos/contactos.html', {'contactos_list': contactos_list, \
+        'no_es_vendedor':es_vendedor})
 
 @login_required
 def contacto(request, contacto_nombre_slug):
-	""" mostrar detalle de un contacto """
-	contacto = Contacto.objects.get(slug=contacto_nombre_slug)
-	pertenece = Pertenece.objects.get(contacto=contacto)
-	numeros_list = contacto.numerotelefonico_set.all()
-	calificacion = Calificacion.objects.get(contacto=contacto)
-	cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
-	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion, 'cotizaciones_list': cotizaciones_list})
+    """ mostrar detalle de un contacto """
+    contacto = Contacto.objects.get(slug=contacto_nombre_slug)
+    pertenece = Pertenece.objects.get(contacto=contacto)
+    numeros_list = contacto.numerotelefonico_set.all()
+    calificacion = Calificacion.objects.get(contacto=contacto)
+    cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'contactos/contacto.html', {'contacto': contacto, \
+        'pertenece':pertenece, 'numeros_list':numeros_list, 'calificacion':calificacion, \
+        'cotizaciones_list':cotizaciones_list, 'no_es_vendedor':es_vendedor})
 
 @login_required
 def registrar_contactos(request):
     """ registrar un nuevo contacto """
-    return render(request, 'contactos/registrar_contactos.html', {})
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'contactos/registrar_contactos.html', {'no_es_vendedor':es_vendedor})
 
 @login_required
 def registrar_contacto(request):
     if request.method == 'POST':
         formContacto = ContactoForm(request.POST)
         formNumeroTelefonico = NumeroTelefonicoForm(request.POST)
-        forms = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico, \
+        'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if formContacto.is_valid() and formNumeroTelefonico.is_valid():
@@ -88,7 +96,9 @@ def registrar_contacto(request):
         # If the request was not a POST, display the form to enter details.
         formContacto = ContactoForm()
         formNumeroTelefonico = NumeroTelefonicoForm()
-        forms = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico, \
+        'no_es_vendedor':es_vendedor}
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
@@ -103,7 +113,8 @@ def registrar_llamada(request):
     if request.method == 'POST':
         formLlamada = LlamadaForm(request.POST)
         formLlamada.fields["contacto"].queryset = contactos_list
-        forms = {'formLlamada':formLlamada}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if formLlamada.is_valid():
@@ -123,7 +134,8 @@ def registrar_llamada(request):
         # If the request was not a POST, display the form to enter details.
         formLlamada = LlamadaForm()
         formLlamada.fields["contacto"].queryset = contactos_list
-        forms = {'formLlamada':formLlamada}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
@@ -133,7 +145,8 @@ def registrar_llamada(request):
 @user_passes_test(no_es_vendedor)
 def consultar_notas(request):
     """ mostrar todas las notas """
-    return render(request, 'contactos/notas.html', {})
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'contactos/notas.html', {'no_es_vendedor':es_vendedor})
 
 @login_required
 @user_passes_test(no_es_vendedor)
@@ -147,7 +160,8 @@ def registrar_nota(request):
     """ registrar una nueva nota """
     if request.method == 'POST':
         formNota = NotaForm(request.POST)
-        forms = {'formNota':formNota}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formNota':formNota, 'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if formNota.is_valid():
@@ -166,7 +180,8 @@ def registrar_nota(request):
     else:
         # If the request was not a POST, display the form to enter details.
         formNota = NotaForm()
-        forms = {'formNota':formNota}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formNota':formNota, 'no_es_vendedor':es_vendedor}
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
@@ -175,9 +190,11 @@ def registrar_nota(request):
 @login_required
 @user_passes_test(no_es_vendedor)
 def consultar_recordatorios(request):
-	""" mostrar todos los recordatorios """
-	recordatorios_list = Recordatorio.objects.all()
-	return render(request, 'contactos/recordatorios.html', {'recordatorios_list': recordatorios_list})
+    """ mostrar todos los recordatorios """
+    recordatorios_list = Recordatorio.objects.all()
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'contactos/recordatorios.html', {'recordatorios_list': recordatorios_list, \
+        'no_es_vendedor':es_vendedor})
 
 @login_required
 @user_passes_test(no_es_vendedor)
@@ -191,7 +208,8 @@ def registrar_recordatorio(request):
     """ registrar un nuevo recordatorio """
     if request.method == 'POST':
         formRecordatorio = RecordatorioForm(request.POST)
-        forms = {'formRecordatorio':formRecordatorio}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formRecordatorio':formRecordatorio, 'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if formRecordatorio.is_valid():
@@ -210,7 +228,8 @@ def registrar_recordatorio(request):
     else:
         # If the request was not a POST, display the form to enter details.
         formRecordatorio = RecordatorioForm()
-        forms = {'formRecordatorio':formRecordatorio}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formRecordatorio':formRecordatorio, 'no_es_vendedor':es_vendedor}
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).

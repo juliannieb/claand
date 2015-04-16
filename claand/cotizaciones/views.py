@@ -6,11 +6,18 @@ from principal.models import Vendedor
 from cotizaciones.forms import Contacto, CotizacionForm
 from contactos.models import Pertenece
 
+def no_es_vendedor(user):
+    """Funcion para el decorador user_passes_test
+    """
+    return not user.groups.filter(name='vendedor').exists()
+
 @login_required
 def consultar_cotizaciones(request):
     """ mostrar todas las cotizaciones """
     cotizaciones_list = Cotizacion.objects.all()
-    return render(request, 'cotizaciones/cotizaciones.html', {'cotizaciones_list': cotizaciones_list})
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'cotizaciones/cotizaciones.html', {'cotizaciones_list':cotizaciones_list, \
+        'no_es_vendedor':es_vendedor})
 
 @login_required
 def cotizacion(request, id_cotizacion):
@@ -18,13 +25,17 @@ def cotizacion(request, id_cotizacion):
     cotizacion = Cotizacion.objects.get(id=id_cotizacion)
     contacto = cotizacion.contacto
     pertenece = Pertenece.objects.get(contacto=contacto)
-    return render(request, "cotizaciones/cotizacion.html", {'cotizacion': cotizacion, 'contacto': contacto, 'pertenece': pertenece})
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, "cotizaciones/cotizacion.html", {'cotizacion': cotizacion, \
+        'contacto': contacto, 'pertenece': pertenece, 'no_es_vendedor':es_vendedor})
 
 @login_required
 def consultar_ventas(request):
     """ mostrar todas las ventas """
     ventas_list = Venta.objects.all()
-    return render(request, 'cotizaciones/ventas.html', {'ventas_list': ventas_list})
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'cotizaciones/ventas.html', {'ventas_list': ventas_list, '\
+        no_es_vendedor':es_vendedor})
 
 @login_required
 def venta(request, id_venta):
@@ -34,7 +45,9 @@ def venta(request, id_venta):
     cotizacion = Cotizacion.objects.get(id=id_cotizacion)
     contacto = cotizacion.contacto
     pertenece = Pertenece.objects.get(contacto=contacto)
-    return render(request, 'cotizaciones/venta.html', {'venta': venta, 'cotizacion': cotizacion, 'contacto': contacto, 'pertenece': pertenece})
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'cotizaciones/venta.html', {'venta':venta, 'cotizacion':cotizacion, \
+        'contacto':contacto, 'pertenece':pertenece, 'no_es_vendedor':es_vendedor})
 
 @login_required
 def registrar(request):
@@ -45,7 +58,8 @@ def registrar(request):
     if request.method == 'POST':
         formCotizacion = CotizacionForm(request.POST)
         formCotizacion.fields["contacto"].queryset = contactos_list
-        forms = {'formCotizacion':formCotizacion}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formCotizacion':formCotizacion, 'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if formCotizacion.is_valid():
@@ -65,7 +79,8 @@ def registrar(request):
         # If the request was not a POST, display the form to enter details.
         formCotizacion = CotizacionForm()
         formCotizacion.fields["contacto"].queryset = contactos_list
-        forms = {'formCotizacion':formCotizacion}
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formCotizacion':formCotizacion, 'no_es_vendedor':es_vendedor}
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
