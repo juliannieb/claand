@@ -1,3 +1,5 @@
+import time
+
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
@@ -12,9 +14,7 @@ from contactos.models import Llamada
 from contactos.forms import ContactoForm, LlamadaForm
 from empresas.forms import NumeroTelefonicoForm, RedSocialForm
 
-import random
-import datetime
-import time
+
 
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
