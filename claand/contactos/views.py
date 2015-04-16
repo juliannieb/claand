@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende, Recordatorio, Nota
+from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende, Recordatorio, Nota, Llamada
 from principal.models import Vendedor
 from cotizaciones.models import Cotizacion, Venta
 from empresas.models import Empresa
@@ -35,7 +35,8 @@ def contacto(request, contacto_nombre_slug):
 	numeros_list = contacto.numerotelefonico_set.all()
 	calificacion = Calificacion.objects.get(contacto=contacto)
 	cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
-	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion, 'cotizaciones_list': cotizaciones_list})
+	llamadas_list = Llamada.objects.all()
+	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion, 'cotizaciones_list': cotizaciones_list, 'llamadas_list': llamadas_list})
 
 @login_required
 def registrar_contactos(request):
@@ -131,13 +132,15 @@ def registrar_llamada(request):
 @user_passes_test(no_es_vendedor)
 def consultar_notas(request):
     """ mostrar todas las notas """
-    return render(request, 'contactos/notas.html', {})
+    notas_list = Nota.objects.all()
+    return render(request, 'contactos/notas.html', {'notas_list': notas_list})
 
 @login_required
 @user_passes_test(no_es_vendedor)
 def nota(request, nota_id):
     """ mostrar detalle de una nota """
-    return HttpResponse("detalle nota")
+    nota = Nota.objects.get(id=nota_id)
+    return render(request, "contactos/nota.html", {'nota': nota})
 
 @login_required
 @user_passes_test(no_es_vendedor)
@@ -156,7 +159,8 @@ def consultar_recordatorios(request):
 @user_passes_test(no_es_vendedor)
 def recordatorio(request, recordatorio_id):
     """ mostrar detalle de un recordatorio """
-    return HttpResponse("detalle recordatorio")
+    recordatorio = Recordatorio.objects.get(id=recordatorio_id)
+    return render(request, "contactos/recordatorio.html", {'recordatorio': recordatorio})
 
 @login_required
 @user_passes_test(no_es_vendedor)

@@ -9,19 +9,18 @@
         </div>
     </div>
 
-
     <div class="container">
         <div class="row pull-left">
-            <form action="crear_nota" class="form-horizontal">
+            <form action="crear_recordatorio" class="form-horizontal">
                 <div class="col-sm-4 col-xs-4">
                     <button type="submit" class="btn btn-success pull-left">Crear nueva nota</button>
                 </div>
             </form>
         </div>
         <div class="row pull-right">
-            <form action="search_notas" class="form-horizontal">
+            <form action="search_recordatorios" class="form-horizontal">
                 <div class="col-sm-8 col-xs-8">
-                    <input type="text" class="form-control" id="txt_search_notas">
+                    <input type="text" class="form-control" id="txt_search_recordatorios">
                 </div>
                 <div class="col-sm-4 col-xs-4">
                     <button type="submit" class="btn btn-default pull-right">Buscar</button>
@@ -36,36 +35,20 @@
                 <tr>
                     <th>ID Nota</th>
                     <th>Contacto</th>
-                    <th>Clasificación</th>
                     <th>Descripción</th>
+                    <th>Clasificación</th>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">1</a></td>
-                    <td>Juan Pérez</td>
-                    <td>3</td>
-                    <td>Tenerlo en cuenta para proyecto de marcadoras.</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">2</a></td>
-                    <td>John Perez</td>
-                    <td>2</td>
-                    <td>Me cae mal.</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">3</a></td>
-                    <td>Adalaid Carranza</td>
-                    <td>3</td>
-                    <td>Muy buen cliente.</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">4</a></td>
-                    <td>Georges Lucas</td>
-                    <td>1</td>
-                    <td>Posiblemente se cambie de empresa.</td>
-                </tr>
+                {% for nota in notas_list %}
+                    <tr>
+                        <td><a href="{% url 'contactos:nota' nota.id %}">{{ nota.id }}</a></td>
+                        <td>{{ nota.contacto }} {{ nota.contacto.apellido }}</td>
+                        <td>{{ nota }}</td>
+                        <td>{{ nota.clasificacion }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
-           
-{% endblock content%}
+
+{% endblock content %}

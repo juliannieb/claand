@@ -1,15 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+
 from cotizaciones.models import Cotizacion, Venta
 from principal.models import Vendedor
-from cotizaciones.forms import Contacto, CotizacionForm
 from contactos.models import Pertenece
+
+from cotizaciones.forms import Contacto, CotizacionForm
+
+def no_es_vendedor(user):
+    """Funcion para el decorador user_passes_test
+    """
+    return not user.groups.filter(name='vendedor').exists()
 
 @login_required
 def consultar_cotizaciones(request):
     """ mostrar todas las cotizaciones """
-    cotizaciones_list = Cotizacion.objects.all()
+    current_user = request.user
+    if no_es_vendedor(current_user):
+        cotizaciones_list = Cotizacion.objects.all()
+    else:
+        current_vendedor = Vendedor.objects.get(user=current_user)
+        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
     return render(request, 'cotizaciones/cotizaciones.html', {'cotizaciones_list': cotizaciones_list})
 
 @login_required
@@ -23,7 +36,14 @@ def cotizacion(request, id_cotizacion):
 @login_required
 def consultar_ventas(request):
     """ mostrar todas las ventas """
-    ventas_list = Venta.objects.all()
+    current_user = request.user
+    if no_es_vendedor(current_user):
+        ventas_list = Venta.objects.all()
+    else:
+        current_vendedor = Vendedor.objects.get(user=current_user)
+        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+        ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
     return render(request, 'cotizaciones/ventas.html', {'ventas_list': ventas_list})
 
 @login_required
