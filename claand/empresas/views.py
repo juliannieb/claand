@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from empresas.forms import EmpresaForm, DireccionForm, NumeroTelefonicoForm, RedSocialForm
 
+from principal.models import Vendedor
 from empresas.models import Empresa, Direccion, EmpresaTieneDireccion
 from cotizaciones.models import Cotizacion, Venta
 from contactos.models import Contacto
@@ -39,8 +40,9 @@ def empresa(request, empresa_nombre_slug):
     if es_vendedor: # si no es vendedor
         contactos_list = Contacto.objects.filter(empresa=empresa)
     else:
+        current_user = request.user
         current_vendedor = Vendedor.objects.get(user=current_user)
-        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+        contactos_list = Contacto.objects.filter(vendedor=current_vendedor, empresa=empresa)
         
     cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
     ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)

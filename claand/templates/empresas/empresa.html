@@ -30,7 +30,7 @@
                     {% endfor %}
                     {% for red in redes_list %}
                         {{red.tipo_red_social}}:
-                        {{red.link}}
+                        <a href="{{red.link}}">{{red.link}}</a>
                         <br>
                     {% endfor %}
                   </div>
@@ -62,7 +62,7 @@
             <tbody>
                 {% for contacto in contactos_list %}
                     <tr>
-                        <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto.nombre }}</a></td>
+                        <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto }}</a></td>
                         <td>{{ contacto.pertenece_set.get.empresa }}</td>
                         <td>{{ contacto.pertenece_set.get.area }}</td>
                         <td>{{ contacto.correo_electronico }}</td>
