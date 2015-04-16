@@ -16,17 +16,26 @@ def no_es_vendedor(user):
     """
     return not user.groups.filter(name='vendedor').exists()
 
+
 @login_required
 def consultar_empresas(request):
-    """ mostrar todas las empresas """
+    """ Vista para mostrar todas las empresas.
+    """
     empresas_list = Empresa.objects.all()
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'empresas/empresas.html', {'empresas_list': empresas_list, \
-        'no_es_vendedor':es_vendedor})
+
+    context = {}
+    context['empresas_list'] = empresas_list
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'empresas/empresas.html', context)
+
 
 @login_required
 def empresa(request, empresa_nombre_slug):
-    """ mostrar una empresa """
+    """ Vista para consultar la información de una empresa en particular.
+    En esta, se realiza un gráfico de ventas y cotizaciones vs tiempo, utilizando 
+    el app de nvd3.
+    """
     context = {}
     empresa = Empresa.objects.get(slug=empresa_nombre_slug)
     es_vendedor = no_es_vendedor(request.user)
@@ -34,9 +43,9 @@ def empresa(request, empresa_nombre_slug):
     empresa_tiene_direccion = EmpresaTieneDireccion.objects.filter(empresa=empresa)
     numeros_list = empresa.numerotelefonico_set.all()
     redes_list = empresa.redsocial_set.all()
+    
     # obtener todos los contactos, o sólo los del vendedor dependiendo si
     # es director o vendedor.
-
     if es_vendedor: # si no es vendedor
         contactos_list = Contacto.objects.filter(empresa=empresa)
     else:
@@ -46,11 +55,20 @@ def empresa(request, empresa_nombre_slug):
         
     cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
     ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
+    
     xdata = list()
     ydata = list()
+    ydata2 = list()
+
+    # obtener montos de cotizaciones para gráfico.
     for cotizacion in cotizaciones_list:
         xdata.append(time.mktime(cotizacion.fecha_creacion.timetuple()) * 1000)
         ydata.append(cotizacion.monto)
+
+    # obtener montos de ventas para el gráfico
+    for venta in ventas_list:
+        ydata2.append(venta.monto_total)
+
 
     tooltip_date = "%d %b %Y %H:%M:%S %p"
     extra_serie1 = {
@@ -58,9 +76,14 @@ def empresa(request, empresa_nombre_slug):
         "date_format": tooltip_date,
         'color': '#a4c639'
     }
-
+    extra_serie2 = {
+        "tooltip": {"y_start": "", "y_end": " cal"},
+        "date_format": tooltip_date,
+        'color': '#FF8aF8'
+    }
     chartdata = {'x': xdata,
-                 'name1': 'Monto', 'y1': ydata, 'extra1': extra_serie1}
+                 'name1': 'Monto Cotizacion', 'y1': ydata, 'extra1': extra_serie1,
+                 'name2': 'Monto Venta', 'y2': ydata2, 'extra2': extra_serie2}
 
     charttype = "lineChart"
     chartcontainer = 'linechart_container'  # container name
@@ -76,8 +99,6 @@ def empresa(request, empresa_nombre_slug):
         }
     }
 
-    
-    
     context['empresa'] = empresa
     context['empresa_tiene_direccion'] = empresa_tiene_direccion
     context['numeros_list'] = numeros_list
@@ -91,6 +112,8 @@ def empresa(request, empresa_nombre_slug):
 
 @login_required
 def registrar_empresa(request):
+    """ Vista para registrar una empresa.
+    """
     if request.method == 'POST':
         form = EmpresaForm(request.POST)
         formDireccion = DireccionForm(request.POST)

@@ -35,26 +35,19 @@ def user_logout(request):
     return HttpResponseRedirect('/principal/login')
 
 @login_required
-def vendedor_index(request):
-    """ Funcion para manejar el index principal del vendedor.
-    TO DO: implementar todo ja.
-    """
-    es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'principal/index_vendedor.html', {'no_es_vendedor':es_vendedor})
-
-@login_required
 def consultar(request):
-    """ Funcion para manejar la vista principal de consultas.
-    TO DO: implementar todo ja.
+    """ En esta vista se muestran las opciones de consulta para los usuarios.
     """
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'principal/consultar.html', {'no_es_vendedor':es_vendedor})
+    context = {}
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'principal/consultar.html', context)
 
 @login_required
 def index(request):
-    """ Funcion para manejar el index principal del director.
-    Aqui deben ir los permisos de login para el director.
-    TO DO: implementar todo ja.
+    """ Vista para mostrar el index del usuario.
     """
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'principal/index.html', {'no_es_vendedor':es_vendedor})
+    context = {}
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'principal/index.html', context)

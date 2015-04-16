@@ -23,6 +23,9 @@ def no_es_vendedor(user):
 
 @login_required
 def consultar_contactos(request):
+    """ Vista para mostrar toda la lista de contactos correspondiente
+    al usuario que está loggeado.
+    """
     current_user = request.user
     es_vendedor = no_es_vendedor(request.user)
     if no_es_vendedor(current_user):
@@ -30,12 +33,16 @@ def consultar_contactos(request):
     else:
         current_vendedor = Vendedor.objects.get(user=current_user)
         contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
-    return render(request, 'contactos/contactos.html', {'contactos_list': contactos_list, \
-        'no_es_vendedor':es_vendedor})
+
+    context = {}
+    context['contactos_list'] = contactos_list
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'contactos/contactos.html', context)
 
 @login_required
 def contacto(request, contacto_nombre_slug):
-    """ mostrar detalle de un contacto """
+    """ Vista para mostrar todo el detalle de un contacto en particular.
+    """
     contacto = Contacto.objects.get(slug=contacto_nombre_slug)
     pertenece = Pertenece.objects.get(contacto=contacto)
     numeros_list = contacto.numerotelefonico_set.all()
@@ -43,19 +50,31 @@ def contacto(request, contacto_nombre_slug):
     cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
     llamadas_list = Llamada.objects.all()
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'contactos/contacto.html', {'contacto':contacto, 'pertenece':pertenece, \
-        'numeros_list':numeros_list, 'calificacion':calificacion, \
-        'cotizaciones_list':cotizaciones_list, 'llamadas_list':llamadas_list, \
-        'no_es_vendedor':es_vendedor})
+    context = {}
+    context['contacto'] = contacto
+    context['pertenece'] = pertenece
+    context['numeros_list'] = numeros_list
+    context['calificacion'] = calificacion
+    context['cotizaciones_list'] = cotizaciones_list
+    context['llamadas_list'] = llamadas_list
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'contactos/contacto.html', context)
 
 @login_required
 def registrar_contactos(request):
-    """ registrar un nuevo contacto """
+    """ En esta vista se presentan las alternativas entre registrar un contacto
+    o una empresa
+    """
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'contactos/registrar_contactos.html', {'no_es_vendedor':es_vendedor})
+    context = {}
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'contactos/registrar_contactos.html', context)
 
 @login_required
 def registrar_contacto(request):
+    """ En esta vista se maneja el registro y validación de un contacto, dependiendo
+    si la solicitud es POST o GET.
+    """
     if request.method == 'POST':
         formContacto = ContactoForm(request.POST)
         formNumeroTelefonico = NumeroTelefonicoForm(request.POST)
@@ -78,7 +97,6 @@ def registrar_contacto(request):
                 calificacion=calificacion, is_cliente=is_cliente)
             contacto.save()
             
-            
             Pertenece(contacto=contacto, empresa=empresa, area=area).save()
 
             current_user = request.user
@@ -90,7 +108,6 @@ def registrar_contacto(request):
                 numero_telefonico.contacto = contacto
                 numero_telefonico.save()
             
-
             # Now call the index() view.
             # The user will be shown the homepage.
             return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
@@ -112,7 +129,8 @@ def registrar_contacto(request):
 
 @login_required
 def registrar_llamada(request):
-    """ registrar una llamada """
+    """ En esta vista, un vendedor registra una llamada y se valida la entrada de la misma.
+    """
     current_user = request.user
     current_vendedor = Vendedor.objects.get(user=current_user)
     contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
@@ -150,23 +168,31 @@ def registrar_llamada(request):
 @login_required
 @user_passes_test(no_es_vendedor)
 def consultar_notas(request):
-    """ mostrar todas las notas """
+    """ En esta vista se muestran todas las notas del director 
+    """
     notas_list = Nota.objects.all()
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'contactos/notas.html', {'notas_list': notas_list, \
-        'no_es_vendedor':es_vendedor})
+    context = {}
+    context['notas_list'] = notas_list
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'contactos/notas.html', context)
 
 @login_required
 @user_passes_test(no_es_vendedor)
 def nota(request, nota_id):
-    """ mostrar detalle de una nota """
+    """ En esta vista se muestra el detalle de una nota en particular.
+    """
     nota = Nota.objects.get(id=nota_id)
-    return render(request, "contactos/nota.html", {'nota': nota})
+    context = {}
+    context['nota'] = nota
+    return render(request, "contactos/nota.html", context)
 
 @login_required
 @user_passes_test(no_es_vendedor)
 def registrar_nota(request):
-    """ registrar una nueva nota """
+    """ En esta vista, se maneja el registro y validación de una nota dependiendo
+    del tipo de solicitud.
+    """
     if request.method == 'POST':
         formNota = NotaForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
@@ -178,6 +204,7 @@ def registrar_nota(request):
             data = formNota.cleaned_data
             contacto = data['contacto']
             descripcion = data['descripcion']
+            clasificacion = data['clasificacion']
             Nota(contacto=contacto, descripcion=descripcion, clasificacion=clasificacion).save()
 
             # Now call the index() view.
@@ -199,23 +226,30 @@ def registrar_nota(request):
 @login_required
 @user_passes_test(no_es_vendedor)
 def consultar_recordatorios(request):
-    """ mostrar todos los recordatorios """
+    """ En esta vista se muestran todos los recordatorios del director
+    """
     recordatorios_list = Recordatorio.objects.all()
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'contactos/recordatorios.html', {'recordatorios_list': recordatorios_list, \
-        'no_es_vendedor':es_vendedor})
+    context = {}
+    context['recordatorios_list'] = recordatorios_list
+    context['no_es_vendedor'] = es_vendedor
+    return render(request, 'contactos/recordatorios.html', context)
 
 @login_required
 @user_passes_test(no_es_vendedor)
 def recordatorio(request, recordatorio_id):
-    """ mostrar detalle de un recordatorio """
+    """ En esta vista se muestra el detalle de un recordatorio
+    """
     recordatorio = Recordatorio.objects.get(id=recordatorio_id)
-    return render(request, "contactos/recordatorio.html", {'recordatorio': recordatorio})
+    context = {}
+    context['recordatorio'] = recordatorio
+    return render(request, "contactos/recordatorio.html", context)
 
 @login_required
 @user_passes_test(no_es_vendedor)
 def registrar_recordatorio(request):
-    """ registrar un nuevo recordatorio """
+    """ En esta vista se registra y valida un nuevo recordatorio
+    """
     if request.method == 'POST':
         formRecordatorio = RecordatorioForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
@@ -244,51 +278,3 @@ def registrar_recordatorio(request):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'contactos/registrar_recordatorio.html', forms)
-
-def demo_piechart(request):
-    claand = Empresa.objects.get(nombre="Claand")
-    contactos_claand = Contacto.objects.filter(empresa=claand)
-    cotizaciones = Cotizacion.objects.filter(contacto=contactos_claand)
-    xdata = list()
-    ydata = list()
-    for cotizacion in cotizaciones:
-        xdata.append(time.mktime(cotizacion.fecha_creacion.timetuple()) * 1000)
-        ydata.append(cotizacion.monto)
-
-    # start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
-    # nb_element = 150
-    # xdata = range(nb_element)
-    # xdata = list(map(lambda x: start_time + x * 1000000000, xdata))
-    # ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-    # ydata2 = list(map(lambda x: x * 2, ydata))
-
-    tooltip_date = "%d %b %Y %H:%M:%S %p"
-    extra_serie1 = {
-        "tooltip": {"y_start": "", "y_end": " cal"},
-        "date_format": tooltip_date,
-        'color': '#a4c639'
-    }
-    # extra_serie2 = {
-    #     "tooltip": {"y_start": "", "y_end": " cal"},
-    #     "date_format": tooltip_date,
-    #     'color': '#FF8aF8'
-    # }
-    chartdata = {'x': xdata,
-                 'name1': 'Monto', 'y1': ydata, 'extra1': extra_serie1}
-
-    charttype = "lineChart"
-    chartcontainer = 'linechart_container'  # container name
-    data = {
-        'charttype': charttype,
-        'chartdata': chartdata,
-        'chartcontainer': chartcontainer,
-        'extra': {
-            'x_is_date': True,
-            'x_axis_format': '%d %b %Y %H',
-            'tag_script_js': True,
-            'jquery_on_ready': False,
-        }
-    }
-    return render_to_response('contactos/linechart.html', data)
-
-
