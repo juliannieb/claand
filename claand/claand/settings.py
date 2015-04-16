@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'grappelli',
-    'djangobower',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +39,8 @@ INSTALLED_APPS = (
     'cotizaciones',
     'empresas',
     'principal',
+    'djangobower',
+    #'django_nvd3',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,44 +89,22 @@ USE_TZ = True
 
 GRAPPELLI_ADMIN_TITLE = "Claand"
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 SETTINGS_DIR = os.path.dirname(__file__)
 
-PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
-PROJECT_PATH = os.path.abspath(PROJECT_PATH)
-
-STATIC_PATH = os.path.join(PROJECT_PATH,'static')
-PROJECT_DIR = os.path.dirname(__file__)
-
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-
-STATIC_URL = '/static/'
-
-LOGIN_URL = '/principal/login/'
-LOGOUT_URL = '/principal/logout/'
-
-STATICFILES_DIRS = (
-    STATIC_PATH,
-)
-
-
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'djangobower.finders.BowerFinder',
-)
 
 # Path for the template folder
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
-
-
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Don't forget to use absolute paths, not relative paths.
     TEMPLATE_PATH,
+)
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -134,11 +113,35 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), ".."),
+)
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+STATIC_URL = '/static/'
+
+LOGIN_URL = '/principal/login/'
+LOGOUT_URL = '/principal/logout/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+)
+
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components/')
 
 BOWER_INSTALLED_APPS = (
     'jquery',
     'underscore',
+    'd3#3.3.13',
+    'nvd3#1.7.1',
 )
 
 
