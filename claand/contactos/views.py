@@ -12,6 +12,10 @@ from contactos.models import Llamada
 from contactos.forms import ContactoForm, LlamadaForm
 from empresas.forms import NumeroTelefonicoForm, RedSocialForm
 
+import random
+import datetime
+import time
+
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
     """
@@ -165,33 +169,49 @@ def registrar_recordatorio(request):
     return HttpResponse("registrar un recordatorio")
 
 def demo_piechart(request):
-    """
-    pieChart page
-    """
-    xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries",
-             "Blueberries", "Dates", "Grapefruit", "Kiwi", "Lemon"]
-    ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
+    claand = Empresa.objects.get(nombre="Claand")
+    contactos_claand = Contacto.objects.filter(empresa=claand)
+    cotizaciones = Cotizacion.objects.filter(contacto=contactos_claand)
+    xdata = list()
+    ydata = list()
+    for cotizacion in cotizaciones:
+        xdata.append(time.mktime(cotizacion.fecha_creacion.timetuple()) * 1000)
+        ydata.append(cotizacion.monto)
 
-    color_list = ['#5d8aa8', '#e32636', '#efdecd', '#ffbf00', '#ff033e', '#a4c639',
-                  '#b2beb5', '#8db600', '#7fffd4', '#ff007f', '#ff55a3', '#5f9ea0']
-    extra_serie = {
+    # start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
+    # nb_element = 150
+    # xdata = range(nb_element)
+    # xdata = list(map(lambda x: start_time + x * 1000000000, xdata))
+    # ydata = [i + random.randint(1, 10) for i in range(nb_element)]
+    # ydata2 = list(map(lambda x: x * 2, ydata))
+
+    tooltip_date = "%d %b %Y %H:%M:%S %p"
+    extra_serie1 = {
         "tooltip": {"y_start": "", "y_end": " cal"},
-        "color_list": color_list
+        "date_format": tooltip_date,
+        'color': '#a4c639'
     }
-    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
-    charttype = "pieChart"
-    chartcontainer = 'piechart_container'  # container name
+    # extra_serie2 = {
+    #     "tooltip": {"y_start": "", "y_end": " cal"},
+    #     "date_format": tooltip_date,
+    #     'color': '#FF8aF8'
+    # }
+    chartdata = {'x': xdata,
+                 'name1': 'Monto', 'y1': ydata, 'extra1': extra_serie1}
 
+    charttype = "lineChart"
+    chartcontainer = 'linechart_container'  # container name
     data = {
         'charttype': charttype,
         'chartdata': chartdata,
         'chartcontainer': chartcontainer,
         'extra': {
-            'x_is_date': False,
-            'x_axis_format': '',
+            'x_is_date': True,
+            'x_axis_format': '%d %b %Y %H',
             'tag_script_js': True,
             'jquery_on_ready': False,
         }
     }
-    return render_to_response('contactos/piechart.html', data)
+    return render_to_response('contactos/linechart.html', data)
+
 
