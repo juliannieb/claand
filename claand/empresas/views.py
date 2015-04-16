@@ -25,7 +25,7 @@ def empresa(request, empresa_nombre_slug):
     contactos_list = Contacto.objects.filter(empresa=empresa)
     cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
     ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
-    return render(request, 'empresas/empresa.html', {'empresa': empresa, 'empresa_tiene_direccion': empresa_tiene_direccion,'numeros_list': numeros_list, 'redes_list': redes_list})
+    return render(request, 'empresas/empresa.html', {'empresa': empresa, 'empresa_tiene_direccion': empresa_tiene_direccion,'numeros_list': numeros_list, 'redes_list': redes_list, 'contactos_list': contactos_list, 'cotizaciones_list': cotizaciones_list, 'ventas_list': ventas_list})
 
 @login_required
 def registrar_empresa(request):

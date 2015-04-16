@@ -48,7 +48,6 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Empresa</th>
                     <th>Área</th>
@@ -58,24 +57,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="...Consultar/Contactos?idContacto">2</a></td>
-                    <td>Alejandro Cassis</td>
-                    <td>Mitsubishi</td>
-                    <td>Ventas</td>
-                    <td>csssz@gmail.com</td>
-                    <td>Cliente</td>
-                    <td>C</td>
-                </tr>
-                <tr>
-                    <td><a href="...Consultar/Contactos?idContacto">3</a></td>
-                    <td>Julián Niebieskikwiat</td>
-                    <td>Mitsubishi</td>
-                    <td>Seguridad</td>
-                    <td>julian@hotmail.com</td>
-                    <td>Cliente</td>
-                    <td>A</td>
-                </tr>
+                {% for contacto in contactos_list %}
+                    <tr>
+                        <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto.nombre }}</a></td>
+                        <td>{{ contacto.pertenece_set.get.empresa }}</td>
+                        <td>{{ contacto.pertenece_set.get.area }}</td>
+                        <td>{{ contacto.correo_electronico }}</td>
+                        {% if contacto.is_cliente %}
+                            <td>Cliente</td>
+                        {% else %}
+                            <td>Prospecto</td>
+                        {% endif %}
+                        <td>{{ contacto.calificacion }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -90,22 +85,24 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Número de Cotización</th>
                     <th>Cliente</th>
                     <th>Empresa</th>
                     <th>Descripción</th>
                     <th>Monto</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">2</a></td>
-                    <td>Julián Niebieskikwiat</td>
-                    <td>Mitsubishi</td>
-                    <td>Máquina de estampado</td>
-                    <td>100000</td>
-                </tr>
-            </tbody>
+            {% for cotizacion in cotizaciones_list %}
+                <tbody>
+                    <tr>
+                        <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
+                        <td>{{ cotizacion.contacto }}</td>
+                        <td>{{ cotizacion.contacto.pertenece_set.get.empresa }}</td>
+                        <td>{{ cotizacion.descripcion }}</td>
+                        <td>{{ cotizacion.monto }}</td>
+                    </tr>
+                </tbody>
+            {% endfor %}
         </table>
     </div>
 
