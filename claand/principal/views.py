@@ -58,5 +58,3 @@ def index(request):
     """
     es_vendedor = no_es_vendedor(request.user)
     return render(request, 'principal/index.html', {'no_es_vendedor':es_vendedor})
-
-

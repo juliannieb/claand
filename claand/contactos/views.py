@@ -35,27 +35,18 @@ def consultar_contactos(request):
 
 @login_required
 def contacto(request, contacto_nombre_slug):
-<<<<<<< HEAD
     """ mostrar detalle de un contacto """
     contacto = Contacto.objects.get(slug=contacto_nombre_slug)
     pertenece = Pertenece.objects.get(contacto=contacto)
     numeros_list = contacto.numerotelefonico_set.all()
     calificacion = Calificacion.objects.get(contacto=contacto)
     cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
+    llamadas_list = Llamada.objects.all()
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'contactos/contacto.html', {'contacto': contacto, \
-        'pertenece':pertenece, 'numeros_list':numeros_list, 'calificacion':calificacion, \
-        'cotizaciones_list':cotizaciones_list, 'no_es_vendedor':es_vendedor})
-=======
-	""" mostrar detalle de un contacto """
-	contacto = Contacto.objects.get(slug=contacto_nombre_slug)
-	pertenece = Pertenece.objects.get(contacto=contacto)
-	numeros_list = contacto.numerotelefonico_set.all()
-	calificacion = Calificacion.objects.get(contacto=contacto)
-	cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
-	llamadas_list = Llamada.objects.all()
-	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion, 'cotizaciones_list': cotizaciones_list, 'llamadas_list': llamadas_list})
->>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
+    return render(request, 'contactos/contacto.html', {'contacto':contacto, 'pertenece':pertenece, \
+        'numeros_list':numeros_list, 'calificacion':calificacion, \
+        'cotizaciones_list':cotizaciones_list, 'llamadas_list':llamadas_list, \
+        'no_es_vendedor':es_vendedor})
 
 @login_required
 def registrar_contactos(request):
@@ -160,13 +151,10 @@ def registrar_llamada(request):
 @user_passes_test(no_es_vendedor)
 def consultar_notas(request):
     """ mostrar todas las notas """
-<<<<<<< HEAD
-    es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'contactos/notas.html', {'no_es_vendedor':es_vendedor})
-=======
     notas_list = Nota.objects.all()
-    return render(request, 'contactos/notas.html', {'notas_list': notas_list})
->>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'contactos/notas.html', {'notas_list': notas_list, \
+        'no_es_vendedor':es_vendedor})
 
 @login_required
 @user_passes_test(no_es_vendedor)

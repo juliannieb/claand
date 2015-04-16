@@ -40,11 +40,7 @@ INSTALLED_APPS = (
     'empresas',
     'principal',
     'djangobower',
-<<<<<<< HEAD
-    #'django_nvd3',
-=======
     'django_nvd3',
->>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
 )
 
 MIDDLEWARE_CLASSES = (
@@ -123,7 +119,7 @@ PROJECT_ROOT = os.path.abspath(
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 
 LOGIN_URL = '/principal/login/'
 LOGOUT_URL = '/principal/logout/'
@@ -134,12 +130,12 @@ STATICFILES_DIRS = (
 
 
 STATICFILES_FINDERS = (
+    'djangobower.finders.BowerFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'djangobower.finders.BowerFinder',
 )
 
-BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components/')
+BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components/')
 
 BOWER_INSTALLED_APPS = (
     'jquery',
@@ -149,4 +145,4 @@ BOWER_INSTALLED_APPS = (
 )
 
 
-# BOWER_PATH = '/usr/bin/bower'
+#BOWER_PATH = '/usr/bin/bower'

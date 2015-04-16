@@ -28,17 +28,13 @@ def empresa(request, empresa_nombre_slug):
     empresa_tiene_direccion = EmpresaTieneDireccion.objects.filter(empresa=empresa)
     numeros_list = empresa.numerotelefonico_set.all()
     redes_list = empresa.redsocial_set.all()
-<<<<<<< HEAD
-    es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'empresas/empresa.html', {'empresa': empresa, \
-        'empresa_tiene_direccion':empresa_tiene_direccion,'numeros_list':numeros_list, \
-        'redes_list': redes_list, 'no_es_vendedor':es_vendedor})
-=======
     contactos_list = Contacto.objects.filter(empresa=empresa)
     cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
     ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
-    return render(request, 'empresas/empresa.html', {'empresa': empresa, 'empresa_tiene_direccion': empresa_tiene_direccion,'numeros_list': numeros_list, 'redes_list': redes_list})
->>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'empresas/empresa.html', {'empresa':empresa, \
+        'empresa_tiene_direccion':empresa_tiene_direccion,'numeros_list':numeros_list, \
+        'redes_list':redes_list, 'no_es_vendedor':es_vendedor})
 
 @login_required
 def registrar_empresa(request):
