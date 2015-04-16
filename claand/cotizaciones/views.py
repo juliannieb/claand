@@ -6,7 +6,7 @@ from cotizaciones.models import Cotizacion, Venta
 from principal.models import Vendedor
 from contactos.models import Pertenece
 
-from cotizaciones.forms import Contacto, CotizacionForm
+from cotizaciones.forms import Contacto, CotizacionForm, VentaForm
 
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
@@ -100,6 +100,38 @@ def registrar(request):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'cotizaciones/registrar_cotizacion.html', forms)
+
+
+def registrar_venta(request, id_cotizacion):
+    cotizacion = Cotizacion.objects.get(id=id_cotizacion)
+    current_user = request.user
+    if request.method == 'POST':
+        formVenta = VentaForm(request.POST)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formVenta':formVenta, 'no_es_vendedor':es_vendedor}
+
+        # Have we been provided with a valid form?
+        if formVenta.is_valid():
+            # Save the new category to the database.
+            data = formVenta.cleaned_data
+            monto_total = data['monto_total']
+            Cotizacion(monto_total=monto_total, cotizacion=cotizacion).save()
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return render(request, 'principal/exito.html')
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print (formVenta.errors)
+    else:
+        # If the request was not a POST, display the form to enter details.
+        formVenta = VentaForm()
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formVenta':formVenta, 'no_es_vendedor':es_vendedor}
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render(request, 'cotizaciones/registrar_venta.html', forms)
+
 
 
 """ Falta todas las relacionadas con pago """

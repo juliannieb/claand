@@ -13,3 +13,11 @@ class CotizacionForm(forms.ModelForm):
 	class Meta:
 		model = Cotizacion
 		fields = ('contacto', 'monto', 'descripcion',)
+
+class VentaForm(forms.ModelForm):
+	monto_total = forms.FloatField(help_text='Monto total: ', \
+		required=True, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
+	class Meta:
+		model = Venta
+		fields = ('monto_total',)
