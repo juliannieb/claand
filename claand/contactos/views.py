@@ -1,9 +1,11 @@
+import time
+
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende, Recordatorio, Nota
+from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende, Recordatorio, Nota, Llamada
 from principal.models import Vendedor
 from cotizaciones.models import Cotizacion, Venta
 from empresas.models import Empresa
@@ -11,6 +13,8 @@ from contactos.models import Llamada
 
 from contactos.forms import ContactoForm, LlamadaForm, NotaForm, RecordatorioForm
 from empresas.forms import NumeroTelefonicoForm, RedSocialForm
+
+
 
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
@@ -31,6 +35,7 @@ def consultar_contactos(request):
 
 @login_required
 def contacto(request, contacto_nombre_slug):
+<<<<<<< HEAD
     """ mostrar detalle de un contacto """
     contacto = Contacto.objects.get(slug=contacto_nombre_slug)
     pertenece = Pertenece.objects.get(contacto=contacto)
@@ -41,6 +46,16 @@ def contacto(request, contacto_nombre_slug):
     return render(request, 'contactos/contacto.html', {'contacto': contacto, \
         'pertenece':pertenece, 'numeros_list':numeros_list, 'calificacion':calificacion, \
         'cotizaciones_list':cotizaciones_list, 'no_es_vendedor':es_vendedor})
+=======
+	""" mostrar detalle de un contacto """
+	contacto = Contacto.objects.get(slug=contacto_nombre_slug)
+	pertenece = Pertenece.objects.get(contacto=contacto)
+	numeros_list = contacto.numerotelefonico_set.all()
+	calificacion = Calificacion.objects.get(contacto=contacto)
+	cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
+	llamadas_list = Llamada.objects.all()
+	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion, 'cotizaciones_list': cotizaciones_list, 'llamadas_list': llamadas_list})
+>>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
 
 @login_required
 def registrar_contactos(request):
@@ -145,14 +160,20 @@ def registrar_llamada(request):
 @user_passes_test(no_es_vendedor)
 def consultar_notas(request):
     """ mostrar todas las notas """
+<<<<<<< HEAD
     es_vendedor = no_es_vendedor(request.user)
     return render(request, 'contactos/notas.html', {'no_es_vendedor':es_vendedor})
+=======
+    notas_list = Nota.objects.all()
+    return render(request, 'contactos/notas.html', {'notas_list': notas_list})
+>>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
 
 @login_required
 @user_passes_test(no_es_vendedor)
 def nota(request, nota_id):
     """ mostrar detalle de una nota """
-    return HttpResponse("detalle nota")
+    nota = Nota.objects.get(id=nota_id)
+    return render(request, "contactos/nota.html", {'nota': nota})
 
 @login_required
 @user_passes_test(no_es_vendedor)
@@ -200,7 +221,8 @@ def consultar_recordatorios(request):
 @user_passes_test(no_es_vendedor)
 def recordatorio(request, recordatorio_id):
     """ mostrar detalle de un recordatorio """
-    return HttpResponse("detalle recordatorio")
+    recordatorio = Recordatorio.objects.get(id=recordatorio_id)
+    return render(request, "contactos/recordatorio.html", {'recordatorio': recordatorio})
 
 @login_required
 @user_passes_test(no_es_vendedor)
@@ -234,4 +256,51 @@ def registrar_recordatorio(request):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'contactos/registrar_recordatorio.html', forms)
+
+def demo_piechart(request):
+    claand = Empresa.objects.get(nombre="Claand")
+    contactos_claand = Contacto.objects.filter(empresa=claand)
+    cotizaciones = Cotizacion.objects.filter(contacto=contactos_claand)
+    xdata = list()
+    ydata = list()
+    for cotizacion in cotizaciones:
+        xdata.append(time.mktime(cotizacion.fecha_creacion.timetuple()) * 1000)
+        ydata.append(cotizacion.monto)
+
+    # start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
+    # nb_element = 150
+    # xdata = range(nb_element)
+    # xdata = list(map(lambda x: start_time + x * 1000000000, xdata))
+    # ydata = [i + random.randint(1, 10) for i in range(nb_element)]
+    # ydata2 = list(map(lambda x: x * 2, ydata))
+
+    tooltip_date = "%d %b %Y %H:%M:%S %p"
+    extra_serie1 = {
+        "tooltip": {"y_start": "", "y_end": " cal"},
+        "date_format": tooltip_date,
+        'color': '#a4c639'
+    }
+    # extra_serie2 = {
+    #     "tooltip": {"y_start": "", "y_end": " cal"},
+    #     "date_format": tooltip_date,
+    #     'color': '#FF8aF8'
+    # }
+    chartdata = {'x': xdata,
+                 'name1': 'Monto', 'y1': ydata, 'extra1': extra_serie1}
+
+    charttype = "lineChart"
+    chartcontainer = 'linechart_container'  # container name
+    data = {
+        'charttype': charttype,
+        'chartdata': chartdata,
+        'chartcontainer': chartcontainer,
+        'extra': {
+            'x_is_date': True,
+            'x_axis_format': '%d %b %Y %H',
+            'tag_script_js': True,
+            'jquery_on_ready': False,
+        }
+    }
+    return render_to_response('contactos/linechart.html', data)
+
 

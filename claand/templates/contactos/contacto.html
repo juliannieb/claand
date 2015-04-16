@@ -8,8 +8,7 @@
             <h1>Información del cliente</h1>
         </div>
     </div>
-    
-<div class="container">
+    <div class="container">
         <div class="row row-centered">
             <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
                 <div class="panel panel-default">
@@ -96,6 +95,33 @@
                             {% else %}
                                 <td>Pendiente</td>
                             {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Llamadas</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Descripcion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for llamada in llamadas_list %}
+                    {% if llamada.contacto.nombre = contacto.nombre %}
+                        <tr>
+                            <td>{{ llamada.fecha }}</td>
+                            <td>{{ llamada.descripcion }}</td>
                         </tr>
                     {% endif %}
                 {% endfor %}

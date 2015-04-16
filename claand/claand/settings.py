@@ -40,7 +40,11 @@ INSTALLED_APPS = (
     'empresas',
     'principal',
     'djangobower',
+<<<<<<< HEAD
     #'django_nvd3',
+=======
+    'django_nvd3',
+>>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
 )
 
 MIDDLEWARE_CLASSES = (

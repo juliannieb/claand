@@ -91,7 +91,7 @@ class Nota(models.Model):
     contacto = models.ForeignKey(Contacto)
 
     def __str__(self):
-        return self.contacto, ":", self.descripcion[:30]
+        return self.descripcion
 
 class Recordatorio(models.Model):
     is_active = models.BooleanField(default=True)

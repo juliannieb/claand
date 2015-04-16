@@ -34,6 +34,7 @@
                     <th>Email</th>
                     <th>Estatus</th>
                     <th>Calificación</th>
+                    <th>Encargado</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +54,9 @@
                         {% else %}
                             <td>Prospecto</td>
                         {% endif %}
-                        <td>{{ contacto.calificacion }}</td>
+                        
+                        <td>{{ contacto.calificaciones.get }}</td>
+                        <td>{{ contacto.atiende_set.get.vendedor }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

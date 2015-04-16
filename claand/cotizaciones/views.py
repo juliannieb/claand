@@ -1,11 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+
 from cotizaciones.models import Cotizacion, Venta
 from principal.models import Vendedor
-from cotizaciones.forms import Contacto, CotizacionForm
 from contactos.models import Pertenece
 
+<<<<<<< HEAD
+=======
+from cotizaciones.forms import Contacto, CotizacionForm
+
+>>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
     """
@@ -14,10 +19,21 @@ def no_es_vendedor(user):
 @login_required
 def consultar_cotizaciones(request):
     """ mostrar todas las cotizaciones """
+<<<<<<< HEAD
     cotizaciones_list = Cotizacion.objects.all()
     es_vendedor = no_es_vendedor(request.user)
     return render(request, 'cotizaciones/cotizaciones.html', {'cotizaciones_list':cotizaciones_list, \
         'no_es_vendedor':es_vendedor})
+=======
+    current_user = request.user
+    if no_es_vendedor(current_user):
+        cotizaciones_list = Cotizacion.objects.all()
+    else:
+        current_vendedor = Vendedor.objects.get(user=current_user)
+        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+    return render(request, 'cotizaciones/cotizaciones.html', {'cotizaciones_list': cotizaciones_list})
+>>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
 
 @login_required
 def cotizacion(request, id_cotizacion):
@@ -32,10 +48,22 @@ def cotizacion(request, id_cotizacion):
 @login_required
 def consultar_ventas(request):
     """ mostrar todas las ventas """
+<<<<<<< HEAD
     ventas_list = Venta.objects.all()
     es_vendedor = no_es_vendedor(request.user)
     return render(request, 'cotizaciones/ventas.html', {'ventas_list': ventas_list, '\
         no_es_vendedor':es_vendedor})
+=======
+    current_user = request.user
+    if no_es_vendedor(current_user):
+        ventas_list = Venta.objects.all()
+    else:
+        current_vendedor = Vendedor.objects.get(user=current_user)
+        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+        ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
+    return render(request, 'cotizaciones/ventas.html', {'ventas_list': ventas_list})
+>>>>>>> 4aa2ea9a115ab09d057c6a5055e08ec8319e24e6
 
 @login_required
 def venta(request, id_venta):

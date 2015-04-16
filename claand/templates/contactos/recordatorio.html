@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Recordatorio de {{recordatorio.contacto.nombre}} {{recordatorio.contacto.apellido}}</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row row-centered">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Urgencia: {{recordatorio.urgencia}}</h3>
+                  </div>
+                  <div class="panel-body">
+                    {{ recordatorio.fecha }}</br>
+                    <br>
+                    {{ recordatorio }}
+                  </div>
+                </div>
+                <div class="form-group"> 
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="btn_submitContacto" class="btn btn-success pull-right">Volver a recordatorios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}

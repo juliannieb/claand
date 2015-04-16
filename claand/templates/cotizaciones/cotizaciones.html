@@ -37,7 +37,7 @@
             <tbody>
                 {% for cotizacion in cotizaciones_list %}
                     <tr><td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
-                        <td>{{cotizacion.contacto}}</td>
+                        <td>{{cotizacion.contacto}} {{ cotizacion.contacto.apellido }}</td>
                             {% if not cotizacion.contacto.empresa.all%}
                                 <td></td>
                             {% else %}
