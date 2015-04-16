@@ -28,12 +28,22 @@ def empresa(request, empresa_nombre_slug):
     """ mostrar una empresa """
     context = {}
     empresa = Empresa.objects.get(slug=empresa_nombre_slug)
+    es_vendedor = no_es_vendedor(request.user)
+    # obtener info general
     empresa_tiene_direccion = EmpresaTieneDireccion.objects.filter(empresa=empresa)
     numeros_list = empresa.numerotelefonico_set.all()
     redes_list = empresa.redsocial_set.all()
-    contactos_list = Contacto.objects.filter(empresa=empresa)
+    # obtener todos los contactos, o sólo los del vendedor dependiendo si
+    # es director o vendedor.
+
+    if es_vendedor: # si no es vendedor
+        contactos_list = Contacto.objects.filter(empresa=empresa)
+    else:
+        current_vendedor = Vendedor.objects.get(user=current_user)
+        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+        
     cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
-    
+    ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
     xdata = list()
     ydata = list()
     for cotizacion in cotizaciones_list:
@@ -64,8 +74,8 @@ def empresa(request, empresa_nombre_slug):
         }
     }
 
-    ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
-    es_vendedor = no_es_vendedor(request.user)
+    
+    
     context['empresa'] = empresa
     context['empresa_tiene_direccion'] = empresa_tiene_direccion
     context['numeros_list'] = numeros_list
