@@ -1,5 +1,5 @@
 from django import forms
-from cotizaciones.models import Cotizacion
+from cotizaciones.models import Cotizacion, Venta
 from contactos.models import Contacto
 
 class CotizacionForm(forms.ModelForm):

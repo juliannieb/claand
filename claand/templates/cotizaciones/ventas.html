@@ -42,7 +42,7 @@
                     <td>{{ venta.cotizacion.contacto }} {{ venta.cotizacion.contacto.apellido }}</td>
                     <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
                     <td>{{ venta.cotizacion.descripcion }}</td>
-                    <td>{{ venta.cotizacion.monto }}</td>
+                    <td>{{ venta.monto_total }}</td>
                     {% if venta.is_completada %}
                         <td>Completada</td>
                     {% else %}
