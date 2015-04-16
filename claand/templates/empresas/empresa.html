@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>Mitsubishi</h1>
+            <h1>Detalle empresa</h1>
         </div>
     </div>
     <div class="container">
@@ -117,24 +117,30 @@
             <thead>
                 <tr>
                     <th>ID Venta</th>
-                    <th>ID Cotización</th>
                     <th>Cliente</th>
                     <th>Empresa</th>
                     <th>Descripción</th>
-                    <th>Monto</th>
+                    <th>Monto Total</th>
+                    <th>Monto Pendiente</th>
                     <th>Estatus</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="...Consultar/Cotizaciones?idCotizacion">2</a></td>
-                    <td>890</td>
-                    <td>Julián Niebieskikwiat</td>
-                    <td>Mitsubishi</td>
-                    <td>Máquina de estampado</td>
-                    <td>100000</td>
-                    <td>Finalizada</td>
-                </tr>
+                {% for venta in ventas_list %}
+                    <tr>
+                        <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
+                        <td>{{ venta.cotizacion.contacto }}</td>
+                        <td>{{ venta.cotizacion.contacto.pertenece_set.get.empresa }}</td>
+                        <td>{{ venta.cotizacion.descripcion }}</td>
+                        <td>{{ venta.monto_total }}</td>
+                        <td>{{ venta.monto_total }}</td>
+                        {% if venta.is_completada %}
+                            <td>Completada</td>
+                        {% else %}
+                            <td>Pendiente</td>
+                        {% endif %}    
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
