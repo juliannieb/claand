@@ -1,102 +1,82 @@
 [
 {
+    "pk": 1,
     "fields": {
-        "area": 1,
-        "fecha": "2015-04-13",
+        "empresa": 8,
+        "fecha": "2015-04-15",
+        "area": 7,
+        "contacto": 12
+    },
+    "model": "contactos.pertenece"
+},
+{
+    "pk": 2,
+    "fields": {
+        "empresa": 2,
+        "fecha": "2015-04-15",
+        "area": 4,
+        "contacto": 13
+    },
+    "model": "contactos.pertenece"
+},
+{
+    "pk": 3,
+    "fields": {
         "empresa": 1,
+        "fecha": "2015-04-15",
+        "area": 1,
+        "contacto": 14
+    },
+    "model": "contactos.pertenece"
+},
+{
+    "pk": 4,
+    "fields": {
+        "empresa": 1,
+        "fecha": "2015-04-15",
+        "area": 1,
         "contacto": 2
     },
-    "model": "contactos.pertenece",
-    "pk": 1
+    "model": "contactos.pertenece"
 },
 {
+    "pk": 5,
     "fields": {
-        "area": 4,
-        "fecha": "2015-04-13",
-        "empresa": 2,
-        "contacto": 3
-    },
-    "model": "contactos.pertenece",
-    "pk": 2
-},
-{
-    "fields": {
-        "area": 5,
-        "fecha": "2015-04-13",
-        "empresa": 3,
-        "contacto": 4
-    },
-    "model": "contactos.pertenece",
-    "pk": 3
-},
-{
-    "fields": {
-        "area": 8,
-        "fecha": "2015-04-13",
-        "empresa": 4,
-        "contacto": 5
-    },
-    "model": "contactos.pertenece",
-    "pk": 4
-},
-{
-    "fields": {
-        "area": 7,
-        "fecha": "2015-04-13",
-        "empresa": 6,
-        "contacto": 6
-    },
-    "model": "contactos.pertenece",
-    "pk": 5
-},
-{
-    "fields": {
-        "area": 6,
-        "fecha": "2015-04-13",
-        "empresa": 8,
-        "contacto": 7
-    },
-    "model": "contactos.pertenece",
-    "pk": 6
-},
-{
-    "fields": {
-        "area": 4,
-        "fecha": "2015-04-13",
-        "empresa": 9,
-        "contacto": 8
-    },
-    "model": "contactos.pertenece",
-    "pk": 7
-},
-{
-    "fields": {
-        "area": 3,
-        "fecha": "2015-04-13",
-        "empresa": 10,
-        "contacto": 9
-    },
-    "model": "contactos.pertenece",
-    "pk": 8
-},
-{
-    "fields": {
+        "empresa": 1,
+        "fecha": "2015-04-15",
         "area": 2,
-        "fecha": "2015-04-13",
-        "empresa": 5,
-        "contacto": 10
+        "contacto": 15
     },
-    "model": "contactos.pertenece",
-    "pk": 9
+    "model": "contactos.pertenece"
 },
 {
+    "pk": 6,
     "fields": {
-        "area": 1,
-        "fecha": "2015-04-13",
-        "empresa": 11,
-        "contacto": 11
+        "empresa": 1,
+        "fecha": "2015-04-16",
+        "area": 3,
+        "contacto": 16
     },
-    "model": "contactos.pertenece",
-    "pk": 10
+    "model": "contactos.pertenece"
+},
+{
+    "pk": 7,
+    "fields": {
+        "empresa": 1,
+        "fecha": "2015-04-16",
+        "area": 3,
+        "contacto": 17
+    },
+    "model": "contactos.pertenece"
+},
+{
+    "pk": 8,
+    "fields": {
+        "empresa": 12,
+        "fecha": "2015-04-16",
+        "area": 7,
+        "contacto": 18
+    },
+    "model": "contactos.pertenece"
 }
 ]

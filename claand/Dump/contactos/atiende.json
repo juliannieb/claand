@@ -1,20 +1,65 @@
 [
 {
     "fields": {
-        "vendedor": 1,
-        "fecha": "2015-04-13",
-        "contacto": 3
+        "contacto": 12,
+        "fecha": "2015-04-15",
+        "vendedor": 1
     },
     "pk": 1,
     "model": "contactos.atiende"
 },
 {
     "fields": {
-        "vendedor": 1,
-        "fecha": "2015-04-13",
-        "contacto": 10
+        "contacto": 13,
+        "fecha": "2015-04-15",
+        "vendedor": 1
     },
     "pk": 2,
+    "model": "contactos.atiende"
+},
+{
+    "fields": {
+        "contacto": 14,
+        "fecha": "2015-04-15",
+        "vendedor": 1
+    },
+    "pk": 3,
+    "model": "contactos.atiende"
+},
+{
+    "fields": {
+        "contacto": 15,
+        "fecha": "2015-04-15",
+        "vendedor": 1
+    },
+    "pk": 4,
+    "model": "contactos.atiende"
+},
+{
+    "fields": {
+        "contacto": 16,
+        "fecha": "2015-04-16",
+        "vendedor": 2
+    },
+    "pk": 5,
+    "model": "contactos.atiende"
+},
+{
+    "fields": {
+        "contacto": 17,
+        "fecha": "2015-04-16",
+        "vendedor": 2
+    },
+    "pk": 6,
+    "model": "contactos.atiende"
+},
+{
+    "fields": {
+        "contacto": 18,
+        "fecha": "2015-04-16",
+        "vendedor": 2
+    },
+    "pk": 7,
     "model": "contactos.atiende"
 }
 ]

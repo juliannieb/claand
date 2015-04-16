@@ -1,2 +1,12 @@
 [
+{
+    "fields": {
+        "descripcion": "Le llam\u00e9 porque soy su fan.",
+        "fecha": "2015-04-16",
+        "contacto": 18,
+        "is_active": true
+    },
+    "model": "contactos.llamada",
+    "pk": 1
+}
 ]

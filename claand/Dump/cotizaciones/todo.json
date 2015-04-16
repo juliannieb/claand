@@ -1,0 +1,54 @@
+[
+{
+    "pk": 1,
+    "model": "cotizaciones.cotizacion",
+    "fields": {
+        "contacto": 13,
+        "monto": 999.8,
+        "fecha_modificacion": "2015-04-15",
+        "fecha_creacion": "2015-04-15",
+        "is_active": true,
+        "is_pendiente": true,
+        "descripcion": "Una cotizaci\u00f3n."
+    }
+},
+{
+    "pk": 2,
+    "model": "cotizaciones.cotizacion",
+    "fields": {
+        "contacto": 2,
+        "monto": 950.0,
+        "fecha_modificacion": "2015-04-15",
+        "fecha_creacion": "2015-04-15",
+        "is_active": true,
+        "is_pendiente": true,
+        "descripcion": "Cotizaci\u00f3n."
+    }
+},
+{
+    "pk": 3,
+    "model": "cotizaciones.cotizacion",
+    "fields": {
+        "contacto": 18,
+        "monto": 554.2,
+        "fecha_modificacion": "2015-04-16",
+        "fecha_creacion": "2015-04-16",
+        "is_active": true,
+        "is_pendiente": true,
+        "descripcion": "Cotizaci\u00f3n de fundas para 25,000 iPhones."
+    }
+},
+{
+    "pk": 4,
+    "model": "cotizaciones.cotizacion",
+    "fields": {
+        "contacto": 15,
+        "monto": 28.0,
+        "fecha_modificacion": "2015-04-16",
+        "fecha_creacion": "2015-04-16",
+        "is_active": true,
+        "is_pendiente": true,
+        "descripcion": "Un queso."
+    }
+}
+]
