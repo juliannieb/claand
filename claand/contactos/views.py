@@ -5,13 +5,13 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende, Recordatorio, Nota
+from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende, Recordatorio, Nota, Llamada
 from principal.models import Vendedor
 from cotizaciones.models import Cotizacion, Venta
 from empresas.models import Empresa
 from contactos.models import Llamada
 
-from contactos.forms import ContactoForm, LlamadaForm
+from contactos.forms import ContactoForm, LlamadaForm, NotaForm, RecordatorioForm
 from empresas.forms import NumeroTelefonicoForm, RedSocialForm
 
 
@@ -39,7 +39,8 @@ def contacto(request, contacto_nombre_slug):
 	numeros_list = contacto.numerotelefonico_set.all()
 	calificacion = Calificacion.objects.get(contacto=contacto)
 	cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
-	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion, 'cotizaciones_list': cotizaciones_list})
+	llamadas_list = Llamada.objects.all()
+	return render(request, 'contactos/contacto.html', {'contacto': contacto, 'pertenece': pertenece, 'numeros_list': numeros_list, 'calificacion': calificacion, 'cotizaciones_list': cotizaciones_list, 'llamadas_list': llamadas_list})
 
 @login_required
 def registrar_contactos(request):
@@ -135,19 +136,46 @@ def registrar_llamada(request):
 @user_passes_test(no_es_vendedor)
 def consultar_notas(request):
     """ mostrar todas las notas """
-    return render(request, 'contactos/notas.html', {})
+    notas_list = Nota.objects.all()
+    return render(request, 'contactos/notas.html', {'notas_list': notas_list})
 
 @login_required
 @user_passes_test(no_es_vendedor)
 def nota(request, nota_id):
     """ mostrar detalle de una nota """
-    return HttpResponse("detalle nota")
+    nota = Nota.objects.get(id=nota_id)
+    return render(request, "contactos/nota.html", {'nota': nota})
 
 @login_required
 @user_passes_test(no_es_vendedor)
 def registrar_nota(request):
     """ registrar una nueva nota """
-    return HttpResponse("registrar una nota")
+    if request.method == 'POST':
+        formNota = NotaForm(request.POST)
+        forms = {'formNota':formNota}
+
+        # Have we been provided with a valid form?
+        if formNota.is_valid():
+            # Save the new category to the database.
+            data = formNota.cleaned_data
+            contacto = data['contacto']
+            descripcion = data['descripcion']
+            Nota(contacto=contacto, descripcion=descripcion, clasificacion=clasificacion).save()
+
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return render(request, 'principal/index_vendedor.html')
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print (formNota.errors)
+    else:
+        # If the request was not a POST, display the form to enter details.
+        formNota = NotaForm()
+        forms = {'formNota':formNota}
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render(request, 'contactos/registrar_nota.html', forms)
 
 @login_required
 @user_passes_test(no_es_vendedor)
@@ -160,13 +188,39 @@ def consultar_recordatorios(request):
 @user_passes_test(no_es_vendedor)
 def recordatorio(request, recordatorio_id):
     """ mostrar detalle de un recordatorio """
-    return HttpResponse("detalle recordatorio")
+    recordatorio = Recordatorio.objects.get(id=recordatorio_id)
+    return render(request, "contactos/recordatorio.html", {'recordatorio': recordatorio})
 
 @login_required
 @user_passes_test(no_es_vendedor)
 def registrar_recordatorio(request):
     """ registrar un nuevo recordatorio """
-    return HttpResponse("registrar un recordatorio")
+    if request.method == 'POST':
+        formRecordatorio = RecordatorioForm(request.POST)
+        forms = {'formRecordatorio':formRecordatorio}
+
+        # Have we been provided with a valid form?
+        if formRecordatorio.is_valid():
+            # Save the new category to the database.
+            data = formRecordatorio.cleaned_data
+            contacto = data['contacto']
+            descripcion = data['descripcion']
+            Nota(contacto=contacto, descripcion=descripcion, clasificacion=clasificacion).save()
+
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return render(request, 'principal/index_vendedor.html')
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print (formRecordatorio.errors)
+    else:
+        # If the request was not a POST, display the form to enter details.
+        formRecordatorio = RecordatorioForm()
+        forms = {'formRecordatorio':formRecordatorio}
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render(request, 'contactos/registrar_recordatorio.html', forms)
 
 def demo_piechart(request):
     claand = Empresa.objects.get(nombre="Claand")

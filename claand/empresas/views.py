@@ -3,7 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from empresas.forms import EmpresaForm, DireccionForm, NumeroTelefonicoForm, RedSocialForm
+
 from empresas.models import Empresa, Direccion, EmpresaTieneDireccion
+from cotizaciones.models import Cotizacion, Venta
+from contactos.models import Contacto
 
 
 @login_required
@@ -19,6 +22,9 @@ def empresa(request, empresa_nombre_slug):
     empresa_tiene_direccion = EmpresaTieneDireccion.objects.filter(empresa=empresa)
     numeros_list = empresa.numerotelefonico_set.all()
     redes_list = empresa.redsocial_set.all()
+    contactos_list = Contacto.objects.filter(empresa=empresa)
+    cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+    ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
     return render(request, 'empresas/empresa.html', {'empresa': empresa, 'empresa_tiene_direccion': empresa_tiene_direccion,'numeros_list': numeros_list, 'redes_list': redes_list})
 
 @login_required

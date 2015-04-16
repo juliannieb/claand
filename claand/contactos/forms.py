@@ -32,3 +32,29 @@ class LlamadaForm(forms.ModelForm):
     class Meta:
         model = Contacto
         fields = ('contacto', 'descripcion',)
+
+class NotaForm(forms.ModelForm):
+    contacto = forms.ModelChoiceField(queryset=Contacto.objects.all(), help_text='Contacto: ', \
+        required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+    descripcion = forms.CharField(help_text='Descripción: ', \
+        required=True, widget=forms.Textarea(attrs={'class': 'form-control'}))
+    clasificacion = forms.IntegerField(help_text='Clasificación: ', \
+        widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Contacto
+        fields = ('contacto', 'descripcion', 'clasificacion',)
+
+class RecordatorioForm(forms.ModelForm):
+    contacto = forms.ModelChoiceField(queryset=Contacto.objects.all(), help_text='Contacto: ', \
+        required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+    descripcion = forms.CharField(help_text='Descripción: ', \
+        required=True, widget=forms.Textarea(attrs={'class': 'form-control'}))
+    urgencia = forms.IntegerField(help_text='Urgencia: ', \
+        widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    fecha = forms.DateField(help_text='Fecha y hora: ', \
+        widget=forms.DateTimeInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Contacto
+        fields = ('contacto', 'descripcion', 'urgencia', 'fecha',)

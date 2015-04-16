@@ -11,7 +11,7 @@ class Contacto(models.Model):
     nombre = models.CharField(max_length=35)
     apellido = models.CharField(max_length=35)
     correo_electronico = models.EmailField(unique=True)
-    calificaciones = models.ManyToManyField('Calificacion')
+    calificacion = models.ForeignKey('Calificacion', null=True)
     empresa = models.ManyToManyField(Empresa, through='Pertenece')
     vendedor = models.ManyToManyField(Vendedor, through='Atiende')
     slug = models.SlugField(unique=True, null=True)
@@ -35,7 +35,7 @@ class Contacto(models.Model):
         super(Contacto, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.nombre
+        return self.nombre + " " + self.apellido
 
 class Pertenece(models.Model):
     contacto = models.ForeignKey(Contacto)
@@ -91,7 +91,7 @@ class Nota(models.Model):
     contacto = models.ForeignKey(Contacto)
 
     def __str__(self):
-        return self.contacto, ":", self.descripcion[:30]
+        return self.descripcion
 
 class Recordatorio(models.Model):
     is_active = models.BooleanField(default=True)
