@@ -93,7 +93,7 @@ def registrar_contacto(request):
 
             # Now call the index() view.
             # The user will be shown the homepage.
-            return render(request, 'principal/index_vendedor.html')
+            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
         else:
             # The supplied form contained errors - just print them to the terminal.
             print (formContacto.errors)
@@ -132,7 +132,7 @@ def registrar_llamada(request):
 
             # Now call the index() view.
             # The user will be shown the homepage.
-            return render(request, 'principal/index_vendedor.html')
+            return render(request, 'principal/exito.html')
         else:
             # The supplied form contained errors - just print them to the terminal.
             print (formLlamada.errors)
@@ -182,7 +182,7 @@ def registrar_nota(request):
 
             # Now call the index() view.
             # The user will be shown the homepage.
-            return render(request, 'principal/index_vendedor.html')
+            return render(request, 'principal/exito.html')
         else:
             # The supplied form contained errors - just print them to the terminal.
             print (formNota.errors)
@@ -231,7 +231,7 @@ def registrar_recordatorio(request):
 
             # Now call the index() view.
             # The user will be shown the homepage.
-            return render(request, 'principal/index_vendedor.html')
+            return render(request, 'principal/exito.html')
         else:
             # The supplied form contained errors - just print them to the terminal.
             print (formRecordatorio.errors)

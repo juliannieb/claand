@@ -86,7 +86,7 @@ def registrar(request):
             Cotizacion(contacto=contacto, monto=monto, descripcion=descripcion).save()
             # Now call the index() view.
             # The user will be shown the homepage.
-            return render(request, 'principal/index_vendedor.html')
+            return render(request, 'principal/exito.html')
         else:
             # The supplied form contained errors - just print them to the terminal.
             print (formCotizacion.errors)
