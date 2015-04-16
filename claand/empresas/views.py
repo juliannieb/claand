@@ -140,4 +140,4 @@ def registrar_empresa(request):
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
-    return render(request, 'empresas/registrar_empresa2.html', forms)
+    return render(request, 'empresas/registrar_empresa.html', forms)
