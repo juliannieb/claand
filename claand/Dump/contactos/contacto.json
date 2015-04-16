@@ -6,9 +6,7 @@
         "nombre": "Juan",
         "slug": "juan",
         "is_active": true,
-        "calificaciones": [
-            10
-        ],
+        "calificacion": 6,
         "correo_electronico": "jperez@hotmail.com"
     },
     "pk": 2,
@@ -21,9 +19,7 @@
         "nombre": "Francisco",
         "slug": "francisco",
         "is_active": true,
-        "calificaciones": [
-            8
-        ],
+        "calificacion": 6,
         "correo_electronico": "fgutierrez@gmail.com"
     },
     "pk": 3,
@@ -36,9 +32,7 @@
         "nombre": "Tom\u00e1s",
         "slug": "tomas",
         "is_active": true,
-        "calificaciones": [
-            7
-        ],
+        "calificacion": 7,
         "correo_electronico": "tomasgolo@hotmail.com"
     },
     "pk": 4,
@@ -51,9 +45,7 @@
         "nombre": "Federico",
         "slug": "federico",
         "is_active": true,
-        "calificaciones": [
-            10
-        ],
+        "calificacion": 9,
         "correo_electronico": "fvacap@gmail.com"
     },
     "pk": 5,
@@ -66,9 +58,7 @@
         "nombre": "Luis Antonio",
         "slug": "luis-antonio",
         "is_active": true,
-        "calificaciones": [
-            7
-        ],
+        "calificacion": 10,
         "correo_electronico": "lamr@hotmail.com"
     },
     "pk": 6,
@@ -81,9 +71,7 @@
         "nombre": "Jaime",
         "slug": "jaime",
         "is_active": true,
-        "calificaciones": [
-            8
-        ],
+        "calificacion": 10,
         "correo_electronico": "jamesml@hotmail.com"
     },
     "pk": 7,
@@ -96,9 +84,7 @@
         "nombre": "Roberto",
         "slug": "roberto",
         "is_active": true,
-        "calificaciones": [
-            9
-        ],
+        "calificacion": 6,
         "correo_electronico": "robertgof@yahoo.com.mx"
     },
     "pk": 8,
@@ -111,9 +97,7 @@
         "nombre": "Daniel",
         "slug": "daniel",
         "is_active": true,
-        "calificaciones": [
-            9
-        ],
+        "calificacion": 6,
         "correo_electronico": "djuarvill@hotmail.com"
     },
     "pk": 9,
@@ -126,9 +110,7 @@
         "nombre": "Mario",
         "slug": "mario",
         "is_active": true,
-        "calificaciones": [
-            6
-        ],
+        "calificacion": 8,
         "correo_electronico": "marionu@gmail.com"
     },
     "pk": 10,
@@ -141,9 +123,7 @@
         "nombre": "Fernanda Daniela",
         "slug": "fernanda-daniela",
         "is_active": true,
-        "calificaciones": [
-            10
-        ],
+        "calificacion": 7,
         "correo_electronico": "fdvargas@gmail.com"
     },
     "pk": 11,
