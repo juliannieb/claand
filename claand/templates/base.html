@@ -9,8 +9,12 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static "css/general.css" %}">
     <!-- <link href="navbar-fixed-top.css" rel="stylesheet"> -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        {% load nvd3_tags %}
+    {% include_chart_jscss %}
+    {% load_chart charttype chartdata chartcontainer extra %}
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">

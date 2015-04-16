@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -24,18 +26,56 @@ def consultar_empresas(request):
 @login_required
 def empresa(request, empresa_nombre_slug):
     """ mostrar una empresa """
+    context = {}
     empresa = Empresa.objects.get(slug=empresa_nombre_slug)
     empresa_tiene_direccion = EmpresaTieneDireccion.objects.filter(empresa=empresa)
     numeros_list = empresa.numerotelefonico_set.all()
     redes_list = empresa.redsocial_set.all()
     contactos_list = Contacto.objects.filter(empresa=empresa)
     cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+    
+    xdata = list()
+    ydata = list()
+    for cotizacion in cotizaciones_list:
+        xdata.append(time.mktime(cotizacion.fecha_creacion.timetuple()) * 1000)
+        ydata.append(cotizacion.monto)
+
+    tooltip_date = "%d %b %Y %H:%M:%S %p"
+    extra_serie1 = {
+        "tooltip": {"y_start": "", "y_end": " cal"},
+        "date_format": tooltip_date,
+        'color': '#a4c639'
+    }
+
+    chartdata = {'x': xdata,
+                 'name1': 'Monto', 'y1': ydata, 'extra1': extra_serie1}
+
+    charttype = "lineChart"
+    chartcontainer = 'linechart_container'  # container name
+    context = {
+        'charttype': charttype,
+        'chartdata': chartdata,
+        'chartcontainer': chartcontainer,
+        'extra': {
+            'x_is_date': True,
+            'x_axis_format': '%d %b %Y %H',
+            'tag_script_js': True,
+            'jquery_on_ready': False,
+        }
+    }
+
     ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
     es_vendedor = no_es_vendedor(request.user)
-    return render(request, 'empresas/empresa.html', {'empresa':empresa, 'empresa_tiene_direccion': \
-        empresa_tiene_direccion,'numeros_list':numeros_list, 'redes_list': \
-        redes_list, 'contactos_list':contactos_list, 'cotizaciones_list':cotizaciones_list, \
-        'ventas_list': ventas_list, 'no_es_vendedor':es_vendedor})
+    context['empresa'] = empresa
+    context['empresa_tiene_direccion'] = empresa_tiene_direccion
+    context['numeros_list'] = numeros_list
+    context['redes_list'] = redes_list
+    context['contactos_list'] = contactos_list
+    context['cotizaciones_list'] = cotizaciones_list
+    context['ventas_list'] = ventas_list
+    context['no_es_vendedor'] = es_vendedor
+
+    return render(request, 'empresas/empresa.html', context)
 
 @login_required
 def registrar_empresa(request):
