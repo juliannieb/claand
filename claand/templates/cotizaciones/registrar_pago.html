@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Registrar cotización</h1>
+        </div>
+    </div>
+
+    
+    <div class="container">
+        <div class="row row-centered">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
+                <form class="form-horizontal" method="post" action="{% url 'cotizaciones:registrar_pago' venta.id %}">
+
+                    {% csrf_token %}
+
+                    {% for hidden in formPago.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+
+                    {% for field in formPago.visible_fields %}
+                        {{ field.errors }}
+                        <div class="row" style="margin-bottom:5px">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="txt_nombreContacto">{{ field.help_text}}</label>
+                                <div class="col-sm-8">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                    <div class="row">
+                        <div class="form-group"> 
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="btn_submitContacto" class="btn btn-success pull-right">Registrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock content%}

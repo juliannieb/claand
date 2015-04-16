@@ -1,5 +1,5 @@
 from django import forms
-from cotizaciones.models import Cotizacion, Venta
+from cotizaciones.models import Cotizacion, Venta, Pago
 from contactos.models import Contacto
 
 class CotizacionForm(forms.ModelForm):
@@ -21,3 +21,11 @@ class VentaForm(forms.ModelForm):
 	class Meta:
 		model = Venta
 		fields = ('monto_total',)
+
+class PagoForm(forms.ModelForm):
+	monto = forms.FloatField(help_text='Monto total: ', \
+		required=True, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
+	class Meta:
+		model = Pago
+		fields = ('monto',)

@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from cotizaciones.models import Cotizacion, Venta
+from cotizaciones.models import Cotizacion, Venta, Pago
 from principal.models import Vendedor
 from contactos.models import Pertenece
 
-from cotizaciones.forms import Contacto, CotizacionForm, VentaForm
+from cotizaciones.forms import Contacto, CotizacionForm, VentaForm, PagoForm
 
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
@@ -61,8 +61,9 @@ def venta(request, id_venta):
     contacto = cotizacion.contacto
     pertenece = Pertenece.objects.get(contacto=contacto)
     es_vendedor = no_es_vendedor(request.user)
+    pagos_list = Pago.objects.filter(venta=venta)
     return render(request, 'cotizaciones/venta.html', {'venta':venta, 'cotizacion':cotizacion, \
-        'contacto':contacto, 'pertenece':pertenece, 'no_es_vendedor':es_vendedor})
+        'contacto':contacto, 'pertenece':pertenece, 'pagos_list':pagos_list, 'no_es_vendedor':es_vendedor})
 
 @login_required
 def registrar(request):
@@ -136,4 +137,36 @@ def registrar_venta(request, id_cotizacion):
 
 
 
-""" Falta todas las relacionadas con pago """
+def registrar_pago(request, id_venta):
+    venta = Venta.objects.get(id=id_venta)
+    current_user = request.user
+    if request.method == 'POST':
+        formPago = PagoForm(request.POST)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formPago':formPago, 'no_es_vendedor':es_vendedor}
+
+        # Have we been provided with a valid form?
+        if formPago.is_valid():
+            # Save the new category to the database.
+            data = formPago.cleaned_data
+            monto = data['monto']
+            venta.monto_acumulado += monto
+            if venta.monto_acumulado >= venta.monto_total:
+                venta.is_completada = True
+            venta.save()
+            Pago(monto=monto, venta=venta).save()
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return render(request, 'principal/exito.html')
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print (formPago.errors)
+    else:
+        # If the request was not a POST, display the form to enter details.
+        formPago = PagoForm()
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formPago':formPago, 'no_es_vendedor':es_vendedor, 'venta' : venta}
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render(request, 'cotizaciones/registrar_pago.html', forms)
