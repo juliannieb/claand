@@ -1,119 +1,129 @@
 [
 {
     "fields": {
-        "nombre": "Claand",
+        "is_active": true,
         "rfc": "CLAA580219JRR",
         "slug": "claand",
-        "is_active": true
+        "nombre": "Claand"
     },
     "model": "empresas.empresa",
     "pk": 1
 },
 {
     "fields": {
-        "nombre": "Coca Cola",
+        "is_active": true,
         "rfc": "COCA540895SOP",
         "slug": "coca-cola",
-        "is_active": true
+        "nombre": "Coca Cola"
     },
     "model": "empresas.empresa",
     "pk": 2
 },
 {
     "fields": {
-        "nombre": "Copper Clad",
+        "is_active": true,
         "rfc": "COPP685743POS",
         "slug": "copper-clad",
-        "is_active": true
+        "nombre": "Copper Clad"
     },
     "model": "empresas.empresa",
     "pk": 3
 },
 {
     "fields": {
-        "nombre": "Elica",
+        "is_active": true,
         "rfc": "ELIC540318TRE",
         "slug": "elica",
-        "is_active": true
+        "nombre": "Elica"
     },
     "model": "empresas.empresa",
     "pk": 4
 },
 {
     "fields": {
-        "nombre": "Imbera",
+        "is_active": true,
         "rfc": "IMBE430587TOE",
         "slug": "imbera",
-        "is_active": true
+        "nombre": "Imbera"
     },
     "model": "empresas.empresa",
     "pk": 5
 },
 {
     "fields": {
-        "nombre": "Kellogs",
+        "is_active": true,
         "rfc": "KELL640717YUU",
         "slug": "kellogs",
-        "is_active": true
+        "nombre": "Kellogs"
     },
     "model": "empresas.empresa",
     "pk": 6
 },
 {
     "fields": {
-        "nombre": "Mazda",
+        "is_active": true,
         "rfc": "MAZD650219SGG",
         "slug": "mazda",
-        "is_active": true
+        "nombre": "Mazda"
     },
     "model": "empresas.empresa",
     "pk": 7
 },
 {
     "fields": {
-        "nombre": "Microsoft",
+        "is_active": true,
         "rfc": "MICR780420MST",
         "slug": "microsoft",
-        "is_active": true
+        "nombre": "Microsoft"
     },
     "model": "empresas.empresa",
     "pk": 8
 },
 {
     "fields": {
-        "nombre": "Oracle",
+        "is_active": true,
         "rfc": "ORAC680519ORC",
         "slug": "oracle",
-        "is_active": true
+        "nombre": "Oracle"
     },
     "model": "empresas.empresa",
     "pk": 9
 },
 {
     "fields": {
-        "nombre": "Toyota",
+        "is_active": true,
         "rfc": "TOYO830412TDS",
         "slug": "toyota",
-        "is_active": true
+        "nombre": "Toyota"
     },
     "model": "empresas.empresa",
     "pk": 10
 },
 {
     "fields": {
-        "nombre": "KSB",
+        "is_active": true,
         "rfc": "KSB1234567890",
         "slug": "ksb",
-        "is_active": true
+        "nombre": "KSB"
     },
     "model": "empresas.empresa",
     "pk": 11
 },
 {
     "fields": {
+        "is_active": true,
+        "rfc": "APPL123456RSS",
+        "slug": "apple",
+        "nombre": "Apple"
+    },
+    "model": "empresas.empresa",
+    "pk": 12
+},
+{
+    "fields": {
         "direccion": 1,
-        "empresa": 1,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 1
     },
     "model": "empresas.empresatienedireccion",
     "pk": 1
@@ -121,8 +131,8 @@
 {
     "fields": {
         "direccion": 2,
-        "empresa": 7,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 7
     },
     "model": "empresas.empresatienedireccion",
     "pk": 2
@@ -130,8 +140,8 @@
 {
     "fields": {
         "direccion": 3,
-        "empresa": 10,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 10
     },
     "model": "empresas.empresatienedireccion",
     "pk": 3
@@ -139,8 +149,8 @@
 {
     "fields": {
         "direccion": 4,
-        "empresa": 2,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 2
     },
     "model": "empresas.empresatienedireccion",
     "pk": 4
@@ -148,8 +158,8 @@
 {
     "fields": {
         "direccion": 5,
-        "empresa": 6,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 6
     },
     "model": "empresas.empresatienedireccion",
     "pk": 5
@@ -157,8 +167,8 @@
 {
     "fields": {
         "direccion": 6,
-        "empresa": 5,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 5
     },
     "model": "empresas.empresatienedireccion",
     "pk": 6
@@ -166,8 +176,8 @@
 {
     "fields": {
         "direccion": 7,
-        "empresa": 9,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 9
     },
     "model": "empresas.empresatienedireccion",
     "pk": 7
@@ -175,8 +185,8 @@
 {
     "fields": {
         "direccion": 8,
-        "empresa": 8,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 8
     },
     "model": "empresas.empresatienedireccion",
     "pk": 8
@@ -184,8 +194,8 @@
 {
     "fields": {
         "direccion": 9,
-        "empresa": 3,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 3
     },
     "model": "empresas.empresatienedireccion",
     "pk": 9
@@ -193,11 +203,20 @@
 {
     "fields": {
         "direccion": 10,
-        "empresa": 4,
-        "fecha": "2015-04-01"
+        "fecha": "2015-04-01",
+        "empresa": 4
     },
     "model": "empresas.empresatienedireccion",
     "pk": 10
+},
+{
+    "fields": {
+        "direccion": 11,
+        "fecha": "2015-04-16",
+        "empresa": 12
+    },
+    "model": "empresas.empresatienedireccion",
+    "pk": 11
 },
 {
     "fields": {
@@ -229,103 +248,113 @@
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.claand.com/",
-        "tipo_red_social": 4,
         "empresa": 1,
-        "is_active": true
+        "tipo_red_social": 4
     },
     "model": "empresas.redsocial",
     "pk": 1
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.facebook.com/Mazda",
-        "tipo_red_social": 2,
         "empresa": 7,
-        "is_active": true
+        "tipo_red_social": 2
     },
     "model": "empresas.redsocial",
     "pk": 2
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.facebook.com/Toyota",
-        "tipo_red_social": 2,
         "empresa": 10,
-        "is_active": true
+        "tipo_red_social": 2
     },
     "model": "empresas.redsocial",
     "pk": 3
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.cocacola.com/",
-        "tipo_red_social": 4,
         "empresa": 2,
-        "is_active": true
+        "tipo_red_social": 4
     },
     "model": "empresas.redsocial",
     "pk": 4
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.twitter.com/Kellogs",
-        "tipo_red_social": 1,
         "empresa": 6,
-        "is_active": true
+        "tipo_red_social": 1
     },
     "model": "empresas.redsocial",
     "pk": 5
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.imbera.com/",
-        "tipo_red_social": 4,
         "empresa": 5,
-        "is_active": true
+        "tipo_red_social": 4
     },
     "model": "empresas.redsocial",
     "pk": 6
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.oracle.com/",
-        "tipo_red_social": 4,
         "empresa": 9,
-        "is_active": true
+        "tipo_red_social": 4
     },
     "model": "empresas.redsocial",
     "pk": 7
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.microsoft.com/",
-        "tipo_red_social": 4,
         "empresa": 8,
-        "is_active": true
+        "tipo_red_social": 4
     },
     "model": "empresas.redsocial",
     "pk": 8
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.facebook.com/Copper_clad",
-        "tipo_red_social": 2,
         "empresa": 3,
-        "is_active": true
+        "tipo_red_social": 2
     },
     "model": "empresas.redsocial",
     "pk": 9
 },
 {
     "fields": {
+        "is_active": true,
         "link": "http://www.elica.com/",
-        "tipo_red_social": 4,
         "empresa": 4,
-        "is_active": true
+        "tipo_red_social": 4
     },
     "model": "empresas.redsocial",
     "pk": 10
+},
+{
+    "fields": {
+        "is_active": true,
+        "link": "http://www.facebook.com/Apple",
+        "empresa": 12,
+        "tipo_red_social": 2
+    },
+    "model": "empresas.redsocial",
+    "pk": 11
 },
 {
     "fields": {
@@ -20169,92 +20198,101 @@
 },
 {
     "fields": {
-        "municipio": 2357,
         "direccion": "San Isidro 25",
-        "is_active": true
+        "is_active": true,
+        "municipio": 2357
     },
     "model": "empresas.direccion",
     "pk": 1
 },
 {
     "fields": {
-        "municipio": 524,
         "direccion": "Cerro Grande 140",
-        "is_active": true
+        "is_active": true,
+        "municipio": 524
     },
     "model": "empresas.direccion",
     "pk": 2
 },
 {
     "fields": {
-        "municipio": 529,
         "direccion": "Pablo Cabrera 307",
-        "is_active": true
+        "is_active": true,
+        "municipio": 529
     },
     "model": "empresas.direccion",
     "pk": 3
 },
 {
     "fields": {
-        "municipio": 2945,
         "direccion": "R\u00edo verde 32",
-        "is_active": true
+        "is_active": true,
+        "municipio": 2945
     },
     "model": "empresas.direccion",
     "pk": 4
 },
 {
     "fields": {
-        "municipio": 2172,
         "direccion": "Ju\u00e1rez 45",
-        "is_active": true
+        "is_active": true,
+        "municipio": 2172
     },
     "model": "empresas.direccion",
     "pk": 5
 },
 {
     "fields": {
-        "municipio": 544,
         "direccion": "Corregidora 570",
-        "is_active": true
+        "is_active": true,
+        "municipio": 544
     },
     "model": "empresas.direccion",
     "pk": 6
 },
 {
     "fields": {
-        "municipio": 2388,
         "direccion": "Constituyentes 52",
-        "is_active": true
+        "is_active": true,
+        "municipio": 2388
     },
     "model": "empresas.direccion",
     "pk": 7
 },
 {
     "fields": {
-        "municipio": 2925,
         "direccion": "Ayuntamiento 220",
-        "is_active": true
+        "is_active": true,
+        "municipio": 2925
     },
     "model": "empresas.direccion",
     "pk": 8
 },
 {
     "fields": {
-        "municipio": 2551,
         "direccion": "Bernardo Quintana 49",
-        "is_active": true
+        "is_active": true,
+        "municipio": 2551
     },
     "model": "empresas.direccion",
     "pk": 9
 },
 {
     "fields": {
-        "municipio": 2652,
         "direccion": "Hidalgo 420",
-        "is_active": true
+        "is_active": true,
+        "municipio": 2652
     },
     "model": "empresas.direccion",
     "pk": 10
+},
+{
+    "fields": {
+        "direccion": "Felipe \u00c1ngeles 178",
+        "is_active": true,
+        "municipio": 515
+    },
+    "model": "empresas.direccion",
+    "pk": 11
 }
 ]

@@ -1,478 +1,551 @@
 [
 {
     "fields": {
+        "slug": "adf",
+        "correo_electronico": "marqui@gmail.com",
+        "apellido": "L\u00f3pez",
+        "is_active": true,
+        "is_cliente": false,
+        "nombre": "Marquicio",
+        "calificacion": 6
+    },
+    "model": "contactos.contacto",
+    "pk": 1
+},
+{
+    "fields": {
+        "slug": "juan",
+        "correo_electronico": "jperez@hotmail.com",
+        "apellido": "P\u00e9rez",
+        "is_active": true,
         "is_cliente": false,
         "nombre": "Juan",
-        "correo_electronico": "jperez@hotmail.com",
-        "is_active": true,
-        "apellido": "P\u00e9rez",
-        "calificaciones": [
-            6
-        ]
+        "calificacion": 6
     },
-    "pk": 2,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 2
 },
 {
     "fields": {
+        "slug": "francisco",
+        "correo_electronico": "fgutierrez@gmail.com",
+        "apellido": "Torres Gutierrez",
+        "is_active": true,
         "is_cliente": false,
         "nombre": "Francisco",
-        "correo_electronico": "fgutierrez@gmail.com",
-        "is_active": true,
-        "apellido": "Torres Gutierrez",
-        "calificaciones": [
-            8
-        ]
+        "calificacion": 6
     },
-    "pk": 3,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 3
 },
 {
     "fields": {
+        "slug": "tomas",
+        "correo_electronico": "tomasgolo@hotmail.com",
+        "apellido": "G\u00f3mez L\u00f3pez",
+        "is_active": true,
         "is_cliente": false,
         "nombre": "Tom\u00e1s",
-        "correo_electronico": "tomasgolo@hotmail.com",
-        "is_active": true,
-        "apellido": "G\u00f3mez L\u00f3pez",
-        "calificaciones": [
-            7
-        ]
+        "calificacion": 7
     },
-    "pk": 4,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 4
 },
 {
     "fields": {
+        "slug": "federico",
+        "correo_electronico": "fvacap@gmail.com",
+        "apellido": "Vaca Paz",
+        "is_active": true,
         "is_cliente": true,
         "nombre": "Federico",
-        "correo_electronico": "fvacap@gmail.com",
-        "is_active": true,
-        "apellido": "Vaca Paz",
-        "calificaciones": [
-            10
-        ]
+        "calificacion": 9
     },
-    "pk": 5,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 5
 },
 {
     "fields": {
+        "slug": "luis-antonio",
+        "correo_electronico": "lamr@hotmail.com",
+        "apellido": "Mart\u00ednez Rodriguez",
+        "is_active": true,
         "is_cliente": false,
         "nombre": "Luis Antonio",
-        "correo_electronico": "lamr@hotmail.com",
-        "is_active": true,
-        "apellido": "Mart\u00ednez Rodriguez",
-        "calificaciones": [
-            7
-        ]
+        "calificacion": 10
     },
-    "pk": 6,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 6
 },
 {
     "fields": {
+        "slug": "jaime",
+        "correo_electronico": "jamesml@hotmail.com",
+        "apellido": "Molina Leal",
+        "is_active": true,
         "is_cliente": false,
         "nombre": "Jaime",
-        "correo_electronico": "jamesml@hotmail.com",
-        "is_active": true,
-        "apellido": "Molina Leal",
-        "calificaciones": [
-            8
-        ]
+        "calificacion": 10
     },
-    "pk": 7,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 7
 },
 {
     "fields": {
+        "slug": "roberto",
+        "correo_electronico": "robertgof@yahoo.com.mx",
+        "apellido": "G\u00f3mez Fr\u00edas",
+        "is_active": true,
         "is_cliente": false,
         "nombre": "Roberto",
-        "correo_electronico": "robertgof@yahoo.com.mx",
-        "is_active": true,
-        "apellido": "G\u00f3mez Fr\u00edas",
-        "calificaciones": [
-            9
-        ]
+        "calificacion": 6
     },
-    "pk": 8,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 8
 },
 {
     "fields": {
+        "slug": "daniel",
+        "correo_electronico": "djuarvill@hotmail.com",
+        "apellido": "Ju\u00e1rez Villarreal",
+        "is_active": true,
         "is_cliente": true,
         "nombre": "Daniel",
-        "correo_electronico": "djuarvill@hotmail.com",
-        "is_active": true,
-        "apellido": "Ju\u00e1rez Villarreal",
-        "calificaciones": [
-            9
-        ]
+        "calificacion": 6
     },
-    "pk": 9,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 9
 },
 {
     "fields": {
+        "slug": "mario",
+        "correo_electronico": "marionu@gmail.com",
+        "apellido": "Nu\u00f1ez Garc\u00eda",
+        "is_active": true,
         "is_cliente": true,
         "nombre": "Mario",
-        "correo_electronico": "marionu@gmail.com",
-        "is_active": true,
-        "apellido": "Nu\u00f1ez Garc\u00eda",
-        "calificaciones": [
-            6
-        ]
+        "calificacion": 8
     },
-    "pk": 10,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 10
 },
 {
     "fields": {
+        "slug": "fernanda-daniela",
+        "correo_electronico": "fdvargas@gmail.com",
+        "apellido": "Vargas Herrera",
+        "is_active": true,
         "is_cliente": true,
         "nombre": "Fernanda Daniela",
-        "correo_electronico": "fdvargas@gmail.com",
-        "is_active": true,
-        "apellido": "Vargas Herrera",
-        "calificaciones": [
-            10
-        ]
+        "calificacion": 7
     },
-    "pk": 11,
-    "model": "contactos.contacto"
+    "model": "contactos.contacto",
+    "pk": 11
+},
+{
+    "fields": {
+        "slug": "duque-aripo-valdes",
+        "correo_electronico": "duque@gmail.com",
+        "apellido": "Vald\u00e9s",
+        "is_active": true,
+        "is_cliente": true,
+        "nombre": "Duque Aripo",
+        "calificacion": 10
+    },
+    "model": "contactos.contacto",
+    "pk": 12
+},
+{
+    "fields": {
+        "slug": "chicken-bake",
+        "correo_electronico": "chickenbake@gmail.com",
+        "apellido": "Bake",
+        "is_active": true,
+        "is_cliente": false,
+        "nombre": "Chicken",
+        "calificacion": 8
+    },
+    "model": "contactos.contacto",
+    "pk": 13
+},
+{
+    "fields": {
+        "slug": "lalocura-por-el-hockey",
+        "correo_electronico": "lalo@gmail.com",
+        "apellido": "El Hockey",
+        "is_active": true,
+        "is_cliente": false,
+        "nombre": "Lalocura Por",
+        "calificacion": 10
+    },
+    "model": "contactos.contacto",
+    "pk": 14
+},
+{
+    "fields": {
+        "slug": "jamon-serrano",
+        "correo_electronico": "jamon@serrano.com",
+        "apellido": "Serrano",
+        "is_active": true,
+        "is_cliente": false,
+        "nombre": "Jam\u00f3n",
+        "calificacion": 7
+    },
+    "model": "contactos.contacto",
+    "pk": 15
+},
+{
+    "fields": {
+        "slug": "joaquin-montes-de-oca",
+        "correo_electronico": "joaquinm@gmail.com",
+        "apellido": "Montes de Oca",
+        "is_active": true,
+        "is_cliente": false,
+        "nombre": "Joaqu\u00edn",
+        "calificacion": 8
+    },
+    "model": "contactos.contacto",
+    "pk": 16
+},
+{
+    "fields": {
+        "slug": "aranza-martinez",
+        "correo_electronico": "arimar@gmail.com",
+        "apellido": "Mart\u00ednez",
+        "is_active": true,
+        "is_cliente": false,
+        "nombre": "Aranza",
+        "calificacion": 8
+    },
+    "model": "contactos.contacto",
+    "pk": 17
+},
+{
+    "fields": {
+        "slug": "steve-jobs",
+        "correo_electronico": "stjobs@gmail.com",
+        "apellido": "Jobs",
+        "is_active": true,
+        "is_cliente": true,
+        "nombre": "Steve",
+        "calificacion": 10
+    },
+    "model": "contactos.contacto",
+    "pk": 18
+},
+{
+    "fields": {
+        "fecha": "2015-04-15",
+        "area": 7,
+        "empresa": 8,
+        "contacto": 12
+    },
+    "model": "contactos.pertenece",
+    "pk": 1
+},
+{
+    "fields": {
+        "fecha": "2015-04-15",
+        "area": 4,
+        "empresa": 2,
+        "contacto": 13
+    },
+    "model": "contactos.pertenece",
+    "pk": 2
+},
+{
+    "fields": {
+        "fecha": "2015-04-15",
+        "area": 1,
+        "empresa": 1,
+        "contacto": 14
+    },
+    "model": "contactos.pertenece",
+    "pk": 3
+},
+{
+    "fields": {
+        "fecha": "2015-04-15",
+        "area": 1,
+        "empresa": 1,
+        "contacto": 2
+    },
+    "model": "contactos.pertenece",
+    "pk": 4
+},
+{
+    "fields": {
+        "fecha": "2015-04-15",
+        "area": 2,
+        "empresa": 1,
+        "contacto": 15
+    },
+    "model": "contactos.pertenece",
+    "pk": 5
+},
+{
+    "fields": {
+        "fecha": "2015-04-16",
+        "area": 3,
+        "empresa": 1,
+        "contacto": 16
+    },
+    "model": "contactos.pertenece",
+    "pk": 6
+},
+{
+    "fields": {
+        "fecha": "2015-04-16",
+        "area": 3,
+        "empresa": 1,
+        "contacto": 17
+    },
+    "model": "contactos.pertenece",
+    "pk": 7
+},
+{
+    "fields": {
+        "fecha": "2015-04-16",
+        "area": 7,
+        "empresa": 12,
+        "contacto": 18
+    },
+    "model": "contactos.pertenece",
+    "pk": 8
 },
 {
     "fields": {
         "nombre": "Ventas"
     },
-    "pk": 1,
-    "model": "contactos.area"
+    "model": "contactos.area",
+    "pk": 1
 },
 {
     "fields": {
         "nombre": "Seguridad"
     },
-    "pk": 2,
-    "model": "contactos.area"
+    "model": "contactos.area",
+    "pk": 2
 },
 {
     "fields": {
         "nombre": "Calidad"
     },
-    "pk": 3,
-    "model": "contactos.area"
+    "model": "contactos.area",
+    "pk": 3
 },
 {
     "fields": {
         "nombre": "Mercadotecnia"
     },
-    "pk": 4,
-    "model": "contactos.area"
+    "model": "contactos.area",
+    "pk": 4
 },
 {
     "fields": {
         "nombre": "Producci\u00f3n"
     },
-    "pk": 5,
-    "model": "contactos.area"
+    "model": "contactos.area",
+    "pk": 5
 },
 {
     "fields": {
         "nombre": "Direcci\u00f3n"
     },
-    "pk": 6,
-    "model": "contactos.area"
+    "model": "contactos.area",
+    "pk": 6
 },
 {
     "fields": {
         "nombre": "Administraci\u00f3n"
     },
-    "pk": 7,
-    "model": "contactos.area"
+    "model": "contactos.area",
+    "pk": 7
 },
 {
     "fields": {
         "nombre": "Finanzas"
     },
-    "pk": 8,
-    "model": "contactos.area"
+    "model": "contactos.area",
+    "pk": 8
+},
+{
+    "fields": {
+        "vendedor": 1,
+        "fecha": "2015-04-15",
+        "contacto": 12
+    },
+    "model": "contactos.atiende",
+    "pk": 1
+},
+{
+    "fields": {
+        "vendedor": 1,
+        "fecha": "2015-04-15",
+        "contacto": 13
+    },
+    "model": "contactos.atiende",
+    "pk": 2
+},
+{
+    "fields": {
+        "vendedor": 1,
+        "fecha": "2015-04-15",
+        "contacto": 14
+    },
+    "model": "contactos.atiende",
+    "pk": 3
+},
+{
+    "fields": {
+        "vendedor": 1,
+        "fecha": "2015-04-15",
+        "contacto": 15
+    },
+    "model": "contactos.atiende",
+    "pk": 4
 },
 {
     "fields": {
         "vendedor": 2,
-        "fecha": "2015-04-01",
-        "contacto": 2
+        "fecha": "2015-04-16",
+        "contacto": 16
     },
-    "pk": 1,
-    "model": "contactos.atiende"
-},
-{
-    "fields": {
-        "vendedor": 3,
-        "fecha": "2015-04-01",
-        "contacto": 3
-    },
-    "pk": 2,
-    "model": "contactos.atiende"
-},
-{
-    "fields": {
-        "vendedor": 4,
-        "fecha": "2015-04-01",
-        "contacto": 4
-    },
-    "pk": 3,
-    "model": "contactos.atiende"
+    "model": "contactos.atiende",
+    "pk": 5
 },
 {
     "fields": {
         "vendedor": 2,
-        "fecha": "2015-04-01",
-        "contacto": 5
+        "fecha": "2015-04-16",
+        "contacto": 17
     },
-    "pk": 4,
-    "model": "contactos.atiende"
-},
-{
-    "fields": {
-        "vendedor": 3,
-        "fecha": "2015-04-01",
-        "contacto": 6
-    },
-    "pk": 5,
-    "model": "contactos.atiende"
-},
-{
-    "fields": {
-        "vendedor": 4,
-        "fecha": "2015-04-01",
-        "contacto": 7
-    },
-    "pk": 6,
-    "model": "contactos.atiende"
+    "model": "contactos.atiende",
+    "pk": 6
 },
 {
     "fields": {
         "vendedor": 2,
-        "fecha": "2015-04-01",
-        "contacto": 8
+        "fecha": "2015-04-16",
+        "contacto": 18
     },
-    "pk": 7,
-    "model": "contactos.atiende"
-},
-{
-    "fields": {
-        "vendedor": 3,
-        "fecha": "2015-04-01",
-        "contacto": 9
-    },
-    "pk": 8,
-    "model": "contactos.atiende"
-},
-{
-    "fields": {
-        "vendedor": 4,
-        "fecha": "2015-04-01",
-        "contacto": 10
-    },
-    "pk": 9,
-    "model": "contactos.atiende"
-},
-{
-    "fields": {
-        "vendedor": 2,
-        "fecha": "2015-04-01",
-        "contacto": 11
-    },
-    "pk": 10,
-    "model": "contactos.atiende"
+    "model": "contactos.atiende",
+    "pk": 7
 },
 {
     "fields": {
         "calificacion": 1
     },
-    "pk": 6,
-    "model": "contactos.calificacion"
+    "model": "contactos.calificacion",
+    "pk": 6
 },
 {
     "fields": {
         "calificacion": 2
     },
-    "pk": 7,
-    "model": "contactos.calificacion"
+    "model": "contactos.calificacion",
+    "pk": 7
 },
 {
     "fields": {
         "calificacion": 3
     },
-    "pk": 8,
-    "model": "contactos.calificacion"
+    "model": "contactos.calificacion",
+    "pk": 8
 },
 {
     "fields": {
         "calificacion": 4
     },
-    "pk": 9,
-    "model": "contactos.calificacion"
+    "model": "contactos.calificacion",
+    "pk": 9
 },
 {
     "fields": {
         "calificacion": 5
     },
-    "pk": 10,
-    "model": "contactos.calificacion"
+    "model": "contactos.calificacion",
+    "pk": 10
+},
+{
+    "fields": {
+        "contacto": 18,
+        "descripcion": "Le llam\u00e9 porque soy su fan.",
+        "is_active": true,
+        "fecha": "2015-04-16"
+    },
+    "model": "contactos.llamada",
+    "pk": 1
 },
 {
     "fields": {
         "nombre": "Oficina"
     },
-    "pk": 1,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 1
 },
 {
     "fields": {
         "nombre": "Celular"
     },
-    "pk": 2,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 2
 },
 {
     "fields": {
         "nombre": "Casa"
     },
-    "pk": 3,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 3
 },
 {
     "fields": {
         "nombre": "Fax"
     },
-    "pk": 4,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 4
 },
 {
     "fields": {
         "nombre": "Otro"
     },
-    "pk": 5,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 5
 },
 {
     "fields": {
-        "vendedor": null,
-        "numero": 4421199233,
+        "tipo_numero": 2,
         "is_active": true,
         "empresa": null,
+        "contacto": 12,
+        "numero": 4421329988,
+        "vendedor": null
+    },
+    "model": "contactos.numerotelefonico",
+    "pk": 1
+},
+{
+    "fields": {
         "tipo_numero": 1,
-        "contacto": 2
+        "is_active": true,
+        "empresa": 12,
+        "contacto": null,
+        "numero": 4421567890,
+        "vendedor": null
     },
-    "pk": 2,
-    "model": "contactos.numerotelefonico"
+    "model": "contactos.numerotelefonico",
+    "pk": 2
 },
 {
     "fields": {
-        "vendedor": null,
-        "numero": 4422314567,
-        "is_active": true,
-        "empresa": null,
         "tipo_numero": 2,
-        "contacto": 3
-    },
-    "pk": 3,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "vendedor": null,
-        "numero": 4421276345,
         "is_active": true,
         "empresa": null,
-        "tipo_numero": 3,
-        "contacto": 4
+        "contacto": 18,
+        "numero": 4421789380,
+        "vendedor": null
     },
-    "pk": 4,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "vendedor": null,
-        "numero": 4413324563,
-        "is_active": true,
-        "empresa": null,
-        "tipo_numero": 2,
-        "contacto": 5
-    },
-    "pk": 5,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "vendedor": null,
-        "numero": 3321456342,
-        "is_active": true,
-        "empresa": null,
-        "tipo_numero": 2,
-        "contacto": 6
-    },
-    "pk": 6,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "vendedor": null,
-        "numero": 5514231425,
-        "is_active": true,
-        "empresa": null,
-        "tipo_numero": 5,
-        "contacto": 7
-    },
-    "pk": 7,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "vendedor": null,
-        "numero": 4431253241,
-        "is_active": true,
-        "empresa": null,
-        "tipo_numero": 2,
-        "contacto": 8
-    },
-    "pk": 8,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "vendedor": null,
-        "numero": 6631242133,
-        "is_active": true,
-        "empresa": null,
-        "tipo_numero": 1,
-        "contacto": 9
-    },
-    "pk": 9,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "vendedor": null,
-        "numero": 4423135243,
-        "is_active": true,
-        "empresa": null,
-        "tipo_numero": 2,
-        "contacto": 10
-    },
-    "pk": 10,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "vendedor": null,
-        "numero": 4421253465,
-        "is_active": true,
-        "empresa": null,
-        "tipo_numero": 2,
-        "contacto": 11
-    },
-    "pk": 11,
-    "model": "contactos.numerotelefonico"
+    "model": "contactos.numerotelefonico",
+    "pk": 3
 }
 ]

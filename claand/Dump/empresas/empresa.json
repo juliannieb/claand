@@ -1,82 +1,122 @@
 [
 {
+    "pk": 1,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Claand"
-    },
-    "pk": "CLAA580219JRR",
-    "model": "empresas.empresa"
+        "slug": "claand",
+        "nombre": "Claand",
+        "rfc": "CLAA580219JRR",
+        "is_active": true
+    }
 },
 {
+    "pk": 2,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Coca Cola"
-    },
-    "pk": "COCA540895SOP",
-    "model": "empresas.empresa"
+        "slug": "coca-cola",
+        "nombre": "Coca Cola",
+        "rfc": "COCA540895SOP",
+        "is_active": true
+    }
 },
 {
+    "pk": 3,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Copper Clad"
-    },
-    "pk": "COPP685743POS",
-    "model": "empresas.empresa"
+        "slug": "copper-clad",
+        "nombre": "Copper Clad",
+        "rfc": "COPP685743POS",
+        "is_active": true
+    }
 },
 {
+    "pk": 4,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Elica"
-    },
-    "pk": "ELIC540318TRE",
-    "model": "empresas.empresa"
+        "slug": "elica",
+        "nombre": "Elica",
+        "rfc": "ELIC540318TRE",
+        "is_active": true
+    }
 },
 {
+    "pk": 5,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Imbera"
-    },
-    "pk": "IMBE430587TOE",
-    "model": "empresas.empresa"
+        "slug": "imbera",
+        "nombre": "Imbera",
+        "rfc": "IMBE430587TOE",
+        "is_active": true
+    }
 },
 {
+    "pk": 6,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Kellogs"
-    },
-    "pk": "KELL640717YUU",
-    "model": "empresas.empresa"
+        "slug": "kellogs",
+        "nombre": "Kellogs",
+        "rfc": "KELL640717YUU",
+        "is_active": true
+    }
 },
 {
+    "pk": 7,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Mazda"
-    },
-    "pk": "MAZD650219SGG",
-    "model": "empresas.empresa"
+        "slug": "mazda",
+        "nombre": "Mazda",
+        "rfc": "MAZD650219SGG",
+        "is_active": true
+    }
 },
 {
+    "pk": 8,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Microsoft"
-    },
-    "pk": "MICR780420MST",
-    "model": "empresas.empresa"
+        "slug": "microsoft",
+        "nombre": "Microsoft",
+        "rfc": "MICR780420MST",
+        "is_active": true
+    }
 },
 {
+    "pk": 9,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Oracle"
-    },
-    "pk": "ORAC680519ORC",
-    "model": "empresas.empresa"
+        "slug": "oracle",
+        "nombre": "Oracle",
+        "rfc": "ORAC680519ORC",
+        "is_active": true
+    }
 },
 {
+    "pk": 10,
+    "model": "empresas.empresa",
     "fields": {
-        "is_active": true,
-        "nombre": "Toyota"
-    },
-    "pk": "TOYO830412TDS",
-    "model": "empresas.empresa"
+        "slug": "toyota",
+        "nombre": "Toyota",
+        "rfc": "TOYO830412TDS",
+        "is_active": true
+    }
+},
+{
+    "pk": 11,
+    "model": "empresas.empresa",
+    "fields": {
+        "slug": "ksb",
+        "nombre": "KSB",
+        "rfc": "KSB1234567890",
+        "is_active": true
+    }
+},
+{
+    "pk": 12,
+    "model": "empresas.empresa",
+    "fields": {
+        "slug": "apple",
+        "nombre": "Apple",
+        "rfc": "APPL123456RSS",
+        "is_active": true
+    }
 }
 ]

@@ -1,146 +1,38 @@
 [
 {
+    "pk": 1,
     "fields": {
         "is_active": true,
-        "numero": 4421199233,
+        "numero": 4421329988,
         "empresa": null,
-        "tipo_numero": 1,
-        "vendedor": null,
-        "contacto": 2
+        "contacto": 12,
+        "tipo_numero": 2,
+        "vendedor": null
     },
+    "model": "contactos.numerotelefonico"
+},
+{
     "pk": 2,
+    "fields": {
+        "is_active": true,
+        "numero": 4421567890,
+        "empresa": 12,
+        "contacto": null,
+        "tipo_numero": 1,
+        "vendedor": null
+    },
     "model": "contactos.numerotelefonico"
 },
 {
-    "fields": {
-        "is_active": true,
-        "numero": 4422314567,
-        "empresa": null,
-        "tipo_numero": 2,
-        "vendedor": null,
-        "contacto": 3
-    },
     "pk": 3,
-    "model": "contactos.numerotelefonico"
-},
-{
     "fields": {
         "is_active": true,
-        "numero": 4421276345,
+        "numero": 4421789380,
         "empresa": null,
-        "tipo_numero": 3,
-        "vendedor": null,
-        "contacto": 4
-    },
-    "pk": 4,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "is_active": true,
-        "numero": 4413324563,
-        "empresa": null,
+        "contacto": 18,
         "tipo_numero": 2,
-        "vendedor": null,
-        "contacto": 5
+        "vendedor": null
     },
-    "pk": 5,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "is_active": true,
-        "numero": 3321456342,
-        "empresa": null,
-        "tipo_numero": 2,
-        "vendedor": null,
-        "contacto": 6
-    },
-    "pk": 6,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "is_active": true,
-        "numero": 5514231425,
-        "empresa": null,
-        "tipo_numero": 5,
-        "vendedor": null,
-        "contacto": 7
-    },
-    "pk": 7,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "is_active": true,
-        "numero": 4431253241,
-        "empresa": null,
-        "tipo_numero": 2,
-        "vendedor": null,
-        "contacto": 8
-    },
-    "pk": 8,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "is_active": true,
-        "numero": 6631242133,
-        "empresa": null,
-        "tipo_numero": 1,
-        "vendedor": null,
-        "contacto": 9
-    },
-    "pk": 9,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "is_active": true,
-        "numero": 4423135243,
-        "empresa": null,
-        "tipo_numero": 2,
-        "vendedor": null,
-        "contacto": 10
-    },
-    "pk": 10,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "is_active": true,
-        "numero": 4421253465,
-        "empresa": null,
-        "tipo_numero": 2,
-        "vendedor": null,
-        "contacto": 11
-    },
-    "pk": 11,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "is_active": true,
-        "numero": 4421913476,
-        "empresa": null,
-        "tipo_numero": 2,
-        "vendedor": null,
-        "contacto": 2
-    },
-    "pk": 12,
-    "model": "contactos.numerotelefonico"
-},
-{
-    "fields": {
-        "is_active": true,
-        "numero": 4422786756,
-        "empresa": 1,
-        "tipo_numero": 1,
-        "vendedor": null,
-        "contacto": null
-    },
-    "pk": 13,
     "model": "contactos.numerotelefonico"
 }
 ]
