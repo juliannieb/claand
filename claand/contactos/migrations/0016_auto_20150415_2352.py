@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contacto',
             name='calificacion',
-            field=models.ForeignKey(to='contactos.Calificacion', null=True),
+            field=models.ForeignKey(null=True, to='contactos.Calificacion'),
             preserve_default=True,
         ),
     ]
