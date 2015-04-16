@@ -12,6 +12,7 @@
     <div class="container">
 
     <!-- Main component for a primary marketing message or call to action -->
+    {% if es_vendedor %}
     <div class="jumbotron" style="text-align: center;">
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -43,5 +44,8 @@
             </div>
         </div>
     </div>
+    {% else %}
+    <h1>Hola</h1>
+    {% endif %}
 
 {% endblock content%}

@@ -15,13 +15,16 @@ class ContactoForm(forms.ModelForm):
         required=True, widget=forms.Select(attrs={'class': 'form-control'}))
     correo_electronico = forms.EmailField(help_text='Email: ', required=True, \
         widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    #calificaciones = forms.ModelMultipleChoiceField(help_text='Calificación: ', required=True, widget=forms.SelectMultiple(attrs={'class':'form-control'}))
+    calificacion = forms.ModelChoiceField(help_text='Calificación: ', \
+        queryset=Calificacion.objects.all(), required=True, \
+        widget=forms.Select(attrs={'class':'form-control'}))
     is_cliente = forms.BooleanField(help_text='Cliente: ', required=False, \
         widget=forms.CheckboxInput(attrs={'class':'form-control'}))
 
     class Meta:
         model = Contacto
-        fields = ('nombre', 'apellido', 'empresa', 'area', 'correo_electronico', 'is_cliente',)
+        fields = ('nombre', 'apellido', 'empresa', 'area', 'correo_electronico', \
+            'calificacion', 'is_cliente',)
 
 class LlamadaForm(forms.ModelForm):
     contacto = forms.ModelChoiceField(queryset=Contacto.objects.all(), help_text='Contacto: ', \

@@ -9,8 +9,8 @@ class Vendedor(models.Model):
         al crear un vendedor, siempre se le asigne el grupo de vendedor.
         De esta forma, podemos seleccionar las vistas a las que puede acceder.
         """
-        grupo_estudiante = group = Group.objects.filter(name="vendedor")[0]
-        self.user.groups.add(grupo_estudiante)
+        grupo_vendedor = group = Group.objects.filter(name="vendedor")[0]
+        self.user.groups.add(grupo_vendedor)
         return super(Vendedor, self).save(*args, **kwargs)
 
     def __str__(self):

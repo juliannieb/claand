@@ -11,7 +11,7 @@ class Contacto(models.Model):
     nombre = models.CharField(max_length=35)
     apellido = models.CharField(max_length=35)
     correo_electronico = models.EmailField(unique=True)
-    calificacion = models.ForeignKey('Calificacion')
+    calificacion = models.ForeignKey('Calificacion', null=True)
     empresa = models.ManyToManyField(Empresa, through='Pertenece')
     vendedor = models.ManyToManyField(Vendedor, through='Atiende')
     slug = models.SlugField(unique=True, null=True)

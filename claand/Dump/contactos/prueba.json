@@ -1,0 +1,28 @@
+[
+{
+    "model": "contactos.contacto",
+    "pk": 1,
+    "fields": {
+        "apellido": "L\u00f3pez",
+        "is_active": true,
+        "correo_electronico": "marqui@gmail.com",
+        "is_cliente": false,
+        "slug": "adf",
+        "calificacion": 6,
+        "nombre": "Marquicio"
+    }
+},
+{
+    "model": "contactos.contacto",
+    "pk": 2,
+    "fields": {
+        "apellido": "Cassis Arze",
+        "is_active": true,
+        "correo_electronico": "luigicsssaz@gmail.com",
+        "is_cliente": false,
+        "slug": "asdf",
+        "calificacion": 10,
+        "nombre": "Luigi"
+    }
+}
+]
