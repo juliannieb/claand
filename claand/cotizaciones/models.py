@@ -10,7 +10,7 @@ class Cotizacion(models.Model):
     descripcion = models.TextField()
     is_pendiente = models.BooleanField(default=True)
     contacto = models.ForeignKey(Contacto)
-    fecha_creacion = models.DateField(editable=False)
+    fecha_creacion = models.DateField(editable=True)
     fecha_modificacion = models.DateField()
 
     def save(self, *args, **kwargs):

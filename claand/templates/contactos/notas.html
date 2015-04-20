@@ -30,19 +30,19 @@
     </div>
 
     <div class="container">
-        <table class="table table-hover">
+        <table class="sortable table table-hover">
             <thead>
                 <tr>
-                    <th>ID Nota</th>
-                    <th>Contacto</th>
-                    <th>Descripción</th>
-                    <th>Clasificación</th>
+                    <th class="table-head"><a href="#">ID Nota</a></th>
+                    <th class="table-head"><a href="#">Contacto</a></th>
+                    <th class="table-head"><a href="#">Descripción</a></th>
+                    <th class="table-head"><a href="#">Clasificación</a></th>
             </thead>
             <tbody>
                 {% for nota in notas_list %}
                     <tr>
                         <td><a href="{% url 'contactos:nota' nota.id %}">{{ nota.id }}</a></td>
-                        <td>{{ nota.contacto }} {{ nota.contacto.apellido }}</td>
+                        <td>{{ nota.contacto }}</td>
                         <td>{{ nota }}</td>
                         <td>{{ nota.clasificacion }}</td>
                     </tr>

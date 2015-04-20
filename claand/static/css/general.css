@@ -1,9 +1,23 @@
+@import url(http://fonts.googleapis.com/css?family=Quicksand);
+
+*{
+    font-family: 'Quicksand', sans-serif;
+}
+
+th.table-head a {
+    color: inherit;
+    text-decoration: inherit;
+}
+    th.table-head a:hover {
+        color: #8D0200;
+    }
+
 a.menu_submenu_link {
 	color: inherit;
 	text-decoration: inherit;
 }
 	a.menu_submenu_link:hover {
-		color: black;
+		color: #8D0200;
 	}
 
 .row-centered {

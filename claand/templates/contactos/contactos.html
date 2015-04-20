@@ -24,17 +24,17 @@
     </div>
 
     <div class="container">
-        <table class="table table-hover">
+        <table class="sortable table table-hover" id="example">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Empresa</th>
-                    <th>Área</th>
-                    <th>Email</th>
-                    <th>Estatus</th>
-                    <th>Calificación</th>
-                    <th>Encargado</th>
+                    <th class="table-head"><a href="#">Nombre</a></th>
+                    <th class="table-head"><a href="#">Apellido</a></th>
+                    <th class="table-head"><a href="#">Empresas</a></th>
+                    <th class="table-head"><a href="#">Área</a></th>
+                    <th class="table-head"><a href="#">Email</a></th>
+                    <th class="table-head"><a href="#">Estatus</a></th>
+                    <th class="table-head"><a href="#">Calificación</a></th>
+                    <th class="table-head"><a href="#">Encargado</a></th>
                 </tr>
             </thead>
             <tbody>
@@ -55,12 +55,19 @@
                             <td>Prospecto</td>
                         {% endif %}
                         
-                        <td>{{ contacto.calificaciones.get }}</td>
+                        <td>{{ contacto.calificacion }}</td>
                         <td>{{ contacto.atiende_set.get.vendedor }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#example').dataTable( {
+                "order": [[ 3, "desc" ]]
+            } );
+        } );
+    </script>
 
 {% endblock content%}

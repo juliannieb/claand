@@ -24,22 +24,21 @@
     </div>
 
     <div class="container">
-        <table class="table table-hover">
+        <table class="sortable table table-hover">
             <thead>
                 <tr>
-                    <th>ID Cotización</th>
-                    <th>Cliente</th>
-                    <th>Empresa</th>
-                    <th>Descripción</th>
-                    <th>Monto</th>
-                    <th>Estatus</th>
+                    <th class="table-head"><a href="#">ID Cotización</a></th>
+                    <th class="table-head"><a href="#">Cliente</a></th>
+                    <th class="table-head"><a href="#">Empresa</a></th>
+                    <th class="table-head"><a href="#">Monto</a></th>
+                    <th class="table-head"><a href="#">Estatus</a></th>
                 </tr>
             </thead>
             <tbody>
                 {% for venta in ventas_list %}
                 <tr>
                     <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
-                    <td>{{ venta.cotizacion.contacto }} {{ venta.cotizacion.contacto.apellido }}</td>
+                    <td>{{ venta.cotizacion.contacto }}</td>
                     <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
                     <td>{{ venta.cotizacion.descripcion }}</td>
                     <td>{{ venta.monto_total }}</td>

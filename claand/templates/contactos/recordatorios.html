@@ -30,14 +30,14 @@
     </div>
 
     <div class="container">
-        <table class="table table-hover">
+        <table class="sortable table table-hover">
             <thead>
                 <tr>
-                    <th>ID Recordatorio</th>
-                    <th>Contacto</th>
-                    <th>Urgencia</th>
-                    <th>Descripción</th>
-                    <th>Fecha</th>
+                    <th class="table-head"><a href="#">ID Recordatorio</a></th>
+                    <th class="table-head"><a href="#">Contacto</a></th>
+                    <th class="table-head"><a href="#">Urgencia</a></th>
+                    <th class="table-head"><a href="#">Descripción</a></th>
+                    <th class="table-head"><a href="#">Fecha</a></th>
             </thead>
             <tbody>
                 {% for recordatorio in recordatorios_list %}
