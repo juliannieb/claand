@@ -24,7 +24,7 @@
     </div>
 
     <div class="container">
-        <table class="sortable table table-hover" id="example">
+        <table class="sortable table table-hover">
             <thead>
                 <tr>
                     <th class="table-head"><a href="#">Nombre</a></th>
@@ -62,12 +62,5 @@
             </tbody>
         </table>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('#example').dataTable( {
-                "order": [[ 3, "desc" ]]
-            } );
-        } );
-    </script>
 
 {% endblock content%}
