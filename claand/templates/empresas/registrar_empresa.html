@@ -91,5 +91,14 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $('#id_estado').change(function(){
+            var estado_id;
+            estado_id = $(this).val();
+            $.get("{% url 'empresas:get_municipio' %}", {estado_id : estado_id}, function(data) {
+                $('#id_municipio').html(data);
+            });
+        });
+    </script>
 
 {% endblock content%}

@@ -32,10 +32,10 @@
             </thead>
             <tbody>
                 {% for empresa in empresas_list %}
-                <tr>
-                    <td><a href="{% url 'empresas:empresa' empresa.slug %}">{{ empresa.rfc }}</a></td>
-                    <td>{{ empresa.nombre }}</td>
-                </tr>
+                    <tr>
+                        <td><a href="{% url 'empresas:empresa' empresa.slug %}">{{ empresa.rfc }}</a></td>
+                        <td>{{ empresa.nombre }}</td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>

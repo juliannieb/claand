@@ -22,9 +22,9 @@ class DireccionForm(forms.ModelForm):
 	direccion = forms.CharField(max_length=100, help_text='Dirección: ', required=True, \
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	estado = forms.ModelChoiceField(queryset=Estado.objects.all(), help_text='Estado: ', \
-		required=False, widget=forms.Select(attrs={'class': 'form-control'}))
+		required=False, widget=forms.Select(attrs={'class': 'form-control', 'id' : 'id_estado'}))
 	municipio = forms.ModelChoiceField(queryset=Municipio.objects.all(), help_text='Municipio: ', \
-		required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+		required=True, widget=forms.Select(attrs={'class': 'form-control', 'id' : 'id_municipio'}))
 
 	class Meta:
 		model = Direccion
