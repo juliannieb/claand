@@ -12,11 +12,8 @@
     <div class="container">
         <div class="row pull-right">
             <form action="search_empresas" class="form-horizontal">
-                <div class="col-sm-8 col-xs-8">
-                    <input type="text" class="form-control" id="txt_search_empresas">
-                </div>
-                <div class="col-sm-4 col-xs-4">
-                    <button type="submit" class="btn btn-default pull-right">Buscar</button>
+                <div class="col-sm-12 col-xs-12">
+                    <input type="text" class="form-control" id="txt_search_empresas" placeholder="Buscar...">
                 </div>
             </form>
         </div> 
@@ -30,7 +27,7 @@
                     <th class="table-head"><a href="#">Nombre</a></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tabla_empresas">
                 {% for empresa in empresas_list %}
                     <tr>
                         <td><a href="{% url 'empresas:empresa' empresa.slug %}">{{ empresa.rfc }}</a></td>
@@ -40,5 +37,15 @@
             </tbody>
         </table>
     </div>
+
+    <script type="text/javascript">
+        $('#txt_search_empresas').keyup(function(){
+            var texto;
+            texto = $(this).val();
+            $.get("{% url 'empresas:search_empresas' %}", {'texto' : texto}, function(data) {
+                $('#tabla_empresas').html(data);
+            });
+        });
+    </script>
 
 {% endblock content%}

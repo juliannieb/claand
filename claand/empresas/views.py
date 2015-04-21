@@ -175,3 +175,12 @@ def get_municipio(request):
         municipios = Municipio.objects.filter(estado=estado_id).order_by('nombre')
     return render_to_response('empresas/municipios_seleccionados.html', {'municipios': municipios})
 
+
+def search_empresas(request):
+    """Función para atender la petición GET AJAX para filtrar las empresas en la Vista
+    empresas
+    """
+    if request.is_ajax() and request.method == 'GET':
+        texto = request.GET['texto']
+        empresas_list = Empresa.objects.filter(nombre__icontains=texto)
+    return render_to_response('empresas/search_empresas.html', {'empresas_list': empresas_list})
