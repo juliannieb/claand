@@ -14,8 +14,6 @@ from contactos.models import Llamada
 from contactos.forms import ContactoForm, LlamadaForm, NotaForm, RecordatorioForm
 from empresas.forms import NumeroTelefonicoForm, RedSocialForm
 
-
-
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
     """
@@ -48,6 +46,7 @@ def contacto(request, contacto_nombre_slug):
     numeros_list = contacto.numerotelefonico_set.all()
     calificacion = Calificacion.objects.get(contacto=contacto)
     cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
+    ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
     llamadas_list = Llamada.objects.all()
     es_vendedor = no_es_vendedor(request.user)
     context = {}
@@ -58,6 +57,7 @@ def contacto(request, contacto_nombre_slug):
     context['cotizaciones_list'] = cotizaciones_list
     context['llamadas_list'] = llamadas_list
     context['no_es_vendedor'] = es_vendedor
+    context['ventas_list'] = ventas_list
     return render(request, 'contactos/contacto.html', context)
 
 @login_required
