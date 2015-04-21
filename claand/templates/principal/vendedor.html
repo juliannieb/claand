@@ -5,32 +5,7 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>Información del cliente</h1>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row row-centered">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">{{contacto.nombre}} {{contacto.apellido}}</h3>
-                  </div>
-                  <div class="panel-body">
-                    {{ pertenece.empresa.nombre }}</br>
-                    {{ pertenece.area }} </br>
-                    {{ contacto.correo_electronico}}</br>
-                    {% for numero in numeros_list %}
-                        {{ numero.tipo_numero }} : {{ numero.numero}} </br>
-                    {% endfor %}
-                    {% if contacto.is_cliente %}
-                        Cliente </br>
-                    {% else %}
-                        Prospecto </br>
-                    {% endif %}
-                    Calificación: {{calificacion.calificacion}}
-                  </div>
-                </div>
-            </div>
+            <h1>{{ vendedor }}</h1>
         </div>
     </div>
     <div class="container">
@@ -38,7 +13,6 @@
             <h1>Cotizaciones asociadas</h1>
         </div>
     </div>
-
     <div class="container">
         <table class="sortable table table-hover">
             <thead>
@@ -51,12 +25,14 @@
             </thead>
             <tbody>
                 {% for cotizacion in cotizaciones_list %}
-                    <tr>
-                        <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
-                        <td>{{ pertenece.empresa }}</td>
-                        <td>{{ cotizacion.descripcion }}</td>
-                        <td>{{ cotizacion.monto }}</td>
-                    </tr>
+                    {% if cotizacion.is_pendiente %}
+                        <tr>
+                            <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
+                            <td>{{ cotizacion.contacto.empresa.get }}</td>
+                            <td>{{ cotizacion.descripcion }}</td>
+                            <td>{{ cotizacion.monto }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -86,8 +62,8 @@
                         <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
                         <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
                         <td>{{ venta.cotizacion.descripcion }}</td>
-                        <td>{{ venta.monto_total }}</td>
-                        <td>{{ venta.monto_total }}</td>
+                        <td>{{ venta.cotizacion.venta.monto_total }}</td>
+                        <td>{{ venta.cotizacion.venta.monto_total }}</td>
                         {% if venta.is_completada %}
                             <td>Completada</td>
                         {% else %}
@@ -109,18 +85,18 @@
         <table class="sortable table table-hover">
             <thead>
                 <tr>
+                    <th class="table-head"><a href="#">Contacto</a></th>
                     <th class="table-head"><a href="#">Fecha</a></th>
-                    <th class="table-head"><a href="#">Descripcion</a></th>
+                    <th class="table-head"><a href="#">Descripción</a></th>
                 </tr>
             </thead>
             <tbody>
                 {% for llamada in llamadas_list %}
-                    {% if llamada.contacto.nombre = contacto.nombre %}
-                        <tr>
-                            <td>{{ llamada.fecha }}</td>
-                            <td>{{ llamada.descripcion }}</td>
-                        </tr>
-                    {% endif %}
+                    <tr>
+                        <td>{{ llamada.contacto }}</td>
+                        <td>{{ llamada.fecha }}</td>
+                        <td>{{ llamada.descripcion }}</td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
