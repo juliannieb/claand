@@ -51,12 +51,14 @@
             </thead>
             <tbody>
                 {% for cotizacion in cotizaciones_list %}
-                    <tr>
-                        <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
-                        <td>{{ pertenece.empresa }}</td>
-                        <td>{{ cotizacion.descripcion }}</td>
-                        <td>{{ cotizacion.monto }}</td>
-                    </tr>
+                    {% if cotizacion.is_pendiente %}
+                        <tr>
+                            <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
+                            <td>{{ pertenece.empresa }}</td>
+                            <td>{{ cotizacion.descripcion }}</td>
+                            <td>{{ cotizacion.monto }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
