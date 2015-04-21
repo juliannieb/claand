@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende, Recordatorio, Nota, Llamada
 from principal.models import Vendedor
@@ -278,3 +279,21 @@ def registrar_recordatorio(request):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'contactos/registrar_recordatorio.html', forms)
+
+def search_contactos(request):
+    """Función para atender la petición GET AJAX para filtrar los contactos en la Vista
+    contactos
+    """
+    if request.is_ajax() and request.method == 'GET':
+        current_user = request.user
+        es_vendedor = no_es_vendedor(request.user)
+        if no_es_vendedor(current_user):
+            contactos_list = Contacto.objects.all()
+        else:
+            current_vendedor = Vendedor.objects.get(user=current_user)
+            contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+        texto = request.GET['texto']
+        contactos_list = contactos_list.filter(Q(nombre__icontains=texto) | \
+            Q(apellido__icontains=texto) | Q(correo_electronico__icontains=texto))
+    return render_to_response('contactos/search_contactos.html', {'contactos_list': contactos_list, \
+        'no_es_vendedor':es_vendedor})

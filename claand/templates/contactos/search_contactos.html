@@ -1,0 +1,21 @@
+{% for contacto in contactos_list %}
+    <tr>
+        <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto.nombre }}</a></td>
+        <td>{{ contacto.apellido }}</td>
+        {% if not contacto.empresa.all %}
+            <td></td>
+        {% else %}
+            <td>{{ contacto.empresa.all|join:", " }}</td>
+        {% endif %}
+        <td>{{ contacto.pertenece_set.get.area }}</td>
+        <td>{{ contacto.correo_electronico }}</td>
+        {% if contacto.is_cliente %}
+            <td>Cliente</td>
+        {% else %}
+            <td>Prospecto</td>
+        {% endif %}
+        
+        <td>{{ contacto.calificacion }}</td>
+        <td>{{ contacto.atiende_set.get.vendedor }}</td>
+    </tr>
+{% endfor %}
