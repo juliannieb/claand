@@ -31,3 +31,7 @@ a.menu_submenu_link {
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+ul.errorlist li{
+    color: #8D0200;
+}
