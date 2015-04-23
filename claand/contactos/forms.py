@@ -41,8 +41,8 @@ class NotaForm(forms.ModelForm):
         required=True, widget=forms.Select(attrs={'class': 'form-control'}))
     descripcion = forms.CharField(help_text='Descripción: ', \
         required=True, widget=forms.Textarea(attrs={'class': 'form-control'}))
-    clasificacion = forms.IntegerField(help_text='Clasificación: ', \
-        widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    clasificacion = forms.ChoiceField(help_text='Clasificación: ', choices=[(x, x) for x in range(1, 4)], \
+        widget=forms.Select(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Contacto
@@ -53,8 +53,8 @@ class RecordatorioForm(forms.ModelForm):
         required=True, widget=forms.Select(attrs={'class': 'form-control'}))
     descripcion = forms.CharField(help_text='Descripción: ', \
         required=True, widget=forms.Textarea(attrs={'class': 'form-control'}))
-    urgencia = forms.IntegerField(help_text='Urgencia: ', \
-        widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    urgencia = forms.ChoiceField(help_text='Urgencia: ', choices=[(x, x) for x in range(1, 4)], \
+        widget=forms.Select(attrs={'class': 'form-control'}))
     fecha = forms.DateField(help_text='Fecha y hora: ', \
         widget=forms.DateTimeInput(attrs={'class': 'form-control'}))
 
