@@ -18,12 +18,12 @@
                   <div class="panel-body">
                     {{ recordatorio.fecha }}</br>
                     <br>
-                    {{ recordatorio }}
+                    {{ recordatorio.descripcion }}
                   </div>
                 </div>
                 <div class="form-group"> 
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="btn_submitContacto" class="btn btn-success pull-right">Volver a recordatorios</button>
+                        <a href="{% url 'contactos:consultar_recordatorios' %}"><button type="btn_submitContacto" class="btn btn-success pull-right">Volver a recordatorios</button></a>
                     </div>
                 </div>
             </div>

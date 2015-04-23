@@ -95,7 +95,7 @@ class Nota(models.Model):
 
 class Recordatorio(models.Model):
     is_active = models.BooleanField(default=True)
-    descripcion = models.TextField()
+    descripcion = models.TextField(max_length=1000)
     fecha = models.DateTimeField()
     urgencia = models.IntegerField(default=1)
     contacto = models.ForeignKey(Contacto)
@@ -105,7 +105,7 @@ class Recordatorio(models.Model):
 
 class Llamada(models.Model):
     is_active = models.BooleanField(default=True)
-    descripcion = models.TextField()
+    descripcion = models.TextField(max_length=1000)
     fecha = models.DateField()
     contacto = models.ForeignKey(Contacto)
 
