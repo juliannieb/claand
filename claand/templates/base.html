@@ -9,10 +9,13 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static "css/general.css" %}">
     <!-- <link href="navbar-fixed-top.css" rel="stylesheet"> -->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="{% static "js/table_sort.js" %}"></script>
+    <link rel="stylesheet" 
+    href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+    <script type="text/javascript" 
+    src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
         {% load nvd3_tags %}
     {% include_chart_jscss %}
     {% load_chart charttype chartdata chartcontainer extra %}
@@ -63,9 +66,42 @@
     {% block content %}
     {% endblock content %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#tableContactos').dataTable( {
+            "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
+            }
+        } );
+    } );
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#tableCotizaciones').dataTable( {
+            "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
+            }
+        } );
+    } );
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#tableVentas').dataTable( {
+            "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
+            }
+        } );
+    } );
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#tableLlamadas').dataTable( {
+            "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
+            }
+        } );
+    } );
+    </script>
+
 </body>
 </html>

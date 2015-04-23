@@ -10,27 +10,7 @@
     </div>
 
     <div class="container">
-        <div class="row pull-left">
-            <form action="{% url 'contactos:registrar_recordatorio' %}" class="form-horizontal">
-                <div class="col-sm-4 col-xs-4">
-                    <button type="submit" class="btn btn-success pull-left">Crear nuevo recordatorio</button>
-                </div>
-            </form>
-        </div>
-        <div class="row pull-right">
-            <form action="search_recordatorios" class="form-horizontal">
-                <div class="col-sm-8 col-xs-8">
-                    <input type="text" class="form-control" id="txt_search_recordatorios">
-                </div>
-                <div class="col-sm-4 col-xs-4">
-                    <button type="submit" class="btn btn-default pull-right">Buscar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="container">
-        <table class="sortable table table-hover">
+        <table class="sortable table table-hover" id="tableContactos">
             <thead>
                 <tr>
                     <th class="table-head"><a href="#">ID Recordatorio</a></th>
@@ -51,6 +31,16 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row pull-left">
+            <form action="{% url 'contactos:registrar_recordatorio' %}" class="form-horizontal">
+                <div class="col-sm-4 col-xs-4">
+                    <button type="submit" class="btn btn-success pull-left">Crear nuevo recordatorio</button>
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock content%}

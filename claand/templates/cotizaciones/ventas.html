@@ -8,30 +8,17 @@
             <h1>Todas las ventas</h1>
         </div>
     </div>
-    
-    <div class="container">
-        <div class="row pull-right">
-            <form action="search_cotizaciones" class="form-horizontal">
-                <div class="col-sm-8 col-xs-8">
-                    <input type="text" class="form-control" id="txt_search_cotizaciones">
-                </div>
-                <div class="col-sm-4 col-xs-4">
-                    <button type="submit" class="btn btn-default pull-right">Buscar</button>
-                </div>
-            </form>
-        </div>
-            
-    </div>
 
     <div class="container">
-        <table class="sortable table table-hover">
+        <table class="sortable table table-hover" id="tableVentas">
             <thead>
                 <tr>
-                    <th class="table-head"><a href="#">ID Venta</a></th>
-                    <th class="table-head"><a href="#">Cliente</a></th>
-                    <th class="table-head"><a href="#">Empresa</a></th>
-                    <th class="table-head"><a href="#">Monto</a></th>
-                    <th class="table-head"><a href="#">Estatus</a></th>
+                    <th>ID Venta</th>
+                    <th>Cliente</th>
+                    <th>Empresa</th>
+                    <th>Descripción</th>
+                    <th>Monto Total</th>
+                    <th>Estatus</th>
                 </tr>
             </thead>
             <tbody>
