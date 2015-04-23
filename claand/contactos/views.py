@@ -185,6 +185,8 @@ def nota(request, nota_id):
     """
     nota = Nota.objects.get(id=nota_id)
     context = {}
+    es_vendedor = no_es_vendedor(request.user)
+    context['no_es_vendedor'] = es_vendedor
     context['nota'] = nota
     return render(request, "contactos/nota.html", context)
 
@@ -242,7 +244,9 @@ def recordatorio(request, recordatorio_id):
     """ En esta vista se muestra el detalle de un recordatorio
     """
     recordatorio = Recordatorio.objects.get(id=recordatorio_id)
+    es_vendedor = no_es_vendedor(request.user)
     context = {}
+    context['no_es_vendedor'] = es_vendedor
     context['recordatorio'] = recordatorio
     return render(request, "contactos/recordatorio.html", context)
 
