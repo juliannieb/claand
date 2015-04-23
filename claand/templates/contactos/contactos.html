@@ -8,20 +8,9 @@
             <h1>Todos los contactos</h1>
         </div>
     </div>
-    
-    <div class="container">
-        <div class="row pull-right">
-            <form action="search_contactos" class="form-horizontal">
-                <div class="col-sm-12 col-xs-12">
-                    <input type="text" class="form-control" id="txt_search_contactos" placeholder="Buscar...">
-                </div>
-            </form>
-        </div>
-            
-    </div>
 
     <div class="container">
-        <table class="sortable table table-hover">
+        <table class="sortable table table-hover" id="tableContactos">
             <thead>
                 <tr>
                     <th class="table-head"><a href="#">Nombre</a></th>
@@ -34,7 +23,7 @@
                     <th class="table-head"><a href="#">Encargado</a></th>
                 </tr>
             </thead>
-            <tbody id="tabla_contactos">
+            <tbody>
                 {% for contacto in contactos_list %}
                     <tr>
                         <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto.nombre }}</a></td>
@@ -60,7 +49,7 @@
         </table>
     </div>
 
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         $('#txt_search_contactos').keyup(function(){
             var texto;
             texto = $(this).val();
@@ -68,6 +57,6 @@
                 $('#tabla_contactos').html(data);
             });
         });
-    </script>
+    </script>-->
 
 {% endblock content%}
