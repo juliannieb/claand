@@ -59,12 +59,18 @@ def empresa(request, empresa_nombre_slug):
     xdata = list()
     ydata = list()
     ydata2 = list()
-
+    x_dict = {}
     # obtener montos de cotizaciones para gráfico.
     for cotizacion in cotizaciones_list:
-        xdata.append(time.mktime(cotizacion.fecha_creacion.timetuple()) * 1000)
-        ydata.append(cotizacion.monto)
+        fecha_cotizacion = time.mktime(cotizacion.fecha_creacion.timetuple()) * 1000
+        xdata.append(fecha_cotizacion)
+        if fecha_cotizacion in x_dict:
+            x_dict[fecha_cotizacion] += cotizacion.monto
+        else:
+            x_dict[fecha_cotizacion] = cotizacion.monto
 
+    ydata = list(x_dict.values())
+    xdata = list(x_dict.keys())
     # obtener montos de ventas para el gráfico
     for venta in ventas_list:
         ydata2.append(venta.monto_total)
@@ -82,8 +88,8 @@ def empresa(request, empresa_nombre_slug):
         'color': '#FF8aF8'
     }
     chartdata = {'x': xdata,
-                 'name1': 'Monto Cotizacion', 'y1': ydata, 'extra1': extra_serie1,
-                 'name2': 'Monto Venta', 'y2': ydata2, 'extra2': extra_serie2}
+                 'name1': 'Monto Cotizado', 'y1': ydata, 'extra1': extra_serie1,
+                 'name2': 'Monto Vendido', 'y2': ydata2, 'extra2': extra_serie2}
 
     charttype = "lineChart"
     chartcontainer = 'linechart_container'  # container name
