@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>Todos los contactos</h1>
+            <h1>Todos los vendedores</h1>
         </div>
     </div>
 
@@ -13,15 +13,17 @@
         <table class="sortable table table-hover" id="tableContactos">
             <thead>
                 <tr>
-                    <th class="table-head"><a href="#">ID Vendedor</a></th>
-                    <th class="table-head"><a href="#">Nombre</a></th>
+                    <th>ID Vendedor</th>
+                    <th>Nombre</a></th>
+                    <th>Email</th>
                 </tr>
             </thead>
             <tbody>
                 {% for vendedor in vendedores_list %}
                     <tr>
                         <td><a href="{% url 'principal:vendedor' vendedor.id %}">{{ vendedor.id }}</a></td>
-                        <td>{{ vendedor }}</td>
+                        <td>{{ vendedor.user.first_name }} {{vendedor.user.last_name}}</td>
+                        <td>{{ vendedor.user.email }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
