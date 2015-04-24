@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from datetime import date
 
 from cotizaciones.models import Cotizacion, Venta, Pago
 from principal.models import Vendedor
@@ -22,8 +23,22 @@ def consultar_cotizaciones(request):
         cotizaciones_list = Cotizacion.objects.all()
     else:
         current_vendedor = Vendedor.objects.get(user=current_user)
-        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
-        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+        todos_los_contactos = Contacto.objects.all()
+        contactos_list = []
+        for contacto in todos_los_contactos:
+            if contacto.atiende_set.all():
+                if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                    contactos_list.append(contacto)
+
+        todas_las_cotizaciones = Cotizacion.objects.all()
+        todas_las_ventas = Venta.objects.all()
+        cotizaciones_list = []
+
+        for cotizacion in todas_las_cotizaciones:
+            for contacto in contactos_list:
+                if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
+                    cotizaciones_list.append(cotizacion)
+
     es_vendedor = no_es_vendedor(request.user)
 
     context = {}
@@ -57,9 +72,31 @@ def consultar_ventas(request):
         ventas_list = Venta.objects.all()
     else:
         current_vendedor = Vendedor.objects.get(user=current_user)
-        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
-        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
-        ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
+        todos_los_contactos = Contacto.objects.all()
+        contactos_list = []
+        for contacto in todos_los_contactos:
+            if contacto.atiende_set.all():
+                if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                    contactos_list.append(contacto)
+
+        todas_las_cotizaciones = Cotizacion.objects.all()
+        todas_las_ventas = Venta.objects.all()
+        cotizaciones_list = []
+        ventas_list = []
+
+        for cotizacion in todas_las_cotizaciones:
+            for contacto in contactos_list:
+                if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
+                    cotizaciones_list.append(cotizacion)
+
+        for venta in todas_las_ventas:
+            for cotizacion in cotizaciones_list:
+                if venta.cotizacion == cotizacion:
+                    ventas_list.append(venta)
+
+
+        #cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+        #ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
     es_vendedor = no_es_vendedor(request.user)
 
     context = {}

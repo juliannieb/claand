@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>Información del cliente</h1>
+            <h1>Información del contacto</h1>
         </div>
     </div>
     <div class="container">
@@ -32,7 +32,17 @@
                 </div>
             </div>
         </div>
+        {% if no_es_vendedor %}
+            <div class="row row-centered">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
+                    <a href="{% url 'contactos:asignar_vendedor' contacto.id %}">
+                        <button type="btn_submitContacto" class="btn btn-success pull-right">Asignar vendedor</button>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
     </div>
+
     <div class="container">
         <div class="page-header">
             <h1>Cotizaciones asociadas</h1>

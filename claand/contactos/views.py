@@ -12,7 +12,7 @@ from cotizaciones.models import Cotizacion, Venta
 from empresas.models import Empresa
 from contactos.models import Llamada
 
-from contactos.forms import ContactoForm, LlamadaForm, NotaForm, RecordatorioForm
+from contactos.forms import ContactoForm, LlamadaForm, NotaForm, RecordatorioForm, AtiendeForm
 from empresas.forms import NumeroTelefonicoForm, RedSocialForm
 
 def no_es_vendedor(user):
@@ -31,8 +31,12 @@ def consultar_contactos(request):
         contactos_list = Contacto.objects.all()
     else:
         current_vendedor = Vendedor.objects.get(user=current_user)
-        contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
-
+        todos_los_contactos = Contacto.objects.all()
+        contactos_list = []
+        for contacto in todos_los_contactos:
+            if contacto.atiende_set.all():
+                if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                    contactos_list.append(contacto)
     context = {}
     context['contactos_list'] = contactos_list
     context['no_es_vendedor'] = es_vendedor
@@ -304,3 +308,36 @@ def search_contactos(request):
             Q(apellido__icontains=texto) | Q(correo_electronico__icontains=texto))
     return render_to_response('contactos/search_contactos.html', {'contactos_list': contactos_list, \
         'no_es_vendedor':es_vendedor})
+
+def asignar_vendedor(request, contacto_id):
+    """ En esta vista se asigna la atención de un vendedor a un contacto
+    """
+    contacto = Contacto.objects.get(id=contacto_id)
+    if request.method == 'POST':
+        formAtiende = AtiendeForm(request.POST)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formAtiende':formAtiende, 'no_es_vendedor':es_vendedor}
+
+        # Have we been provided with a valid form?
+        if formAtiende.is_valid():
+            # Save the new category to the database.
+            data = formAtiende.cleaned_data
+            vendedor = data['vendedor']
+            Atiende(contacto=contacto, vendedor=vendedor).save()
+
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print (formAtiende.errors)
+    else:
+        # If the request was not a POST, display the form to enter details.
+        formAtiende = AtiendeForm()
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formAtiende':formAtiende, 'no_es_vendedor':es_vendedor, \
+        'contacto':contacto, }
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render(request, 'contactos/asignar_vendedor.html', forms)
