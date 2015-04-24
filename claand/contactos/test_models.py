@@ -19,7 +19,7 @@ class ModelosContacto(TestCase):
 
     def test_slug_unico_contacto(self):
         """ Test para probar si el slug de dos contactos es diferente en el caso en que
-        haya dos con el mismo nombre 
+        haya mas de uno con el mismo nombre.
         """
         contacto_a = Contacto.objects.create(nombre="Juan", apellido="Perez", \
             correo_electronico="j@b.com")
