@@ -22,8 +22,8 @@
             <tbody>
                 {% for recordatorio in recordatorios_list %}
                     <tr>
-                        <td><a href="{% url 'contactos:recordatorio' recordatorio.id %}">1</a></td>
-                        <td>{{ recordatorio.contacto }} {{ recordatorio.contacto.apellido }}</td>
+                        <td><a href="{% url 'contactos:recordatorio' recordatorio.id %}">{{ recordatorio.id}}</a></td>
+                        <td>{{ recordatorio.contacto }}</td>
                         <td>{{ recordatorio.urgencia }}</td>
                         <td>{{ recordatorio }}</td>
                         <td>{{ recordatorio.fecha }}</td>

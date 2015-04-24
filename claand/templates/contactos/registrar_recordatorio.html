@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row row-centered">
             <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
-                <form class="form-horizontal" method="post" action="{% url 'contactos:registrar_nota' %}">
+                <form class="form-horizontal" method="post" action="{% url 'contactos:registrar_recordatorio' %}">
 
                     {% csrf_token %}
 
@@ -33,9 +33,11 @@
                         </div>
                     {% endfor %}
                     
-                    <div class="form-group"> 
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="btn_submitContacto" class="btn btn-success pull-right">Registrar</button>
+                    <div class="row">
+                        <div class="form-group"> 
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="btn_submitContacto" class="btn btn-success pull-right">Registrar</button>
+                            </div>
                         </div>
                     </div>
                 </form>

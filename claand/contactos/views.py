@@ -151,7 +151,7 @@ def registrar_llamada(request):
 
             # Now call the index() view.
             # The user will be shown the homepage.
-            return render(request, 'principal/exito.html')
+            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
         else:
             # The supplied form contained errors - just print them to the terminal.
             print (formLlamada.errors)
@@ -185,6 +185,8 @@ def nota(request, nota_id):
     """
     nota = Nota.objects.get(id=nota_id)
     context = {}
+    es_vendedor = no_es_vendedor(request.user)
+    context['no_es_vendedor'] = es_vendedor
     context['nota'] = nota
     return render(request, "contactos/nota.html", context)
 
@@ -210,7 +212,7 @@ def registrar_nota(request):
 
             # Now call the index() view.
             # The user will be shown the homepage.
-            return render(request, 'principal/exito.html')
+            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
         else:
             # The supplied form contained errors - just print them to the terminal.
             print (formNota.errors)
@@ -242,7 +244,9 @@ def recordatorio(request, recordatorio_id):
     """ En esta vista se muestra el detalle de un recordatorio
     """
     recordatorio = Recordatorio.objects.get(id=recordatorio_id)
+    es_vendedor = no_es_vendedor(request.user)
     context = {}
+    context['no_es_vendedor'] = es_vendedor
     context['recordatorio'] = recordatorio
     return render(request, "contactos/recordatorio.html", context)
 
@@ -262,11 +266,14 @@ def registrar_recordatorio(request):
             data = formRecordatorio.cleaned_data
             contacto = data['contacto']
             descripcion = data['descripcion']
-            Nota(contacto=contacto, descripcion=descripcion, clasificacion=clasificacion).save()
+            urgencia = data['urgencia']
+            fecha = data['fecha']
+            Recordatorio(contacto=contacto, descripcion=descripcion, urgencia=urgencia, \
+                fecha=fecha).save()
 
             # Now call the index() view.
             # The user will be shown the homepage.
-            return render(request, 'principal/exito.html')
+            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
         else:
             # The supplied form contained errors - just print them to the terminal.
             print (formRecordatorio.errors)
