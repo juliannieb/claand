@@ -288,7 +288,7 @@ def registrar_recordatorio(request):
     return render(request, 'contactos/registrar_recordatorio.html', forms)
 
 def search_contactos(request):
-    """Función para atender la petición GET AJAX para filtrar los contactos en la Vista
+    """ Función para atender la petición GET AJAX para filtrar los contactos en la Vista
     contactos
     """
     if request.is_ajax() and request.method == 'GET':
