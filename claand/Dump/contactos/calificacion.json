@@ -1,37 +1,37 @@
 [
 {
+    "pk": 6,
     "fields": {
         "calificacion": 1
     },
-    "model": "contactos.calificacion",
-    "pk": 6
+    "model": "contactos.calificacion"
 },
 {
+    "pk": 7,
     "fields": {
         "calificacion": 2
     },
-    "model": "contactos.calificacion",
-    "pk": 7
+    "model": "contactos.calificacion"
 },
 {
+    "pk": 8,
     "fields": {
         "calificacion": 3
     },
-    "model": "contactos.calificacion",
-    "pk": 8
+    "model": "contactos.calificacion"
 },
 {
+    "pk": 9,
     "fields": {
         "calificacion": 4
     },
-    "model": "contactos.calificacion",
-    "pk": 9
+    "model": "contactos.calificacion"
 },
 {
+    "pk": 10,
     "fields": {
         "calificacion": 5
     },
-    "model": "contactos.calificacion",
-    "pk": 10
+    "model": "contactos.calificacion"
 }
 ]
