@@ -4,13 +4,13 @@
     "fields": {
         "user": 2
     },
-    "pk": 2
+    "pk": 1
 },
 {
     "model": "principal.vendedor",
     "fields": {
         "user": 3
     },
-    "pk": 3
+    "pk": 2
 }
 ]

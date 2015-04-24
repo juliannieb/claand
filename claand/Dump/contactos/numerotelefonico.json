@@ -1,38 +1,14 @@
 [
 {
+    "model": "contactos.numerotelefonico",
     "pk": 1,
     "fields": {
-        "is_active": true,
-        "numero": 4421329988,
+        "vendedor": null,
+        "numero": 4421913478,
         "empresa": null,
-        "contacto": 12,
-        "tipo_numero": 2,
-        "vendedor": null
-    },
-    "model": "contactos.numerotelefonico"
-},
-{
-    "pk": 2,
-    "fields": {
         "is_active": true,
-        "numero": 4421567890,
-        "empresa": 12,
-        "contacto": null,
-        "tipo_numero": 1,
-        "vendedor": null
-    },
-    "model": "contactos.numerotelefonico"
-},
-{
-    "pk": 3,
-    "fields": {
-        "is_active": true,
-        "numero": 4421789380,
-        "empresa": null,
-        "contacto": 18,
-        "tipo_numero": 2,
-        "vendedor": null
-    },
-    "model": "contactos.numerotelefonico"
+        "contacto": 19,
+        "tipo_numero": 3
+    }
 }
 ]

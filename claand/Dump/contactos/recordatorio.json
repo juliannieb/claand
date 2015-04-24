@@ -1,2 +1,24 @@
 [
+{
+    "fields": {
+        "urgencia": 1,
+        "contacto": 1,
+        "is_active": true,
+        "fecha": "2015-04-25T05:00:00Z",
+        "descripcion": "CHIDO"
+    },
+    "pk": 1,
+    "model": "contactos.recordatorio"
+},
+{
+    "fields": {
+        "urgencia": 3,
+        "contacto": 2,
+        "is_active": true,
+        "fecha": "2015-04-29T05:00:00Z",
+        "descripcion": "Hola"
+    },
+    "pk": 2,
+    "model": "contactos.recordatorio"
+}
 ]

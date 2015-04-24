@@ -1,2 +1,57 @@
 [
+{
+    "fields": {
+        "is_active": true,
+        "venta": 7,
+        "fecha_modificacion": "2015-04-16",
+        "fecha_creacion": "2015-04-16",
+        "monto": 5500.0
+    },
+    "model": "cotizaciones.pago",
+    "pk": 1
+},
+{
+    "fields": {
+        "is_active": true,
+        "venta": 7,
+        "fecha_modificacion": "2015-04-16",
+        "fecha_creacion": "2015-04-16",
+        "monto": 500.0
+    },
+    "model": "cotizaciones.pago",
+    "pk": 2
+},
+{
+    "fields": {
+        "is_active": true,
+        "venta": 5,
+        "fecha_modificacion": "2015-04-20",
+        "fecha_creacion": "2015-04-20",
+        "monto": 420.0
+    },
+    "model": "cotizaciones.pago",
+    "pk": 5
+},
+{
+    "fields": {
+        "is_active": true,
+        "venta": 9,
+        "fecha_modificacion": "2015-04-20",
+        "fecha_creacion": "2015-04-20",
+        "monto": 1457.0
+    },
+    "model": "cotizaciones.pago",
+    "pk": 6
+},
+{
+    "fields": {
+        "is_active": true,
+        "venta": 4,
+        "fecha_modificacion": "2015-04-20",
+        "fecha_creacion": "2015-04-20",
+        "monto": 180.0
+    },
+    "model": "cotizaciones.pago",
+    "pk": 7
+}
 ]

@@ -1,236 +1,249 @@
 [
 {
     "model": "contactos.contacto",
+    "pk": 1,
     "fields": {
+        "is_cliente": false,
         "nombre": "Marquicio",
         "slug": "adf",
         "is_active": true,
         "apellido": "L\u00f3pez",
-        "correo_electronico": "marqui@gmail.com",
-        "is_cliente": false,
-        "calificacion": 6
-    },
-    "pk": 1
+        "calificacion": 6,
+        "correo_electronico": "marqui@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 2,
     "fields": {
+        "is_cliente": false,
         "nombre": "Juan",
         "slug": "juan",
         "is_active": true,
         "apellido": "P\u00e9rez",
-        "correo_electronico": "jperez@hotmail.com",
-        "is_cliente": false,
-        "calificacion": 6
-    },
-    "pk": 2
+        "calificacion": 6,
+        "correo_electronico": "jperez@hotmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 3,
     "fields": {
+        "is_cliente": false,
         "nombre": "Francisco",
         "slug": "francisco",
         "is_active": true,
         "apellido": "Torres Gutierrez",
-        "correo_electronico": "fgutierrez@gmail.com",
-        "is_cliente": false,
-        "calificacion": 6
-    },
-    "pk": 3
+        "calificacion": 6,
+        "correo_electronico": "fgutierrez@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 4,
     "fields": {
+        "is_cliente": false,
         "nombre": "Tom\u00e1s",
         "slug": "tomas",
         "is_active": true,
         "apellido": "G\u00f3mez L\u00f3pez",
-        "correo_electronico": "tomasgolo@hotmail.com",
-        "is_cliente": false,
-        "calificacion": 7
-    },
-    "pk": 4
+        "calificacion": 7,
+        "correo_electronico": "tomasgolo@hotmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 5,
     "fields": {
+        "is_cliente": true,
         "nombre": "Federico",
         "slug": "federico",
         "is_active": true,
         "apellido": "Vaca Paz",
-        "correo_electronico": "fvacap@gmail.com",
-        "is_cliente": true,
-        "calificacion": 9
-    },
-    "pk": 5
+        "calificacion": 9,
+        "correo_electronico": "fvacap@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 6,
     "fields": {
+        "is_cliente": false,
         "nombre": "Luis Antonio",
         "slug": "luis-antonio",
         "is_active": true,
         "apellido": "Mart\u00ednez Rodriguez",
-        "correo_electronico": "lamr@hotmail.com",
-        "is_cliente": false,
-        "calificacion": 10
-    },
-    "pk": 6
+        "calificacion": 10,
+        "correo_electronico": "lamr@hotmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 7,
     "fields": {
+        "is_cliente": false,
         "nombre": "Jaime",
         "slug": "jaime",
         "is_active": true,
         "apellido": "Molina Leal",
-        "correo_electronico": "jamesml@hotmail.com",
-        "is_cliente": false,
-        "calificacion": 10
-    },
-    "pk": 7
+        "calificacion": 10,
+        "correo_electronico": "jamesml@hotmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 8,
     "fields": {
+        "is_cliente": false,
         "nombre": "Roberto",
         "slug": "roberto",
         "is_active": true,
         "apellido": "G\u00f3mez Fr\u00edas",
-        "correo_electronico": "robertgof@yahoo.com.mx",
-        "is_cliente": false,
-        "calificacion": 6
-    },
-    "pk": 8
+        "calificacion": 6,
+        "correo_electronico": "robertgof@yahoo.com.mx"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 9,
     "fields": {
+        "is_cliente": true,
         "nombre": "Daniel",
         "slug": "daniel",
         "is_active": true,
         "apellido": "Ju\u00e1rez Villarreal",
-        "correo_electronico": "djuarvill@hotmail.com",
-        "is_cliente": true,
-        "calificacion": 6
-    },
-    "pk": 9
+        "calificacion": 6,
+        "correo_electronico": "djuarvill@hotmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 10,
     "fields": {
+        "is_cliente": true,
         "nombre": "Mario",
         "slug": "mario",
         "is_active": true,
         "apellido": "Nu\u00f1ez Garc\u00eda",
-        "correo_electronico": "marionu@gmail.com",
-        "is_cliente": true,
-        "calificacion": 8
-    },
-    "pk": 10
+        "calificacion": 8,
+        "correo_electronico": "marionu@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 11,
     "fields": {
+        "is_cliente": true,
         "nombre": "Fernanda Daniela",
         "slug": "fernanda-daniela",
         "is_active": true,
         "apellido": "Vargas Herrera",
-        "correo_electronico": "fdvargas@gmail.com",
-        "is_cliente": true,
-        "calificacion": 7
-    },
-    "pk": 11
+        "calificacion": 7,
+        "correo_electronico": "fdvargas@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 12,
     "fields": {
+        "is_cliente": true,
         "nombre": "Duque Aripo",
         "slug": "duque-aripo-valdes",
         "is_active": true,
         "apellido": "Vald\u00e9s",
-        "correo_electronico": "duque@gmail.com",
-        "is_cliente": true,
-        "calificacion": 10
-    },
-    "pk": 12
+        "calificacion": 10,
+        "correo_electronico": "duque@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 13,
     "fields": {
+        "is_cliente": false,
         "nombre": "Chicken",
         "slug": "chicken-bake",
         "is_active": true,
         "apellido": "Bake",
-        "correo_electronico": "chickenbake@gmail.com",
-        "is_cliente": false,
-        "calificacion": 8
-    },
-    "pk": 13
+        "calificacion": 8,
+        "correo_electronico": "chickenbake@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 14,
     "fields": {
+        "is_cliente": false,
         "nombre": "Lalocura Por",
         "slug": "lalocura-por-el-hockey",
         "is_active": true,
         "apellido": "El Hockey",
-        "correo_electronico": "lalo@gmail.com",
-        "is_cliente": false,
-        "calificacion": 10
-    },
-    "pk": 14
+        "calificacion": 10,
+        "correo_electronico": "lalo@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 15,
     "fields": {
+        "is_cliente": false,
         "nombre": "Jam\u00f3n",
         "slug": "jamon-serrano",
         "is_active": true,
         "apellido": "Serrano",
-        "correo_electronico": "jamon@serrano.com",
-        "is_cliente": false,
-        "calificacion": 7
-    },
-    "pk": 15
+        "calificacion": 7,
+        "correo_electronico": "jamon@serrano.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 16,
     "fields": {
+        "is_cliente": false,
         "nombre": "Joaqu\u00edn",
         "slug": "joaquin-montes-de-oca",
         "is_active": true,
         "apellido": "Montes de Oca",
-        "correo_electronico": "joaquinm@gmail.com",
-        "is_cliente": false,
-        "calificacion": 8
-    },
-    "pk": 16
+        "calificacion": 8,
+        "correo_electronico": "joaquinm@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 17,
     "fields": {
+        "is_cliente": false,
         "nombre": "Aranza",
         "slug": "aranza-martinez",
         "is_active": true,
         "apellido": "Mart\u00ednez",
-        "correo_electronico": "arimar@gmail.com",
-        "is_cliente": false,
-        "calificacion": 8
-    },
-    "pk": 17
+        "calificacion": 8,
+        "correo_electronico": "arimar@gmail.com"
+    }
 },
 {
     "model": "contactos.contacto",
+    "pk": 18,
     "fields": {
+        "is_cliente": true,
         "nombre": "Steve",
         "slug": "steve-jobs",
         "is_active": true,
         "apellido": "Jobs",
-        "correo_electronico": "stjobs@gmail.com",
+        "calificacion": 10,
+        "correo_electronico": "stjobs@gmail.com"
+    }
+},
+{
+    "model": "contactos.contacto",
+    "pk": 19,
+    "fields": {
         "is_cliente": true,
-        "calificacion": 10
-    },
-    "pk": 18
+        "nombre": "Pedro",
+        "slug": "pedro-lopez",
+        "is_active": true,
+        "apellido": "Lopez",
+        "calificacion": 8,
+        "correo_electronico": "pedro@gmail.com"
+    }
 }
 ]

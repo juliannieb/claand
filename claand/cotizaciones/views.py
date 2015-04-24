@@ -163,7 +163,7 @@ def registrar(request):
     # Render the form with error messages (if any).
     return render(request, 'cotizaciones/registrar_cotizacion.html', forms)
 
-
+@login_required
 def registrar_venta(request, id_cotizacion):
     """ Vista para registrar una venta.
     En esta misma se cambia el status de una cotizacion a no pendiente.
@@ -200,7 +200,7 @@ def registrar_venta(request, id_cotizacion):
     return render(request, 'cotizaciones/registrar_venta.html', forms)
 
 
-
+@login_required
 def registrar_pago(request, id_venta):
     venta = Venta.objects.get(id=id_venta)
     current_user = request.user
