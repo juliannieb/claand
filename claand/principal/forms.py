@@ -3,31 +3,16 @@ from principal.models import Vendedor
 
 class VendedorForm(forms.ModelForm):
 	nombre = forms.CharField(help_text='Nombre: ', \
-		required=True, widget=forms.Textarea(attrs={'class': 'form-control'}))
+		required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
 	apellido = forms.CharField(help_text='Apellido: ', \
-		required=True, widget=forms.Textarea(attrs={'class': 'form-control'}))
-	contacto = forms.ModelChoiceField(queryset=Contacto.objects.all(), help_text='Contacto: ', \
-		required=True, widget=forms.Select(attrs={'class': 'form-control'}))
-	monto = forms.FloatField(help_text='Monto: ', \
-		required=True, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+		required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+	correo_electronico = forms.EmailField(help_text='Email: ', required=True, \
+        widget=forms.EmailInput(attrs={'class': 'form-control'}))
+	usuario = forms.CharField(help_text='Nombre de usuario: ', \
+		required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+	password = forms.CharField(help_text='Contraseña: ', \
+		required=True, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 	
-
 	class Meta:
-		model = Cotizacion
-		fields = ('contacto', 'monto', 'descripcion',)
-
-class VentaForm(forms.ModelForm):
-	monto_total = forms.FloatField(help_text='Monto total: ', \
-		required=True, widget=forms.NumberInput(attrs={'class': 'form-control'}))
-
-	class Meta:
-		model = Venta
-		fields = ('monto_total',)
-
-class PagoForm(forms.ModelForm):
-	monto = forms.FloatField(help_text='Monto total: ', \
-		required=True, widget=forms.NumberInput(attrs={'class': 'form-control'}))
-
-	class Meta:
-		model = Pago
-		fields = ('monto',)
+		model = Vendedor
+		fields = ('nombre', 'apellido', 'correo_electronico', 'usuario', 'password',)
