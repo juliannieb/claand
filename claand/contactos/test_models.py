@@ -52,7 +52,7 @@ class ModelosContacto(TestCase):
         fecha = datetime.now()
         contacto_prueba = Contacto.objects.get(id=1)
         llamada_prueba = Llamada.objects.create(contacto=contacto_prueba, descripcion=descripcion, fecha=fecha)
-        self.assertEqual(descripcion[:50], str(llamada_prueba))
+        self.assertEqual(descripcion[:30], str(llamada_prueba))
 
 
 
