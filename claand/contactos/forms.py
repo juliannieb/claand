@@ -3,6 +3,7 @@ from contactos.models import Contacto, Pertenece, Area, Atiende, Calificacion
 from contactos.models import Nota, Recordatorio, Llamada
 from contactos.models import NumeroTelefonico, TipoNumeroTelefonico
 from empresas.models import Empresa
+from principal.models import Vendedor
 
 class ContactoForm(forms.ModelForm):
     nombre = forms.CharField(max_length=35, help_text='Nombre: ', \
@@ -61,3 +62,11 @@ class RecordatorioForm(forms.ModelForm):
     class Meta:
         model = Contacto
         fields = ('contacto', 'descripcion', 'urgencia', 'fecha',)
+
+class AtiendeForm(forms.ModelForm):
+    vendedor = forms.ModelChoiceField(queryset=Vendedor.objects.all(), help_text='Vendedor: ', \
+        required=True, widget=forms.Select(attrs={'class':'form-control'}))
+
+    class Meta:
+        model = Atiende
+        fields = ('vendedor',)

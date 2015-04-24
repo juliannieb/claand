@@ -42,7 +42,13 @@
                         {% endif %}
                         
                         <td>{{ contacto.calificacion }}</td>
-                        <td>{{ contacto.atiende_set.get.vendedor }}</td>
+                        <td>
+                            {% for atiende in contacto.atiende_set.all %}
+                                {% if forloop.last %}
+                                    {{ atiende.vendedor }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

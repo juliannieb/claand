@@ -8,6 +8,8 @@ from principal.models import Vendedor
 from contactos.models import Contacto, Llamada
 from cotizaciones.models import Cotizacion, Venta
 
+from principal.forms import VendedorForm
+
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
     """
@@ -85,3 +87,36 @@ def vendedor(request, id_vendedor):
     context['no_es_vendedor'] = es_vendedor
     return render(request, 'principal/vendedor.html', context)
 
+def registrar_vendedor(request):
+    """ Vista para registrar un nuevo vendedor en el sistema """
+    current_user = request.user
+    if request.method == 'POST':
+        formVendedor = VendedorForm(request.POST)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formVendedor':formVendedor, 'no_es_vendedor':es_vendedor}
+
+        # Have we been provided with a valid form?
+        if formVendedor.is_valid():
+            # Save the new category to the database.
+            data = formVendedor.cleaned_data
+            nombre = data['nombre']
+            apellido = data['apellido']
+            correo_electronico = data['correo_electronico']
+            usuario = data['usuario']
+            password = data['password']
+
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return render(request, 'principal/exito.html')
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print (formVendedor.errors)
+    else:
+        # If the request was not a POST, display the form to enter details.
+        formVendedor = VendedorForm()
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formVendedor':formVendedor, 'no_es_vendedor':es_vendedor, }
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render(request, 'principal/registrar_vendedor.html', forms)
