@@ -3,35 +3,35 @@
     "fields": {
         "nombre": "Oficina"
     },
-    "pk": 1,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 1
 },
 {
     "fields": {
         "nombre": "Celular"
     },
-    "pk": 2,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 2
 },
 {
     "fields": {
         "nombre": "Casa"
     },
-    "pk": 3,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 3
 },
 {
     "fields": {
         "nombre": "Fax"
     },
-    "pk": 4,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 4
 },
 {
     "fields": {
         "nombre": "Otro"
     },
-    "pk": 5,
-    "model": "contactos.tiponumerotelefonico"
+    "model": "contactos.tiponumerotelefonico",
+    "pk": 5
 }
 ]

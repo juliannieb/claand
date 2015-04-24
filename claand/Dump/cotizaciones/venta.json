@@ -1,2 +1,93 @@
 [
+{
+    "model": "cotizaciones.venta",
+    "pk": 2,
+    "fields": {
+        "cotizacion": 16,
+        "is_completada": false,
+        "fecha_creacion": "2015-04-16",
+        "monto_total": 210.0,
+        "is_active": true,
+        "monto_acumulado": 0.0,
+        "fecha_modificacion": "2015-04-16"
+    }
+},
+{
+    "model": "cotizaciones.venta",
+    "pk": 3,
+    "fields": {
+        "cotizacion": 14,
+        "is_completada": false,
+        "fecha_creacion": "2015-04-16",
+        "monto_total": 165.0,
+        "is_active": true,
+        "monto_acumulado": 0.0,
+        "fecha_modificacion": "2015-04-16"
+    }
+},
+{
+    "model": "cotizaciones.venta",
+    "pk": 4,
+    "fields": {
+        "cotizacion": 13,
+        "is_completada": true,
+        "fecha_creacion": "2015-04-16",
+        "monto_total": 180.0,
+        "is_active": true,
+        "monto_acumulado": 180.0,
+        "fecha_modificacion": "2015-04-20"
+    }
+},
+{
+    "model": "cotizaciones.venta",
+    "pk": 5,
+    "fields": {
+        "cotizacion": 6,
+        "is_completada": true,
+        "fecha_creacion": "2015-04-16",
+        "monto_total": 420.0,
+        "is_active": true,
+        "monto_acumulado": 420.0,
+        "fecha_modificacion": "2015-04-20"
+    }
+},
+{
+    "model": "cotizaciones.venta",
+    "pk": 6,
+    "fields": {
+        "cotizacion": 5,
+        "is_completada": false,
+        "fecha_creacion": "2015-04-16",
+        "monto_total": 280.0,
+        "is_active": true,
+        "monto_acumulado": 0.0,
+        "fecha_modificacion": "2015-04-16"
+    }
+},
+{
+    "model": "cotizaciones.venta",
+    "pk": 7,
+    "fields": {
+        "cotizacion": 20,
+        "is_completada": true,
+        "fecha_creacion": "2015-04-16",
+        "monto_total": 6000.0,
+        "is_active": true,
+        "monto_acumulado": 6000.0,
+        "fecha_modificacion": "2015-04-16"
+    }
+},
+{
+    "model": "cotizaciones.venta",
+    "pk": 9,
+    "fields": {
+        "cotizacion": 21,
+        "is_completada": true,
+        "fecha_creacion": "2015-04-20",
+        "monto_total": 1457.0,
+        "is_active": true,
+        "monto_acumulado": 1457.0,
+        "fecha_modificacion": "2015-04-20"
+    }
+}
 ]

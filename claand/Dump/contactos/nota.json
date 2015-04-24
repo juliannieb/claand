@@ -1,2 +1,42 @@
 [
+{
+    "pk": 1,
+    "fields": {
+        "clasificacion": 3,
+        "is_active": true,
+        "contacto": 14,
+        "descripcion": "Le gusta el hocke, tener en cuenta para boletos"
+    },
+    "model": "contactos.nota"
+},
+{
+    "pk": 2,
+    "fields": {
+        "clasificacion": 4,
+        "is_active": true,
+        "contacto": 15,
+        "descripcion": "Disfruta del queso, regalar queso en navidad"
+    },
+    "model": "contactos.nota"
+},
+{
+    "pk": 3,
+    "fields": {
+        "clasificacion": 5,
+        "is_active": true,
+        "contacto": 6,
+        "descripcion": "Muy buen cliente, tomar en cuenta para regalo a fin de a\u00f1o"
+    },
+    "model": "contactos.nota"
+},
+{
+    "pk": 4,
+    "fields": {
+        "clasificacion": 1,
+        "is_active": true,
+        "contacto": 7,
+        "descripcion": "Se tarda en pagar, no manda orden de compras"
+    },
+    "model": "contactos.nota"
+}
 ]

@@ -1,12 +1,12 @@
 [
 {
-    "fields": {
-        "descripcion": "Le llam\u00e9 porque soy su fan.",
-        "fecha": "2015-04-16",
-        "contacto": 18,
-        "is_active": true
-    },
     "model": "contactos.llamada",
+    "fields": {
+        "is_active": true,
+        "descripcion": "Llamada de seguimiento de maquinado de piezas Mazda",
+        "contacto": 1,
+        "fecha": "2015-04-20"
+    },
     "pk": 1
 }
 ]
