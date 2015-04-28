@@ -16,12 +16,13 @@
                     <h3 class="panel-title">{{contacto.nombre}} {{contacto.apellido}}</h3>
                   </div>
                   <div class="panel-body">
-                    {{ pertenece.empresa.nombre }}</br>
-                    {{ pertenece.area }} </br>
-                    {{ contacto.correo_electronico}}</br>
+                    Empresa: {{ pertenece.empresa.nombre }}</br>
+                    Área: {{ pertenece.area }} </br>
+                    Correo electrónico: {{ contacto.correo_electronico}}</br>
                     {% for numero in numeros_list %}
                         {{ numero.tipo_numero }} : {{ numero.numero}} </br>
                     {% endfor %}
+                    Tipo: 
                     {% if contacto.is_cliente %}
                         Cliente </br>
                     {% else %}
