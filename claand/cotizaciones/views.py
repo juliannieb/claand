@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from datetime import date
+from django.forms.util import ErrorList
 
 from cotizaciones.models import Cotizacion, Venta, Pago
 from principal.models import Vendedor
@@ -219,14 +220,19 @@ def registrar_pago(request, id_venta):
             # Save the new category to the database.
             data = formPago.cleaned_data
             monto = data['monto']
-            venta.monto_acumulado += monto
-            if venta.monto_acumulado >= venta.monto_total:
-                venta.is_completada = True
-            venta.save()
-            Pago(monto=monto, venta=venta).save()
-            # Now call the index() view.
-            # The user will be shown the homepage.
-            return render(request, 'principal/exito.html')
+            if venta.monto_acumulado + monto > venta.monto_total:
+                formPago.errors['monto'] = ErrorList(['El monto acumulado no puede ser mayor al monto total de la venta.'])
+                forms = {'formPago':formPago, 'venta' : venta, 'no_es_vendedor':es_vendedor}
+                return render(request, 'cotizaciones/registrar_pago.html', forms)
+            else:
+                venta.monto_acumulado += monto
+                if venta.monto_acumulado >= venta.monto_total:
+                    venta.is_completada = True
+                venta.save()
+                Pago(monto=monto, venta=venta).save()
+                # Now call the index() view.
+                # The user will be shown the homepage.
+                return render(request, 'principal/exito.html')
         else:
             # The supplied form contained errors - just print them to the terminal.
             print (formPago.errors)
