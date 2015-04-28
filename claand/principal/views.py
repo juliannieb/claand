@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import RequestContext
+from django.contrib.auth.models import User, Group
 
 from principal.models import Vendedor
 from contactos.models import Contacto, Llamada
@@ -105,6 +106,11 @@ def registrar_vendedor(request):
             usuario = data['usuario']
             password = data['password']
 
+            user = User.objects.create_user(usuario, correo_electronico, password)
+            user.first_name = nombre
+            user.last_name = apellido
+            user.save()
+            Vendedor(user=user).save()
             # Now call the index() view.
             # The user will be shown the homepage.
             return render(request, 'principal/exito.html')
