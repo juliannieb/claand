@@ -178,7 +178,7 @@ def registrar_venta(request, id_cotizacion):
     if request.method == 'POST':
         formVenta = VentaForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
-        forms = {'formVenta':formVenta, 'no_es_vendedor':es_vendedor}
+        forms = {'formVenta':formVenta, 'cotizacion' : cotizacion, 'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if formVenta.is_valid():
@@ -212,7 +212,7 @@ def registrar_pago(request, id_venta):
     if request.method == 'POST':
         formPago = PagoForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
-        forms = {'formPago':formPago, 'no_es_vendedor':es_vendedor}
+        forms = {'formPago':formPago, 'venta' : venta, 'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if formPago.is_valid():

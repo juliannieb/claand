@@ -1,12 +1,13 @@
 from datetime import datetime
 
 from django.db import models
+from django.core.validators import MinValueValidator
 
 from contactos.models import Contacto
 
 class Cotizacion(models.Model):
     is_active = models.BooleanField(default=True)
-    monto = models.FloatField(default=0)
+    monto = models.FloatField(default=0, validators=[MinValueValidator(0)])
     descripcion = models.TextField()
     is_pendiente = models.BooleanField(default=True)
     contacto = models.ForeignKey(Contacto)
@@ -28,7 +29,7 @@ class Cotizacion(models.Model):
 
 class Venta(models.Model):
     is_active = models.BooleanField(default=True)
-    monto_total = models.FloatField(default=0)
+    monto_total = models.FloatField(default=0, validators=[MinValueValidator(0)])
     monto_acumulado = models.FloatField(default=0)
     is_completada = models.BooleanField(default=False)
     cotizacion = models.OneToOneField(Cotizacion)
@@ -53,7 +54,7 @@ class Pago(models.Model):
     venta = models.ForeignKey(Venta)
     fecha_creacion = models.DateField(editable=False)
     fecha_modificacion = models.DateField()
-    monto = models.FloatField()
+    monto = models.FloatField(validators=[MinValueValidator(0)])
     
     def save(self, *args, **kwargs):
         """ Override de save para que sólo haya una fecha de creación,
