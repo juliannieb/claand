@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>Registrar cotización</h1>
+            <h1>Registrar venta</h1>
         </div>
     </div>
 
@@ -36,7 +36,9 @@
                     <div class="row">
                         <div class="form-group"> 
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="btn_submitContacto" class="btn btn-success pull-right">Registrar</button>
+                                <a href="{% url 'cotizaciones:registrar_venta' cotizacion.id %}">
+                                    <button type="btn_submitContacto" class="btn btn-success pull-right">Registrar</button>
+                                </a>
                             </div>
                         </div>
                     </div>

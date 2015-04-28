@@ -131,10 +131,15 @@ def registrar(request):
     """
     current_user = request.user
     current_vendedor = Vendedor.objects.get(user=current_user)
-    contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+    todos_los_contactos = Contacto.objects.all()
+    contactos_list = []
+    for contacto in todos_los_contactos:
+        if contacto.atiende_set.all():
+            if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                contactos_list.append(contacto.pk)
     if request.method == 'POST':
         formCotizacion = CotizacionForm(request.POST)
-        formCotizacion.fields["contacto"].queryset = contactos_list
+        formCotizacion.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formCotizacion':formCotizacion, 'no_es_vendedor':es_vendedor}
 
@@ -155,7 +160,7 @@ def registrar(request):
     else:
         # If the request was not a POST, display the form to enter details.
         formCotizacion = CotizacionForm()
-        formCotizacion.fields["contacto"].queryset = contactos_list
+        formCotizacion.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formCotizacion':formCotizacion, 'no_es_vendedor':es_vendedor}
 
@@ -173,7 +178,7 @@ def registrar_venta(request, id_cotizacion):
     if request.method == 'POST':
         formVenta = VentaForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
-        forms = {'formVenta':formVenta, 'no_es_vendedor':es_vendedor}
+        forms = {'formVenta':formVenta, 'cotizacion' : cotizacion, 'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if formVenta.is_valid():
@@ -207,7 +212,7 @@ def registrar_pago(request, id_venta):
     if request.method == 'POST':
         formPago = PagoForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
-        forms = {'formPago':formPago, 'no_es_vendedor':es_vendedor}
+        forms = {'formPago':formPago, 'venta' : venta, 'no_es_vendedor':es_vendedor}
 
         # Have we been provided with a valid form?
         if formPago.is_valid():
