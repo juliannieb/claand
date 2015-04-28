@@ -2,9 +2,7 @@ from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Group
 
-from principal.models import Vendedor
 from contactos.models import Contacto
-from empresas.models import Empresa
 
 from cotizaciones.forms import CotizacionForm, VentaForm, PagoForm
 

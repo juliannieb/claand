@@ -30,7 +30,7 @@ class VistasContacto(TestCase):
 
     def test_contacto_usuario_no_registrado(self):
         """ test para checar si un usuario no registrado es redirigido al login
-        al intentar entrar a consultar contactos.
+        al intentar entrar a las vistas del app.
         """
         response = self.client.get(reverse('contactos:consultar_contactos'))
         self.assertEqual(response.status_code, 302)

@@ -3,6 +3,7 @@ import time
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 
 from empresas.forms import EmpresaForm, DireccionForm, NumeroTelefonicoForm, RedSocialForm
 
@@ -172,14 +173,16 @@ def registrar_empresa(request):
     return render(request, 'empresas/registrar_empresa.html', forms)
 
 
-
+@login_required
 def get_municipio(request):
     """ Función para atender la petición GET AJAX para obtener el municipio de un estado
     """
     if request.is_ajax() and request.method == 'GET':
         estado_id = request.GET['estado_id']
         municipios = Municipio.objects.filter(estado=estado_id).order_by('nombre')
-    return render_to_response('empresas/municipios_seleccionados.html', {'municipios': municipios})
+        return render_to_response('empresas/municipios_seleccionados.html', {'municipios': municipios})
+    else:
+        return HttpResponseRedirect(reverse('principal:index'))
 
 
 def search_empresas(request):
