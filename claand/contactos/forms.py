@@ -57,10 +57,10 @@ class RecordatorioForm(forms.ModelForm):
     urgencia = forms.ChoiceField(help_text='Urgencia: ', choices=[(x, x) for x in range(1, 4)], \
         widget=forms.Select(attrs={'class': 'form-control'}))
     fecha = forms.DateField(help_text='Fecha y hora: ', \
-        widget=forms.DateTimeInput(attrs={'class': 'form-control'}))
+        widget=forms.DateTimeInput(attrs={'class': 'form-control datepicker'}))
 
     class Meta:
-        model = Contacto
+        model = Recordatorio
         fields = ('contacto', 'descripcion', 'urgencia', 'fecha',)
 
 class AtiendeForm(forms.ModelForm):
