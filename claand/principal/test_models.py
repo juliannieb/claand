@@ -20,8 +20,3 @@ class ModelosPrincipal(TestCase):
 		"""
 		vendedor_prueba = Vendedor.objects.create(user=self.usuario)
 		self.assertIsNotNone(vendedor_prueba.user.groups.get(name='vendedor'))
-
-
-
-
-
