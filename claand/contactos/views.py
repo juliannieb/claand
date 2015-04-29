@@ -1,11 +1,21 @@
 import time
+import os
+import logging
+import httplib2
 
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.urlresolvers import reverse
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
+from oauth2client.django_orm import Storage
+from oauth2client import xsrfutil
+from oauth2client.client import flow_from_clientsecrets
+
+from claand import settings
+from contactos.models import CredentialsModel
 from contactos.models import Contacto, Pertenece, NumeroTelefonico, Calificacion, Atiende, Recordatorio, Nota, Llamada
 from principal.models import Vendedor
 from cotizaciones.models import Cotizacion, Venta
@@ -19,6 +29,23 @@ def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
     """
     return not user.groups.filter(name='vendedor').exists()
+
+
+CLIENT_SECRETS = os.path.join(os.path.dirname(__file__),  'client_secret.json')
+FLOW = flow_from_clientsecrets(
+    CLIENT_SECRETS,
+    scope='https://www.googleapis.com/auth/calendar',
+    redirect_uri='http://localhost:8000/oauth2callback')
+
+@login_required
+def auth_return(request):
+    ans = xsrfutil.validate_token(settings.SECRET_KEY, str(request.REQUEST['state']), request.user)
+    if not ans:
+        return HttpResponseBadRequest()
+    credential = FLOW.step2_exchange(request.REQUEST)
+    storage = Storage(CredentialsModel, 'id', request.user, 'credential')
+    storage.put(credential)
+    return HttpResponseRedirect(reverse('contactos:registrar_recordatorio'))
 
 @login_required
 def consultar_contactos(request):
@@ -138,10 +165,15 @@ def registrar_llamada(request):
     """
     current_user = request.user
     current_vendedor = Vendedor.objects.get(user=current_user)
-    contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+    todos_los_contactos = Contacto.objects.all()
+    contactos_list = []
+    for contacto in todos_los_contactos:
+        if contacto.atiende_set.all():
+            if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                contactos_list.append(contacto.pk)
     if request.method == 'POST':
         formLlamada = LlamadaForm(request.POST)
-        formLlamada.fields["contacto"].queryset = contactos_list
+        formLlamada.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
 
@@ -162,7 +194,7 @@ def registrar_llamada(request):
     else:
         # If the request was not a POST, display the form to enter details.
         formLlamada = LlamadaForm()
-        formLlamada.fields["contacto"].queryset = contactos_list
+        formLlamada.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
 
@@ -254,6 +286,26 @@ def recordatorio(request, recordatorio_id):
     context['recordatorio'] = recordatorio
     return render(request, "contactos/recordatorio.html", context)
 
+# @login_required
+# @user_passes_test(no_es_vendedor)
+# def registrar_recordatorio(request):
+#     """ En esta vista se registra y valida un nuevo recordatorio
+#     """
+#     storage = Storage(CredentialsModel, 'id', request.user, 'credential')
+#     credential = storage.get()
+#     if credential is None or credential.invalid == True:
+#         FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY, request.user)
+#         authorize_url = FLOW.step1_get_authorize_url()
+#         return HttpResponseRedirect(authorize_url)
+#     else:
+#         http = httplib2.Http()
+#         http = credential.authorize(http)
+#         service = build("calendar", "v3", http=http)
+#         formRecordatorio = RecordatorioForm()
+#         es_vendedor = no_es_vendedor(request.user)
+#         forms = {'formRecordatorio':formRecordatorio, 'no_es_vendedor':es_vendedor}
+#     return render(request, 'contactos/registrar_recordatorio.html', forms)
+
 @login_required
 @user_passes_test(no_es_vendedor)
 def registrar_recordatorio(request):
@@ -291,6 +343,8 @@ def registrar_recordatorio(request):
     # Render the form with error messages (if any).
     return render(request, 'contactos/registrar_recordatorio.html', forms)
 
+
+@login_required
 def search_contactos(request):
     """ Función para atender la petición GET AJAX para filtrar los contactos en la Vista
     contactos
@@ -309,6 +363,8 @@ def search_contactos(request):
     return render_to_response('contactos/search_contactos.html', {'contactos_list': contactos_list, \
         'no_es_vendedor':es_vendedor})
 
+@login_required
+@user_passes_test(no_es_vendedor)
 def asignar_vendedor(request, contacto_id):
     """ En esta vista se asigna la atención de un vendedor a un contacto
     """
@@ -341,3 +397,40 @@ def asignar_vendedor(request, contacto_id):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'contactos/asignar_vendedor.html', forms)
+
+@login_required
+def eliminar_contacto(request, id_contacto):
+    contacto = Contacto.objects.get(pk=id_contacto)
+    contacto.is_active = False
+    contacto.save()
+    cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
+    for cotizacion in cotizaciones_list:
+        cotizacion.is_active = False
+        try:
+            venta = Venta.objects.get(cotizacion=cotizacion)
+        except:
+            venta = None
+        if venta:
+            venta.is_active = False
+            venta.save()
+        cotizacion.save()
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+
+@login_required
+@user_passes_test(no_es_vendedor)
+def eliminar_nota(request, id_nota):
+    nota = Nota.objects.get(pk=id_nota)
+    nota.is_active = False
+    nota.save()
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+
+@login_required
+@user_passes_test(no_es_vendedor)
+def eliminar_recordatorio(request, id_recordatorio):
+    recordatorio = Recordatorio.objects.get(pk=id_recordatorio)
+    recordatorio.is_active = False
+    recordatorio.save()
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})

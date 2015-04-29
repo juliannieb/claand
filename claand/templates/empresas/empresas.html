@@ -19,10 +19,12 @@
             </thead>
             <tbody id="tabla_empresas">
                 {% for empresa in empresas_list %}
-                    <tr>
-                        <td><a href="{% url 'empresas:empresa' empresa.slug %}">{{ empresa.rfc }}</a></td>
-                        <td>{{ empresa.nombre }}</td>
-                    </tr>
+                    {% if empresa.is_active %}
+                        <tr>
+                            <td><a href="{% url 'empresas:empresa' empresa.slug %}">{{ empresa.rfc }}</a></td>
+                            <td>{{ empresa.nombre }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>

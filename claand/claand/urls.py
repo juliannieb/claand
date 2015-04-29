@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     url(r'^empresas/', include('empresas.urls', namespace="empresas")),
     url(r'^cotizaciones/', include('cotizaciones.urls', namespace="cotizaciones")),
     url(r'^contactos/', include('contactos.urls', namespace="contactos")),
+    url(r'^oauth2callback', 'contactos.views.auth_return'),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -31,11 +31,18 @@
                     {% endif %}
                   </div>
                 </div>
-                <div class="form-group"> 
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{% url 'cotizaciones:registrar_pago' venta.id %}">
-                            <button type="btn_submitContacto" class="btn btn-success pull-right">Registrar Pago</button>
-                        </a>
+                <div class="row">
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                            <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_venta()">Eliminar</button>
+
+                            <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+
+                            <a href="{% url 'cotizaciones:registrar_pago' venta.id %}">
+                                <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Registrar Pago</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -66,5 +73,16 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        function eliminar_venta() {
+            var x;
+            if (confirm("¿Estás seguro de eliminar el registro?") == true) {
+                window.location.replace("{% url 'cotizaciones:eliminar_venta' venta.id %}");
+            } else {
+                x = "You pressed Cancel!";
+            }
+        }
+    </script>
 
 {% endblock content%}

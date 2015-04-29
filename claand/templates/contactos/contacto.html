@@ -16,32 +16,52 @@
                     <h3 class="panel-title">{{contacto.nombre}} {{contacto.apellido}}</h3>
                   </div>
                   <div class="panel-body">
-                    {{ pertenece.empresa.nombre }}</br>
-                    {{ pertenece.area }} </br>
-                    {{ contacto.correo_electronico}}</br>
+                    Empresa: {{ pertenece.empresa.nombre }}</br>
+                    Área: {{ pertenece.area }} </br>
+                    Correo electrónico: {{ contacto.correo_electronico}}</br>
                     {% for numero in numeros_list %}
                         {{ numero.tipo_numero }} : {{ numero.numero}} </br>
                     {% endfor %}
-                    {% if contacto.is_cliente %}
+                    Tipo: 
+                        {% if contacto.is_cliente %}
                         Cliente </br>
                     {% else %}
                         Prospecto </br>
                     {% endif %}
                     Calificación: {{calificacion.calificacion}}
                   </div>
-                </div>
+                </div>            
+                {% if no_es_vendedor %}
+                    <div class="row">
+                        <div class="form-group"> 
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_contacto()">Eliminar</button>
+
+                                <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+
+                                <a href="{% url 'contactos:asignar_vendedor' contacto.id %}">
+                                    <button style="margin-right: 5px"  type="btn_submitContacto" class="btn btn-success pull-right">Asignar vendedor</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                     <div class="row">
+                        <div class="form-group"> 
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_contacto()">Eliminar</button>
+                                
+                                <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
-        {% if no_es_vendedor %}
-            <div class="row row-centered">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
-                    <a href="{% url 'contactos:asignar_vendedor' contacto.id %}">
-                        <button type="btn_submitContacto" class="btn btn-success pull-right">Asignar vendedor</button>
-                    </a>
-                </div>
-            </div>
-        {% endif %}
     </div>
+
+
 
     <div class="container">
         <div class="page-header">
@@ -61,13 +81,15 @@
             </thead>
             <tbody>
                 {% for cotizacion in cotizaciones_list %}
-                    {% if cotizacion.is_pendiente %}
-                        <tr>
-                            <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
-                            <td>{{ pertenece.empresa }}</td>
-                            <td>{{ cotizacion.descripcion }}</td>
-                            <td>{{ cotizacion.monto }}</td>
-                        </tr>
+                    {% if cotizacion.is_active %}
+                        {% if cotizacion.is_pendiente %}
+                            <tr>
+                                <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
+                                <td>{{ pertenece.empresa }}</td>
+                                <td>{{ cotizacion.descripcion }}</td>
+                                <td>{{ cotizacion.monto }}</td>
+                            </tr>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </tbody>
@@ -94,18 +116,20 @@
             </thead>
             <tbody>
                 {% for venta in ventas_list %}
-                    <tr>
-                        <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
-                        <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
-                        <td>{{ venta.cotizacion.descripcion }}</td>
-                        <td>{{ venta.monto_total }}</td>
-                        <td>{{ venta.monto_total }}</td>
-                        {% if venta.is_completada %}
-                            <td>Completada</td>
-                        {% else %}
-                            <td>Pendiente</td>
-                        {% endif %}
-                    </tr>
+                    {% if venta.is_active %}
+                        <tr>
+                            <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
+                            <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
+                            <td>{{ venta.cotizacion.descripcion }}</td>
+                            <td>{{ venta.monto_total }}</td>
+                            <td>{{ venta.monto_total }}</td>
+                            {% if venta.is_completada %}
+                                <td>Completada</td>
+                            {% else %}
+                                <td>Pendiente</td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -127,15 +151,28 @@
             </thead>
             <tbody>
                 {% for llamada in llamadas_list %}
-                    {% if llamada.contacto.nombre = contacto.nombre %}
-                        <tr>
-                            <td>{{ llamada.fecha }}</td>
-                            <td>{{ llamada.descripcion }}</td>
-                        </tr>
+                    {% if llamada.is_active %}
+                        {% if llamada.contacto == contacto %}
+                            <tr>
+                                <td>{{ llamada.fecha }}</td>
+                                <td>{{ llamada.descripcion }}</td>
+                            </tr>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
+<script>
+    function eliminar_contacto() {
+        var x;
+        if (confirm("¿Estás seguro de eliminar el registro?") == true) {
+            window.location.replace("{% url 'contactos:eliminar_contacto' contacto.id %}");
+        } else {
+            x = "You pressed Cancel!";
+        }
+    }
+</script>
 
 {% endblock content%}

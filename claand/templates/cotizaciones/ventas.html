@@ -23,18 +23,20 @@
             </thead>
             <tbody>
                 {% for venta in ventas_list %}
-                <tr>
-                    <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
-                    <td>{{ venta.cotizacion.contacto }}</td>
-                    <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
-                    <td>{{ venta.cotizacion.descripcion }}</td>
-                    <td>{{ venta.monto_total }}</td>
-                    {% if venta.is_completada %}
-                        <td>Completada</td>
-                    {% else %}
-                        <td>Pendiente</td>
+                    {% if venta.is_active %}
+                        <tr>
+                            <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
+                            <td>{{ venta.cotizacion.contacto }}</td>
+                            <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
+                            <td>{{ venta.cotizacion.descripcion }}</td>
+                            <td>{{ venta.monto_total }}</td>
+                            {% if venta.is_completada %}
+                                <td>Completada</td>
+                            {% else %}
+                                <td>Pendiente</td>
+                            {% endif %}
+                        </tr>
                     {% endif %}
-                </tr>
                 {% endfor %}
             </tbody>
         </table>

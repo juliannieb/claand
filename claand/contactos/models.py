@@ -1,10 +1,23 @@
 from datetime import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.contrib import admin
+from django.contrib.auth.models import User
+
+from oauth2client.django_orm import FlowField
+from oauth2client.django_orm import CredentialsField
+
 from empresas.models import Empresa
 from principal.models import Vendedor
 
     
+class CredentialsModel(models.Model):
+  id = models.ForeignKey(User, primary_key=True)
+  credential = CredentialsField()
+
+class CredentialsAdmin(admin.ModelAdmin):
+    pass
+
 class Contacto(models.Model):
     is_active = models.BooleanField(default=True)
     is_cliente = models.BooleanField(default=False)
