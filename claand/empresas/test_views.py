@@ -1,11 +1,15 @@
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Group
+from django.db.models import Q
 
 from principal.models import Vendedor
+from empresas.models import Empresa
+from contactos.models import Contacto
 
 
 class VistasEmpresas(TestCase):
+    fixtures = ['contactos.json', 'empresas.json', 'cotizaciones.json', 'principal.json', 'users.json']
     def setUp(self):
         grupo_vendedor = Group.objects.get_or_create(name="vendedor")[0]
         self.usuario = User.objects.create_user('temporary', 'temporary@gmail.com', 'temporary')
@@ -34,6 +38,38 @@ class VistasEmpresas(TestCase):
         self.assertTrue(login)
         response = self.client.get(reverse('empresas:get_municipio'))
         self.assertRedirects(response, reverse('principal:index'), status_code=302, target_status_code=200)
+
+    def test_vista_empresa(self):
+        """ Test para probar si al ver el detalle de una empresa, se muestra su informacion
+        correspondiente
+        """
+        # login = self.client.login(username='temporary', password='temporary')
+        # self.assertTrue(login)
+        # response = self.client.get(reverse('empresas:empresa', args=('claand',)))
+        # self.assertEqual(response.status_code, 200)
+        # empresa = Empresa.objects.get(slug='claand')
+        # self.assertIs(empresa)
+        # numeros_list = empresa.numerotelefonico_set.all()
+        # self.assertTrue('numeros_list' in response.context)
+        # self.assertCountEqual(response.context['numeros_list'], numeros_list)
+        # redes_list = empresa.redsocial_set.all()
+        # self.assertTrue('redes_list' in response.context)
+        # self.assertCountEqual(response.context['redes_list'], redes_list)
+        # contactos_list = Contacto.objects.filter(empresa=empresa)
+        # self.assertTrue('contactos_list' in response.context)
+        # self.assertCountEqual(response.context['contactos_list'], contactos_list)
+        pass
+        
+    def test_vista_empresas(self):
+        """ Probar si se muestran todas las empresas
+        """
+        login = self.client.login(username='temporary', password='temporary')
+        self.assertTrue(login)
+        response = self.client.get(reverse('empresas:consultar_empresas'))
+        self.assertEqual(response.status_code, 200)
+        empresas = Empresa.objects.all()
+        self.assertTrue('empresas_list' in response.context)
+        self.assertCountEqual(response.context['empresas_list'], empresas)
 
 
         
