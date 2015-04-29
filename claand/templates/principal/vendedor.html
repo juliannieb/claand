@@ -10,9 +10,45 @@
     </div>
     <div class="container">
         <div class="page-header">
+            <h1>Llamadas</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="sortable table table-hover" id="tableLlamadas">
+            <thead>
+                <tr>
+                    <th>Contacto</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for llamada in llamadas_list %}
+                    <tr>
+                        <td>{{ llamada.contacto }}</td>
+                        <td>{{ llamada.fecha }}</td>
+                        <td>{{ llamada.descripcion }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row row-centered">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
+                {% include_container chartcontainer %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
             <h1>Cotizaciones asociadas</h1>
         </div>
     </div>
+
     <div class="container">
         <table class="sortable table table-hover" id="tableCotizaciones">
             <thead>
@@ -75,31 +111,6 @@
         </table>
     </div>
 
-    <div class="container">
-        <div class="page-header">
-            <h1>Llamadas</h1>
-        </div>
-    </div>
 
-    <div class="container">
-        <table class="sortable table table-hover" id="tableLlamadas">
-            <thead>
-                <tr>
-                    <th>Contacto</th>
-                    <th>Fecha</th>
-                    <th>Descripción</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for llamada in llamadas_list %}
-                    <tr>
-                        <td>{{ llamada.contacto }}</td>
-                        <td>{{ llamada.fecha }}</td>
-                        <td>{{ llamada.descripcion }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
 
 {% endblock content%}

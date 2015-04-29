@@ -21,7 +21,8 @@
                     Concepto: {{ cotizacion.descripcion }} </br>
                     Monto total: $ {{ venta.monto_total }}</br>
                     Monto acumulado: $ {{ venta.monto_acumulado }} <br>
-                    Fecha: {{ cotizacion.fecha_creacion }}</br>
+                    Fecha de cotización: {{ cotizacion.fecha_creacion }}</br>
+                    Fecha de venta: {{ venta.fecha_creacion }} <br>
                     Estado: 
                     {% if venta.is_completada %}
                         Completada <br>
