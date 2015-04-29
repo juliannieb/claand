@@ -255,3 +255,9 @@ def eliminar_cotizacion(request, id_cotizacion):
     cotizacion.is_active = False
     cotizacion.save()
     return render(request, 'principal/exito.html')
+
+def eliminar_venta(request, id_venta):
+    venta = Venta.objects.get(pk=id_venta)
+    venta.is_active = False
+    venta.save()
+    return render(request, 'principal/exito.html')

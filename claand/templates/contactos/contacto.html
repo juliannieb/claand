@@ -30,19 +30,38 @@
                     {% endif %}
                     Calificación: {{calificacion.calificacion}}
                   </div>
-                </div>
+                </div>            
+                {% if no_es_vendedor %}
+                    <div class="row">
+                        <div class="form-group"> 
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_contacto()">Eliminar</button>
+
+                                <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+
+                                <a href="{% url 'contactos:asignar_vendedor' contacto.id %}">
+                                    <button style="margin-right: 5px"  type="btn_submitContacto" class="btn btn-success pull-right">Asignar vendedor</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                     <div class="row">
+                        <div class="form-group"> 
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_contacto()">Eliminar</button>
+                                
+                                <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
-        {% if no_es_vendedor %}
-            <div class="row row-centered">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
-                    <a href="{% url 'contactos:asignar_vendedor' contacto.id %}">
-                        <button type="btn_submitContacto" class="btn btn-success pull-right">Asignar vendedor</button>
-                    </a>
-                </div>
-            </div>
-        {% endif %}
     </div>
+
+
 
     <div class="container">
         <div class="page-header">
@@ -144,5 +163,16 @@
             </tbody>
         </table>
     </div>
+
+<script>
+    function eliminar_contacto() {
+        var x;
+        if (confirm("¿Estás seguro de eliminar el registro?") == true) {
+            window.location.replace("{% url 'contactos:eliminar_contacto' contacto.id %}");
+        } else {
+            x = "You pressed Cancel!";
+        }
+    }
+</script>
 
 {% endblock content%}

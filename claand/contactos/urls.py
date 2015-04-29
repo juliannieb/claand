@@ -18,4 +18,7 @@ urlpatterns = patterns('',
         url(r'^recordatorios/$', views.consultar_recordatorios, name='consultar_recordatorios'),
         url(r'^recordatorios/(?P<recordatorio_id>[\w\-]+)/$', views.recordatorio, name='recordatorio'),
         url(r'^registrar-recordatorio/$', views.registrar_recordatorio, name='registrar_recordatorio'),
+
+        url(r'^eliminar-contacto/(?P<id_contacto>[\w\-]+)/$', views.eliminar_contacto, \
+            name="eliminar_contacto"),
                 )

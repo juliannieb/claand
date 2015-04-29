@@ -12,5 +12,7 @@ urlpatterns = patterns('',
         url(r'^ventas/(?P<id_venta>[\w\-]+)/registrar_pago/$', views.registrar_pago, name='registrar_pago'),
 
         url(r'^eliminar-cotizacion/(?P<id_cotizacion>[\w\-]+)/$', views.eliminar_cotizacion, \
-        	name="eliminar_cotizacion")
+        	name="eliminar_cotizacion"),
+        url(r'^eliminar-venta/(?P<id_venta>[\w\-]+)/$', views.eliminar_venta, \
+            name="eliminar_venta"),
         )

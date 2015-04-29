@@ -296,6 +296,7 @@ def registrar_recordatorio(request):
     # Render the form with error messages (if any).
     return render(request, 'contactos/registrar_recordatorio.html', forms)
 
+@login_required
 def search_contactos(request):
     """ Función para atender la petición GET AJAX para filtrar los contactos en la Vista
     contactos
@@ -314,6 +315,8 @@ def search_contactos(request):
     return render_to_response('contactos/search_contactos.html', {'contactos_list': contactos_list, \
         'no_es_vendedor':es_vendedor})
 
+@login_required
+@user_passes_test(no_es_vendedor)
 def asignar_vendedor(request, contacto_id):
     """ En esta vista se asigna la atención de un vendedor a un contacto
     """
@@ -346,3 +349,21 @@ def asignar_vendedor(request, contacto_id):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'contactos/asignar_vendedor.html', forms)
+
+@login_required
+def eliminar_contacto(request, id_contacto):
+    contacto = Contacto.objects.get(pk=id_contacto)
+    contacto.is_active = False
+    contacto.save()
+    cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
+    for cotizacion in cotizaciones_list:
+        cotizacion.is_active = False
+        try:
+            venta = Venta.objects.get(cotizacion=cotizacion)
+        except:
+            venta = None
+        if venta:
+            venta.is_active = False
+            venta.save()
+        cotizacion.save()
+    return render(request, 'principal/exito.html')
