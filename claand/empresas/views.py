@@ -97,18 +97,11 @@ def empresa(request, empresa_nombre_slug):
             xdata.append(fecha_cotizacion)
             x_dict[fecha_cotizacion] = cotizacion.monto
 
-    print(x_dict)
-
-    #ydata = list(x_dict.values())
-    #x = list(x_dict.keys())
-
     x_data = sorted(xdata)
-    print(x_data)
     ydata = []
     for x in x_data:
         ydata.append(x_dict[x])
 
-    print(ydata)
     # obtener montos de ventas para el gráfico
     
     for venta in ventas_list:
@@ -122,8 +115,7 @@ def empresa(request, empresa_nombre_slug):
     #x = list(x_dict2.keys())
 
     x_data2 = sorted(xdata2)
-    print("x_data2")
-    print(x_data2)
+
     ydata2 = []
     for x in x_data2:
         ydata2.append(x_dict2[x])

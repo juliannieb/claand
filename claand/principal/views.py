@@ -111,8 +111,6 @@ def vendedor(request, id_vendedor):
             x_dict2[fecha_venta] = venta.monto_total
 
     x_data2 = sorted(xdata2)
-    print("x_data2")
-    print(x_data2)
     ydata2 = []
     for x in x_data2:
         ydata2.append(x_dict2[x])
