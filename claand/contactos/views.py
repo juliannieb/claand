@@ -366,4 +366,23 @@ def eliminar_contacto(request, id_contacto):
             venta.is_active = False
             venta.save()
         cotizacion.save()
-    return render(request, 'principal/exito.html')
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+
+@login_required
+@user_passes_test(no_es_vendedor)
+def eliminar_nota(request, id_nota):
+    nota = Nota.objects.get(pk=id_nota)
+    nota.is_active = False
+    nota.save()
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+
+@login_required
+@user_passes_test(no_es_vendedor)
+def eliminar_recordatorio(request, id_recordatorio):
+    recordatorio = Recordatorio.objects.get(pk=id_recordatorio)
+    recordatorio.is_active = False
+    recordatorio.save()
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})

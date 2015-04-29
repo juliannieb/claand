@@ -20,12 +20,14 @@
             </thead>
             <tbody>
                 {% for nota in notas_list %}
-                    <tr>
-                        <td><a href="{% url 'contactos:nota' nota.id %}">{{ nota.id }}</a></td>
-                        <td>{{ nota.contacto }}</td>
-                        <td>{{ nota }}</td>
-                        <td>{{ nota.clasificacion }}</td>
-                    </tr>
+                    {% if nota.is_active %}
+                        <tr>
+                            <td><a href="{% url 'contactos:nota' nota.id %}">{{ nota.id }}</a></td>
+                            <td>{{ nota.contacto }}</td>
+                            <td>{{ nota }}</td>
+                            <td>{{ nota.clasificacion }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
