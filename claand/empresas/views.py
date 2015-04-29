@@ -49,37 +49,38 @@ def empresa(request, empresa_nombre_slug):
     redes_list = empresa.redsocial_set.all()
 
     current_user = request.user
-    current_vendedor = Vendedor.objects.get(user=current_user)
-    todos_los_contactos = Contacto.objects.all()
-    contactos_list = []
-    for contacto in todos_los_contactos:
-        if contacto.atiende_set.all():
-            if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
-                contactos_list.append(contacto.pk)
-    
-    # obtener todos los contactos, o sólo los del vendedor dependiendo si
-    # es director o vendedor.
-    if es_vendedor: # si no es vendedor
-        contactos_list = Contacto.objects.filter(empresa=empresa)
-    else:
-        current_user = request.user
-        current_vendedor = Vendedor.objects.get(user=current_user)
-        contactos_list = Contacto.objects.filter(Q(pk__in=contactos_list) & Q(empresa=empresa))
-    
+
     todas_las_cotizaciones = Cotizacion.objects.all()
     todas_las_ventas = Venta.objects.all()
     cotizaciones_list = []
     ventas_list = []
     
-    for cotizacion in todas_las_cotizaciones:
-        for contacto in contactos_list:
-            if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
-                cotizaciones_list.append(cotizacion)
+    # obtener todos los contactos, o sólo los del vendedor dependiendo si
+    # es director o vendedor.
+    if es_vendedor: # si no es vendedor
+        contactos_list = Contacto.objects.filter(empresa=empresa)
+        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+        ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
+    else:
+        current_user = request.user
+        current_vendedor = Vendedor.objects.get(user=current_user)
+        todos_los_contactos = Contacto.objects.all()
+        contactos_list = []
+        for contacto in todos_los_contactos:
+            if contacto.atiende_set.all():
+                if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                    contactos_list.append(contacto.pk)
+        contactos_list = Contacto.objects.filter(Q(pk__in=contactos_list) & Q(empresa=empresa))
 
-    for venta in todas_las_ventas:
-        for cotizacion in cotizaciones_list:
-            if venta.cotizacion == cotizacion:
-                ventas_list.append(venta)
+        for cotizacion in todas_las_cotizaciones:
+            for contacto in contactos_list:
+                if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
+                    cotizaciones_list.append(cotizacion)
+
+        for venta in todas_las_ventas:
+            for cotizacion in cotizaciones_list:
+                if venta.cotizacion == cotizacion:
+                    ventas_list.append(venta)
     
     xdata = list()
     xdata2 = list()
