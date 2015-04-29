@@ -62,18 +62,20 @@
             </thead>
             <tbody>
                 {% for contacto in contactos_list %}
-                    <tr>
-                        <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto }}</a></td>
-                        <td>{{ contacto.pertenece_set.get.empresa }}</td>
-                        <td>{{ contacto.pertenece_set.get.area }}</td>
-                        <td>{{ contacto.correo_electronico }}</td>
-                        {% if contacto.is_cliente %}
-                            <td>Cliente</td>
-                        {% else %}
-                            <td>Prospecto</td>
-                        {% endif %}
-                        <td>{{ contacto.calificacion }}</td>
-                    </tr>
+                    {% if contacto.is_active %}
+                        <tr>
+                            <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto }}</a></td>
+                            <td>{{ contacto.pertenece_set.get.empresa }}</td>
+                            <td>{{ contacto.pertenece_set.get.area }}</td>
+                            <td>{{ contacto.correo_electronico }}</td>
+                            {% if contacto.is_cliente %}
+                                <td>Cliente</td>
+                            {% else %}
+                                <td>Prospecto</td>
+                            {% endif %}
+                            <td>{{ contacto.calificacion }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -98,13 +100,17 @@
             </thead>
             <tbody>
                 {% for cotizacion in cotizaciones_list %}
-                    <tr>
-                        <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
-                        <td>{{ cotizacion.contacto }}</td>
-                        <td>{{ cotizacion.contacto.pertenece_set.get.empresa }}</td>
-                        <td>{{ cotizacion.descripcion }}</td>
-                        <td>{{ cotizacion.monto }}</td>
-                    </tr>
+                    {% if cotizacion.is_active %}
+                        {% if cotizacion.is_pendiente %}
+                            <tr>
+                                <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
+                                <td>{{ cotizacion.contacto }}</td>
+                                <td>{{ cotizacion.contacto.pertenece_set.get.empresa }}</td>
+                                <td>{{ cotizacion.descripcion }}</td>
+                                <td>{{ cotizacion.monto }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -131,19 +137,21 @@
             </thead>
             <tbody>
                 {% for venta in ventas_list %}
-                    <tr>
-                        <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
-                        <td>{{ venta.cotizacion.contacto }}</td>
-                        <td>{{ venta.cotizacion.contacto.pertenece_set.get.empresa }}</td>
-                        <td>{{ venta.cotizacion.descripcion }}</td>
-                        <td>{{ venta.monto_total }}</td>
-                        <td>{{ venta.monto_total }}</td>
-                        {% if venta.is_completada %}
-                            <td>Completada</td>
-                        {% else %}
-                            <td>Pendiente</td>
-                        {% endif %}    
-                    </tr>
+                    {% if venta.is_active %}
+                        <tr>
+                            <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
+                            <td>{{ venta.cotizacion.contacto }}</td>
+                            <td>{{ venta.cotizacion.contacto.pertenece_set.get.empresa }}</td>
+                            <td>{{ venta.cotizacion.descripcion }}</td>
+                            <td>{{ venta.monto_total }}</td>
+                            <td>{{ venta.monto_total }}</td>
+                            {% if venta.is_completada %}
+                                <td>Completada</td>
+                            {% else %}
+                                <td>Pendiente</td>
+                            {% endif %}    
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>

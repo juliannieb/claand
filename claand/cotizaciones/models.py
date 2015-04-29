@@ -23,6 +23,9 @@ class Cotizacion(models.Model):
         self.fecha_modificacion = datetime.today()
         return super(Cotizacion, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return str(self.contacto) + ": " + self.descripcion + ": $" + str(self.monto)
+
     class Meta:
         verbose_name = 'Cotización'
         verbose_name_plural = 'Cotizaciones'
@@ -45,6 +48,10 @@ class Venta(models.Model):
         self.fecha_modificacion = datetime.today()
         return super(Venta, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return str(self.cotizacion.contacto) + ": " + self.cotizacion.descripcion + ": $" + \
+        str(self.monto_total)
+
     class Meta:
         verbose_name = 'Venta'
         verbose_name_plural = 'Ventas'
@@ -63,4 +70,8 @@ class Pago(models.Model):
         if not self.id:
             self.fecha_creacion = datetime.today()
         self.fecha_modificacion = datetime.today()
-        return super(Pago, self).save(*args, **kwargs)  
+        return super(Pago, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return str(self.id) + ": " + self.venta.cotizacion.descripcion + ": $" + \
+        str(self.monto)

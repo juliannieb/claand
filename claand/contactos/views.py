@@ -165,10 +165,15 @@ def registrar_llamada(request):
     """
     current_user = request.user
     current_vendedor = Vendedor.objects.get(user=current_user)
-    contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+    todos_los_contactos = Contacto.objects.all()
+    contactos_list = []
+    for contacto in todos_los_contactos:
+        if contacto.atiende_set.all():
+            if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                contactos_list.append(contacto.pk)
     if request.method == 'POST':
         formLlamada = LlamadaForm(request.POST)
-        formLlamada.fields["contacto"].queryset = contactos_list
+        formLlamada.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
 
@@ -189,7 +194,7 @@ def registrar_llamada(request):
     else:
         # If the request was not a POST, display the form to enter details.
         formLlamada = LlamadaForm()
-        formLlamada.fields["contacto"].queryset = contactos_list
+        formLlamada.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
 
@@ -339,6 +344,7 @@ def registrar_recordatorio(request):
     return render(request, 'contactos/registrar_recordatorio.html', forms)
 
 
+@login_required
 def search_contactos(request):
     """ Función para atender la petición GET AJAX para filtrar los contactos en la Vista
     contactos
@@ -357,6 +363,8 @@ def search_contactos(request):
     return render_to_response('contactos/search_contactos.html', {'contactos_list': contactos_list, \
         'no_es_vendedor':es_vendedor})
 
+@login_required
+@user_passes_test(no_es_vendedor)
 def asignar_vendedor(request, contacto_id):
     """ En esta vista se asigna la atención de un vendedor a un contacto
     """
@@ -389,3 +397,40 @@ def asignar_vendedor(request, contacto_id):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'contactos/asignar_vendedor.html', forms)
+
+@login_required
+def eliminar_contacto(request, id_contacto):
+    contacto = Contacto.objects.get(pk=id_contacto)
+    contacto.is_active = False
+    contacto.save()
+    cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
+    for cotizacion in cotizaciones_list:
+        cotizacion.is_active = False
+        try:
+            venta = Venta.objects.get(cotizacion=cotizacion)
+        except:
+            venta = None
+        if venta:
+            venta.is_active = False
+            venta.save()
+        cotizacion.save()
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+
+@login_required
+@user_passes_test(no_es_vendedor)
+def eliminar_nota(request, id_nota):
+    nota = Nota.objects.get(pk=id_nota)
+    nota.is_active = False
+    nota.save()
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+
+@login_required
+@user_passes_test(no_es_vendedor)
+def eliminar_recordatorio(request, id_recordatorio):
+    recordatorio = Recordatorio.objects.get(pk=id_recordatorio)
+    recordatorio.is_active = False
+    recordatorio.save()
+    es_vendedor = no_es_vendedor(request.user)
+    return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
