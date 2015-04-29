@@ -1,4 +1,6 @@
 import time
+import collections
+import operator
 
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
@@ -47,57 +49,84 @@ def empresa(request, empresa_nombre_slug):
     redes_list = empresa.redsocial_set.all()
 
     current_user = request.user
-    current_vendedor = Vendedor.objects.get(user=current_user)
-    todos_los_contactos = Contacto.objects.all()
-    contactos_list = []
-    for contacto in todos_los_contactos:
-        if contacto.atiende_set.all():
-            if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
-                contactos_list.append(contacto.pk)
-    
-    # obtener todos los contactos, o sólo los del vendedor dependiendo si
-    # es director o vendedor.
-    if es_vendedor: # si no es vendedor
-        contactos_list = Contacto.objects.filter(empresa=empresa)
-    else:
-        current_user = request.user
-        current_vendedor = Vendedor.objects.get(user=current_user)
-        contactos_list = Contacto.objects.filter(Q(pk__in=contactos_list) & Q(empresa=empresa))
-    
+
     todas_las_cotizaciones = Cotizacion.objects.all()
     todas_las_ventas = Venta.objects.all()
     cotizaciones_list = []
     ventas_list = []
     
-    for cotizacion in todas_las_cotizaciones:
-        for contacto in contactos_list:
-            if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
-                cotizaciones_list.append(cotizacion)
+    # obtener todos los contactos, o sólo los del vendedor dependiendo si
+    # es director o vendedor.
+    if es_vendedor: # si no es vendedor
+        contactos_list = Contacto.objects.filter(empresa=empresa)
+        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+        ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
+    else:
+        current_user = request.user
+        current_vendedor = Vendedor.objects.get(user=current_user)
+        todos_los_contactos = Contacto.objects.all()
+        contactos_list = []
+        for contacto in todos_los_contactos:
+            if contacto.atiende_set.all():
+                if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                    contactos_list.append(contacto.pk)
+        contactos_list = Contacto.objects.filter(Q(pk__in=contactos_list) & Q(empresa=empresa))
 
-    for venta in todas_las_ventas:
-        for cotizacion in cotizaciones_list:
-            if venta.cotizacion == cotizacion:
-                ventas_list.append(venta)
+        for cotizacion in todas_las_cotizaciones:
+            for contacto in contactos_list:
+                if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
+                    cotizaciones_list.append(cotizacion)
+
+        for venta in todas_las_ventas:
+            for cotizacion in cotizaciones_list:
+                if venta.cotizacion == cotizacion:
+                    ventas_list.append(venta)
     
     xdata = list()
+    xdata2 = list()
     ydata = list()
     ydata2 = list()
     x_dict = {}
+    x_dict2 = {}
     # obtener montos de cotizaciones para gráfico.
     for cotizacion in cotizaciones_list:
         fecha_cotizacion = time.mktime(cotizacion.fecha_creacion.timetuple()) * 1000
-        xdata.append(fecha_cotizacion)
         if fecha_cotizacion in x_dict:
             x_dict[fecha_cotizacion] += cotizacion.monto
         else:
+            xdata.append(fecha_cotizacion)
             x_dict[fecha_cotizacion] = cotizacion.monto
 
-    ydata = list(x_dict.values())
-    xdata = list(x_dict.keys())
-    # obtener montos de ventas para el gráfico
-    for venta in ventas_list:
-        ydata2.append(venta.monto_total)
+    print(x_dict)
 
+    #ydata = list(x_dict.values())
+    #x = list(x_dict.keys())
+
+    x_data = sorted(xdata)
+    print(x_data)
+    ydata = []
+    for x in x_data:
+        ydata.append(x_dict[x])
+
+    print(ydata)
+    # obtener montos de ventas para el gráfico
+    
+    for venta in ventas_list:
+        fecha_venta = time.mktime(venta.cotizacion.fecha_creacion.timetuple()) * 1000
+        if fecha_venta in x_dict2:
+            x_dict2[fecha_venta] += venta.monto_total
+        else:
+            xdata2.append(fecha_venta)
+            x_dict2[fecha_venta] = venta.monto_total
+
+    #x = list(x_dict2.keys())
+
+    x_data2 = sorted(xdata2)
+    print("x_data2")
+    print(x_data2)
+    ydata2 = []
+    for x in x_data2:
+        ydata2.append(x_dict2[x])
 
     tooltip_date = "%d %b %Y %H:%M:%S %p"
     extra_serie1 = {
@@ -110,7 +139,7 @@ def empresa(request, empresa_nombre_slug):
         "date_format": tooltip_date,
         'color': '#FF8aF8'
     }
-    chartdata = {'x': xdata,
+    chartdata = {'x': x_data,
                  'name1': 'Monto Cotizado', 'y1': ydata, 'extra1': extra_serie1,
                  'name2': 'Monto Vendido', 'y2': ydata2, 'extra2': extra_serie2}
 
