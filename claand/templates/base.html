@@ -16,6 +16,9 @@
     <script type="text/javascript" 
     src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 
+    {% block head_content %}
+    {% endblock %}
+
         {% load nvd3_tags %}
     {% include_chart_jscss %}
     {% load_chart charttype chartdata chartcontainer extra %}
