@@ -188,6 +188,10 @@ def registrar_venta(request, id_cotizacion):
             monto_total = data['monto_total']
             cotizacion.is_pendiente = False
             cotizacion.save()
+            contacto = cotizacion.contacto
+            if contacto.is_cliente == False:
+                contacto.is_cliente = True
+                contacto.save()
             Venta(monto_total=monto_total, cotizacion=cotizacion).save()
             # Now call the index() view.
             # The user will be shown the homepage.
@@ -245,3 +249,9 @@ def registrar_pago(request, id_venta):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'cotizaciones/registrar_pago.html', forms)
+
+def eliminar_cotizacion(request, id_cotizacion):
+    cotizacion = Cotizacion.objects.get(pk=id_cotizacion)
+    cotizacion.is_active = False
+    cotizacion.save()
+    return render(request, 'principal/exito.html')

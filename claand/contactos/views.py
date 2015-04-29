@@ -138,10 +138,15 @@ def registrar_llamada(request):
     """
     current_user = request.user
     current_vendedor = Vendedor.objects.get(user=current_user)
-    contactos_list = Contacto.objects.filter(vendedor=current_vendedor)
+    todos_los_contactos = Contacto.objects.all()
+    contactos_list = []
+    for contacto in todos_los_contactos:
+        if contacto.atiende_set.all():
+            if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                contactos_list.append(contacto.pk)
     if request.method == 'POST':
         formLlamada = LlamadaForm(request.POST)
-        formLlamada.fields["contacto"].queryset = contactos_list
+        formLlamada.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
 
@@ -162,7 +167,7 @@ def registrar_llamada(request):
     else:
         # If the request was not a POST, display the form to enter details.
         formLlamada = LlamadaForm()
-        formLlamada.fields["contacto"].queryset = contactos_list
+        formLlamada.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
 

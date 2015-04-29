@@ -23,7 +23,7 @@
                         {{ numero.tipo_numero }} : {{ numero.numero}} </br>
                     {% endfor %}
                     Tipo: 
-                    {% if contacto.is_cliente %}
+                        {% if contacto.is_cliente %}
                         Cliente </br>
                     {% else %}
                         Prospecto </br>
@@ -62,13 +62,15 @@
             </thead>
             <tbody>
                 {% for cotizacion in cotizaciones_list %}
-                    {% if cotizacion.is_pendiente %}
-                        <tr>
-                            <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
-                            <td>{{ pertenece.empresa }}</td>
-                            <td>{{ cotizacion.descripcion }}</td>
-                            <td>{{ cotizacion.monto }}</td>
-                        </tr>
+                    {% if cotizacion.is_active %}
+                        {% if cotizacion.is_pendiente %}
+                            <tr>
+                                <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
+                                <td>{{ pertenece.empresa }}</td>
+                                <td>{{ cotizacion.descripcion }}</td>
+                                <td>{{ cotizacion.monto }}</td>
+                            </tr>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </tbody>
@@ -95,18 +97,20 @@
             </thead>
             <tbody>
                 {% for venta in ventas_list %}
-                    <tr>
-                        <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
-                        <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
-                        <td>{{ venta.cotizacion.descripcion }}</td>
-                        <td>{{ venta.monto_total }}</td>
-                        <td>{{ venta.monto_total }}</td>
-                        {% if venta.is_completada %}
-                            <td>Completada</td>
-                        {% else %}
-                            <td>Pendiente</td>
-                        {% endif %}
-                    </tr>
+                    {% if venta.is_active %}
+                        <tr>
+                            <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
+                            <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
+                            <td>{{ venta.cotizacion.descripcion }}</td>
+                            <td>{{ venta.monto_total }}</td>
+                            <td>{{ venta.monto_total }}</td>
+                            {% if venta.is_completada %}
+                                <td>Completada</td>
+                            {% else %}
+                                <td>Pendiente</td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -128,11 +132,13 @@
             </thead>
             <tbody>
                 {% for llamada in llamadas_list %}
-                    {% if llamada.contacto.nombre = contacto.nombre %}
-                        <tr>
-                            <td>{{ llamada.fecha }}</td>
-                            <td>{{ llamada.descripcion }}</td>
-                        </tr>
+                    {% if llamada.is_active %}
+                        {% if llamada.contacto == contacto %}
+                            <tr>
+                                <td>{{ llamada.fecha }}</td>
+                                <td>{{ llamada.descripcion }}</td>
+                            </tr>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </tbody>

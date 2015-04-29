@@ -4,6 +4,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 
 from empresas.forms import EmpresaForm, DireccionForm, NumeroTelefonicoForm, RedSocialForm
 
@@ -44,6 +45,15 @@ def empresa(request, empresa_nombre_slug):
     empresa_tiene_direccion = EmpresaTieneDireccion.objects.filter(empresa=empresa)
     numeros_list = empresa.numerotelefonico_set.all()
     redes_list = empresa.redsocial_set.all()
+
+    current_user = request.user
+    current_vendedor = Vendedor.objects.get(user=current_user)
+    todos_los_contactos = Contacto.objects.all()
+    contactos_list = []
+    for contacto in todos_los_contactos:
+        if contacto.atiende_set.all():
+            if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                contactos_list.append(contacto.pk)
     
     # obtener todos los contactos, o sólo los del vendedor dependiendo si
     # es director o vendedor.
@@ -52,10 +62,22 @@ def empresa(request, empresa_nombre_slug):
     else:
         current_user = request.user
         current_vendedor = Vendedor.objects.get(user=current_user)
-        contactos_list = Contacto.objects.filter(vendedor=current_vendedor, empresa=empresa)
-        
-    cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
-    ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
+        contactos_list = Contacto.objects.filter(Q(pk__in=contactos_list) & Q(empresa=empresa))
+    
+    todas_las_cotizaciones = Cotizacion.objects.all()
+    todas_las_ventas = Venta.objects.all()
+    cotizaciones_list = []
+    ventas_list = []
+    
+    for cotizacion in todas_las_cotizaciones:
+        for contacto in contactos_list:
+            if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
+                cotizaciones_list.append(cotizacion)
+
+    for venta in todas_las_ventas:
+        for cotizacion in cotizaciones_list:
+            if venta.cotizacion == cotizacion:
+                ventas_list.append(venta)
     
     xdata = list()
     ydata = list()
