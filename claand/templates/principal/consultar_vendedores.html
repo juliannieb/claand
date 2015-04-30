@@ -10,6 +10,15 @@
     </div>
 
     <div class="container">
+        <div class="row pull-right">
+            <div class="col-sm-4 col-xs-4">
+                <a href="{% url 'principal:registrar_vendedor' %}"><button type="submit" class="btn btn-success pull-left">Registrar nuevo vendedor</button></a>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="container">
         <table class="sortable table table-hover" id="tableContactos">
             <thead>
                 <tr>
@@ -38,14 +47,6 @@
         <div class="row row-centered">
             <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
                 {% include_container chartcontainer %}
-            </div>
-        </div>
-    </div>
-    
-    <div class="container">
-        <div class="row pull-right">
-            <div class="col-sm-4 col-xs-4">
-                <a href="{% url 'principal:registrar_vendedor' %}"><button type="submit" class="btn btn-success pull-left">Registrar nuevo vendedor</button></a>
             </div>
         </div>
     </div>
