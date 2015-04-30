@@ -20,6 +20,56 @@ def no_es_vendedor(user):
     """
     return not user.groups.filter(name='vendedor').exists()
 
+def obtener_contactos_list(vendedor):
+    todos_los_contactos = Contacto.objects.all()
+    contactos_list = []
+    for contacto in todos_los_contactos:
+        atiende_set = contacto.atiende_set.all()
+        if atiende_set:
+            ultimo_atiende = atiende_set[len(atiende_set) - 1]
+            if ultimo_atiende.vendedor == vendedor:
+                if contacto.is_active:
+                    contactos_list.append(contacto)
+    return contactos_list
+
+def obtener_contactos_ids(contactos_list):
+    contactos_ids = []
+    for contacto in contactos_list:
+        contactos_ids.append(contacto.id)
+    return contactos_ids
+
+def obtener_cotizaciones_list(contactos_list):
+    todas_las_cotizaciones = Cotizacion.objects.all()
+    cotizaciones_list = []
+    for cotizacion in todas_las_cotizaciones:
+        for contacto in contactos_list:
+            atiende_set = contacto.atiende_set.all()
+            if atiende_set:
+                ultimo_atiende = atiende_set[len(atiende_set) - 1]
+                if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= ultimo_atiende.fecha:
+                    if cotizacion.is_active:
+                        cotizaciones_list.append(cotizacion)
+    return cotizaciones_list
+
+def obtener_ventas_list(cotizaciones_list):
+    todas_las_ventas = Venta.objects.all()
+    ventas_list = []
+    for venta in todas_las_ventas:
+        for cotizacion in cotizaciones_list:
+            if venta.cotizacion == cotizacion:
+                if venta.is_active:
+                    ventas_list.append(venta)
+    return ventas_list
+
+def obtener_llamadas_list(contactos_list):
+    todas_las_llamadas = Llamada.objects.all()
+    llamadas_list = []
+    for llamada in todas_las_llamadas:
+        for contacto in contactos_list:
+            if llamada.contacto == contacto:
+                if llamada.is_active:
+                    llamadas_list.append(llamada)
+    return llamadas_list
 
 @login_required
 def consultar_empresas(request):
@@ -47,16 +97,8 @@ def empresa(request, empresa_nombre_slug):
     empresa_tiene_direccion = EmpresaTieneDireccion.objects.filter(empresa=empresa)
     numeros_list = empresa.numerotelefonico_set.all()
     redes_list = empresa.redsocial_set.all()
-
-    current_user = request.user
-
-    todas_las_cotizaciones = Cotizacion.objects.all()
-    todas_las_ventas = Venta.objects.all()
-    cotizaciones_list = []
-    ventas_list = []
     
-    # obtener todos los contactos, o sólo los del vendedor dependiendo si
-    # es director o vendedor.
+    current_user = request.user
     if es_vendedor: # si no es vendedor
         contactos_list = Contacto.objects.filter(empresa=empresa)
         cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
@@ -64,23 +106,12 @@ def empresa(request, empresa_nombre_slug):
     else:
         current_user = request.user
         current_vendedor = Vendedor.objects.get(user=current_user)
-        todos_los_contactos = Contacto.objects.all()
-        contactos_list = []
-        for contacto in todos_los_contactos:
-            if contacto.atiende_set.all():
-                if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
-                    contactos_list.append(contacto.pk)
-        contactos_list = Contacto.objects.filter(Q(pk__in=contactos_list) & Q(empresa=empresa))
-
-        for cotizacion in todas_las_cotizaciones:
-            for contacto in contactos_list:
-                if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
-                    cotizaciones_list.append(cotizacion)
-
-        for venta in todas_las_ventas:
-            for cotizacion in cotizaciones_list:
-                if venta.cotizacion == cotizacion:
-                    ventas_list.append(venta)
+        current_vendedor = Vendedor.objects.get(user=current_user)
+        contactos_list = obtener_contactos_list(current_vendedor)
+        contactos_list = obtener_contactos_ids(contactos_list)
+        contactos_list = Contacto.objects.filter(pk__in=contactos_list, empresa=empresa)
+        cotizaciones_list = obtener_cotizaciones_list(contactos_list)
+        ventas_list = obtener_ventas_list(cotizaciones_list)
     
     xdata = list()
     xdata2 = list()

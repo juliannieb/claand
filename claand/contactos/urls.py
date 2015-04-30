@@ -8,7 +8,6 @@ urlpatterns = patterns('',
 
         url(r'^contactos/$', views.consultar_contactos, name='consultar_contactos'),
         url(r'^contactos/(?P<contacto_nombre_slug>[\w\-]+)/$', views.contacto, name='contacto'),
-        url(r'^search_contactos/$', views.search_contactos, name='search_contactos'),
         url(r'^asignar_vendedor/(?P<contacto_id>[\w\-]+)/$', views.asignar_vendedor, name='asignar_vendedor'),
 
         url(r'^notas/$', views.consultar_notas, name='consultar_notas'),
