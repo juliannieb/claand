@@ -212,14 +212,12 @@ def registrar_empresa(request):
             es_valido = True
             if formNumeroTelefonico.has_changed():
                 if not formNumeroTelefonico.is_valid():
-                    print("Form telefonico no valido")
                     es_valido = False
             else:
                 formNumeroTelefonico = NumeroTelefonicoForm()
                 forms['formNumeroTelefonico'] = formNumeroTelefonico
             if formRedSocial.has_changed():
                 if not formRedSocial.is_valid():
-                    print("Form red social no valido")
                     es_valido = False
             else:
                 formRedSocial = RedSocialForm()

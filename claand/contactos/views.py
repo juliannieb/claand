@@ -159,33 +159,40 @@ def registrar_contacto(request):
     if request.method == 'POST':
         formContacto = ContactoForm(request.POST)
         formNumeroTelefonico = NumeroTelefonicoForm(request.POST)
+        if not formNumeroTelefonico.has_changed():
+            formNumeroTelefonico = NumeroTelefonicoForm()
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico, \
         'no_es_vendedor':es_vendedor}
-        if formContacto.is_valid() and formNumeroTelefonico.is_valid():
-            data = formContacto.cleaned_data
-            nombre = data['nombre']
-            apellido = data['apellido']
-            correo_electronico = data['correo_electronico']
-            empresa = data['empresa']
-            area = data['area']
-            is_cliente = data['is_cliente']
-            calificacion = data['calificacion']
-            contacto = Contacto(nombre=nombre, apellido=apellido, correo_electronico=correo_electronico, \
-                calificacion=calificacion, is_cliente=is_cliente)
-            contacto.save()
-            
-            Pertenece(contacto=contacto, empresa=empresa, area=area).save()
-
-            current_user = request.user
-            current_vendedor = Vendedor.objects.get(user=current_user)
-            Atiende(vendedor=current_vendedor, contacto=contacto).save()
-
+        if formContacto.is_valid():
+            es_valido = True
             if formNumeroTelefonico.has_changed():
-                numero_telefonico = formNumeroTelefonico.instance
-                numero_telefonico.contacto = contacto
-                numero_telefonico.save()
-            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+                if not formNumeroTelefonico.is_valid:
+                    es_valido = False
+            if es_valido:
+                data = formContacto.cleaned_data
+                nombre = data['nombre']
+                apellido = data['apellido']
+                correo_electronico = data['correo_electronico']
+                empresa = data['empresa']
+                area = data['area']
+                is_cliente = data['is_cliente']
+                calificacion = data['calificacion']
+                contacto = Contacto(nombre=nombre, apellido=apellido, correo_electronico=correo_electronico, \
+                    calificacion=calificacion, is_cliente=is_cliente)
+                contacto.save()
+                
+                Pertenece(contacto=contacto, empresa=empresa, area=area).save()
+
+                current_user = request.user
+                current_vendedor = Vendedor.objects.get(user=current_user)
+                Atiende(vendedor=current_vendedor, contacto=contacto).save()
+
+                if formNumeroTelefonico.has_changed() and formNumeroTelefonico.is_valid():
+                    numero_telefonico = formNumeroTelefonico.instance
+                    numero_telefonico.contacto = contacto
+                    numero_telefonico.save()
+                return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
     else:
         formContacto = ContactoForm()
         formNumeroTelefonico = NumeroTelefonicoForm()
