@@ -77,12 +77,10 @@ def consultar_vendedores(request):
     for vendedor in vendedores_list:
         xdata.append(vendedor.user.first_name + " " +vendedor.user.last_name)
 
-    print(xdata)
     for vendedor in vendedores_list:
         contactos_list = Contacto.objects.filter(vendedor=vendedor)
         cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
         ydata.append(cotizaciones_list.count())
-    print(ydata)
 
     chartdata = {'x': xdata, 'y': ydata}
     charttype = "pieChart"
