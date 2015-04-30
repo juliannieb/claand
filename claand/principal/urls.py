@@ -7,6 +7,7 @@ urlpatterns = patterns('',
         url(r'^logout/$', views.user_logout, name='logout'),
         url(r'^index/$', views.index, name='index'),
         url(r'^consultar/$', views.consultar, name='consultar'),
+        url(r'^global/$', views.consultar_global, name='consultar_global'),
 
         url(r'^vendedores/$', views.consultar_vendedores, name='consultar_vendedores'),
         url(r'^vendedores/(?P<id_vendedor>[\w\-]+)/$', views.vendedor, name='vendedor'),
