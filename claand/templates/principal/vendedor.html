@@ -12,7 +12,12 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_vendedor()">Eliminar</button>
+                <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
+            </div>
+        </div>
+        <div class="row pull-right">
+            <div class="col-sm-12 pull-right">
+                <a href="{% url 'principal:eliminar_vendedor' vendedor.id %}" id="boton_confirmar">Sí quiero borrar</a>
             </div>
         </div>
     </div>
@@ -125,13 +130,5 @@
             </tbody>
         </table>
     </div>
-
-<script>
-    function eliminar_vendedor() {
-        if (confirm("¿Estás seguro de eliminar el registro?") == true) {
-            window.location.replace("{% url 'principal:eliminar_vendedor' vendedor.id %}");
-        }
-    }
-</script>
 
 {% endblock content%}

@@ -21,10 +21,11 @@
                     {{ recordatorio.descripcion }}
                   </div>
                 </div>
+
                 <div class="row">
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_recordatorio()">Eliminar</button>
+                            <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
 
                             <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
 
@@ -32,19 +33,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group"> 
-                    
+                <div class="row pull-right">
+                    <div class="col-sm-12 pull-right">
+                        <a href="{% url 'contactos:eliminar_recordatorio' recordatorio.id %}" id="boton_confirmar"> Sí quiero borrar </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-<script>
-    function eliminar_recordatorio() {
-        if (confirm("¿Estás seguro de eliminar el registro?") == true) {
-            window.location.replace("{% url 'contactos:eliminar_recordatorio' recordatorio.id %}");
-        }
-    }
-</script>
 
 {% endblock content%}

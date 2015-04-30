@@ -418,6 +418,14 @@ def eliminar_contacto(request, id_contacto):
             venta.is_active = False
             venta.save()
         cotizacion.save()
+    notas_list = Nota.objects.filter(contacto=contacto)
+    for nota in notas_list:
+        nota.is_active = False
+        nota.save()
+    recordatorios_list = Recordatorio.objects.filter(contacto=contacto)
+    for recordatorio in recordatorios_list:
+        recordatorio.is_active = False
+        recordatorio.save()
     es_vendedor = no_es_vendedor(request.user)
     return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
 
