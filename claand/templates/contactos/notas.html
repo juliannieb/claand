@@ -21,7 +21,7 @@
             <tbody>
                 {% for nota in notas_list %}
                     {% if nota.is_active %}
-                        <tr id='{{nota.contacto}}'>
+                        <tr id='{{nota.contacto}}' class="link_fila">
                             <td><a href="{% url 'contactos:nota' nota.id %}">{{ nota.id }}</a></td>
                             <td>{{ nota.contacto }}</td>
                             <td>{{ nota }}</td>

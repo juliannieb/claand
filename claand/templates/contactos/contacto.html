@@ -88,7 +88,7 @@
                 {% for cotizacion in cotizaciones_list %}
                     {% if cotizacion.is_active %}
                         {% if cotizacion.is_pendiente %}
-                            <tr>
+                            <tr class="link_fila">
                                 <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
                                 <td>{{ pertenece.empresa }}</td>
                                 <td>{{ cotizacion.descripcion }}</td>
@@ -122,7 +122,7 @@
             <tbody>
                 {% for venta in ventas_list %}
                     {% if venta.is_active %}
-                        <tr>
+                        <tr class="link_fila">
                             <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
                             <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
                             <td>{{ venta.cotizacion.descripcion }}</td>
@@ -149,7 +149,7 @@
     <div class="container">
         <table class="sortable table table-hover" id="tableLlamadas">
             <thead>
-                <tr>
+                <tr class="link_fila">
                     <th>Fecha</th>
                     <th>Descripcion</a></th>
                 </tr>
@@ -185,7 +185,8 @@
                     {% for nota in notas_list %}
                         {% if nota.is_active %}
                             {% if nota.contacto == contacto %}
-                                <tr>
+                                <tr class="link_fila">
+                                    <td><a href="{% url 'contactos:nota' nota.id %}">{{nota.id}}</a></td>
                                     <td>{{ nota.descripcion }}</td>
                                 </tr>
                             {% endif %}

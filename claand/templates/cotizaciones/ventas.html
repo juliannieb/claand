@@ -24,7 +24,7 @@
             <tbody>
                 {% for venta in ventas_list %}
                     {% if venta.is_active %}
-                        <tr>
+                        <tr class="link_fila">
                             <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
                             <td>{{ venta.cotizacion.contacto }}</td>
                             <td>{{ venta.cotizacion.contacto.empresa.get }}</td>

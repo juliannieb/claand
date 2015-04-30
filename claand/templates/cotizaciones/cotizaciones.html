@@ -25,7 +25,10 @@
                 {% for cotizacion in cotizaciones_list %}
                     {%if cotizacion.is_active %}
                         {% if cotizacion.is_pendiente %}
-                            <tr><td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
+                            <tr class="link_fila">
+                                <td>
+                                    <a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a>
+                                </td>
                                 <td>{{cotizacion.contacto}}</td>
                                     {% if not cotizacion.contacto.empresa.all%}
                                         <td></td>

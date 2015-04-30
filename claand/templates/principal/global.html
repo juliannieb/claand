@@ -37,7 +37,7 @@
             <tbody>
                 {% for contacto in contactos_list %}
                     {% if contacto.is_active %}
-                        <tr>
+                        <tr class="link_fila">
                             <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto.nombre }}</a></td>
                             <td>{{ contacto.apellido }}</td>
                             {% if not contacto.empresa.all %}
@@ -92,7 +92,7 @@
                 {% for cotizacion in cotizaciones_list %}
                     {% if cotizacion.is_active %}
                         {% if cotizacion.is_pendiente %}
-                            <tr>
+                            <tr class="link_fila">
                                 <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
                                 <td>{{ cotizacion.contacto.empresa.get }}</td>
                                 <td>{{ cotizacion.descripcion }}</td>
@@ -129,7 +129,7 @@
             <tbody>
                 {% for venta in ventas_list %}
                     {% if venta.is_active %}
-                        <tr>
+                        <tr class="link_fila">
                             <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
                             <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
                             <td>{{ venta.cotizacion.descripcion }}</td>
