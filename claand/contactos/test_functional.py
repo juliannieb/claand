@@ -30,7 +30,7 @@ class ContactosAdminTests(LiveServerTestCase):
         el = self.browser.find_element_by_id('id_contacto')
         # elegir contacto Marquicio
         for option in el.find_elements_by_tag_name('option'):
-            if option.text == 'Marquicio López':
+            if option.text == 'Oscar Hernández':
                 option.click()
                 break
         descripcion = self.browser.find_element_by_id('id_descripcion')
