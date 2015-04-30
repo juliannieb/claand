@@ -21,7 +21,7 @@
             <tbody>
                 {% for nota in notas_list %}
                     {% if nota.is_active %}
-                        <tr>
+                        <tr id='{{nota.contacto}}'>
                             <td><a href="{% url 'contactos:nota' nota.id %}">{{ nota.id }}</a></td>
                             <td>{{ nota.contacto }}</td>
                             <td>{{ nota }}</td>
@@ -43,5 +43,6 @@
             </form>
         </div>
     </div>
+
 
 {% endblock content %}

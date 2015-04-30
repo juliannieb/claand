@@ -34,7 +34,6 @@ class PrincipalFunctionalTests(LiveServerTestCase):
         body = self.browser.find_element_by_tag_name('body')
         self.assertIn('Administración del sitio', body.text)
 
-
     def test_login_vendedor(self):
         """ test para probar interacción básica de login:
         - ir a la vista de login
@@ -119,11 +118,4 @@ class PrincipalFunctionalTests(LiveServerTestCase):
         self.browser.find_element_by_link_text('Vendedores').click()
         body = self.browser.find_element_by_tag_name('body')
         self.assertIn('tulio elegante', body.text)
-
-
-
-
-
-
-
 
