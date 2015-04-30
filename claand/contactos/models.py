@@ -30,6 +30,8 @@ class Contacto(models.Model):
     slug = models.SlugField(unique=True, null=True)
 
     def save(self, *args, **kwargs):
+        """ Override del método save para evitar slugs repetidos.
+        """
         if not self.id and not self.slug:
             slug = slugify(self.nombre)
             slug += "-" + slugify(self.apellido)
