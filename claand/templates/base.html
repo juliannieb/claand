@@ -70,50 +70,37 @@
     {% endblock content %}
 
     <script type="text/javascript">
-    $(document).ready(function() {
-        $('#tableContactos').dataTable( {
-            "language": {
-                "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
-            }
-        } );
-    } );
-    </script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#tableCotizaciones').dataTable( {
-            "language": {
-                "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
-            }
-        } );
-    } );
-    </script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#tableVentas').dataTable( {
-            "language": {
-                "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
-            }
-        } );
-    } );
-    </script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#tableLlamadas').dataTable( {
-            "language": {
-                "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
-            }
-        } );
-    } );
-    </script>
-
-    <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
+            $('#tableContactos').dataTable( {
+                "language": {
+                    "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
+                }
+            } );
+            $('#tableCotizaciones').dataTable( {
+                "language": {
+                    "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
+                }
+            } );
+            $('#tableVentas').dataTable( {
+                "language": {
+                    "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
+                }
+            } );
+            $('#tableLlamadas').dataTable( {
+                "language": {
+                    "url": "http://cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
+                }
+            } );
             $("#boton_confirmar").hide();
             $("#boton_eliminar").click(function(){
                 $("#boton_confirmar").show();
             });
-        }); 
+            $("tr").click(function() {
+                window.location.href = $(this).find("a").attr("href");
+            });
+        } );
     </script>
+
 
 </body>
 </html>

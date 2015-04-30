@@ -44,6 +44,17 @@ class ContactosAdminTests(LiveServerTestCase):
         self.assertIn('Operación exitosa', body.text)
         # volver a notas
         self.browser.find_element_by_link_text('Notas').click()
+
+        # eliminar nota
+        self.browser.find_element_by_id('Oscar Hernández').click()
+        self.browser.find_element_by_id('boton_eliminar').click()
+        self.browser.find_element_by_id('boton_confirmar').click()
+
+        self.browser.find_element_by_link_text('Notas').click()
+        # revisar que no aparezca
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertNotIn('Oscar Hernández', body.text)
+
         
 
 
