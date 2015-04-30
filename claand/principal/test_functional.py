@@ -84,4 +84,9 @@ class PrincipalFunctionalTests(LiveServerTestCase):
         self.assertIn('Recordatorios', body.text)
         self.assertIn('Notas', body.text)
         self.assertIn('Consultar', body.text)
+        # consultar un vendedor:
+        self.browser.find_element_by_link_text('Consultar').click()
+        self.browser.find_element_by_link_text('Vendedores').click()
+        # revisar que esten todos los vendedores
+        
 

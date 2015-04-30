@@ -20,8 +20,8 @@ class ContactosAdminTests(LiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test_crear_nota(self):
-        """ test de creación de una nota
+    def test_crear_editar_borrar_nota(self):
+        """ test de creación, edición y eliminación de una nota
         """
         self.browser.find_element_by_link_text('Notas').click()
         self.browser.find_element_by_id('crear_nota').click()
@@ -42,6 +42,10 @@ class ContactosAdminTests(LiveServerTestCase):
         body = self.browser.find_element_by_tag_name('body')
         # operación exitosa?
         self.assertIn('Operación exitosa', body.text)
+        # volver a notas
+        self.browser.find_element_by_link_text('Notas').click()
+        
+
 
 
 
