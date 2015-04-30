@@ -1,16 +1,18 @@
 [
 {
     "model": "principal.vendedor",
+    "pk": 1,
     "fields": {
-        "user": 2
-    },
-    "pk": 1
+        "is_active": true,
+        "user": 3
+    }
 },
 {
     "model": "principal.vendedor",
+    "pk": 2,
     "fields": {
-        "user": 3
-    },
-    "pk": 2
+        "is_active": true,
+        "user": 2
+    }
 }
 ]
