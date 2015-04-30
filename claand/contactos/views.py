@@ -162,10 +162,7 @@ def registrar_contacto(request):
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico, \
         'no_es_vendedor':es_vendedor}
-
-        # Have we been provided with a valid form?
         if formContacto.is_valid() and formNumeroTelefonico.is_valid():
-            # Save the new category to the database.
             data = formContacto.cleaned_data
             nombre = data['nombre']
             apellido = data['apellido']
@@ -188,24 +185,13 @@ def registrar_contacto(request):
                 numero_telefonico = formNumeroTelefonico.instance
                 numero_telefonico.contacto = contacto
                 numero_telefonico.save()
-            
-            # Now call the index() view.
-            # The user will be shown the homepage.
             return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
-        else:
-            # The supplied form contained errors - just print them to the terminal.
-            print (formContacto.errors)
-            print (formNumeroTelefonico.errors)
     else:
-        # If the request was not a POST, display the form to enter details.
         formContacto = ContactoForm()
         formNumeroTelefonico = NumeroTelefonicoForm()
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico, \
         'no_es_vendedor':es_vendedor}
-
-    # Bad form (or form details), no form supplied...
-    # Render the form with error messages (if any).
     return render(request, 'contactos/registrar_contacto.html', forms)
 
 @login_required
@@ -221,30 +207,17 @@ def registrar_llamada(request):
         formLlamada.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
-
-        # Have we been provided with a valid form?
         if formLlamada.is_valid():
-            # Save the new category to the database.
             data = formLlamada.cleaned_data
             contacto = data['contacto']
             descripcion = data['descripcion']
             Llamada(contacto=contacto, descripcion=descripcion).save()
-
-            # Now call the index() view.
-            # The user will be shown the homepage.
             return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
-        else:
-            # The supplied form contained errors - just print them to the terminal.
-            print (formLlamada.errors)
     else:
-        # If the request was not a POST, display the form to enter details.
         formLlamada = LlamadaForm()
         formLlamada.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formLlamada':formLlamada, 'no_es_vendedor':es_vendedor}
-
-    # Bad form (or form details), no form supplied...
-    # Render the form with error messages (if any).
     return render(request, 'contactos/registrar_llamada.html', forms)
 
 @login_required
@@ -281,30 +254,17 @@ def registrar_nota(request):
         formNota = NotaForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formNota':formNota, 'no_es_vendedor':es_vendedor}
-
-        # Have we been provided with a valid form?
         if formNota.is_valid():
-            # Save the new category to the database.
             data = formNota.cleaned_data
             contacto = data['contacto']
             descripcion = data['descripcion']
             clasificacion = data['clasificacion']
             Nota(contacto=contacto, descripcion=descripcion, clasificacion=clasificacion).save()
-
-            # Now call the index() view.
-            # The user will be shown the homepage.
             return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
-        else:
-            # The supplied form contained errors - just print them to the terminal.
-            print (formNota.errors)
     else:
-        # If the request was not a POST, display the form to enter details.
         formNota = NotaForm()
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formNota':formNota, 'no_es_vendedor':es_vendedor}
-
-    # Bad form (or form details), no form supplied...
-    # Render the form with error messages (if any).
     return render(request, 'contactos/registrar_nota.html', forms)
 
 @login_required

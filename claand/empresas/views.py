@@ -199,27 +199,47 @@ def registrar_empresa(request):
         form = EmpresaForm(request.POST)
         formDireccion = DireccionForm(request.POST)
         formNumeroTelefonico = NumeroTelefonicoForm(request.POST)
+        if not formNumeroTelefonico.has_changed():
+            formNumeroTelefonico = NumeroTelefonicoForm()
         formRedSocial = RedSocialForm(request.POST)
+        if not formRedSocial.has_changed():
+            formRedSocial = RedSocialForm()
         es_vendedor = no_es_vendedor(request.user)
         forms = {'form':form, 'formDireccion':formDireccion, 'formNumeroTelefonico':formNumeroTelefonico, \
         'formRedSocial':formRedSocial, 'no_es_vendedor':es_vendedor}
-        
-        if form.is_valid() and formDireccion.is_valid() and formNumeroTelefonico.is_valid() and formRedSocial.is_valid():
-            empresa = form.instance
-            empresa = form.save(commit=True)
-            direccion = formDireccion.save(commit=True)
 
-            EmpresaTieneDireccion(empresa=empresa, direccion=direccion).save()
-
+        if form.is_valid() and formDireccion.is_valid():
+            es_valido = True
             if formNumeroTelefonico.has_changed():
-                numero_telefonico = formNumeroTelefonico.instance
-                numero_telefonico.empresa = empresa
-                numero_telefonico.save()
+                if not formNumeroTelefonico.is_valid():
+                    print("Form telefonico no valido")
+                    es_valido = False
+            else:
+                formNumeroTelefonico = NumeroTelefonicoForm()
+                forms['formNumeroTelefonico'] = formNumeroTelefonico
             if formRedSocial.has_changed():
-                red_social = formRedSocial.instance
-                red_social.empresa = empresa
-                red_social.save()
-            return render(request, 'principal/exito.html')
+                if not formRedSocial.is_valid():
+                    print("Form red social no valido")
+                    es_valido = False
+            else:
+                formRedSocial = RedSocialForm()
+                forms['formRedSocial'] = formRedSocial
+            if es_valido:
+                empresa = form.instance
+                empresa = form.save(commit=True)
+                direccion = formDireccion.save(commit=True)
+
+                EmpresaTieneDireccion(empresa=empresa, direccion=direccion).save()
+
+                if formNumeroTelefonico.has_changed() and formNumeroTelefonico.is_valid():
+                    numero_telefonico = formNumeroTelefonico.instance
+                    numero_telefonico.empresa = empresa
+                    numero_telefonico.save()
+                if formRedSocial.has_changed() and formRedSocial.is_valid():
+                    red_social = formRedSocial.instance
+                    red_social.empresa = empresa
+                    red_social.save()
+                return render(request, 'principal/exito.html')
     else:
         form = EmpresaForm()
         formDireccion = DireccionForm()

@@ -31,20 +31,20 @@ class DireccionForm(forms.ModelForm):
 		fields = ('estado', 'municipio', 'direccion',)
 
 class NumeroTelefonicoForm(forms.ModelForm):
-	numero = forms.IntegerField(help_text='Número: ', required=False, \
+	numero = forms.IntegerField(help_text='Número: ', required=True, \
 		widget=forms.NumberInput(attrs={'class': 'form-control'}))
 	tipo_numero = forms.ModelChoiceField(queryset=TipoNumeroTelefonico.objects.all(), \
-		help_text='Tipo: ', required=False, widget=forms.Select(attrs={'class': 'form-control'}))
+		help_text='Tipo: ', required=True, widget=forms.Select(attrs={'class': 'form-control'}))
 
 	class Meta:
 		model = NumeroTelefonico
 		fields = ('numero', 'tipo_numero',)
 
 class RedSocialForm(forms.ModelForm):
-	link = forms.URLField(help_text='Link: ', required=False, \
+	link = forms.URLField(help_text='Link: ', required=True, \
 		widget=forms.URLInput(attrs={'class': 'form-control'}))
 	tipo_red_social = forms.ModelChoiceField(queryset=TipoRedSocial.objects.all(), \
-		help_text='Tipo: ', required=False, widget=forms.Select(attrs={'class': 'form-control'}))
+		help_text='Tipo: ', required=True, widget=forms.Select(attrs={'class': 'form-control'}))
 
 	class Meta:
 		model = RedSocial

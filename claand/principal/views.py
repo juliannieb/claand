@@ -128,12 +128,10 @@ def consultar_vendedores(request):
     for vendedor in vendedores_list:
         xdata.append(vendedor.user.first_name + " " +vendedor.user.last_name)
 
-    print(xdata)
     for vendedor in vendedores_list:
         contactos_list = obtener_contactos_list(vendedor)
         cotizaciones_list = obtener_cotizaciones_list(contactos_list)
         ydata.append(len(cotizaciones_list))
-    print(ydata)
 
     chartdata = {'x': xdata, 'y': ydata}
     charttype = "pieChart"
@@ -258,8 +256,6 @@ def registrar_vendedor(request):
             user.save()
             Vendedor(user=user).save()
             return render(request, 'principal/exito.html', forms)
-        else:
-            print (formVendedor.errors)
     else:
         formVendedor = VendedorForm()
         es_vendedor = no_es_vendedor(request.user)
