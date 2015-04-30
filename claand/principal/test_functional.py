@@ -86,4 +86,44 @@ class PrincipalFunctionalTests(LiveServerTestCase):
         self.browser.find_element_by_link_text('Vendedores').click()
         # revisar que esten todos los vendedores
 
+    def test_registrar_vendedor(self):
+        """ Test para registrar un vendedor
+        """
+        self.browser.get(self.live_server_url + '/principal/login/')
+        username_field = self.browser.find_element_by_name('username')
+        username_field.send_keys('admin')
+        password_field = self.browser.find_element_by_name('password')
+        password_field.send_keys('admin')
+        password_field.send_keys(Keys.RETURN)
+
+        self.browser.find_element_by_link_text('Consultar').click()
+        self.browser.find_element_by_link_text('Vendedores').click()
+        self.browser.find_element_by_id('registrar_vendedor').click()
+
+        nombre_field = self.browser.find_element_by_id('id_nombre')
+        nombre_field.send_keys('tulio')
+        apellido_field = self.browser.find_element_by_id('id_apellido')
+        apellido_field.send_keys('elegante')
+        correo_field = self.browser.find_element_by_id('id_correo_electronico')
+        correo_field.send_keys('tulio@abc.com')
+        username_field = self.browser.find_element_by_id('id_usuario')
+        username_field.send_keys('tulio')
+        password_field = self.browser.find_element_by_id('id_password')
+        password_field.send_keys('tulio')
+        self.browser.find_element_by_id('registrar_vendedor').click()
+
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('Operación exitosa', body.text)
+
+        self.browser.find_element_by_link_text('Consultar').click()
+        self.browser.find_element_by_link_text('Vendedores').click()
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('tulio elegante', body.text)
+
+
+
+
+
+
+
 
