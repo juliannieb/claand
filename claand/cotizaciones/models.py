@@ -36,7 +36,7 @@ class Venta(models.Model):
     monto_acumulado = models.FloatField(default=0)
     is_completada = models.BooleanField(default=False)
     cotizacion = models.OneToOneField(Cotizacion)
-    fecha_creacion = models.DateField(editable=False)
+    fecha_creacion = models.DateField(editable=True)
     fecha_modificacion = models.DateField()
 
     def save(self, *args, **kwargs):

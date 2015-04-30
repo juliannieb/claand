@@ -68,6 +68,32 @@ def consultar_vendedores(request):
     es_vendedor = no_es_vendedor(request.user)
     vendedores_list = Vendedor.objects.all()
     context = {}
+    xdata = list()
+    ydata = list()
+    for vendedor in vendedores_list:
+        xdata.append(vendedor.user.first_name + " " +vendedor.user.last_name)
+
+    print(xdata)
+    for vendedor in vendedores_list:
+        contactos_list = Contacto.objects.filter(vendedor=vendedor)
+        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+        ydata.append(cotizaciones_list.count())
+    print(ydata)
+
+    chartdata = {'x': xdata, 'y': ydata}
+    charttype = "pieChart"
+    chartcontainer = 'piechart_container'
+    context = {
+    'charttype': charttype,
+    'chartdata': chartdata,
+    'chartcontainer': chartcontainer,
+    'extra': {
+        'x_is_date': False,
+        'x_axis_format': '',
+        'tag_script_js': True,
+        'jquery_on_ready': False,
+        }
+    }
     context['vendedores_list'] = vendedores_list
     context['no_es_vendedor'] = es_vendedor
     return render(request, 'principal/consultar_vendedores.html', context)
@@ -111,8 +137,6 @@ def vendedor(request, id_vendedor):
             x_dict2[fecha_venta] = venta.monto_total
 
     x_data2 = sorted(xdata2)
-    print("x_data2")
-    print(x_data2)
     ydata2 = []
     for x in x_data2:
         ydata2.append(x_dict2[x])

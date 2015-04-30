@@ -39,7 +39,7 @@ class FormasContactos(TestCase):
         form_llamada = LlamadaForm(data=data)
         self.assertFalse(form_llamada.is_valid())
         descripcion = "prueba"
-        data = {'contacto' : -1, 'descripcion' : descripcion}
+        data = {'descripcion' : descripcion}
         self.assertFalse(form_llamada.is_valid())
 
     def test_registrar_nota_valida(self):
