@@ -24,7 +24,8 @@
                 <div class="row">
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_nota()">Eliminar</button>
+                            <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
+                            <a href="{% url 'contactos:eliminar_nota' nota.id %}" id="boton_confirmar"> si quiero borrar </a>
 
                             <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
 
@@ -37,11 +38,13 @@
     </div>
 
 <script>
-    function eliminar_nota() {
-        if (confirm("¿Estás seguro de eliminar el registro?") == true) {
-            window.location.replace("{% url 'contactos:eliminar_nota' nota.id %}");
-        }
-    }
+
+    $(document).ready(function(){
+        $("#boton_confirmar").hide();
+        $("#boton_eliminar").click(function(){
+            $("#boton_confirmar").show();
+        });
+    }); 
 </script>
 
 {% endblock content%}
