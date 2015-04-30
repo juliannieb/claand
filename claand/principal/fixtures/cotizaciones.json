@@ -1,54 +1,106 @@
 [
 {
+    "fields": {
+        "is_pendiente": true,
+        "fecha_creacion": "2015-02-02",
+        "monto": 500.0,
+        "is_active": true,
+        "contacto": 1,
+        "descripcion": "Mano de obra",
+        "fecha_modificacion": "2015-04-29"
+    },
     "pk": 1,
-    "model": "cotizaciones.cotizacion",
-    "fields": {
-        "contacto": 13,
-        "monto": 999.8,
-        "fecha_modificacion": "2015-04-15",
-        "fecha_creacion": "2015-04-15",
-        "is_active": true,
-        "is_pendiente": true,
-        "descripcion": "Una cotizaci\u00f3n."
-    }
+    "model": "cotizaciones.cotizacion"
 },
 {
+    "fields": {
+        "is_pendiente": true,
+        "fecha_creacion": "2015-03-03",
+        "monto": 600.0,
+        "is_active": true,
+        "contacto": 5,
+        "descripcion": "Marcado",
+        "fecha_modificacion": "2015-04-29"
+    },
     "pk": 2,
-    "model": "cotizaciones.cotizacion",
+    "model": "cotizaciones.cotizacion"
+},
+{
     "fields": {
+        "is_pendiente": true,
+        "fecha_creacion": "2015-03-31",
+        "monto": 450.0,
+        "is_active": true,
         "contacto": 2,
-        "monto": 950.0,
-        "fecha_modificacion": "2015-04-15",
-        "fecha_creacion": "2015-04-15",
-        "is_active": true,
-        "is_pendiente": true,
-        "descripcion": "Cotizaci\u00f3n."
-    }
-},
-{
+        "descripcion": "Marcado",
+        "fecha_modificacion": "2015-04-29"
+    },
     "pk": 3,
-    "model": "cotizaciones.cotizacion",
-    "fields": {
-        "contacto": 18,
-        "monto": 554.2,
-        "fecha_modificacion": "2015-04-16",
-        "fecha_creacion": "2015-04-16",
-        "is_active": true,
-        "is_pendiente": true,
-        "descripcion": "Cotizaci\u00f3n de fundas para 25,000 iPhones."
-    }
+    "model": "cotizaciones.cotizacion"
 },
 {
-    "pk": 4,
-    "model": "cotizaciones.cotizacion",
     "fields": {
-        "contacto": 15,
-        "monto": 28.0,
-        "fecha_modificacion": "2015-04-16",
-        "fecha_creacion": "2015-04-16",
-        "is_active": true,
         "is_pendiente": true,
-        "descripcion": "Un queso."
-    }
+        "fecha_creacion": "2015-04-08",
+        "monto": 700.0,
+        "is_active": true,
+        "contacto": 7,
+        "descripcion": "Mano de obra",
+        "fecha_modificacion": "2015-04-29"
+    },
+    "pk": 4,
+    "model": "cotizaciones.cotizacion"
+},
+{
+    "fields": {
+        "is_pendiente": true,
+        "fecha_creacion": "2015-04-21",
+        "monto": 550.0,
+        "is_active": true,
+        "contacto": 4,
+        "descripcion": "Mano de obra",
+        "fecha_modificacion": "2015-04-29"
+    },
+    "pk": 5,
+    "model": "cotizaciones.cotizacion"
+},
+{
+    "fields": {
+        "is_pendiente": false,
+        "fecha_creacion": "2015-04-29",
+        "monto": 900.0,
+        "is_active": true,
+        "contacto": 6,
+        "descripcion": "Productos varios",
+        "fecha_modificacion": "2015-04-29"
+    },
+    "pk": 6,
+    "model": "cotizaciones.cotizacion"
+},
+{
+    "fields": {
+        "is_pendiente": false,
+        "fecha_creacion": "2015-04-29",
+        "monto": 3000.0,
+        "is_active": true,
+        "contacto": 7,
+        "descripcion": "Marcado",
+        "fecha_modificacion": "2015-04-29"
+    },
+    "pk": 7,
+    "model": "cotizaciones.cotizacion"
+},
+{
+    "fields": {
+        "is_pendiente": false,
+        "fecha_creacion": "2015-04-29",
+        "monto": 750.0,
+        "is_active": true,
+        "contacto": 8,
+        "descripcion": "Servicios\r\n",
+        "fecha_modificacion": "2015-04-29"
+    },
+    "pk": 8,
+    "model": "cotizaciones.cotizacion"
 }
 ]

@@ -1,56 +1,60 @@
 [
 {
-    "model": "auth.user",
     "pk": 1,
     "fields": {
-        "date_joined": "2015-04-08T23:15:25.511Z",
+        "user_permissions": [],
         "is_staff": true,
-        "first_name": "",
         "is_superuser": true,
         "last_name": "",
         "groups": [],
-        "last_login": "2015-04-14T04:04:17.324Z",
         "email": "",
-        "password": "pbkdf2_sha256$15000$2ewmlG7doVJR$gSm2V7/IJxpL2IsrLJMpIamRLUwiZ/tbGYJh/TW8J60=",
+        "last_login": "2015-04-30T03:19:01.227Z",
         "username": "admin",
-        "user_permissions": [],
-        "is_active": true
-    }
+        "is_active": true,
+        "first_name": "",
+        "date_joined": "2015-04-29T15:59:52.423Z",
+        "password": "pbkdf2_sha256$15000$VAjZ5BPbjvSG$XSNKoFcvLDY5Y2p/gJUaQ9b6enkMGiO07qP3tJD0BCs="
+    },
+    "model": "auth.user"
 },
 {
-    "model": "auth.user",
     "pk": 2,
     "fields": {
-        "date_joined": "2015-04-14T02:05:21.906Z",
-        "is_staff": false,
-        "first_name": "",
-        "is_superuser": false,
-        "last_name": "",
-        "groups": [],
-        "last_login": "2015-04-14T03:48:07.734Z",
-        "email": "",
-        "password": "pbkdf2_sha256$15000$G5MBvqEqigP0$vqgYTgtjy4+EIKA0oqmqtavH5wmy2L223qUjotGG6vU=",
-        "username": "Tulio",
         "user_permissions": [],
-        "is_active": true
-    }
+        "is_staff": false,
+        "is_superuser": false,
+        "last_name": "Niebeskikwiat Godoy",
+        "groups": [
+            1
+        ],
+        "email": "juliannieb@gmail.com",
+        "last_login": "2015-04-30T03:03:50.936Z",
+        "username": "Julian",
+        "is_active": true,
+        "first_name": "Juli\u00e1n",
+        "date_joined": "2015-04-29T16:59:03Z",
+        "password": "pbkdf2_sha256$15000$f6CbkuldqgY0$jRwHPyagsSVi5gUwhy7HLNpC2YYS1hCPKMgcZ7k/yeI="
+    },
+    "model": "auth.user"
 },
 {
-    "model": "auth.user",
     "pk": 3,
     "fields": {
-        "date_joined": "2015-04-14T02:05:21.906Z",
-        "is_staff": false,
-        "first_name": "",
-        "is_superuser": false,
-        "last_name": "",
-        "groups": [],
-        "last_login": "2015-04-14T03:48:07.734Z",
-        "email": "",
-        "password": "pbkdf2_sha256$15000$G5MBvqEqigP0$vqgYTgtjy4+EIKA0oqmqtavH5wmy2L223qUjotGG6vU=",
-        "username": "Marquicio",
         "user_permissions": [],
-        "is_active": true
-    }
+        "is_staff": false,
+        "is_superuser": false,
+        "last_name": "L\u00f3pez Morales",
+        "groups": [
+            1
+        ],
+        "email": "marcolm485@gmail.com",
+        "last_login": "2015-04-30T01:24:04.110Z",
+        "username": "Marco",
+        "is_active": true,
+        "first_name": "Marco Antonio ",
+        "date_joined": "2015-04-29T17:14:05Z",
+        "password": "pbkdf2_sha256$15000$gvRCHRCktPuB$Ek8jKKPkKelDOhHbLrNj8hefkb6Aa/5Et+W8djz1304="
+    },
+    "model": "auth.user"
 }
 ]
