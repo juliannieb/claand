@@ -250,6 +250,7 @@ def registrar_pago(request, id_venta):
     # Render the form with error messages (if any).
     return render(request, 'cotizaciones/registrar_pago.html', forms)
 
+@login_required
 def eliminar_cotizacion(request, id_cotizacion):
     cotizacion = Cotizacion.objects.get(pk=id_cotizacion)
     cotizacion.is_active = False
@@ -257,6 +258,7 @@ def eliminar_cotizacion(request, id_cotizacion):
     es_vendedor = no_es_vendedor(request.user)
     return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
 
+@login_required
 def eliminar_venta(request, id_venta):
     venta = Venta.objects.get(pk=id_venta)
     venta.is_active = False

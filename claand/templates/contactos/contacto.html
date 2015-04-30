@@ -163,6 +163,62 @@
             </tbody>
         </table>
     </div>
+    {% if no_es_vendedor %} <!-- if true, es director -->
+        <div class="container">
+            <div class="page-header">
+                <h1>Notas</h1>
+            </div>
+        </div>
+        <div class="container">
+            <table class="sortable table table-hover" id="tableLlamadas">
+                <thead>
+                    <tr>
+                        <th>Descripcion</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nota in notas_list %}
+                        {% if nota.is_active %}
+                            {% if nota.contacto == contacto %}
+                                <tr>
+                                    <td>{{ nota.descripcion }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+    {% if no_es_vendedor %} <!-- if true, es director -->
+        <div class="container">
+            <div class="page-header">
+                <h1>Recordatorios</h1>
+            </div>
+        </div>
+        <div class="container">
+            <table class="sortable table table-hover" id="tableLlamadas">
+                <thead>
+                    <tr>
+                        <th>Fecha</a></th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recordatorio in recordatorios_list %}
+                        {% if recordatorio.is_active %}
+                            {% if recordatorio.contacto == contacto %}
+                                <tr>
+                                    <td>{{ recordatorio.fecha }}</td>
+                                    <td>{{ recordatorio.descripcion }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 
 <script>
     function eliminar_contacto() {

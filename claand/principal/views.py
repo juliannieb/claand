@@ -8,10 +8,10 @@ from django.template import RequestContext
 from django.contrib.auth.models import User, Group
 
 from principal.models import Vendedor
-from contactos.models import Contacto, Llamada
+from contactos.models import Contacto, Llamada, Atiende
 from cotizaciones.models import Cotizacion, Venta
 
-from principal.forms import VendedorForm
+from principal.forms import VendedorForm, SeleccionarVendedorForm
 
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
@@ -68,10 +68,38 @@ def consultar_vendedores(request):
     es_vendedor = no_es_vendedor(request.user)
     vendedores_list = Vendedor.objects.all()
     context = {}
+    xdata = list()
+    ydata = list()
+    for vendedor in vendedores_list:
+        xdata.append(vendedor.user.first_name + " " +vendedor.user.last_name)
+
+    print(xdata)
+    for vendedor in vendedores_list:
+        contactos_list = Contacto.objects.filter(vendedor=vendedor)
+        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
+        ydata.append(cotizaciones_list.count())
+    print(ydata)
+
+    chartdata = {'x': xdata, 'y': ydata}
+    charttype = "pieChart"
+    chartcontainer = 'piechart_container'
+    context = {
+    'charttype': charttype,
+    'chartdata': chartdata,
+    'chartcontainer': chartcontainer,
+    'extra': {
+        'x_is_date': False,
+        'x_axis_format': '',
+        'tag_script_js': True,
+        'jquery_on_ready': False,
+        }
+    }
     context['vendedores_list'] = vendedores_list
     context['no_es_vendedor'] = es_vendedor
     return render(request, 'principal/consultar_vendedores.html', context)
 
+@login_required
+@user_passes_test(no_es_vendedor)
 def vendedor(request, id_vendedor):
     """ Vista para mostrar el detalle de un contacto en particular
     """
@@ -152,6 +180,8 @@ def vendedor(request, id_vendedor):
     context['no_es_vendedor'] = es_vendedor
     return render(request, 'principal/vendedor.html', context)
 
+@login_required
+@user_passes_test(no_es_vendedor)
 def registrar_vendedor(request):
     """ Vista para registrar un nuevo vendedor en el sistema """
     current_user = request.user
@@ -159,10 +189,7 @@ def registrar_vendedor(request):
         formVendedor = VendedorForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formVendedor':formVendedor, 'no_es_vendedor':es_vendedor}
-
-        # Have we been provided with a valid form?
         if formVendedor.is_valid():
-            # Save the new category to the database.
             data = formVendedor.cleaned_data
             nombre = data['nombre']
             apellido = data['apellido']
@@ -175,18 +202,48 @@ def registrar_vendedor(request):
             user.last_name = apellido
             user.save()
             Vendedor(user=user).save()
-            # Now call the index() view.
-            # The user will be shown the homepage.
             return render(request, 'principal/exito.html')
         else:
-            # The supplied form contained errors - just print them to the terminal.
             print (formVendedor.errors)
     else:
-        # If the request was not a POST, display the form to enter details.
         formVendedor = VendedorForm()
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formVendedor':formVendedor, 'no_es_vendedor':es_vendedor, }
 
-    # Bad form (or form details), no form supplied...
-    # Render the form with error messages (if any).
     return render(request, 'principal/registrar_vendedor.html', forms)
+
+@login_required
+@user_passes_test(no_es_vendedor)
+def eliminar_vendedor(request, id_vendedor):
+    """ Vista para registrar un nuevo vendedor en el sistema """
+    vendedor = Vendedor.objects.get(pk=id_vendedor)
+    if request.method == 'POST':
+        formAsignarTodosLosContactos = SeleccionarVendedorForm(request.POST)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formAsignarTodosLosContactos':formAsignarTodosLosContactos, 'vendedor':vendedor, 'no_es_vendedor':es_vendedor}
+
+        if formAsignarTodosLosContactos.is_valid():
+            data = formAsignarTodosLosContactos.cleaned_data
+            nuevoVendedor = data['vendedor']
+            todos_los_contactos = Contacto.objects.all()
+            contactos_list = []
+            for contacto in todos_los_contactos:
+                if contacto.atiende_set.all():
+                    if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor \
+                    == vendedor:
+                        contactos_list.append(contacto)
+            for contacto in contactos_list:
+                Atiende(contacto=contacto, vendedor=nuevoVendedor).save()
+            vendedor.is_active = False
+            vendedor.save()
+            user = vendedor.user
+            user.is_active = False
+            user.save()
+            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+    else:
+        formAsignarTodosLosContactos = SeleccionarVendedorForm()
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formAsignarTodosLosContactos':formAsignarTodosLosContactos, 'vendedor':vendedor, \
+        'no_es_vendedor':es_vendedor, }
+
+    return render(request, 'principal/eliminar_vendedor.html', forms)

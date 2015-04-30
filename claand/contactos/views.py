@@ -81,6 +81,8 @@ def contacto(request, contacto_nombre_slug):
     ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
     llamadas_list = Llamada.objects.all()
     es_vendedor = no_es_vendedor(request.user)
+    notas_list = Nota.objects.filter(contacto=contacto)
+    recordatorios_list = Recordatorio.objects.filter(contacto=contacto)
     context = {}
     context['contacto'] = contacto
     context['pertenece'] = pertenece
@@ -90,6 +92,8 @@ def contacto(request, contacto_nombre_slug):
     context['llamadas_list'] = llamadas_list
     context['no_es_vendedor'] = es_vendedor
     context['ventas_list'] = ventas_list
+    context['notas_list'] = notas_list
+    context['recordatorios_list'] = recordatorios_list
     return render(request, 'contactos/contacto.html', context)
 
 @login_required

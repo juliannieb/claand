@@ -20,17 +20,27 @@
             </thead>
             <tbody>
                 {% for vendedor in vendedores_list %}
-                    <tr>
-                        <td><a href="{% url 'principal:vendedor' vendedor.id %}">{{ vendedor.id }}</a></td>
-                        <td>{{ vendedor.user.first_name }} {{vendedor.user.last_name}}</td>
-                        <td>{{ vendedor.user.email }}</td>
-                    </tr>
+                    {% if vendedor.is_active %}
+                        <tr>
+                            <td><a href="{% url 'principal:vendedor' vendedor.id %}">{{ vendedor.id }}</a></td>
+                            <td>{{ vendedor.user.first_name }} {{vendedor.user.last_name}}</td>
+                            <td>{{ vendedor.user.email }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
     <br>
+    <br>
+    <div class="container">
+        <div class="row row-centered">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
+                {% include_container chartcontainer %}
+            </div>
+        </div>
+    </div>
     
     <div class="container">
         <div class="row pull-right">

@@ -172,10 +172,8 @@ def registrar_empresa(request):
         es_vendedor = no_es_vendedor(request.user)
         forms = {'form':form, 'formDireccion':formDireccion, 'formNumeroTelefonico':formNumeroTelefonico, \
         'formRedSocial':formRedSocial, 'no_es_vendedor':es_vendedor}
-
-        # Have we been provided with a valid form?
+        
         if form.is_valid() and formDireccion.is_valid() and formNumeroTelefonico.is_valid() and formRedSocial.is_valid():
-            # Save the new category to the database.
             empresa = form.instance
             empresa = form.save(commit=True)
             direccion = formDireccion.save(commit=True)
@@ -190,18 +188,8 @@ def registrar_empresa(request):
                 red_social = formRedSocial.instance
                 red_social.empresa = empresa
                 red_social.save()
-
-            # Now call the index() view.
-            # The user will be shown the homepage.
             return render(request, 'principal/exito.html')
-        else:
-            # The supplied form contained errors - just print them to the terminal.
-            print (form.errors)
-            print (formDireccion.errors)
-            print (formNumeroTelefonico.errors)
-            print (formRedSocial.errors)
     else:
-        # If the request was not a POST, display the form to enter details.
         form = EmpresaForm()
         formDireccion = DireccionForm()
         formNumeroTelefonico = NumeroTelefonicoForm()
@@ -211,8 +199,6 @@ def registrar_empresa(request):
         'formNumeroTelefonico':formNumeroTelefonico, \
         'formRedSocial':formRedSocial, 'no_es_vendedor':es_vendedor}
 
-    # Bad form (or form details), no form supplied...
-    # Render the form with error messages (if any).
     return render(request, 'empresas/registrar_empresa.html', forms)
 
 

@@ -8,6 +8,15 @@
             <h1>{{ vendedor }}</h1>
         </div>
     </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_vendedor()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="page-header">
             <h1>Llamadas</h1>
@@ -25,11 +34,13 @@
             </thead>
             <tbody>
                 {% for llamada in llamadas_list %}
-                    <tr>
-                        <td>{{ llamada.contacto }}</td>
-                        <td>{{ llamada.fecha }}</td>
-                        <td>{{ llamada.descripcion }}</td>
-                    </tr>
+                    {% if llamada.is_active %}
+                        <tr>
+                            <td>{{ llamada.contacto }}</td>
+                            <td>{{ llamada.fecha }}</td>
+                            <td>{{ llamada.descripcion }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -61,13 +72,15 @@
             </thead>
             <tbody>
                 {% for cotizacion in cotizaciones_list %}
-                    {% if cotizacion.is_pendiente %}
-                        <tr>
-                            <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
-                            <td>{{ cotizacion.contacto.empresa.get }}</td>
-                            <td>{{ cotizacion.descripcion }}</td>
-                            <td>{{ cotizacion.monto }}</td>
-                        </tr>
+                    {% if cotizacion.is_active %}
+                        {% if cotizacion.is_pendiente %}
+                            <tr>
+                                <td><a href="{% url 'cotizaciones:cotizacion' cotizacion.id %}">{{ cotizacion.id }}</a></td>
+                                <td>{{ cotizacion.contacto.empresa.get }}</td>
+                                <td>{{ cotizacion.descripcion }}</td>
+                                <td>{{ cotizacion.monto }}</td>
+                            </tr>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </tbody>
@@ -94,23 +107,31 @@
             </thead>
             <tbody>
                 {% for venta in ventas_list %}
-                    <tr>
-                        <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
-                        <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
-                        <td>{{ venta.cotizacion.descripcion }}</td>
-                        <td>{{ venta.cotizacion.venta.monto_total }}</td>
-                        <td>{{ venta.cotizacion.venta.monto_total }}</td>
-                        {% if venta.is_completada %}
-                            <td>Completada</td>
-                        {% else %}
-                            <td>Pendiente</td>
-                        {% endif %}
-                    </tr>
+                    {% if venta.is_active %}
+                        <tr>
+                            <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
+                            <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
+                            <td>{{ venta.cotizacion.descripcion }}</td>
+                            <td>{{ venta.cotizacion.venta.monto_total }}</td>
+                            <td>{{ venta.cotizacion.venta.monto_total }}</td>
+                            {% if venta.is_completada %}
+                                <td>Completada</td>
+                            {% else %}
+                                <td>Pendiente</td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
-
+<script>
+    function eliminar_vendedor() {
+        if (confirm("¿Estás seguro de eliminar el registro?") == true) {
+            window.location.replace("{% url 'principal:eliminar_vendedor' vendedor.id %}");
+        }
+    }
+</script>
 
 {% endblock content%}
