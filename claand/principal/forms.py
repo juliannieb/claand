@@ -16,3 +16,13 @@ class VendedorForm(forms.ModelForm):
 	class Meta:
 		model = Vendedor
 		fields = ('nombre', 'apellido', 'correo_electronico', 'usuario', 'password',)
+
+
+""" Form para seleccionar un vendedor para pasarle todos los contactos  """
+class SeleccionarVendedorForm(forms.ModelForm):
+	vendedor = forms.ModelChoiceField(queryset=Vendedor.objects.all(), help_text='Vendedor: ', \
+		required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+
+	class Meta:
+		model = Vendedor
+		fields = ('vendedor',)

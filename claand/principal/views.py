@@ -8,10 +8,10 @@ from django.template import RequestContext
 from django.contrib.auth.models import User, Group
 
 from principal.models import Vendedor
-from contactos.models import Contacto, Llamada
+from contactos.models import Contacto, Llamada, Atiende
 from cotizaciones.models import Cotizacion, Venta
 
-from principal.forms import VendedorForm
+from principal.forms import VendedorForm, SeleccionarVendedorForm
 
 def no_es_vendedor(user):
     """Funcion para el decorador user_passes_test
@@ -192,3 +192,43 @@ def registrar_vendedor(request):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'principal/registrar_vendedor.html', forms)
+
+def eliminar_vendedor(request, id_vendedor):
+    """ Vista para registrar un nuevo vendedor en el sistema """
+    vendedor = Vendedor.objects.get(pk=id_vendedor)
+    if request.method == 'POST':
+        formAsignarTodosLosContactos = SeleccionarVendedorForm(request.POST)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formAsignarTodosLosContactos':formAsignarTodosLosContactos, 'vendedor':vendedor, 'no_es_vendedor':es_vendedor}
+
+        if formAsignarTodosLosContactos.is_valid():
+            data = formAsignarTodosLosContactos.cleaned_data
+            nuevoVendedor = data['vendedor']
+            todos_los_contactos = Contacto.objects.all()
+            contactos_list = []
+            for contacto in todos_los_contactos:
+                if contacto.atiende_set.all():
+                    if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor \
+                    == vendedor:
+                        contactos_list.append(contacto)
+            for contacto in contactos_list:
+                Atiende(contacto=contacto, vendedor=nuevoVendedor).save()
+            vendedor.is_active = False
+            vendedor.save()
+            user = vendedor.user
+            user.is_active = False
+            user.save()
+            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print (formAsignarTodosLosContactos.errors)
+    else:
+        # If the request was not a POST, display the form to enter details.
+        formAsignarTodosLosContactos = SeleccionarVendedorForm()
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formAsignarTodosLosContactos':formAsignarTodosLosContactos, 'vendedor':vendedor, \
+        'no_es_vendedor':es_vendedor, }
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render(request, 'principal/eliminar_vendedor.html', forms)

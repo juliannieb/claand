@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, Group
 
 class Vendedor(models.Model):
     user = models.OneToOneField(User)
+    is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         """ Override de la funcion de save para que
