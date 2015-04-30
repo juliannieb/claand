@@ -23,21 +23,24 @@ def user_login(request):
     en el caso de que sea un GET, muestra el template de login,
     y si es POST realiza la validacion y redireccionamiento. 
     """
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                login(request, user)
-                es_vendedor = no_es_vendedor(user)
-                return HttpResponseRedirect('/principal/index/', {'no_es_vendedor':es_vendedor})
-            else:
-                return render(request, 'principal/login2.html', {'desactivada':True})
-        else:
-            return render(request, 'principal/login2.html', {'errors':True})
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/principal/index/')
     else:
-        return render(request, 'principal/login2.html', {})
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    es_vendedor = no_es_vendedor(user)
+                    return HttpResponseRedirect('/principal/index/', {'no_es_vendedor':es_vendedor})
+                else:
+                    return render(request, 'principal/login2.html', {'desactivada':True})
+            else:
+                return render(request, 'principal/login2.html', {'errors':True})
+        else:
+            return render(request, 'principal/login2.html', {})
 
 def user_logout(request):
     logout(request)
