@@ -18,6 +18,57 @@ def no_es_vendedor(user):
     """
     return not user.groups.filter(name='vendedor').exists()
 
+def obtener_contactos_list(vendedor):
+    todos_los_contactos = Contacto.objects.all()
+    contactos_list = []
+    for contacto in todos_los_contactos:
+        atiende_set = contacto.atiende_set.all()
+        if atiende_set:
+            ultimo_atiende = atiende_set[len(atiende_set) - 1]
+            if ultimo_atiende.vendedor == vendedor:
+                if contacto.is_active:
+                    contactos_list.append(contacto)
+    return contactos_list
+
+def obtener_cotizaciones_list(contactos_list):
+    todas_las_cotizaciones = Cotizacion.objects.all()
+    cotizaciones_list = []
+    for cotizacion in todas_las_cotizaciones:
+        for contacto in contactos_list:
+            atiende_set = contacto.atiende_set.all()
+            if atiende_set:
+                ultimo_atiende = atiende_set[len(atiende_set) - 1]
+                if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= ultimo_atiende.fecha:
+                    if cotizacion.is_active:
+                        cotizaciones_list.append(cotizacion)
+    return cotizaciones_list
+
+def obtener_ventas_list(cotizaciones_list):
+    todas_las_ventas = Venta.objects.all()
+    ventas_list = []
+    for venta in todas_las_ventas:
+        for cotizacion in cotizaciones_list:
+            if venta.cotizacion == cotizacion:
+                if venta.is_active:
+                    ventas_list.append(venta)
+    return ventas_list
+
+def obtener_llamadas_list(contactos_list):
+    todas_las_llamadas = Llamada.objects.all()
+    llamadas_list = []
+    for llamada in todas_las_llamadas:
+        for contacto in contactos_list:
+            if llamada.contacto == contacto:
+                if llamada.is_active:
+                    llamadas_list.append(llamada)
+    return llamadas_list
+
+def obtener_contactos_ids(contactos_list):
+    contactos_ids = []
+    for contacto in contactos_list:
+        contactos_ids.append(contacto.id)
+    return contactos_ids
+
 def user_login(request):
     """ esta vista maneja todo el proceso de login:
     en el caso de que sea un GET, muestra el template de login,
@@ -77,10 +128,12 @@ def consultar_vendedores(request):
     for vendedor in vendedores_list:
         xdata.append(vendedor.user.first_name + " " +vendedor.user.last_name)
 
+    print(xdata)
     for vendedor in vendedores_list:
-        contactos_list = Contacto.objects.filter(vendedor=vendedor)
-        cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
-        ydata.append(cotizaciones_list.count())
+        contactos_list = obtener_contactos_list(vendedor)
+        cotizaciones_list = obtener_cotizaciones_list(contactos_list)
+        ydata.append(len(cotizaciones_list))
+    print(ydata)
 
     chartdata = {'x': xdata, 'y': ydata}
     charttype = "pieChart"
@@ -108,34 +161,10 @@ def vendedor(request, id_vendedor):
     es_vendedor = no_es_vendedor(request.user)
     vendedor = Vendedor.objects.get(id=id_vendedor)
     current_vendedor = vendedor
-    todos_los_contactos = Contacto.objects.all()
-    contactos_list = []
-    for contacto in todos_los_contactos:
-        if contacto.atiende_set.all():
-            if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
-                contactos_list.append(contacto)
-
-    todas_las_cotizaciones = Cotizacion.objects.all()
-    todas_las_ventas = Venta.objects.all()
-    cotizaciones_list = []
-    ventas_list = []
-
-    for cotizacion in todas_las_cotizaciones:
-        for contacto in contactos_list:
-            if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
-                cotizaciones_list.append(cotizacion)
-
-    for venta in todas_las_ventas:
-        for cotizacion in cotizaciones_list:
-            if venta.cotizacion == cotizacion:
-                ventas_list.append(venta)
-    
-    llamadas_list = Llamada.objects.all()
-    llamadas_list = []
-    for llamada in llamadas_list:
-        for contacto in contactos_list:
-            if llamada.contacto == contacto:
-                llamadas_list.append(llamada)
+    contactos_list = obtener_contactos_list(vendedor)
+    cotizaciones_list = obtener_cotizaciones_list(contactos_list)
+    ventas_list = obtener_ventas_list(cotizaciones_list)
+    llamadas_list = obtener_llamadas_list(contactos_list)
 
     xdata = list()
     xdata2 = list()
@@ -223,7 +252,6 @@ def registrar_vendedor(request):
             correo_electronico = data['correo_electronico']
             usuario = data['usuario']
             password = data['password']
-
             user = User.objects.create_user(usuario, correo_electronico, password)
             user.first_name = nombre
             user.last_name = apellido
@@ -247,18 +275,12 @@ def eliminar_vendedor(request, id_vendedor):
     if request.method == 'POST':
         formAsignarTodosLosContactos = SeleccionarVendedorForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
-        forms = {'formAsignarTodosLosContactos':formAsignarTodosLosContactos, 'vendedor':vendedor, 'no_es_vendedor':es_vendedor}
-
+        forms = {'formAsignarTodosLosContactos':formAsignarTodosLosContactos, 'vendedor':vendedor, \
+        'no_es_vendedor':es_vendedor}
         if formAsignarTodosLosContactos.is_valid():
             data = formAsignarTodosLosContactos.cleaned_data
             nuevoVendedor = data['vendedor']
-            todos_los_contactos = Contacto.objects.all()
-            contactos_list = []
-            for contacto in todos_los_contactos:
-                if contacto.atiende_set.all():
-                    if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor \
-                    == vendedor:
-                        contactos_list.append(contacto)
+            contactos_list = obtener_contactos_list(vendedor)
             for contacto in contactos_list:
                 Atiende(contacto=contacto, vendedor=nuevoVendedor).save()
             vendedor.is_active = False
