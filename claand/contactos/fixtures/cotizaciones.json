@@ -1,54 +1,232 @@
 [
 {
     "pk": 1,
-    "model": "cotizaciones.cotizacion",
     "fields": {
-        "contacto": 13,
-        "monto": 999.8,
-        "fecha_modificacion": "2015-04-15",
-        "fecha_creacion": "2015-04-15",
-        "is_active": true,
         "is_pendiente": true,
-        "descripcion": "Una cotizaci\u00f3n."
-    }
+        "monto": 500.0,
+        "fecha_creacion": "2015-02-02",
+        "is_active": true,
+        "contacto": 1,
+        "fecha_modificacion": "2015-04-29",
+        "descripcion": "Mano de obra"
+    },
+    "model": "cotizaciones.cotizacion"
 },
 {
     "pk": 2,
-    "model": "cotizaciones.cotizacion",
     "fields": {
-        "contacto": 2,
-        "monto": 950.0,
-        "fecha_modificacion": "2015-04-15",
-        "fecha_creacion": "2015-04-15",
-        "is_active": true,
         "is_pendiente": true,
-        "descripcion": "Cotizaci\u00f3n."
-    }
+        "monto": 600.0,
+        "fecha_creacion": "2015-03-03",
+        "is_active": true,
+        "contacto": 5,
+        "fecha_modificacion": "2015-04-29",
+        "descripcion": "Marcado"
+    },
+    "model": "cotizaciones.cotizacion"
 },
 {
     "pk": 3,
-    "model": "cotizaciones.cotizacion",
     "fields": {
-        "contacto": 18,
-        "monto": 554.2,
-        "fecha_modificacion": "2015-04-16",
-        "fecha_creacion": "2015-04-16",
-        "is_active": true,
         "is_pendiente": true,
-        "descripcion": "Cotizaci\u00f3n de fundas para 25,000 iPhones."
-    }
+        "monto": 450.0,
+        "fecha_creacion": "2015-03-31",
+        "is_active": true,
+        "contacto": 2,
+        "fecha_modificacion": "2015-04-29",
+        "descripcion": "Marcado"
+    },
+    "model": "cotizaciones.cotizacion"
 },
 {
     "pk": 4,
-    "model": "cotizaciones.cotizacion",
     "fields": {
-        "contacto": 15,
-        "monto": 28.0,
-        "fecha_modificacion": "2015-04-16",
-        "fecha_creacion": "2015-04-16",
-        "is_active": true,
         "is_pendiente": true,
-        "descripcion": "Un queso."
-    }
+        "monto": 700.0,
+        "fecha_creacion": "2015-04-08",
+        "is_active": true,
+        "contacto": 7,
+        "fecha_modificacion": "2015-04-29",
+        "descripcion": "Mano de obra"
+    },
+    "model": "cotizaciones.cotizacion"
+},
+{
+    "pk": 5,
+    "fields": {
+        "is_pendiente": true,
+        "monto": 550.0,
+        "fecha_creacion": "2015-04-21",
+        "is_active": true,
+        "contacto": 4,
+        "fecha_modificacion": "2015-04-29",
+        "descripcion": "Mano de obra"
+    },
+    "model": "cotizaciones.cotizacion"
+},
+{
+    "pk": 6,
+    "fields": {
+        "is_pendiente": false,
+        "monto": 900.0,
+        "fecha_creacion": "2015-04-29",
+        "is_active": true,
+        "contacto": 6,
+        "fecha_modificacion": "2015-04-29",
+        "descripcion": "Productos varios"
+    },
+    "model": "cotizaciones.cotizacion"
+},
+{
+    "pk": 7,
+    "fields": {
+        "is_pendiente": false,
+        "monto": 3000.0,
+        "fecha_creacion": "2015-04-29",
+        "is_active": true,
+        "contacto": 7,
+        "fecha_modificacion": "2015-04-29",
+        "descripcion": "Marcado"
+    },
+    "model": "cotizaciones.cotizacion"
+},
+{
+    "pk": 8,
+    "fields": {
+        "is_pendiente": false,
+        "monto": 750.0,
+        "fecha_creacion": "2015-04-29",
+        "is_active": true,
+        "contacto": 8,
+        "fecha_modificacion": "2015-04-29",
+        "descripcion": "Servicios\r\n"
+    },
+    "model": "cotizaciones.cotizacion"
+},
+{
+    "pk": 1,
+    "fields": {
+        "fecha_creacion": "2015-04-29",
+        "cotizacion": 1,
+        "monto_acumulado": 0.0,
+        "is_active": true,
+        "is_completada": false,
+        "monto_total": 650.0,
+        "fecha_modificacion": "2015-04-29"
+    },
+    "model": "cotizaciones.venta"
+},
+{
+    "pk": 2,
+    "fields": {
+        "fecha_creacion": "2015-04-29",
+        "cotizacion": 2,
+        "monto_acumulado": 0.0,
+        "is_active": true,
+        "is_completada": false,
+        "monto_total": 500.0,
+        "fecha_modificacion": "2015-04-29"
+    },
+    "model": "cotizaciones.venta"
+},
+{
+    "pk": 3,
+    "fields": {
+        "fecha_creacion": "2015-04-29",
+        "cotizacion": 3,
+        "monto_acumulado": 0.0,
+        "is_active": true,
+        "is_completada": false,
+        "monto_total": 780.0,
+        "fecha_modificacion": "2015-04-29"
+    },
+    "model": "cotizaciones.venta"
+},
+{
+    "pk": 4,
+    "fields": {
+        "fecha_creacion": "2015-04-29",
+        "cotizacion": 4,
+        "monto_acumulado": 0.0,
+        "is_active": true,
+        "is_completada": false,
+        "monto_total": 700.0,
+        "fecha_modificacion": "2015-04-29"
+    },
+    "model": "cotizaciones.venta"
+},
+{
+    "pk": 5,
+    "fields": {
+        "fecha_creacion": "2015-04-29",
+        "cotizacion": 5,
+        "monto_acumulado": 0.0,
+        "is_active": true,
+        "is_completada": false,
+        "monto_total": 600.0,
+        "fecha_modificacion": "2015-04-29"
+    },
+    "model": "cotizaciones.venta"
+},
+{
+    "pk": 6,
+    "fields": {
+        "fecha_creacion": "2015-04-29",
+        "cotizacion": 6,
+        "monto_acumulado": 0.0,
+        "is_active": true,
+        "is_completada": false,
+        "monto_total": 850.0,
+        "fecha_modificacion": "2015-04-29"
+    },
+    "model": "cotizaciones.venta"
+},
+{
+    "pk": 7,
+    "fields": {
+        "fecha_creacion": "2015-04-29",
+        "cotizacion": 7,
+        "monto_acumulado": 4000.0,
+        "is_active": true,
+        "is_completada": true,
+        "monto_total": 4000.0,
+        "fecha_modificacion": "2015-04-29"
+    },
+    "model": "cotizaciones.venta"
+},
+{
+    "pk": 8,
+    "fields": {
+        "fecha_creacion": "2015-04-29",
+        "cotizacion": 8,
+        "monto_acumulado": 0.0,
+        "is_active": true,
+        "is_completada": false,
+        "monto_total": 800.0,
+        "fecha_modificacion": "2015-04-29"
+    },
+    "model": "cotizaciones.venta"
+},
+{
+    "pk": 1,
+    "fields": {
+        "is_active": true,
+        "fecha_creacion": "2015-04-29",
+        "monto": 3000.0,
+        "fecha_modificacion": "2015-04-29",
+        "venta": 7
+    },
+    "model": "cotizaciones.pago"
+},
+{
+    "pk": 2,
+    "fields": {
+        "is_active": true,
+        "fecha_creacion": "2015-04-29",
+        "monto": 1000.0,
+        "fecha_modificacion": "2015-04-29",
+        "venta": 7
+    },
+    "model": "cotizaciones.pago"
 }
 ]
