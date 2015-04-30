@@ -62,6 +62,7 @@ def index(request):
     return render(request, 'principal/index.html', context)
 
 @login_required
+@user_passes_test(no_es_vendedor)
 def consultar_vendedores(request):
     """ Vista para mostrar toda la lista de vendedores al director
     """
