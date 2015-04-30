@@ -25,7 +25,6 @@
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
-                            <a href="{% url 'contactos:eliminar_nota' nota.id %}" id="boton_confirmar"> si quiero borrar </a>
 
                             <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
 
@@ -33,18 +32,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="row pull-right">
+                    <div class="col-sm-12 pull-right">
+                        <a href="{% url 'contactos:eliminar_nota' nota.id %}" id="boton_confirmar"> Sí quiero borrar </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-<script>
-
-    $(document).ready(function(){
-        $("#boton_confirmar").hide();
-        $("#boton_eliminar").click(function(){
-            $("#boton_confirmar").show();
-        });
-    }); 
-</script>
 
 {% endblock content%}

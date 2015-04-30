@@ -35,7 +35,7 @@
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
 
-                            <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_venta()">Eliminar</button>
+                            <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
 
                             <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
 
@@ -43,6 +43,11 @@
                                 <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Registrar Pago</button>
                             </a>
                         </div>
+                    </div>
+                </div>
+                <div class="row pull-right">
+                    <div class="col-sm-12 pull-right">
+                        <a href="{% url 'cotizaciones:eliminar_venta' venta.id %}" id="boton_confirmar">Sí quiero borrar</a>
                     </div>
                 </div>
             </div>
@@ -73,16 +78,5 @@
             </tbody>
         </table>
     </div>
-
-    <script>
-        function eliminar_venta() {
-            var x;
-            if (confirm("¿Estás seguro de eliminar el registro?") == true) {
-                window.location.replace("{% url 'cotizaciones:eliminar_venta' venta.id %}");
-            } else {
-                x = "You pressed Cancel!";
-            }
-        }
-    </script>
 
 {% endblock content%}

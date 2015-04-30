@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="form-group"> 
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_contacto()">Eliminar</button>
+                                <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
 
                                 <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
 
@@ -49,7 +49,7 @@
                      <div class="row">
                         <div class="form-group"> 
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="btn_submitContacto" class="btn btn-danger pull-right" onclick="eliminar_contacto()">Eliminar</button>
+                                <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
                                 
                                 <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
 
@@ -57,6 +57,11 @@
                         </div>
                     </div>
                 {% endif %}
+                    <div class="row pull-right">
+                        <div class="col-sm-12 pull-right">
+                            <a href="{% url 'contactos:eliminar_contacto' contacto.id %}" id="boton_confirmar">Sí quiero borrar</a>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -219,16 +224,5 @@
             </table>
         </div>
     {% endif %}
-
-<script>
-    function eliminar_contacto() {
-        var x;
-        if (confirm("¿Estás seguro de eliminar el registro?") == true) {
-            window.location.replace("{% url 'contactos:eliminar_contacto' contacto.id %}");
-        } else {
-            x = "You pressed Cancel!";
-        }
-    }
-</script>
 
 {% endblock content%}

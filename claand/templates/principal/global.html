@@ -5,64 +5,74 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>{{ vendedor }}</h1>
+            <h1>Información general</h1>
         </div>
     </div>
-    
     <div class="container">
         <div class="row">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
-                <button type="btn_submitContacto" class="btn btn-success pull-right" style="margin-right: 5px" onclick="window.print()">Generar Reporte</button>
-            </div>
-        </div>
-        <div class="row pull-right">
-            <div class="col-sm-12 pull-right">
-                <a href="{% url 'principal:eliminar_vendedor' vendedor.id %}" id="boton_confirmar">Sí quiero borrar</a>
+                <button type="btn_submitContacto" class="btn btn-success pull-right"onclick="window.print()">Generar Reporte</button>
             </div>
         </div>
     </div>
-
     <div class="container">
         <div class="page-header">
-            <h1>Llamadas</h1>
+            <h1>Nuevos contactos</h1>
         </div>
     </div>
-
     <div class="container">
-        <table class="sortable table table-hover" id="tableLlamadas">
+        <table class="sortable table table-hover" id="tableContactos">
             <thead>
                 <tr>
-                    <th>Contacto</th>
-                    <th>Fecha</th>
-                    <th>Descripción</th>
+                    <th class="table-head"><a href="#">Nombre</a></th>
+                    <th class="table-head"><a href="#">Apellido</a></th>
+                    <th class="table-head"><a href="#">Empresas</a></th>
+                    <th class="table-head"><a href="#">Área</a></th>
+                    <th class="table-head"><a href="#">Email</a></th>
+                    <th class="table-head"><a href="#">Estatus</a></th>
+                    <th class="table-head"><a href="#">Calificación</a></th>
+                    <th class="table-head"><a href="#">Encargado</a></th>
                 </tr>
             </thead>
             <tbody>
-                {% for llamada in llamadas_list %}
-                    {% if llamada.is_active %}
+                {% for contacto in contactos_list %}
+                    {% if contacto.is_active %}
                         <tr>
-                            <td>{{ llamada.contacto }}</td>
-                            <td>{{ llamada.fecha }}</td>
-                            <td>{{ llamada.descripcion }}</td>
+                            <td><a href="{% url 'contactos:contacto' contacto.slug %}">{{ contacto.nombre }}</a></td>
+                            <td>{{ contacto.apellido }}</td>
+                            {% if not contacto.empresa.all %}
+                                <td></td>
+                            {% else %}
+                                <td>{{ contacto.empresa.all|join:", " }}</td>
+                            {% endif %}
+                            <td>{{ contacto.pertenece_set.get.area }}</td>
+                            <td>{{ contacto.correo_electronico }}</td>
+                            {% if contacto.is_cliente %}
+                                <td>Cliente</td>
+                            {% else %}
+                                <td>Prospecto</td>
+                            {% endif %}
+                            
+                            <td>{{ contacto.calificacion }}</td>
+                            <td>
+                                {% for atiende in contacto.atiende_set.all %}
+                                    {% if forloop.last %}
+                                        {{ atiende.vendedor }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
                         </tr>
                     {% endif %}
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    <br>
-    <div class="container">
-        <div class="row row-centered">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-centered">
-                {% include_container chartcontainer %}
-            </div>
-        </div>
-    </div>
+
+
 
     <div class="container">
         <div class="page-header">
-            <h1>Cotizaciones asociadas</h1>
+            <h1>Nuevas Cotizaciones</h1>
         </div>
     </div>
 
@@ -74,6 +84,8 @@
                     <th>Empresa</th>
                     <th>Descripción</th>
                     <th>Monto</th>
+                    <th>Fecha</th>
+                    <th>Encargado</th>
                 </tr>
             </thead>
             <tbody>
@@ -85,6 +97,8 @@
                                 <td>{{ cotizacion.contacto.empresa.get }}</td>
                                 <td>{{ cotizacion.descripcion }}</td>
                                 <td>{{ cotizacion.monto }}</td>
+                                <td>{{ cotizacion.fecha_creacion }}</td>
+                                <td>{{ cotizacion.contacto.vendedor.get }}</td>
                             </tr>
                         {% endif %}
                     {% endif %}
@@ -95,12 +109,12 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>Ventas asociadas</h1>
+            <h1>Nuevas Ventas</h1>
         </div>
     </div>
 
     <div class="container">
-        <table class="table table-hover" id="tableVentas">
+        <table class="sortable table table-hover" id="tableVentas">
             <thead>
                 <tr>
                     <th>ID Venta</th>
@@ -109,6 +123,7 @@
                     <th>Monto Total</th>
                     <th>Monto Restante</th>
                     <th>Estatus</th>
+                    <th>Encargado</th>
                 </tr>
             </thead>
             <tbody>
@@ -118,13 +133,14 @@
                             <td><a href="{% url 'cotizaciones:venta' venta.id %}">{{ venta.id }}</a></td>
                             <td>{{ venta.cotizacion.contacto.empresa.get }}</td>
                             <td>{{ venta.cotizacion.descripcion }}</td>
-                            <td>{{ venta.cotizacion.venta.monto_total }}</td>
-                            <td>{{ venta.cotizacion.venta.monto_total }}</td>
+                            <td>{{ venta.monto_total }}</td>
+                            <td>{{ venta.monto_total }}</td>
                             {% if venta.is_completada %}
                                 <td>Completada</td>
                             {% else %}
                                 <td>Pendiente</td>
                             {% endif %}
+                            <td>{{ venta.cotizacion.contacto.vendedor.get }}</td>
                         </tr>
                     {% endif %}
                 {% endfor %}
