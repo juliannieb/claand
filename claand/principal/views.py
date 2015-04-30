@@ -109,10 +109,35 @@ def vendedor(request, id_vendedor):
     """
     es_vendedor = no_es_vendedor(request.user)
     vendedor = Vendedor.objects.get(id=id_vendedor)
-    contactos_list = Contacto.objects.filter(vendedor=vendedor)
-    cotizaciones_list = Cotizacion.objects.filter(contacto=contactos_list)
-    ventas_list = Venta.objects.filter(cotizacion=cotizaciones_list)
-    llamadas_list = Llamada.objects.filter(contacto=contactos_list)
+    current_vendedor = vendedor
+    todos_los_contactos = Contacto.objects.all()
+    contactos_list = []
+    for contacto in todos_los_contactos:
+        if contacto.atiende_set.all():
+            if contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].vendedor == current_vendedor:
+                contactos_list.append(contacto)
+
+    todas_las_cotizaciones = Cotizacion.objects.all()
+    todas_las_ventas = Venta.objects.all()
+    cotizaciones_list = []
+    ventas_list = []
+
+    for cotizacion in todas_las_cotizaciones:
+        for contacto in contactos_list:
+            if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= contacto.atiende_set.all()[len(contacto.atiende_set.all()) - 1].fecha:
+                cotizaciones_list.append(cotizacion)
+
+    for venta in todas_las_ventas:
+        for cotizacion in cotizaciones_list:
+            if venta.cotizacion == cotizacion:
+                ventas_list.append(venta)
+    
+    llamadas_list = Llamada.objects.all()
+    llamadas_list = []
+    for llamada in llamadas_list:
+        for contacto in contactos_list:
+            if llamada.contacto == contacto:
+                llamadas_list.append(llamada)
 
     xdata = list()
     xdata2 = list()
@@ -206,7 +231,7 @@ def registrar_vendedor(request):
             user.last_name = apellido
             user.save()
             Vendedor(user=user).save()
-            return render(request, 'principal/exito.html')
+            return render(request, 'principal/exito.html', forms)
         else:
             print (formVendedor.errors)
     else:

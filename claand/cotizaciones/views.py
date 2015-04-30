@@ -15,6 +15,36 @@ def no_es_vendedor(user):
     """
     return not user.groups.filter(name='vendedor').exists()
 
+def obtener_contactos_list(vendedor):
+    todos_los_contactos = Contacto.objects.all()
+    contactos_list = []
+    for contacto in todos_los_contactos:
+        atiende_set = contacto.atiende_set.all()
+        ultimo_atiende = atiende_set[len(atiende_set) - 1]
+        if ultimo_atiende.vendedor == vendedor:
+            contactos_list.append(contacto)
+    return contactos_list
+
+def obtener_cotizaciones_list(contactos_list):
+    todas_las_cotizaciones = Cotizacion.objects.all()
+    cotizaciones_list = []
+    for cotizacion in todas_las_cotizaciones:
+        for contacto in contactos_list:
+            atiende_set = contacto.atiende_set.all()
+            ultimo_atiende = atiende_set[len(atiende_set) - 1]
+            if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= ultimo_atiende.fecha:
+                cotizaciones_list.append(cotizacion)
+    return cotizaciones_list
+
+def obtener_ventas_list(cotizaciones_list):
+    todas_las_ventas = Venta.objects.all()
+    ventas_list = []
+    for venta in todas_las_ventas:
+        for cotizacion in cotizaciones_list:
+            if venta.cotizacion == cotizacion:
+                ventas_list.append(venta)
+    return ventas_list
+
 @login_required
 def consultar_cotizaciones(request):
     """ Vista para mostrar todas las cotizaciones de un usuario.
