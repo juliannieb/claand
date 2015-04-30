@@ -98,6 +98,8 @@ def consultar_vendedores(request):
     context['no_es_vendedor'] = es_vendedor
     return render(request, 'principal/consultar_vendedores.html', context)
 
+@login_required
+@user_passes_test(no_es_vendedor)
 def vendedor(request, id_vendedor):
     """ Vista para mostrar el detalle de un contacto en particular
     """
@@ -178,6 +180,8 @@ def vendedor(request, id_vendedor):
     context['no_es_vendedor'] = es_vendedor
     return render(request, 'principal/vendedor.html', context)
 
+@login_required
+@user_passes_test(no_es_vendedor)
 def registrar_vendedor(request):
     """ Vista para registrar un nuevo vendedor en el sistema """
     current_user = request.user
@@ -185,10 +189,7 @@ def registrar_vendedor(request):
         formVendedor = VendedorForm(request.POST)
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formVendedor':formVendedor, 'no_es_vendedor':es_vendedor}
-
-        # Have we been provided with a valid form?
         if formVendedor.is_valid():
-            # Save the new category to the database.
             data = formVendedor.cleaned_data
             nombre = data['nombre']
             apellido = data['apellido']
@@ -201,22 +202,18 @@ def registrar_vendedor(request):
             user.last_name = apellido
             user.save()
             Vendedor(user=user).save()
-            # Now call the index() view.
-            # The user will be shown the homepage.
             return render(request, 'principal/exito.html')
         else:
-            # The supplied form contained errors - just print them to the terminal.
             print (formVendedor.errors)
     else:
-        # If the request was not a POST, display the form to enter details.
         formVendedor = VendedorForm()
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formVendedor':formVendedor, 'no_es_vendedor':es_vendedor, }
 
-    # Bad form (or form details), no form supplied...
-    # Render the form with error messages (if any).
     return render(request, 'principal/registrar_vendedor.html', forms)
 
+@login_required
+@user_passes_test(no_es_vendedor)
 def eliminar_vendedor(request, id_vendedor):
     """ Vista para registrar un nuevo vendedor en el sistema """
     vendedor = Vendedor.objects.get(pk=id_vendedor)
@@ -243,16 +240,10 @@ def eliminar_vendedor(request, id_vendedor):
             user.is_active = False
             user.save()
             return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
-        else:
-            # The supplied form contained errors - just print them to the terminal.
-            print (formAsignarTodosLosContactos.errors)
     else:
-        # If the request was not a POST, display the form to enter details.
         formAsignarTodosLosContactos = SeleccionarVendedorForm()
         es_vendedor = no_es_vendedor(request.user)
         forms = {'formAsignarTodosLosContactos':formAsignarTodosLosContactos, 'vendedor':vendedor, \
         'no_es_vendedor':es_vendedor, }
 
-    # Bad form (or form details), no form supplied...
-    # Render the form with error messages (if any).
     return render(request, 'principal/eliminar_vendedor.html', forms)
