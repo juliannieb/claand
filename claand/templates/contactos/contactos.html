@@ -57,14 +57,4 @@
         </table>
     </div>
 
-    <!--<script type="text/javascript">
-        $('#txt_search_contactos').keyup(function(){
-            var texto;
-            texto = $(this).val();
-            $.get("{% url 'contactos:search_contactos' %}", {'texto' : texto}, function(data) {
-                $('#tabla_contactos').html(data);
-            });
-        });
-    </script>-->
-
 {% endblock content%}

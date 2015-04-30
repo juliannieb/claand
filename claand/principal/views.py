@@ -251,3 +251,16 @@ def eliminar_vendedor(request, id_vendedor):
         'no_es_vendedor':es_vendedor, }
 
     return render(request, 'principal/eliminar_vendedor.html', forms)
+
+
+@login_required
+@user_passes_test(no_es_vendedor)
+def consultar_global(request):
+    contactos_list = Contacto.objects.all()
+    cotizaciones_list = Cotizacion.objects.all()
+    ventas_list = Venta.objects.all()
+    context={}
+    context['contactos_list'] = contactos_list
+    context['cotizaciones_list'] = cotizaciones_list
+    context['ventas_list'] = ventas_list
+    return render(request, 'principal/global.html', context)
