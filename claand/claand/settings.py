@@ -64,8 +64,8 @@ WSGI_APPLICATION = 'claand.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "prueba1",
-        "USER": os.environ['DB_USER'],
+        "NAME": "claanddb",
+        "USER": os.environ['DB_USERNAME'],
         "PASSWORD": os.environ['DB_PASSWORD'],
         "HOST": "localhost",
         "PORT": "",
