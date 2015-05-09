@@ -119,7 +119,7 @@ PROJECT_ROOT = os.path.abspath(
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-STATIC_URL = '/staticfiles/'
+STATIC_URL = '/static/'
 
 LOGIN_URL = '/principal/login/'
 LOGOUT_URL = '/principal/logout/'
