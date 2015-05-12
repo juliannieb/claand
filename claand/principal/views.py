@@ -310,6 +310,7 @@ def eliminar_vendedor(request, id_vendedor):
 @login_required
 @user_passes_test(no_es_vendedor)
 def consultar_global(request):
+    es_vendedor = no_es_vendedor(request.user)
     contactos_list = Contacto.objects.all()
     cotizaciones_list = Cotizacion.objects.all()
     ventas_list = Venta.objects.all()
@@ -317,4 +318,5 @@ def consultar_global(request):
     context['contactos_list'] = contactos_list
     context['cotizaciones_list'] = cotizaciones_list
     context['ventas_list'] = ventas_list
+    context['no_es_vendedor'] = es_vendedor
     return render(request, 'principal/global.html', context)
