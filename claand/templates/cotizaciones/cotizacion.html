@@ -34,7 +34,9 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
 
-                            <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+                            <a href="{% url 'cotizaciones:editar_cotizacion' cotizacion.id %}">
+                                <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+                            </a>
 
                             <a href="{% url 'cotizaciones:registrar_venta' cotizacion.id %}">
                             <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Registrar Venta</button>

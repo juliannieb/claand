@@ -232,3 +232,56 @@ def eliminar_venta(request, id_venta):
     venta.save()
     es_vendedor = no_es_vendedor(request.user)
     return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+
+@login_required
+def editar_cotizacion(request, id_cotizacion):
+    """ Vista para editar una cotizacion.
+    """
+    cotizacion = Cotizacion.objects.get(pk=id_cotizacion)
+    current_user = request.user
+    current_vendedor = Vendedor.objects.get(user=current_user)
+    contactos_list = obtener_contactos_list(current_vendedor)
+    contactos_list = obtener_contactos_ids(contactos_list)
+    if request.method == 'POST':
+        formCotizacion = CotizacionForm(request.POST)
+        formCotizacion.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formCotizacion':formCotizacion, 'no_es_vendedor':es_vendedor, 'cotizacion':cotizacion}
+        if formCotizacion.is_valid():
+            data = formCotizacion.cleaned_data
+            contacto = data['contacto']
+            monto = data['monto']
+            descripcion = data['descripcion']
+            cotizacion.contacto = contacto
+            cotizacion.monto = monto
+            cotizacion.descripcion = descripcion
+            cotizacion.save()
+            return render(request, 'principal/exito.html')
+    else:
+        formCotizacion = CotizacionForm(instance=cotizacion)
+        formCotizacion.fields["contacto"].queryset = Contacto.objects.filter(pk__in=contactos_list)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formCotizacion':formCotizacion, 'no_es_vendedor':es_vendedor, 'cotizacion':cotizacion}
+    return render(request, 'cotizaciones/editar_cotizacion.html', forms)
+
+@login_required
+def editar_venta(request, id_venta):
+    """ Vista para editar una cotizacion.
+    """
+    venta = Venta.objects.get(pk=id_venta)
+    current_user = request.user
+    if request.method == 'POST':
+        formVenta = VentaForm(request.POST)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formVenta':formVenta, 'no_es_vendedor':es_vendedor, 'venta':venta}
+        if formVenta.is_valid():
+            data = formVenta.cleaned_data
+            monto_total = data['monto_total']
+            venta.monto_total = monto_total
+            venta.save()
+            return render(request, 'principal/exito.html')
+    else:
+        formVenta = VentaForm(instance=venta)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formVenta':formVenta, 'no_es_vendedor':es_vendedor, 'venta':venta}
+    return render(request, 'cotizaciones/editar_venta.html', forms)

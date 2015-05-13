@@ -419,7 +419,7 @@ def editar_contacto(request, id_contacto):
     """
     contacto = Contacto.objects.get(pk=id_contacto)
     if request.method == 'POST':
-        formContacto = ContactoForm(request.POST, instance=contacto)
+        formContacto = ContactoForm(request.POST)
         formNumeroTelefonico = NumeroTelefonicoForm(request.POST)
         if not formNumeroTelefonico.has_changed():
             formNumeroTelefonico = NumeroTelefonicoForm()
