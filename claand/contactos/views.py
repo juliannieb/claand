@@ -22,7 +22,7 @@ from cotizaciones.models import Cotizacion, Venta
 from empresas.models import Empresa
 from contactos.models import Llamada
 
-from contactos.forms import ContactoForm, LlamadaForm, NotaForm, RecordatorioForm, AtiendeForm
+from contactos.forms import ContactoForm, LlamadaForm, NotaForm, RecordatorioForm, AtiendeForm, EditarContactoForm
 from empresas.forms import NumeroTelefonicoForm, RedSocialForm
 
 def no_es_vendedor(user):
@@ -119,7 +119,8 @@ def contacto(request, contacto_nombre_slug):
     """ Vista para mostrar todo el detalle de un contacto en particular.
     """
     contacto = Contacto.objects.get(slug=contacto_nombre_slug)
-    pertenece = Pertenece.objects.get(contacto=contacto)
+    pertenece = Pertenece.objects.filter(contacto=contacto)
+    pertenece = pertenece[len(pertenece) - 1]
     numeros_list = contacto.numerotelefonico_set.all()
     calificacion = Calificacion.objects.get(contacto=contacto)
     cotizaciones_list = Cotizacion.objects.filter(contacto=contacto)
@@ -333,9 +334,11 @@ def registrar_recordatorio(request):
             descripcion = data['descripcion']
             urgencia = data['urgencia']
             fecha = data['fecha']
-            Recordatorio(contacto=contacto, descripcion=descripcion, urgencia=urgencia, \
-                fecha=fecha).save()
-            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+            recordatorio = Recordatorio(contacto=contacto, descripcion=descripcion, urgencia=urgencia, \
+                fecha=fecha)
+            recordatorio.save()
+            print(recordatorio.fecha)
+            return render(request, 'principal/exitoRecordatorio.html', {'no_es_vendedor':es_vendedor, 'event': recordatorio})
     else:
         formRecordatorio = RecordatorioForm()
         es_vendedor = no_es_vendedor(request.user)
@@ -408,3 +411,107 @@ def eliminar_recordatorio(request, id_recordatorio):
     recordatorio.save()
     es_vendedor = no_es_vendedor(request.user)
     return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+
+@login_required
+def editar_contacto(request, id_contacto):
+    """ En esta vista se presenta la interfaz para editar la información básica
+    de un contacto.
+    """
+    contacto = Contacto.objects.get(pk=id_contacto)
+    if request.method == 'POST':
+        formContacto = ContactoForm(request.POST)
+        formNumeroTelefonico = NumeroTelefonicoForm(request.POST)
+        if not formNumeroTelefonico.has_changed():
+            formNumeroTelefonico = NumeroTelefonicoForm()
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'contacto': contacto, 'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico, \
+        'no_es_vendedor':es_vendedor}
+        es_valido = True
+        if formContacto.is_valid():
+            if formNumeroTelefonico.has_changed():
+                if not formNumeroTelefonico.is_valid:
+                    es_valido = False
+            if es_valido:
+                data = formContacto.cleaned_data
+                nombre = data['nombre']
+                apellido = data['apellido']
+                correo_electronico = data['correo_electronico']
+                empresa = data['empresa']
+                area = data['area']
+                is_cliente = data['is_cliente']
+                calificacion = data['calificacion']
+                contacto.nombre = nombre
+                contacto.apellido = apellido
+                contacto.correo_electronico = correo_electronico
+                contacto.calificacion = calificacion
+                contacto.is_cliente = is_cliente
+                contacto.save()
+                
+                pertenece = Pertenece.objects.get(contacto=contacto)
+                pertenece.empresa = empresa
+                pertenece.area = area
+                pertenece.save()  
+
+                if formNumeroTelefonico.has_changed() and formNumeroTelefonico.is_valid():
+                    numeros_tels = NumeroTelefonico.objects.get(contacto=contacto)
+                    tel_data = formNumeroTelefonico.cleaned_data
+                    numero = tel_data['numero']
+                    tipo_numero = tel_data['tipo_numero']
+                    numeros_tels.numero = numero
+                    numeros_tels.tipo_numero = tipo_numero
+                    numeros_tels.save()
+                return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+    else:
+        contacto = Contacto.objects.get(id=id_contacto)
+        data_formContacto = {}
+        data_formContacto['nombre'] = contacto.nombre
+        data_formContacto['apellido'] = contacto.apellido
+        pertenece = Pertenece.objects.filter(contacto=contacto)
+        pertenece = pertenece[len(pertenece) - 1]
+        empresa = pertenece.empresa
+        data_formContacto['empresa'] = empresa.pk
+        data_formContacto['area'] = pertenece.area.pk
+        data_formContacto['correo_electronico'] = contacto.correo_electronico
+        data_formContacto['calificacion'] = contacto.calificacion
+        data_formContacto['is_cliente'] = contacto.is_cliente
+
+        numeros_tels = NumeroTelefonico.objects.get(contacto=contacto)
+        data_formTelefono = {}
+        data_formTelefono['numero'] = numeros_tels.numero
+        data_formTelefono['tipo_numero'] = numeros_tels.tipo_numero
+
+        formContacto = ContactoForm(data_formContacto)
+        formNumeroTelefonico = NumeroTelefonicoForm(data_formTelefono)
+
+        #formContacto['correo_electronico'] = contacto.correo_electronico
+        #formContacto['calificacion'] = contacto.calificacion.pk
+        
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'contacto': contacto,'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico, \
+        'no_es_vendedor':es_vendedor}
+    return render(request, 'contactos/editar_contacto.html', forms)
+
+@login_required
+def editar_nota(request, id_nota):
+    """ En esta vista, se maneja la edición de una nota.
+    """
+    nota = Nota.objects.get(pk=id_nota)
+    if request.method == 'POST':
+        formNota = NotaForm(request.POST)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formNota':formNota, 'no_es_vendedor':es_vendedor, 'nota':nota}
+        if formNota.is_valid():
+            data = formNota.cleaned_data
+            contacto = data['contacto']
+            descripcion = data['descripcion']
+            clasificacion = data['clasificacion']
+            nota.contacto = contacto
+            nota.descripcion = descripcion
+            nota.clasificacion = clasificacion
+            nota.save()
+            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+    else:
+        formNota = NotaForm(instance=nota)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formNota':formNota, 'no_es_vendedor':es_vendedor, 'nota':nota}
+    return render(request, 'contactos/editar_nota.html', forms)

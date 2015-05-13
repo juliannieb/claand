@@ -37,7 +37,9 @@
 
                             <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
 
-                            <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+                            <a href="{% url 'cotizaciones:editar_venta' venta.id %}">
+                                <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+                            </a>
 
                             <a href="{% url 'cotizaciones:registrar_pago' venta.id %}">
                                 <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Registrar Pago</button>

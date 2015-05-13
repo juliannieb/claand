@@ -15,4 +15,9 @@ urlpatterns = patterns('',
         	name="eliminar_cotizacion"),
         url(r'^eliminar-venta/(?P<id_venta>[\w\-]+)/$', views.eliminar_venta, \
             name="eliminar_venta"),
+
+        url(r'^editar-cotizacion/(?P<id_cotizacion>[\w\-]+)/$', views.editar_cotizacion, \
+            name='editar_cotizacion'),
+        url(r'^editar-venta/(?P<id_venta>[\w\-]+)/$', views.editar_venta, \
+            name='editar_venta'),
         )

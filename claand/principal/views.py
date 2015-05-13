@@ -19,38 +19,25 @@ def no_es_vendedor(user):
     return not user.groups.filter(name='vendedor').exists()
 
 def obtener_contactos_list(vendedor):
-    """ Función para obtener la lista de contactos de un vendedor.
-    """
     todos_los_contactos = Contacto.objects.all()
     contactos_list = []
-    # Recorre la lista de todos los contactos
     for contacto in todos_los_contactos:
-        # Obtiene todas las relaciones de Atiende entre contacto y vendedor
         atiende_set = contacto.atiende_set.all()
         if atiende_set:
-            # Obtiene la última relación de Atiende entre contacto y vendedor
             ultimo_atiende = atiende_set[len(atiende_set) - 1]
-            if ultimo_atiende.vendedor == vendedor: # Si el vendedor lo atiende actualmente
+            if ultimo_atiende.vendedor == vendedor:
                 if contacto.is_active:
-                    contactos_list.append(contacto) # Se agrega el contacto a la lista
+                    contactos_list.append(contacto)
     return contactos_list
 
 def obtener_cotizaciones_list(contactos_list):
-    """ Función para obtener la lista de cotizaciones que atiende un vendedor
-        actualmente.
-    """
     todas_las_cotizaciones = Cotizacion.objects.all()
     cotizaciones_list = []
-    # Recorre todas las cotizaciones
     for cotizacion in todas_las_cotizaciones:
-        # Recorre la lista de contactos
         for contacto in contactos_list:
-            # Obtiene todas las relaciones de Atiende entre contacto y vendedor
             atiende_set = contacto.atiende_set.all()
             if atiende_set:
-                # Obtiene la última relación de Atiende entre contacto y vendedor
                 ultimo_atiende = atiende_set[len(atiende_set) - 1]
-                # Si la cotización fue creada después de la fecha en que se empezó a atender
                 if cotizacion.contacto == contacto and cotizacion.fecha_creacion >= ultimo_atiende.fecha:
                     if cotizacion.is_active:
                         cotizaciones_list.append(cotizacion)

@@ -8,6 +8,9 @@ class ContactosAdminTests(LiveServerTestCase):
     fixtures = ['contactos.json', 'empresas.json', 'cotizaciones.json', 'principal.json', 'users.json']
     
     def setUp(self):
+        """ Setup para cada test:
+        Como aquí se prueban puros casos del admin, se autentica al mismo cada vez.
+        """
         self.browser = webdriver.Firefox()
         grupo_vendedor = Group.objects.get_or_create(name="vendedor")[0]
         self.browser.get(self.live_server_url + '/principal/login/')

@@ -98,7 +98,13 @@
                                 <td>{{ cotizacion.descripcion }}</td>
                                 <td>{{ cotizacion.monto }}</td>
                                 <td>{{ cotizacion.fecha_creacion }}</td>
-                                <td>{{ cotizacion.contacto.vendedor.get }}</td>
+                                <td>
+                                    {% for atiende in cotizacion.contacto.atiende_set.all %}
+                                        {% if forloop.last %}
+                                            {{ atiende.vendedor }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
                             </tr>
                         {% endif %}
                     {% endif %}
@@ -140,7 +146,13 @@
                             {% else %}
                                 <td>Pendiente</td>
                             {% endif %}
-                            <td>{{ venta.cotizacion.contacto.vendedor.get }}</td>
+                            <td>
+                                {% for atiende in venta.cotizacion.contacto.atiende_set.all %}
+                                    {% if forloop.last %}
+                                        {{ atiende.vendedor }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
                         </tr>
                     {% endif %}
                 {% endfor %}

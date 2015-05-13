@@ -70,3 +70,23 @@ class AtiendeForm(forms.ModelForm):
     class Meta:
         model = Atiende
         fields = ('vendedor',)
+
+class EditarContactoForm(forms.ModelForm):
+    nombre = forms.CharField(max_length=35, help_text='Nombre: ', \
+        required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    apellido = forms.CharField(max_length=35, help_text='Apellido: ', \
+        required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    empresa = forms.ModelChoiceField(queryset=Empresa.objects.all(), \
+        help_text='Empresa: ', required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+    area = forms.ModelChoiceField(queryset=Area.objects.all(), help_text='Area: ', \
+        required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+    calificacion = forms.ModelChoiceField(help_text='Calificación: ', \
+        queryset=Calificacion.objects.all(), required=True, \
+        widget=forms.Select(attrs={'class':'form-control'}))
+    is_cliente = forms.BooleanField(help_text='Cliente: ', required=False, \
+        widget=forms.CheckboxInput(attrs={'class':'form-control'}))
+
+    class Meta:
+        model = Contacto
+        fields = ('nombre', 'apellido', 'empresa', 'area', \
+            'calificacion', 'is_cliente',)
