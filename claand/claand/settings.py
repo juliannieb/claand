@@ -24,6 +24,9 @@ TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['45.55.233.163']
 
+# SITE_ID Agregado para que sirva google_calendarize
+
+SITE_ID = 1
 
 # Application definition
 
@@ -35,12 +38,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'contactos',
     'cotizaciones',
     'empresas',
     'principal',
     'djangobower',
     'django_nvd3',
+    'contactos.templatetags.google_calendarize',
 )
 
 MIDDLEWARE_CLASSES = (
