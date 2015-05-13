@@ -333,9 +333,11 @@ def registrar_recordatorio(request):
             descripcion = data['descripcion']
             urgencia = data['urgencia']
             fecha = data['fecha']
-            Recordatorio(contacto=contacto, descripcion=descripcion, urgencia=urgencia, \
-                fecha=fecha).save()
-            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+            recordatorio = Recordatorio(contacto=contacto, descripcion=descripcion, urgencia=urgencia, \
+                fecha=fecha)
+            recordatorio.save()
+            print(recordatorio.fecha)
+            return render(request, 'principal/exitoRecordatorio.html', {'no_es_vendedor':es_vendedor, 'event': recordatorio})
     else:
         formRecordatorio = RecordatorioForm()
         es_vendedor = no_es_vendedor(request.user)
