@@ -490,3 +490,28 @@ def editar_contacto(request, id_contacto):
         forms = {'contacto': contacto,'formContacto':formContacto, 'formNumeroTelefonico':formNumeroTelefonico, \
         'no_es_vendedor':es_vendedor}
     return render(request, 'contactos/editar_contacto.html', forms)
+
+@login_required
+def editar_nota(request, id_nota):
+    """ En esta vista, se maneja la edición de una nota.
+    """
+    nota = Nota.objects.get(pk=id_nota)
+    if request.method == 'POST':
+        formNota = NotaForm(request.POST)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formNota':formNota, 'no_es_vendedor':es_vendedor, 'nota':nota}
+        if formNota.is_valid():
+            data = formNota.cleaned_data
+            contacto = data['contacto']
+            descripcion = data['descripcion']
+            clasificacion = data['clasificacion']
+            nota.contacto = contacto
+            nota.descripcion = descripcion
+            nota.clasificacion = clasificacion
+            nota.save()
+            return render(request, 'principal/exito.html', {'no_es_vendedor':es_vendedor})
+    else:
+        formNota = NotaForm(instance=nota)
+        es_vendedor = no_es_vendedor(request.user)
+        forms = {'formNota':formNota, 'no_es_vendedor':es_vendedor, 'nota':nota}
+    return render(request, 'contactos/editar_nota.html', forms)

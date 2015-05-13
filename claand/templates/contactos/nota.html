@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>Recordatorio de {{ nota.contacto.nombre }} {{ nota.contacto.apellido }}</h1>
+            <h1>Nota de {{ nota.contacto.nombre }} {{ nota.contacto.apellido }}</h1>
         </div>
     </div>
     <div class="container">
@@ -26,7 +26,9 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
 
-                            <button style="margin-right: 5px" type="btn_submitContacto" id="boton_editar" class="btn btn-success pull-right">Editar</button>
+                            <a href="{% url 'contactos:editar_nota' nota.id %}">
+                                <button style="margin-right: 5px" type="btn_submitContacto" id="boton_editar" class="btn btn-success pull-right">Editar</button>
+                            </a>
 
                             <a href="{% url 'contactos:consultar_notas' %}"><button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Volver a notas</button></a>
                         </div>
