@@ -37,7 +37,9 @@
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
 
-                                <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+                                <a href="{% url 'contactos:editar_contacto' contacto.id %}">
+                                    <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+                                </a>
 
                                 <a href="{% url 'contactos:asignar_vendedor' contacto.id %}">
                                     <button style="margin-right: 5px"  type="btn_submitContacto" class="btn btn-success pull-right">Asignar vendedor</button>
@@ -51,7 +53,9 @@
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="btn_submitContacto" class="btn btn-danger pull-right"  id="boton_eliminar">Eliminar</button>
                                 
-                                <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+                                <a href="{% url 'contactos:editar_contacto' contacto.id %}">
+                                    <button style="margin-right: 5px" type="btn_submitContacto" class="btn btn-success pull-right">Editar</button>
+                                </a>
 
                             </div>
                         </div>
