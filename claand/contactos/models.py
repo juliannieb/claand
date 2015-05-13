@@ -152,3 +152,9 @@ class NumeroTelefonico(models.Model):
     class Meta:
         verbose_name_plural = 'Números Telefónicos'
         verbose_name = 'Número Telefónico'
+
+from django import template
+from django.contrib.sites.models import Site
+from django.utils.http import urlquote_plus
+
+register = template.Library()
